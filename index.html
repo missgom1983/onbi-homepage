@@ -1,130 +1,2186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>온비 | ONBI</title>
-  <meta name="description" content="온비 공식 홈페이지 — 따뜻한 기술로 일상을 잇습니다." />
-  <style>
-    :root {
-      --bg: #ffffff;
-      --fg: #1a1a2e;
-      --muted: #5c5c7a;
-      --brand: #4f46e5;
-      --brand-soft: #eef2ff;
-      --border: #e5e7eb;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
-        "Malgun Gothic", "맑은 고딕", sans-serif;
-      color: var(--fg);
-      background: var(--bg);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On:Gi · 기억은 사라져도, 온기는 남습니다</title>
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/landing.css">
+<script src="shared/theme.js"></script>
+<script src="shared/sso-menu.js"></script>
+<script src="shared/image-slot.js"></script>
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "light",
+  "senior": false
+}/*EDITMODE-END*/;
+</script>
+<style>
+/* Display font for hero & section headings */
+.h-hero h1,
+.h-stack-head h2,
+.h-cta h2,
+.h-tile h3 {
+  font-weight: 700;
+}
 
-    /* Header */
-    header {
-      position: sticky; top: 0; z-index: 10;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: saturate(180%) blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .logo { font-weight: 800; font-size: 20px; color: var(--brand); letter-spacing: -0.02em; }
-    .nav ul { display: flex; gap: 28px; list-style: none; }
-    .nav a { text-decoration: none; color: var(--muted); font-size: 15px; font-weight: 500; transition: color .2s; }
-    .nav a:hover { color: var(--brand); }
+/* ───────── Hero — bright, brand-forward ───────── */
+.h-hero {
+  position: relative;
+  min-height: 92vh;
+  padding: 96px 0 80px;
+  background:
+    radial-gradient(ellipse 80% 60% at 80% 20%, rgba(79, 184, 158, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 20% 80%, rgba(217, 184, 140, 0.2) 0%, transparent 60%),
+    linear-gradient(180deg, var(--paper-2) 0%, var(--paper) 100%);
+  color: var(--ink);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.h-hero::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 70%;
+  height: 80%;
+  background: radial-gradient(ellipse at center,
+    rgba(79, 184, 158, 0.18) 0%,
+    transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.h-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -15%;
+  width: 60%;
+  height: 70%;
+  background: radial-gradient(ellipse at center,
+    rgba(200, 229, 219, 0.5) 0%,
+    transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
 
-    /* Hero */
-    .hero { text-align: center; padding: 96px 0 80px; }
-    .badge {
-      display: inline-block; background: var(--brand-soft); color: var(--brand);
-      font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; margin-bottom: 24px;
-    }
-    .hero h1 { font-size: 48px; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 20px; }
-    .hero p { font-size: 19px; color: var(--muted); max-width: 560px; margin: 0 auto 36px; }
-    .btn {
-      display: inline-block; background: var(--brand); color: #fff; text-decoration: none;
-      font-weight: 600; font-size: 16px; padding: 14px 32px; border-radius: 12px;
-      transition: transform .15s, box-shadow .15s; box-shadow: 0 8px 24px rgba(79,70,229,.25);
-    }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(79,70,229,.35); }
+.h-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
 
-    /* Features */
-    .features { padding: 40px 0 96px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .card {
-      border: 1px solid var(--border); border-radius: 16px; padding: 28px;
-      transition: box-shadow .2s, transform .2s; background: #fff;
-    }
-    .card:hover { box-shadow: 0 12px 32px rgba(0,0,0,.06); transform: translateY(-4px); }
-    .card .icon { font-size: 32px; margin-bottom: 14px; }
-    .card h3 { font-size: 18px; margin-bottom: 8px; }
-    .card p { font-size: 15px; color: var(--muted); }
+.h-hero .text-block {
+  max-width: 980px;
+}
 
-    /* Footer */
-    footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--muted); font-size: 14px; }
+.h-hero .hooks {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--celadon-200);
+  border-radius: 999px;
+  margin-bottom: 36px;
+  box-shadow: 0 4px 12px -4px rgba(79,184,158,0.15);
+}
+.h-hero .hooks .ld {
+  width: 8px; height: 8px; border-radius: 4px;
+  background: var(--celadon-500);
+  box-shadow: 0 0 0 0 rgba(79,184,158,0.55);
+  animation: ongi-dot-pulse 2.2s ease-in-out infinite;
+}
+.h-hero .hooks span:not(.ld) {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--celadon-700);
+}
 
-    @media (max-width: 720px) {
-      .hero h1 { font-size: 34px; }
-      .grid { grid-template-columns: 1fr; }
-      .nav ul { display: none; }
-    }
-  </style>
+.h-hero h1 {
+  font-size: clamp(44px, 7vw, 96px);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+  margin: 0 0 24px;
+  text-wrap: balance;
+}
+.h-hero h1 .ln {
+  display: block;
+  color: var(--ink);
+}
+.h-hero h1 .acc {
+  background: linear-gradient(110deg, var(--celadon-700) 10%, var(--celadon-500) 50%, var(--celadon-700) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.h-hero .lead {
+  font-size: clamp(16px, 1.5vw, 20px);
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0 0 36px;
+  max-width: 540px;
+  text-wrap: pretty;
+}
+.h-hero .lead b {
+  color: var(--ink) !important;
+}
+
+.h-hero .ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.h-hero .btn-primary {
+  background: var(--celadon-500);
+  color: #fff;
+}
+.h-hero .btn-primary:hover { background: var(--celadon-600); }
+.h-hero .btn-ghost {
+  background: rgba(255,255,255,0.7);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.h-hero .btn-ghost:hover { background: #fff; }
+
+/* Map visual (replaces orbit) */
+.h-visual .ongi-orbit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.h-visual .ongi-orbit svg { display: block; width: 100%; height: 100%; }
+.h-visual { aspect-ratio: 4/5.2; max-width: 460px; }
+.h-visual {
+  position: relative;
+  aspect-ratio: 4/5;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.h-visual .phone {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1A2435 0%, #0E141C 100%);
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px;
+  box-shadow:
+    0 50px 100px -30px rgba(79, 184, 158, 0.3),
+    0 20px 60px -20px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.h-visual .phone::before {
+  content: '';
+  position: absolute;
+  top: 16px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 20px;
+  background: #000;
+  border-radius: 12px;
+  z-index: 2;
+}
+.h-visual .pscreen {
+  width: 100%; height: 100%;
+  background: var(--paper);
+  border-radius: 25px;
+  padding: 52px 18px 22px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.h-visual .name-row {
+  font-size: 13px;
+  color: var(--text-3);
+  font-weight: 600;
+}
+.h-visual .name-row b {
+  display: block;
+  color: var(--text);
+  font-size: 19px;
+  letter-spacing: -0.025em;
+  margin-top: 2px;
+}
+.h-visual .score-card {
+  background: linear-gradient(150deg, var(--celadon-700), var(--celadon-500));
+  border-radius: 18px;
+  padding: 16px 18px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.h-visual .score-card::after {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+.h-visual .score-card .lbl {
+  font-size: 11px;
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.h-visual .score-card .num {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.h-visual .score-card .num sub {
+  font-size: 14px;
+  opacity: 0.65;
+  font-weight: 500;
+  vertical-align: baseline;
+  margin-left: 4px;
+}
+.h-visual .signals {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.h-visual .sig {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.h-visual .sig .sn { font-size: 9px; color: var(--text-3); font-weight: 700; }
+.h-visual .sig .sv { font-size: 13px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+.h-visual .mem-strip {
+  display: flex;
+  gap: 4px;
+  margin-top: auto;
+}
+.h-visual .mem-strip > div {
+  flex: 1;
+  aspect-ratio: 1/1.1;
+  border-radius: 8px;
+  background: var(--sand-soft);
+}
+.h-visual .mem-strip > div:nth-child(2) { background: #DDF0E7; }
+.h-visual .mem-strip > div:nth-child(3) { background: #F4D4D4; }
+.h-visual .mem-strip > div:nth-child(4) { background: #C8E5DB; }
+
+/* Floating cards around phone */
+.h-visual .float-card {
+  position: absolute;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(20px);
+  border-radius: 14px;
+  padding: 10px 14px;
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+}
+.h-visual .float-card.fc-1 {
+  top: 14%;
+  right: 0;
+  left: auto;
+  animation: float-1 6s ease-in-out infinite;
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+.h-visual .float-card.fc-1 .fc-t,
+.h-visual .float-card.fc-1 .fc-s {
+  display: inline;
+  white-space: nowrap;
+}
+.h-visual .float-card.fc-1 .fc-s {
+  margin-top: 0;
+  margin-left: 6px;
+}
+.h-visual .float-card.fc-1 .fc-s::before {
+  content: '·';
+  margin-right: 6px;
+  color: var(--text-3);
+}
+.h-visual .float-card.fc-2 {
+  bottom: 4%;
+  left: -22%;
+  right: auto;
+  animation: float-2 7s ease-in-out infinite;
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+.h-visual .float-card.fc-2 .fc-t,
+.h-visual .float-card.fc-2 .fc-s {
+  display: inline;
+  white-space: nowrap;
+}
+.h-visual .float-card.fc-2 .fc-s {
+  margin-top: 0;
+  margin-left: 6px;
+}
+.h-visual .float-card.fc-2 .fc-s::before {
+  content: '·';
+  margin-right: 6px;
+  color: var(--text-3);
+}
+.h-visual .float-card .fc-dot {
+  width: 8px; height: 8px; border-radius: 4px;
+  background: var(--celadon-500);
+  flex-shrink: 0;
+}
+.h-visual .float-card.fc-2 .fc-dot { background: #C9A06E; }
+.h-visual .float-card .fc-t {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.012em;
+}
+.h-visual .float-card .fc-s {
+  font-size: 10px;
+  color: var(--text-3);
+  margin-top: 1px;
+}
+@keyframes float-1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float-2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+/* ─── Section scaffolding ─── */
+.h-section {
+  padding: 120px 0;
+  position: relative;
+}
+.h-section.h-section-tight {
+  padding: 48px 0;
+}
+.h-stack-head-tight {
+  margin-bottom: 22px;
+}
+.h-stack-head-tight h2 {
+  font-size: clamp(22px, 2.8vw, 32px);
+  margin: 6px 0 6px;
+}
+.h-section.alt { background: var(--paper-2); }
+
+.h-stack-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.h-stack-head .left { max-width: 720px; }
+.h-stack-head .right {
+  display: flex; gap: 10px;
+  flex-shrink: 0;
+}
+.h-stack-head h2 {
+  font-size: clamp(30px, 4.4vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin: 12px 0 16px;
+  text-wrap: balance;
+}
+.h-stack-head .sub {
+  font-size: clamp(15px, 1.4vw, 19px);
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Service tiles — 3 wide on row 1, 3 wide on row 2 */
+.h-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.h-tile {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 22px 22px 20px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.h-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -20px rgba(31,42,58,0.18);
+  border-color: var(--celadon-300);
+}
+.h-tile .t-eye {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 14px;
+}
+.h-tile h3 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+.h-tile p {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin: 0 0 14px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.h-tile .t-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: auto;
+  letter-spacing: -0.012em;
+}
+.h-tile .t-go::after {
+  content: '›';
+  transition: transform 0.2s var(--ease);
+  display: inline-block;
+}
+.h-tile:hover .t-go::after { transform: translateX(4px); }
+.h-tile.featured {
+  background: linear-gradient(160deg, var(--celadon-700), var(--celadon-500));
+  color: #fff;
+  border: none;
+}
+.h-tile.featured .t-eye { color: rgba(255,255,255,0.85); }
+.h-tile.featured h3 { font-size: 32px; }
+.h-tile.featured p { color: rgba(255,255,255,0.85); font-size: 15.5px; }
+.h-tile.featured .t-go { color: #fff; }
+.h-tile.featured::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  pointer-events: none;
+}
+
+.h-tile.dark {
+  background: var(--slate-700);
+  color: #fff;
+  border: none;
+}
+.h-tile.dark .t-eye { color: var(--celadon-300); }
+.h-tile.dark p { color: rgba(255,255,255,0.75); }
+.h-tile.dark .t-go { color: var(--celadon-300); }
+
+/* Visual element inside tile */
+.h-tile .t-viz {
+  margin: 4px 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.h-tile .t-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--celadon-50);
+  color: var(--celadon-700);
+  letter-spacing: -0.005em;
+}
+.h-tile .t-pill.p1 { background: #FBE9E9; color: #D94B4B; }
+.h-tile .t-pill.p2 { background: #FAEFD9; color: #B57728; }
+.h-tile.featured .t-pill, .h-tile.dark .t-pill {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+/* Tile mini chart */
+.h-tile .t-chart {
+  height: 60px;
+  margin: 10px 0 18px;
+}
+
+/* Stats row */
+.h-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 16px;
+}
+.h-stat {
+  text-align: left;
+}
+.h-stat .sn {
+  font-size: clamp(30px, 3.8vw, 46px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.h-stat .sn span {
+  font-size: 0.4em;
+  color: var(--text-3);
+  font-weight: 600;
+  margin-left: 4px;
+}
+.h-stat .sl {
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.45;
+  margin-top: 14px;
+}
+
+/* CTA panel — slim horizontal banner */
+.h-cta {
+  background: linear-gradient(135deg, var(--celadon-700) 0%, var(--celadon-500) 60%, #6BC4AB 100%);
+  border-radius: 22px;
+  padding: 36px 48px;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  text-align: left;
+  box-shadow: 0 14px 36px -16px rgba(79,184,158,0.4);
+}
+.h-cta::before {
+  content: '';
+  position: absolute;
+  top: -100%; right: -10%;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.h-cta h2 {
+  position: relative;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0;
+  text-wrap: balance;
+  flex: 1;
+}
+.h-cta p {
+  position: relative;
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: rgba(255,255,255,0.78);
+  margin: 6px 0 0;
+}
+.h-cta .ctas {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+@media (max-width: 880px) {
+  .h-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+    text-align: left;
+  }
+  .h-cta .ctas { width: 100%; }
+}
+.h-cta .btn-primary { background: #fff; color: var(--ink); }
+.h-cta .btn-primary:hover { background: var(--paper); }
+.h-cta .btn-ghost {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.h-cta .btn-ghost:hover { background: rgba(255,255,255,0.2); }
+
+@keyframes ongi-dot-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(79, 184, 158, 0.55); }
+  60%  { box-shadow: 0 0 0 8px rgba(79, 184, 158, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(79, 184, 158, 0); }
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .h-tiles { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 980px) {
+  .h-hero { min-height: auto; padding: 64px 0 56px; }
+  .h-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .h-visual { max-width: 320px; margin: 0 auto; }
+  .h-section { padding: 72px 0; }
+  .h-stack-head { flex-direction: column; align-items: flex-start; margin-bottom: 36px; }
+  .h-stack-head .right { width: 100%; }
+  .h-stats { grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 32px; }
+  .h-cta { padding: 28px 24px; border-radius: 20px; }
+}
+@media (max-width: 680px) {
+  .h-tiles { grid-template-columns: 1fr; }
+  .h-visual .float-card { padding: 8px 12px; font-size: 11px; }
+  .h-visual .float-card .fc-t { font-size: 10.5px; }
+  .h-visual .float-card .fc-s { font-size: 9.5px; }
+  .h-visual .float-card.fc-1 { top: -10%; right: -8%; }
+  .h-visual .float-card.fc-2 { bottom: 4%; left: -8%; }
+  .h-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .h-stat .sn { font-size: clamp(28px, 8vw, 38px); }
+}
+/* ─── 기억 모듈 layer popup ─── */
+.mc-cta {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--celadon-300);
+  letter-spacing: -0.005em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.mem-card:hover .mc-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+.mem-card { cursor: pointer; }
+
+.mem-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 20, 30, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.mem-modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mem-modal {
+  position: relative;
+  background: var(--surface);
+  border-radius: 24px;
+  width: min(880px, 100%);
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+  display: grid;
+  grid-template-columns: 1.05fr 1.4fr;
+  transform: translateY(20px) scale(0.97);
+  opacity: 0;
+  transition: opacity 0.28s ease, transform 0.28s var(--ease);
+}
+.mem-modal-backdrop.is-open .mem-modal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.mem-modal-hero {
+  position: relative;
+  background: var(--paper-2);
+  min-height: 480px;
+  overflow: hidden;
+}
+.mem-modal-hero img, .mem-modal-hero svg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.mem-modal-hero-tag {
+  position: absolute;
+  top: 22px; left: 22px;
+  background: rgba(255,255,255,0.92);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--celadon-700);
+}
+.mem-modal-body {
+  padding: 36px 36px 28px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.mem-modal-eye {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.mem-modal h3 {
+  font-size: clamp(26px, 2.6vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.mem-modal .lede {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin: 0 0 22px;
+}
+.mem-modal blockquote {
+  margin: 0 0 22px;
+  padding: 14px 18px;
+  background: var(--paper-2);
+  border-left: 3px solid var(--celadon-500);
+  border-radius: 0 10px 10px 0;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+  font-style: italic;
+}
+.mem-modal blockquote span {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 6px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.mem-modal .points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mem-modal .points li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.45;
+}
+.mem-modal .points li b {
+  font-weight: 700;
+  letter-spacing: -0.012em;
+}
+.mem-modal .points li::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 4px;
+  background: var(--celadon-500);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.mem-modal .cta-row {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line-2);
+}
+.mem-modal .cta-row .btn {
+  font-size: 13.5px;
+  padding: 12px 22px;
+}
+.mem-modal .price-hint {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+.mem-modal .price-hint b {
+  color: var(--celadon-700);
+  font-weight: 700;
+  font-size: 13px;
+}
+.mem-modal-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 36px; height: 36px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-size: 20px;
+  color: var(--ink);
+  transition: background 0.18s;
+}
+.mem-modal-close:hover { background: #fff; }
+
+@media (max-width: 780px) {
+  .mem-modal {
+    grid-template-columns: 1fr;
+    max-height: 92vh;
+  }
+  .mem-modal-hero { min-height: 220px; }
+  .mem-modal-body { padding: 24px 22px 22px; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="logo">ONBI</div>
-      <nav>
-        <ul>
-          <li><a href="#features">서비스</a></li>
-          <li><a href="#about">소개</a></li>
-          <li><a href="#contact">문의</a></li>
-        </ul>
-      </nav>
+
+<nav class="nav">
+  <div class="container-wide nav-inner">
+    <a href="index.html" class="nav-brand"><span class="ongi-mark">On:Gi</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-active">서비스</a>
+      <a href="pricing.html">구독</a>
+      <a href="care-hub.html">돌봄 관제</a>
+      <a href="brand.html">브랜드</a>
+      <a href="design.html">디자인</a>
     </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="container">
-        <span class="badge">✨ 온비 공식 홈페이지</span>
-        <h1>따뜻한 기술로<br />일상을 잇습니다</h1>
-        <p>온비는 사람과 사람, 기술과 일상을 부드럽게 연결하는 서비스를 만듭니다.</p>
-        <a href="#contact" class="btn">시작하기</a>
-      </div>
-    </section>
-
-    <section class="features" id="features">
-      <div class="container grid">
-        <div class="card">
-          <div class="icon">🚀</div>
-          <h3>빠른 시작</h3>
-          <p>복잡한 설정 없이 누구나 쉽고 빠르게 시작할 수 있습니다.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🔒</div>
-          <h3>안전한 보안</h3>
-          <p>소중한 데이터를 안전하게 보호하는 신뢰할 수 있는 인프라.</p>
-        </div>
-        <div class="card">
-          <div class="icon">💛</div>
-          <h3>따뜻한 지원</h3>
-          <p>언제나 곁에서 함께하는 친절한 고객 지원을 약속합니다.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer id="contact">
-    <div class="container">
-      <p>© 2026 ONBI. All rights reserved.</p>
-      <p>문의: contact@onbi.example.com</p>
+    <div class="nav-cta">
+      <button class="nav-mobile-toggle" aria-label="메뉴 열기" type="button">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/>
+          <line x1="4" y1="13" x2="20" y2="13"/>
+          <line x1="4" y1="19" x2="20" y2="19"/>
+        </svg>
+      </button>
+      <div data-ongi-sso data-system="home"></div>
     </div>
-  </footer>
+  </div>
+</nav>
+
+<!-- ─────────── HERO ─────────── -->
+<header class="h-hero" data-screen-label="01 Hero">
+  <div class="container h-hero-inner">
+    <div>
+      <div class="hooks">
+        <span class="ld"></span>
+        <span>강남구 시범 운영 · 247명의 부모님과 함께</span>
+      </div>
+      <h1>
+        <span class="ln">기억은 사라져도,</span>
+        <span class="ln acc">온기는 남습니다.</span>
+      </h1>
+      <p class="lead">
+        매일의 돌봄, 잊지 못할 순간, 평생 모은 것들.<br>
+        부모님의 평생을 가족 모두가 함께 지키고 보존하는 가족 서비스.
+      </p>
+      <div class="ctas">
+        <a href="parent-app.html" class="btn btn-primary">부모님앱 시작하기</a>
+        <a href="care-hub.html" class="btn btn-ghost">돌봄 관제 알아보기 ›</a>
+      </div>
+    </div>
+
+    <div class="h-visual" aria-hidden="true">
+      <div class="ongi-orbit" role="img" aria-label="On:Gi — 작은 점 하나에서 시작된 온기가 가족과 이웃으로 퍼져나갑니다">
+        <svg viewBox="0 0 480 480" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%;display:block;">
+          <defs>
+            <radialGradient id="bi-glow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#A6D5C2" stop-opacity="0.55"/>
+              <stop offset="55%" stop-color="#4FB89E" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#4FB89E" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="bi-core" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#A6D5C2" stop-opacity="0.95"/>
+              <stop offset="50%" stop-color="#4FB89E" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#246356"/>
+            </radialGradient>
+            <!-- 3D character gradients -->
+            <radialGradient id="bg-blue" cx="0.3" cy="0.3" r="0.8">
+              <stop offset="0%" stop-color="#E8F2FB"/>
+              <stop offset="100%" stop-color="#C8DDEE"/>
+            </radialGradient>
+            <radialGradient id="bg-celadon" cx="0.3" cy="0.3" r="0.8">
+              <stop offset="0%" stop-color="#E8F5EE"/>
+              <stop offset="100%" stop-color="#C8E5DB"/>
+            </radialGradient>
+            <radialGradient id="bg-sand" cx="0.3" cy="0.3" r="0.8">
+              <stop offset="0%" stop-color="#FBF1E0"/>
+              <stop offset="100%" stop-color="#F0DEC2"/>
+            </radialGradient>
+            <radialGradient id="skin" cx="0.4" cy="0.35" r="0.7">
+              <stop offset="0%" stop-color="#FFE0C0"/>
+              <stop offset="100%" stop-color="#F2C098"/>
+            </radialGradient>
+            <radialGradient id="skin-warm" cx="0.4" cy="0.35" r="0.7">
+              <stop offset="0%" stop-color="#FFD8B0"/>
+              <stop offset="100%" stop-color="#E8B080"/>
+            </radialGradient>
+            <radialGradient id="hair-brown" cx="0.3" cy="0.2" r="0.8">
+              <stop offset="0%" stop-color="#7A5236"/>
+              <stop offset="100%" stop-color="#4A2E18"/>
+            </radialGradient>
+            <radialGradient id="hair-dark" cx="0.3" cy="0.2" r="0.8">
+              <stop offset="0%" stop-color="#3A2418"/>
+              <stop offset="100%" stop-color="#1A0F08"/>
+            </radialGradient>
+            <radialGradient id="hair-gray" cx="0.3" cy="0.2" r="0.8">
+              <stop offset="0%" stop-color="#C8C4BE"/>
+              <stop offset="100%" stop-color="#928A80"/>
+            </radialGradient>
+            <linearGradient id="sweater-blue" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5A7CC8"/>
+              <stop offset="100%" stop-color="#3D5A9A"/>
+            </linearGradient>
+            <linearGradient id="sweater-celadon" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5BC4A5"/>
+              <stop offset="100%" stop-color="#3DA088"/>
+            </linearGradient>
+            <linearGradient id="sweater-pink" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F4B8B8"/>
+              <stop offset="100%" stop-color="#D88080"/>
+            </linearGradient>
+            <linearGradient id="sweater-cream" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FBF0D8"/>
+              <stop offset="100%" stop-color="#E8D0A0"/>
+            </linearGradient>
+            <linearGradient id="sweater-white" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="100%" stop-color="#E0E5EC"/>
+            </linearGradient>
+            <linearGradient id="sweater-tan" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C9A06E"/>
+              <stop offset="100%" stop-color="#9A7340"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Outer halo -->
+          <circle cx="240" cy="240" r="240" fill="url(#bi-glow)"/>
+
+          <!-- Expanding ripples -->
+          <g fill="none" stroke="#4FB89E">
+            <circle cx="240" cy="240" r="60" stroke-width="2" stroke-opacity="0.55">
+              <animate attributeName="r" from="20" to="210" dur="4s" begin="0s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-opacity" from="0.55" to="0" dur="4s" begin="0s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" from="2.5" to="0.5" dur="4s" begin="0s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="240" cy="240" r="60" stroke-width="2" stroke-opacity="0.55">
+              <animate attributeName="r" from="20" to="210" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-opacity" from="0.55" to="0" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" from="2.5" to="0.5" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="240" cy="240" r="60" stroke-width="2" stroke-opacity="0.55">
+              <animate attributeName="r" from="20" to="210" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-opacity" from="0.55" to="0" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-width" from="2.5" to="0.5" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <!-- Static reference rings -->
+          <circle cx="240" cy="240" r="100" fill="none" stroke="rgba(79,184,158,0.18)" stroke-width="1" stroke-dasharray="2 6"/>
+          <circle cx="240" cy="240" r="170" fill="none" stroke="rgba(79,184,158,0.1)" stroke-width="1" stroke-dasharray="2 6"/>
+
+          <!-- Connection lines from center to dots -->
+          <g stroke="rgba(79,184,158,0.32)" stroke-width="1" stroke-linecap="round">
+            <line x1="240" y1="240" x2="340" y2="120"/>
+            <line x1="240" y1="240" x2="380" y2="280"/>
+            <line x1="240" y1="240" x2="120" y2="340"/>
+            <line x1="240" y1="240" x2="100" y2="180"/>
+            <line x1="240" y1="240" x2="290" y2="380"/>
+            <line x1="240" y1="240" x2="180" y2="80"/>
+          </g>
+
+          <!-- Person nodes — 3D character illustration style -->
+          <g>
+            <!-- 딸 — 청자 배경, 청자 스웨터, 긴 머리, 행복한 웃음 -->
+            <g transform="translate(360,110)">
+              <circle r="44" fill="url(#bg-celadon)" filter="drop-shadow(0 8px 16px rgba(36,99,86,0.18))"/>
+              <!-- Body / sweater -->
+              <path d="M -24 44 Q -28 16 -10 8 L 10 8 Q 28 16 24 44 Z" fill="url(#sweater-celadon)"/>
+              <ellipse cx="0" cy="12" rx="14" ry="3" fill="#fff" opacity="0.5"/>
+              <!-- Long hair behind -->
+              <ellipse cx="-20" cy="6" rx="6" ry="14" fill="url(#hair-brown)"/>
+              <ellipse cx="20" cy="6" rx="6" ry="14" fill="url(#hair-brown)"/>
+              <!-- Head -->
+              <ellipse cx="0" cy="-8" rx="17" ry="18" fill="url(#skin)"/>
+              <!-- Hair top -->
+              <path d="M -16 -12 Q -18 -28 0 -30 Q 18 -28 16 -12 Q 12 -22 0 -22 Q -12 -22 -16 -12 Z" fill="url(#hair-brown)"/>
+              <!-- Eyes — happy curves -->
+              <path d="M -8 -8 Q -5 -4 -2 -8" stroke="#3A2418" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M 2 -8 Q 5 -4 8 -8" stroke="#3A2418" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <!-- Cheek -->
+              <circle cx="-10" cy="-2" r="2.5" fill="#F4A8A8" opacity="0.7"/>
+              <circle cx="10" cy="-2" r="2.5" fill="#F4A8A8" opacity="0.7"/>
+              <!-- Open smile with teeth -->
+              <path d="M -4 0 Q 0 5 4 0 Q 0 2 -4 0 Z" fill="#A8302A"/>
+              <path d="M -3 1 Q 0 2 3 1" stroke="#fff" stroke-width="1" fill="none"/>
+              <!-- Heart accent -->
+              <path d="M 32 -16 a 2.5 2.5 0 0 1 5 0 a 2.5 2.5 0 0 1 5 0 c 0 3 -5 6 -5 6 c 0 0 -5 -3 -5 -6 z" fill="#D94B4B"/>
+              <text x="0" y="68" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="#246356" letter-spacing="-0.02em">딸</text>
+            </g>
+
+            <!-- 아들 — 파랑 배경, 파랑 스웨터, OK 손짓 표현 -->
+            <g transform="translate(400,300)">
+              <circle r="44" fill="url(#bg-blue)" filter="drop-shadow(0 8px 16px rgba(44,74,107,0.18))"/>
+              <!-- Body / sweater -->
+              <path d="M -24 44 Q -28 16 -10 8 L 10 8 Q 28 16 24 44 Z" fill="url(#sweater-blue)"/>
+              <ellipse cx="0" cy="12" rx="14" ry="3" fill="#fff" opacity="0.4"/>
+              <!-- Head -->
+              <ellipse cx="0" cy="-8" rx="17" ry="18" fill="url(#skin)"/>
+              <!-- Hair messy -->
+              <path d="M -16 -12 Q -20 -26 -6 -28 Q 6 -30 16 -26 Q 18 -14 16 -12 Q 12 -22 4 -20 Q -2 -16 -8 -22 Q -14 -18 -16 -12 Z" fill="url(#hair-brown)"/>
+              <!-- Eyes — bright open -->
+              <ellipse cx="-6" cy="-8" rx="2" ry="2.5" fill="#1A0F08"/>
+              <ellipse cx="6" cy="-8" rx="2" ry="2.5" fill="#1A0F08"/>
+              <circle cx="-5" cy="-9" r="0.7" fill="#fff"/>
+              <circle cx="7" cy="-9" r="0.7" fill="#fff"/>
+              <!-- Surprised mouth (O shape) -->
+              <ellipse cx="0" cy="2" rx="2.5" ry="3" fill="#A8302A"/>
+              <!-- Cheek -->
+              <circle cx="-11" cy="-2" r="2.2" fill="#F4A8A8" opacity="0.6"/>
+              <circle cx="11" cy="-2" r="2.2" fill="#F4A8A8" opacity="0.6"/>
+              <!-- Exclamation accent -->
+              <g transform="translate(34,-18)">
+                <rect x="-1.4" y="0" width="2.8" height="6" rx="1" fill="#F4C530"/>
+                <circle cx="0" cy="9" r="1.4" fill="#F4C530"/>
+              </g>
+              <text x="0" y="68" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="#2C4A6B" letter-spacing="-0.02em">아들</text>
+            </g>
+
+            <!-- 손주 — 노랑 배경, 분홍 스웨터, 양 갈래 큰 눈 -->
+            <g transform="translate(110,360)">
+              <circle r="44" fill="url(#bg-sand)" filter="drop-shadow(0 8px 16px rgba(140,100,51,0.18))"/>
+              <!-- Body / sweater (pink) -->
+              <path d="M -24 44 Q -28 16 -10 8 L 10 8 Q 28 16 24 44 Z" fill="url(#sweater-pink)"/>
+              <ellipse cx="0" cy="12" rx="14" ry="3" fill="#fff" opacity="0.5"/>
+              <!-- Pigtails -->
+              <ellipse cx="-19" cy="-4" rx="5" ry="11" fill="url(#hair-dark)"/>
+              <ellipse cx="19" cy="-4" rx="5" ry="11" fill="url(#hair-dark)"/>
+              <!-- Ribbon on pigtails -->
+              <path d="M -19 -14 L -23 -16 L -19 -10 L -15 -16 Z" fill="#D94B4B"/>
+              <path d="M 19 -14 L 15 -16 L 19 -10 L 23 -16 Z" fill="#D94B4B"/>
+              <!-- Head -->
+              <ellipse cx="0" cy="-6" rx="16" ry="17" fill="url(#skin)"/>
+              <!-- Hair top -->
+              <path d="M -14 -10 Q 0 -24 14 -10 Q 8 -18 0 -18 Q -8 -18 -14 -10 Z" fill="url(#hair-dark)"/>
+              <!-- BIG round kid eyes -->
+              <ellipse cx="-6" cy="-6" rx="3" ry="3.5" fill="#1A0F08"/>
+              <ellipse cx="6" cy="-6" rx="3" ry="3.5" fill="#1A0F08"/>
+              <circle cx="-5" cy="-7" r="1.1" fill="#fff"/>
+              <circle cx="7" cy="-7" r="1.1" fill="#fff"/>
+              <!-- Cheek (big rosy) -->
+              <circle cx="-10" cy="0" r="3.2" fill="#F4A8A8" opacity="0.9"/>
+              <circle cx="10" cy="0" r="3.2" fill="#F4A8A8" opacity="0.9"/>
+              <!-- Wide open smile -->
+              <path d="M -5 3 Q 0 9 5 3 Z" fill="#A8302A"/>
+              <text x="0" y="68" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="#8C6433" letter-spacing="-0.02em">손주</text>
+            </g>
+
+            <!-- 요양사 — 청자 배경, 흰 스웨터, 의료 십자 -->
+            <g transform="translate(80,170)">
+              <circle r="44" fill="url(#bg-celadon)" filter="drop-shadow(0 8px 16px rgba(36,99,86,0.18))"/>
+              <!-- White uniform -->
+              <path d="M -24 44 Q -28 16 -10 8 L 10 8 Q 28 16 24 44 Z" fill="url(#sweater-white)"/>
+              <!-- Red cross on chest -->
+              <rect x="-3" y="22" width="6" height="10" fill="#D94B4B"/>
+              <rect x="-6" y="25" width="12" height="4" fill="#D94B4B"/>
+              <!-- Head -->
+              <ellipse cx="0" cy="-8" rx="17" ry="18" fill="url(#skin)"/>
+              <!-- Hair (tied back) -->
+              <path d="M -16 -12 Q -18 -26 0 -28 Q 18 -26 16 -12 Q 14 -22 0 -22 Q -14 -22 -16 -12 Z" fill="url(#hair-dark)"/>
+              <!-- Eyes — focused warm -->
+              <path d="M -8 -8 Q -5 -4 -2 -8" stroke="#1A0F08" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M 2 -8 Q 5 -4 8 -8" stroke="#1A0F08" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <!-- Cheek -->
+              <circle cx="-11" cy="-2" r="2.3" fill="#F4A8A8" opacity="0.65"/>
+              <circle cx="11" cy="-2" r="2.3" fill="#F4A8A8" opacity="0.65"/>
+              <!-- Calm smile -->
+              <path d="M -4 1 Q 0 4 4 1" stroke="#A8302A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <text x="0" y="68" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="#2C4A6B" letter-spacing="-0.02em">요양사</text>
+            </g>
+
+            <!-- 이웃 — 푸근한 회색 머리 아저씨, 안경 -->
+            <g transform="translate(310,400)">
+              <circle r="44" fill="url(#bg-blue)" filter="drop-shadow(0 8px 16px rgba(44,74,107,0.18))"/>
+              <!-- Sweater (tan/cream) -->
+              <path d="M -24 44 Q -28 16 -10 8 L 10 8 Q 28 16 24 44 Z" fill="url(#sweater-cream)"/>
+              <ellipse cx="0" cy="12" rx="14" ry="3" fill="#fff" opacity="0.4"/>
+              <!-- Head (older) -->
+              <ellipse cx="0" cy="-8" rx="17" ry="18" fill="url(#skin-warm)"/>
+              <!-- Gray hair receding -->
+              <path d="M -16 -10 Q -18 -24 -8 -26 Q 0 -28 8 -26 Q 18 -24 16 -10 Q 14 -20 0 -18 Q -14 -20 -16 -10 Z" fill="url(#hair-gray)"/>
+              <ellipse cx="0" cy="-20" rx="5" ry="2" fill="url(#skin-warm)" opacity="0.7"/>
+              <!-- Round glasses -->
+              <circle cx="-7" cy="-7" r="4.5" fill="none" stroke="#3A2418" stroke-width="1.6"/>
+              <circle cx="7" cy="-7" r="4.5" fill="none" stroke="#3A2418" stroke-width="1.6"/>
+              <line x1="-3" y1="-7" x2="3" y2="-7" stroke="#3A2418" stroke-width="1.3"/>
+              <circle cx="-7" cy="-7" r="1.2" fill="#1A0F08"/>
+              <circle cx="7" cy="-7" r="1.2" fill="#1A0F08"/>
+              <!-- Cheek -->
+              <circle cx="-12" cy="-1" r="2.3" fill="#F4A8A8" opacity="0.6"/>
+              <circle cx="12" cy="-1" r="2.3" fill="#F4A8A8" opacity="0.6"/>
+              <!-- Warm fatherly smile -->
+              <path d="M -5 3 Q 0 7 5 3" stroke="#A8302A" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <text x="0" y="68" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="#2C4A6B" letter-spacing="-0.02em">이웃</text>
+            </g>
+
+            <!-- 친구 — 노랑 배경, 갈색 스웨터, 곱슬머리 + 윙크 -->
+            <g transform="translate(170,80)">
+              <circle r="44" fill="url(#bg-sand)" filter="drop-shadow(0 8px 16px rgba(140,100,51,0.18))"/>
+              <!-- Sweater (tan) -->
+              <path d="M -24 44 Q -28 16 -10 8 L 10 8 Q 28 16 24 44 Z" fill="url(#sweater-tan)"/>
+              <ellipse cx="0" cy="12" rx="14" ry="3" fill="#fff" opacity="0.35"/>
+              <!-- Head -->
+              <ellipse cx="0" cy="-8" rx="17" ry="18" fill="url(#skin)"/>
+              <!-- Curly hair (bouncy) -->
+              <circle cx="-12" cy="-18" r="6" fill="url(#hair-brown)"/>
+              <circle cx="0" cy="-22" r="7" fill="url(#hair-brown)"/>
+              <circle cx="12" cy="-18" r="6" fill="url(#hair-brown)"/>
+              <circle cx="-18" cy="-10" r="5" fill="url(#hair-brown)"/>
+              <circle cx="18" cy="-10" r="5" fill="url(#hair-brown)"/>
+              <circle cx="-6" cy="-22" r="5" fill="url(#hair-brown)"/>
+              <circle cx="6" cy="-22" r="5" fill="url(#hair-brown)"/>
+              <!-- Wink eye -->
+              <path d="M -8 -8 Q -5 -5 -2 -8" stroke="#3A2418" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <ellipse cx="6" cy="-8" rx="2" ry="2.5" fill="#1A0F08"/>
+              <circle cx="7" cy="-9" r="0.7" fill="#fff"/>
+              <!-- Cheek -->
+              <circle cx="-11" cy="-2" r="2.6" fill="#F4A8A8" opacity="0.85"/>
+              <circle cx="11" cy="-2" r="2.6" fill="#F4A8A8" opacity="0.85"/>
+              <!-- Big open smile -->
+              <path d="M -5 2 Q 0 8 5 2 Q 3 4 0 4 Q -3 4 -5 2 Z" fill="#A8302A"/>
+              <text x="0" y="68" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="#8C6433" letter-spacing="-0.02em">친구</text>
+            </g>
+          </g>
+
+          <!-- Drifting small dots -->
+          <g fill="#4FB89E">
+            <circle cx="60" cy="270" r="3" opacity="0.55"/>
+            <circle cx="420" cy="80" r="3" opacity="0.5"/>
+            <circle cx="440" cy="380" r="3" opacity="0.5"/>
+            <circle cx="220" cy="430" r="3" opacity="0.45"/>
+            <circle cx="58" cy="100" r="3" opacity="0.55"/>
+          </g>
+
+          <!-- Center: brand BI -->
+          <g transform="translate(240,240)">
+            <circle r="58" fill="url(#bi-core)" filter="drop-shadow(0 8px 24px rgba(36,99,86,0.35))"/>
+            <circle r="58" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+            <text x="-6" y="8" text-anchor="middle" font-family="inherit" font-size="26" font-weight="800" letter-spacing="-1.2" fill="#fff" style="text-shadow: 0 2px 8px rgba(15,30,30,0.3);">온기</text>
+            <circle cx="24" cy="0" r="5.5" fill="#FFFFFF"/>
+            <circle cx="24" cy="0" r="3.5" fill="#4FB89E">
+              <animate attributeName="r" values="3;4.5;3" dur="2.4s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+        </svg>
+      </div>
+      <div class="float-card fc-1">
+        <span class="fc-dot"></span>
+        <div>
+          <div class="fc-t">약 복용 완료</div>
+          <div class="fc-s">오늘 세 번 모두</div>
+        </div>
+      </div>
+      <div class="float-card fc-2">
+        <span class="fc-dot"></span>
+        <div>
+          <div class="fc-t">기억이 1건 추가됐어요</div>
+          <div class="fc-s">"결혼 반지" · 음성 인터뷰</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─────────── 서비스 (SERVICE PILLARS) ─────────── -->
+<section class="h-section h-section-tight" id="service" data-screen-label="02 서비스">
+  <div class="container">
+    <div class="h-stack-head">
+      <div class="left">
+        <div class="t-eyebrow">서비스</div>
+        <h2>매일을 돌보고, 순간을 기록하고,<br>평생을 보존합니다.</h2>
+        <p class="sub">매일 묻는 안부부터 평생 간직할 기억, 그리고 위급한 순간의 든든한 대처까지.<br>가족의 모든 시간을 잇는 단 하나의 서비스.</p>
+      </div>
+    </div>
+
+    <div class="h-tiles">
+      <!-- Featured: 부모님앱 -->
+      <a href="parent-app.html" class="h-tile featured">
+        <div class="t-icon">
+          <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="14" y="6" width="20" height="36" rx="4"/>
+            <line x1="22" y1="38" x2="26" y2="38"/>
+            <path d="M18 14h12M18 20h12M18 26h7"/>
+          </svg>
+        </div>
+        <div class="t-eye">부모님앱</div>
+        <h3>매일의 안부, 한 화면에.</h3>
+        <p>7신호·약·기억·안부 통화까지 가족이 함께.</p>
+        <div class="t-viz">
+          <span class="t-pill">어른모드</span>
+          <span class="t-pill">7신호</span>
+        </div>
+        <span class="t-go">앱 둘러보기</span>
+      </a>
+
+      <!-- 기억 모듈 -->
+      <a href="index.html#memory-anchor" class="h-tile">
+        <div class="t-icon" style="color: var(--celadon-600);">
+          <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 41s-12-7.5-12-18a8 8 0 0 1 12-5.6A8 8 0 0 1 36 23c0 10.5-12 18-12 18z"/>
+          </svg>
+        </div>
+        <div class="t-eye">기억 모듈</div>
+        <h3>평생의 순간을 보관해요.</h3>
+        <p>일상·관계·물품·작품 — AI가 사연까지 기록.</p>
+        <div class="t-viz">
+          <span class="t-pill">4축 자동 분류</span>
+        </div>
+        <span class="t-go">기억 모듈 보기</span>
+      </a>
+
+      <!-- 돌봄 관제 -->
+      <a href="care-hub.html" class="h-tile dark">
+        <div class="t-icon">
+          <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 6 L10 12 v12 c0 9 7 16 14 18 7-2 14-9 14-18 V12 z"/>
+            <path d="M18 24l5 5 8-10"/>
+          </svg>
+        </div>
+        <div class="t-eye">돌봄 관제</div>
+        <h3>위험 신호, 평균 8분 대응.</h3>
+        <p>P1-P4 자동 정렬 + 업무 흐름판 + AI 기록.</p>
+        <div class="t-viz">
+          <span class="t-pill">강남구 시범 운영</span>
+        </div>
+        <span class="t-go">관제 알아보기</span>
+      </a>
+
+      <!-- 구독 -->
+      <a href="pricing.html" class="h-tile">
+        <div class="t-icon" style="color: #C9A06E;">
+          <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="12" width="36" height="26" rx="4"/>
+            <line x1="6" y1="20" x2="42" y2="20"/>
+            <line x1="13" y1="30" x2="19" y2="30"/>
+          </svg>
+        </div>
+        <div class="t-eye">구독</div>
+        <h3>무료로 시작해요.</h3>
+        <p>가족 5명까지 함께, 위험 알림 포함.</p>
+        <div class="t-viz">
+          <span class="t-pill">월 0원~</span>
+          <span class="t-pill">7일 체험</span>
+        </div>
+        <span class="t-go">요금 보기</span>
+      </a>
+
+      <!-- 브랜드 -->
+      <a href="brand.html" class="h-tile">
+        <div class="t-icon" style="color: #8C6433;">
+          <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 8 L10 40 L24 34 L38 40 L38 8 L24 14 Z"/>
+            <line x1="24" y1="14" x2="24" y2="34"/>
+          </svg>
+        </div>
+        <div class="t-eye">브랜드</div>
+        <h3>왜 만들었나요?</h3>
+        <p>아버지를 떠나보낸 자리에서 시작된 약속.</p>
+        <div class="t-viz">
+          <span class="t-pill">2010 → 2026</span>
+        </div>
+        <span class="t-go">브랜드 이야기</span>
+      </a>
+
+      <!-- 디자인 -->
+      <a href="design.html" class="h-tile">
+        <div class="t-icon" style="color: var(--slate-500);">
+          <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="24" r="16"/>
+            <circle cx="24" cy="24" r="3" fill="currentColor"/>
+            <line x1="24" y1="8" x2="24" y2="14"/>
+            <line x1="24" y1="34" x2="24" y2="40"/>
+            <line x1="8" y1="24" x2="14" y2="24"/>
+            <line x1="34" y1="24" x2="40" y2="24"/>
+          </svg>
+        </div>
+        <div class="t-eye">디자인</div>
+        <h3>온기의 시각 언어.</h3>
+        <p>청자·한지·잉크 컬러 + 어른모드 컴포넌트.</p>
+        <div class="t-viz">
+          <span class="t-pill">디자인 토큰</span>
+        </div>
+        <span class="t-go">디자인 가이드</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 기억 모듈 미리보기 ─────────── -->
+<section class="h-section h-section-tight alt" id="memory-anchor" data-screen-label="03 기억 모듈">
+  <div class="container">
+    <div class="h-stack-head">
+      <div class="left">
+        <div class="t-eyebrow">MEMORY MODULE</div>
+        <h2>잊혀지지 않을 네 가지 기억.</h2>
+        <p class="sub">매일 일어나는 일상, 사랑한 사람들, 평생 곁에 둔 물건, 손으로 빚은 작품 — 네 가지 갈래로 기억을 모아두면 AI가 부모님의 사연까지 함께 들어 기록해드립니다.</p>
+      </div>
+      <div class="right">
+        <a href="parent-app.html" class="btn btn-ink">기억 모듈 체험하기</a>
+      </div>
+    </div>
+
+    <div class="memory-grid">
+      <div class="mem-card" data-axis="1">
+        <image-slot id="m4-1" placeholder="일상의 순간" src="assets/samples/01-spring-walk.svg" radius="22"></image-slot>
+        <div class="mem-card-overlay">
+          <div class="meye">매일의 풍경</div>
+          <h4>일상</h4>
+          <p>매일의 순간들 — 산책, 식사, 햇볕</p>
+          <span class="mc-cta">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="mem-card" data-axis="2">
+        <image-slot id="m4-2" placeholder="관계 · 가족" src="assets/samples/00-wedding-1962.svg" radius="22"></image-slot>
+        <div class="mem-card-overlay">
+          <div class="meye">사람과의 시간</div>
+          <h4>관계</h4>
+          <p>사랑한 사람들과 함께한 시간</p>
+          <span class="mc-cta">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="mem-card" data-axis="3">
+        <image-slot id="m4-3" placeholder="애정 물품" src="assets/samples/02-ring.svg" radius="22"></image-slot>
+        <div class="mem-card-overlay">
+          <div class="meye">곁의 물건</div>
+          <h4>물품</h4>
+          <p>평생 곁에 둔 것들, 사연과 함께</p>
+          <span class="mc-cta">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="mem-card" data-axis="4">
+        <image-slot id="m4-4" placeholder="직접 만든 작품" src="assets/samples/03-embroidery.svg" radius="22"></image-slot>
+        <div class="mem-card-overlay">
+          <div class="meye">손으로 빚은 것</div>
+          <h4>작품</h4>
+          <p>손으로 빚은, 마음으로 만든 것</p>
+          <span class="mc-cta">자세히 보기 →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 기억으로 만드는 것들 ─────────── -->
+<section class="h-section h-section-tight alt" data-screen-label="03a 기억으로 만드는 것들">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 28px;">
+      <div class="t-eyebrow">기억으로 만드는 것들</div>
+      <h2 style="font-size: clamp(22px, 2.8vw, 32px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 700; margin: 8px 0 6px;">
+        모은 기억이 손에 잡히는 선물로
+      </h2>
+    </div>
+
+    <div class="mem-products mem-products-compact">
+      <a href="pricing.html" class="mp-card mp-1">
+        <div class="mp-vis" aria-hidden="true">
+          <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs>
+              <linearGradient id="bookcover" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3DA088"/>
+                <stop offset="100%" stop-color="#19463D"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="92" rx="36" ry="2.5" fill="#1F2A3A" opacity="0.12"/>
+            <rect x="34" y="22" width="56" height="66" fill="#FBF8EF"/>
+            <line x1="34" y1="30" x2="34" y2="86" stroke="#E6E0D1" stroke-width="0.5"/>
+            <line x1="36" y1="30" x2="36" y2="86" stroke="#E6E0D1" stroke-width="0.5"/>
+            <rect x="32" y="20" width="58" height="68" fill="url(#bookcover)"/>
+            <rect x="36" y="24" width="50" height="60" fill="none" stroke="#D9B88C" stroke-width="0.7" opacity="0.8"/>
+            <rect x="36" y="40" width="50" height="14" fill="rgba(0,0,0,0.18)"/>
+            <text x="61" y="50" text-anchor="middle" font-family="inherit" font-size="6" font-weight="700" fill="#D9B88C" letter-spacing="0.1em">자서전</text>
+            <text x="61" y="68" text-anchor="middle" font-family="inherit" font-size="4.5" font-weight="500" fill="#C8E5DB" letter-spacing="0.04em">평생을 한 권에</text>
+            <circle cx="78" cy="78" r="2" fill="#D9B88C" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="mp-tag">자서전 책</div>
+      </a>
+
+      <a href="pricing.html" class="mp-card mp-2">
+        <div class="mp-vis" aria-hidden="true">
+          <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs>
+              <linearGradient id="framewood" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#D9B88C"/>
+                <stop offset="100%" stop-color="#8C6433"/>
+              </linearGradient>
+              <linearGradient id="framesky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FBF8EF"/>
+                <stop offset="100%" stop-color="#DDF0E7"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="92" rx="36" ry="2.5" fill="#1F2A3A" opacity="0.12"/>
+            <rect x="18" y="18" width="84" height="68" rx="2" fill="url(#framewood)"/>
+            <rect x="22" y="22" width="76" height="60" fill="#FBF8EF"/>
+            <rect x="26" y="26" width="68" height="52" fill="url(#framesky)"/>
+            <circle cx="40" cy="40" r="6" fill="#F4E7D2"/>
+            <rect x="78" y="58" width="2" height="14" fill="#8C6433"/>
+            <circle cx="79" cy="56" r="6" fill="#A6D5C2"/>
+            <circle cx="83" cy="58" r="5" fill="#A6D5C2"/>
+            <circle cx="75" cy="58" r="5" fill="#A6D5C2"/>
+            <path d="M 26 70 L 94 70 L 94 78 L 26 78 Z" fill="#7CC5A9" opacity="0.6"/>
+            <ellipse cx="48" cy="72" rx="3" ry="6" fill="#246356"/>
+            <circle cx="48" cy="65" r="2" fill="#FBDFC0"/>
+            <ellipse cx="54" cy="73" rx="2.5" ry="5" fill="#C9A06E"/>
+            <circle cx="54" cy="68" r="1.8" fill="#FBE7CD"/>
+          </svg>
+        </div>
+        <div class="mp-tag">가족 액자</div>
+      </a>
+
+      <a href="pricing.html" class="mp-card mp-3">
+        <div class="mp-vis" aria-hidden="true">
+          <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs>
+              <linearGradient id="screen3" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2C4A6B"/>
+                <stop offset="100%" stop-color="#1E3450"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="92" rx="36" ry="2.5" fill="#1F2A3A" opacity="0.12"/>
+            <rect x="18" y="22" width="84" height="58" rx="4" fill="url(#screen3)"/>
+            <rect x="22" y="26" width="76" height="42" fill="#A6D5C2" opacity="0.6"/>
+            <circle cx="42" cy="38" r="5" fill="#F4E7D2"/>
+            <ellipse cx="68" cy="56" rx="3" ry="6" fill="#246356"/>
+            <circle cx="68" cy="49" r="2.2" fill="#246356"/>
+            <ellipse cx="75" cy="58" rx="2.5" ry="5" fill="#246356"/>
+            <circle cx="75" cy="52" r="1.8" fill="#246356"/>
+            <circle cx="60" cy="47" r="10" fill="rgba(255,255,255,0.9)"/>
+            <polygon points="56,42 56,52 65,47" fill="#246356"/>
+            <rect x="22" y="72" width="76" height="3" rx="1.5" fill="rgba(255,255,255,0.18)"/>
+            <rect x="22" y="72" width="42" height="3" rx="1.5" fill="#4FB89E"/>
+            <rect x="50" y="80" width="20" height="2" fill="#46546A"/>
+            <rect x="42" y="82" width="36" height="2" fill="#46546A"/>
+          </svg>
+        </div>
+        <div class="mp-tag">영상 앨범</div>
+      </a>
+
+      <a href="pricing.html" class="mp-card mp-4">
+        <div class="mp-vis" aria-hidden="true">
+          <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs>
+              <linearGradient id="vinyl4" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2C4A6B"/>
+                <stop offset="100%" stop-color="#19463D"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="92" rx="36" ry="2.5" fill="#1F2A3A" opacity="0.12"/>
+            <rect x="18" y="20" width="84" height="62" rx="6" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.8"/>
+            <circle cx="86" cy="51" r="22" fill="url(#vinyl4)"/>
+            <circle cx="86" cy="51" r="18" fill="none" stroke="#1F2A3A" stroke-width="0.4" opacity="0.5"/>
+            <circle cx="86" cy="51" r="14" fill="none" stroke="#1F2A3A" stroke-width="0.4" opacity="0.5"/>
+            <circle cx="86" cy="51" r="6" fill="#D9B88C"/>
+            <circle cx="86" cy="51" r="1.5" fill="#1F2A3A"/>
+            <g stroke="#4FB89E" stroke-width="1.6" stroke-linecap="round">
+              <line x1="26" y1="51" x2="26" y2="51"/>
+              <line x1="30" y1="48" x2="30" y2="54"/>
+              <line x1="34" y1="44" x2="34" y2="58"/>
+              <line x1="38" y1="40" x2="38" y2="62"/>
+              <line x1="42" y1="38" x2="42" y2="64"/>
+              <line x1="46" y1="42" x2="46" y2="60"/>
+              <line x1="50" y1="46" x2="50" y2="56"/>
+              <line x1="54" y1="44" x2="54" y2="58"/>
+              <line x1="58" y1="40" x2="58" y2="62"/>
+            </g>
+            <circle cx="26" cy="32" r="3" fill="#4FB89E"/>
+            <text x="32" y="35" font-family="inherit" font-size="5" font-weight="700" fill="#246356" letter-spacing="0.04em">REC</text>
+            <text x="26" y="72" font-family="inherit" font-size="5" font-weight="600" fill="#7B8699">02:14 / 12:38</text>
+          </svg>
+        </div>
+        <div class="mp-tag">음성 모음</div>
+      </a>
+
+      <a href="pricing.html" class="mp-card mp-5">
+        <div class="mp-vis" aria-hidden="true">
+          <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <ellipse cx="60" cy="92" rx="36" ry="2.5" fill="#1F2A3A" opacity="0.12"/>
+            <rect x="22" y="22" width="76" height="64" rx="3" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.8"/>
+            <rect x="22" y="22" width="76" height="14" fill="#246356"/>
+            <text x="60" y="32" text-anchor="middle" font-family="inherit" font-size="6" font-weight="700" fill="#fff" letter-spacing="0.12em">2026 · 5월</text>
+            <circle cx="36" cy="22" r="2" fill="none" stroke="#B5BCC8" stroke-width="1"/>
+            <circle cx="60" cy="22" r="2" fill="none" stroke="#B5BCC8" stroke-width="1"/>
+            <circle cx="84" cy="22" r="2" fill="none" stroke="#B5BCC8" stroke-width="1"/>
+            <g font-family="inherit" font-size="4" font-weight="600" fill="#7B8699">
+              <text x="30" y="48" text-anchor="middle">월</text>
+              <text x="40" y="48" text-anchor="middle">화</text>
+              <text x="50" y="48" text-anchor="middle">수</text>
+              <text x="60" y="48" text-anchor="middle">목</text>
+              <text x="70" y="48" text-anchor="middle">금</text>
+              <text x="80" y="48" text-anchor="middle">토</text>
+              <text x="90" y="48" text-anchor="middle">일</text>
+            </g>
+            <g font-family="inherit" font-size="4.5" fill="#1F2A3A">
+              <text x="30" y="58" text-anchor="middle">1</text>
+              <text x="40" y="58" text-anchor="middle">2</text>
+              <text x="50" y="58" text-anchor="middle">3</text>
+              <text x="60" y="58" text-anchor="middle">4</text>
+              <text x="70" y="58" text-anchor="middle">5</text>
+              <text x="80" y="58" text-anchor="middle">6</text>
+              <text x="90" y="58" text-anchor="middle">7</text>
+              <text x="30" y="68" text-anchor="middle">8</text>
+              <text x="40" y="68" text-anchor="middle">9</text>
+              <text x="50" y="68" text-anchor="middle">10</text>
+              <text x="70" y="68" text-anchor="middle">12</text>
+              <text x="80" y="68" text-anchor="middle">13</text>
+              <text x="90" y="68" text-anchor="middle">14</text>
+              <text x="30" y="78" text-anchor="middle">15</text>
+              <text x="40" y="78" text-anchor="middle">16</text>
+              <text x="60" y="78" text-anchor="middle">18</text>
+              <text x="70" y="78" text-anchor="middle">19</text>
+            </g>
+            <circle cx="60" cy="67" r="4" fill="#C9A06E"/>
+            <text x="60" y="68.5" text-anchor="middle" font-family="inherit" font-size="4.5" font-weight="700" fill="#fff">11</text>
+            <circle cx="50" cy="77" r="4" fill="#4FB89E"/>
+            <text x="50" y="78.5" text-anchor="middle" font-family="inherit" font-size="4.5" font-weight="700" fill="#fff">17</text>
+          </svg>
+        </div>
+        <div class="mp-tag">가족 캘린더</div>
+      </a>
+
+      <a href="pricing.html" class="mp-card mp-6">
+        <div class="mp-vis" aria-hidden="true">
+          <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <ellipse cx="60" cy="92" rx="36" ry="2.5" fill="#1F2A3A" opacity="0.12"/>
+            <g transform="rotate(-3 60 50)">
+              <rect x="22" y="20" width="76" height="62" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.8" filter="drop-shadow(0 2px 4px rgba(31,42,58,0.08))"/>
+              <rect x="22" y="20" width="76" height="3" fill="#F0E1CB"/>
+              <g stroke="#8C6433" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.75">
+                <path d="M 28 32 Q 32 30 38 32 T 50 30 T 60 32 T 72 30"/>
+                <path d="M 28 40 Q 34 38 42 40 T 56 38 T 70 40 T 82 38"/>
+                <path d="M 28 48 Q 34 46 42 48 T 58 46 T 76 48"/>
+                <path d="M 28 56 Q 32 54 38 56 T 50 54 T 62 56 T 74 54"/>
+                <path d="M 28 64 Q 34 62 42 64 T 56 62 T 64 64"/>
+              </g>
+              <path d="M 65 76 Q 70 72 75 76 Q 80 74 85 78" stroke="#246356" stroke-width="1" stroke-linecap="round" fill="none"/>
+              <circle cx="32" cy="74" r="5" fill="#C9A06E" opacity="0.85" transform="rotate(-12 32 74)"/>
+              <text x="32" y="76" text-anchor="middle" font-family="inherit" font-size="3" font-weight="800" fill="#FBF8EF" transform="rotate(-12 32 74)">엄마</text>
+            </g>
+            <g fill="#F4D4D4" opacity="0.5">
+              <circle cx="100" cy="30" r="2"/>
+              <circle cx="106" cy="40" r="1.5"/>
+            </g>
+          </svg>
+        </div>
+        <div class="mp-tag">손편지</div>
+      </a>
+    </div>
+
+    <div style="text-align: center; margin-top: 28px;">
+      <button type="button" id="mp-more-btn" class="btn-link" style="font-size: 14px; background: none; border: none; cursor: pointer; font-family: inherit; color: var(--primary); font-weight: 700;">둘러보기</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 제작 상품 layer popup ─────────── -->
+<div class="mp-modal-backdrop" id="mp-modal" aria-hidden="true">
+  <div class="mp-modal" role="dialog" aria-modal="true">
+    <button class="mp-modal-close" aria-label="닫기" type="button">×</button>
+    <div class="mp-modal-head">
+      <div class="t-eyebrow">기억으로 만드는 것들</div>
+      <h3>부모님의 기억이,<br>가족에게 닿는 선물이 됩니다.</h3>
+      <p>매일 모으는 사진·음성·이야기를 자서전·액자·영상으로 만들어 매년 가족에게 보내드려요.</p>
+    </div>
+    <div class="mp-modal-grid">
+      <div class="mp-item">
+        <div class="mp-item-vis mp-vbg-1">
+          <svg viewBox="0 0 80 60" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs><linearGradient id="bk1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3DA088"/><stop offset="100%" stop-color="#19463D"/></linearGradient></defs>
+            <rect x="22" y="14" width="36" height="40" fill="#FBF8EF"/>
+            <rect x="20" y="12" width="38" height="42" fill="url(#bk1)"/>
+            <rect x="24" y="16" width="30" height="34" fill="none" stroke="#D9B88C" stroke-width="0.6" opacity="0.7"/>
+            <rect x="24" y="26" width="30" height="10" fill="rgba(0,0,0,0.18)"/>
+            <text x="39" y="33" text-anchor="middle" font-family="inherit" font-size="4.5" font-weight="700" fill="#D9B88C" letter-spacing="0.08em">자서전</text>
+          </svg>
+        </div>
+        <div class="mp-item-tag">자서전 책</div>
+        <div class="mp-item-meta">200쪽 양장본 · 연 1권 · 가족 5부</div>
+        <div class="mp-item-desc">AI 음성 인터뷰로 모은 부모님 사연을 한 권으로 엮어드려요.</div>
+        <div class="mp-item-price">패밀리 플랜 포함 · 추가 1권 38,000원</div>
+      </div>
+      <div class="mp-item">
+        <div class="mp-item-vis mp-vbg-2">
+          <svg viewBox="0 0 80 60" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs><linearGradient id="fr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D9B88C"/><stop offset="100%" stop-color="#8C6433"/></linearGradient></defs>
+            <rect x="10" y="10" width="60" height="42" rx="2" fill="url(#fr2)"/>
+            <rect x="14" y="14" width="52" height="34" fill="#FBF8EF"/>
+            <rect x="17" y="17" width="46" height="28" fill="#DDF0E7"/>
+            <circle cx="28" cy="25" r="4" fill="#F4E7D2"/>
+            <rect x="54" y="32" width="1.5" height="10" fill="#8C6433"/>
+            <circle cx="54.5" cy="30" r="4" fill="#A6D5C2"/>
+            <path d="M 17 38 L 63 38 L 63 45 L 17 45 Z" fill="#7CC5A9" opacity="0.6"/>
+            <ellipse cx="34" cy="40" rx="2" ry="4" fill="#246356"/>
+            <ellipse cx="40" cy="41" rx="1.8" ry="3.5" fill="#C9A06E"/>
+          </svg>
+        </div>
+        <div class="mp-item-tag">디지털 가족 액자</div>
+        <div class="mp-item-meta">10인치 액자 무상 · WiFi 자동 동기화</div>
+        <div class="mp-item-desc">매달 가장 따뜻한 사진 12장을 골라 거실 액자로 흘려보내요.</div>
+        <div class="mp-item-price">프리미엄 플랜 무상 · 단품 198,000원</div>
+      </div>
+      <div class="mp-item">
+        <div class="mp-item-vis mp-vbg-3">
+          <svg viewBox="0 0 80 60" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs><linearGradient id="sc3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2C4A6B"/><stop offset="100%" stop-color="#1E3450"/></linearGradient></defs>
+            <rect x="10" y="12" width="60" height="38" rx="3" fill="url(#sc3)"/>
+            <rect x="13" y="15" width="54" height="26" fill="#A6D5C2" opacity="0.6"/>
+            <circle cx="24" cy="22" r="3" fill="#F4E7D2"/>
+            <circle cx="40" cy="28" r="7" fill="rgba(255,255,255,0.9)"/>
+            <polygon points="37,25 37,31 44,28" fill="#246356"/>
+            <rect x="13" y="44" width="54" height="2" rx="1" fill="rgba(255,255,255,0.18)"/>
+            <rect x="13" y="44" width="30" height="2" rx="1" fill="#4FB89E"/>
+          </svg>
+        </div>
+        <div class="mp-item-tag">연간 영상 앨범</div>
+        <div class="mp-item-meta">4K · 3-5분 · 가족 채널 자동 공유</div>
+        <div class="mp-item-desc">1년의 순간을 음성과 함께 한 편의 영상으로 정리해 드려요.</div>
+        <div class="mp-item-price">연 1편 무상 · 추가 편당 58,000원</div>
+      </div>
+      <div class="mp-item">
+        <div class="mp-item-vis mp-vbg-4">
+          <svg viewBox="0 0 80 60" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs><linearGradient id="vn4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2C4A6B"/><stop offset="100%" stop-color="#19463D"/></linearGradient></defs>
+            <rect x="10" y="12" width="60" height="38" rx="4" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.6"/>
+            <circle cx="56" cy="31" r="14" fill="url(#vn4)"/>
+            <circle cx="56" cy="31" r="10" fill="none" stroke="#1F2A3A" stroke-width="0.3" opacity="0.5"/>
+            <circle cx="56" cy="31" r="4" fill="#D9B88C"/>
+            <g stroke="#4FB89E" stroke-width="1.4" stroke-linecap="round">
+              <line x1="16" y1="31" x2="16" y2="31"/>
+              <line x1="20" y1="28" x2="20" y2="34"/>
+              <line x1="24" y1="24" x2="24" y2="38"/>
+              <line x1="28" y1="22" x2="28" y2="40"/>
+              <line x1="32" y1="26" x2="32" y2="36"/>
+              <line x1="36" y1="24" x2="36" y2="38"/>
+            </g>
+          </svg>
+        </div>
+        <div class="mp-item-tag">음성 인터뷰 모음</div>
+        <div class="mp-item-meta">무제한 저장 · 가족에게 사후 전달</div>
+        <div class="mp-item-desc">부모님의 목소리 그대로, 평생 클라우드에 안전하게 보관해요.</div>
+        <div class="mp-item-price">모든 플랜 무료</div>
+      </div>
+      <div class="mp-item">
+        <div class="mp-item-vis mp-vbg-5">
+          <svg viewBox="0 0 80 60" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <rect x="14" y="12" width="52" height="40" rx="2" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.6"/>
+            <rect x="14" y="12" width="52" height="10" fill="#246356"/>
+            <text x="40" y="19" text-anchor="middle" font-family="inherit" font-size="4.5" font-weight="700" fill="#fff" letter-spacing="0.1em">2026 · 5월</text>
+            <g font-family="inherit" font-size="3.5" fill="#1F2A3A">
+              <text x="22" y="32" text-anchor="middle">3</text>
+              <text x="32" y="32" text-anchor="middle">4</text>
+              <text x="42" y="32" text-anchor="middle">5</text>
+              <text x="52" y="32" text-anchor="middle">6</text>
+              <text x="62" y="32" text-anchor="middle">7</text>
+              <text x="22" y="42" text-anchor="middle">10</text>
+              <text x="32" y="42" text-anchor="middle">11</text>
+              <text x="52" y="42" text-anchor="middle">13</text>
+              <text x="62" y="42" text-anchor="middle">14</text>
+            </g>
+            <circle cx="42" cy="40" r="3.5" fill="#C9A06E"/>
+            <text x="42" y="41.5" text-anchor="middle" font-family="inherit" font-size="3.5" font-weight="700" fill="#fff">12</text>
+          </svg>
+        </div>
+        <div class="mp-item-tag">가족 캘린더</div>
+        <div class="mp-item-meta">탁상용 · 인원수만큼 인쇄 · 연 1회 발송</div>
+        <div class="mp-item-desc">생신·기일·가족 사진을 담은 12개월 캘린더를 가족 모두에게.</div>
+        <div class="mp-item-price">패밀리 플랜 포함 · 추가 1부 12,000원</div>
+      </div>
+      <div class="mp-item">
+        <div class="mp-item-vis mp-vbg-6">
+          <svg viewBox="0 0 80 60" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <g transform="rotate(-3 40 30)">
+              <rect x="14" y="12" width="52" height="36" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.6"/>
+              <rect x="14" y="12" width="52" height="2.5" fill="#F0E1CB"/>
+              <g stroke="#8C6433" stroke-width="0.7" stroke-linecap="round" fill="none" opacity="0.75">
+                <path d="M 18 22 Q 22 20 26 22 T 34 20 T 42 22 T 50 20"/>
+                <path d="M 18 28 Q 22 26 28 28 T 38 26 T 48 28"/>
+                <path d="M 18 34 Q 22 32 26 34 T 34 32 T 42 34"/>
+                <path d="M 18 40 Q 22 38 28 40 T 38 38"/>
+              </g>
+              <circle cx="22" cy="44" r="3" fill="#C9A06E" opacity="0.85" transform="rotate(-12 22 44)"/>
+              <text x="22" y="45.5" text-anchor="middle" font-family="inherit" font-size="2.4" font-weight="800" fill="#FBF8EF" transform="rotate(-12 22 44)">엄마</text>
+            </g>
+          </svg>
+        </div>
+        <div class="mp-item-tag">손편지</div>
+        <div class="mp-item-meta">분기 1회 · 봉투까지 손수 제작</div>
+        <div class="mp-item-desc">음성으로 남긴 자녀·손주에게 보내는 말씀을 손글씨로 인쇄해요.</div>
+        <div class="mp-item-price">프리미엄 플랜 포함 · 단품 9,800원</div>
+      </div>
+    </div>
+    <div class="mp-modal-cta">
+      <a href="pricing.html" class="btn btn-primary">플랜 비교 보기</a>
+      <a href="#contact" class="btn btn-ghost">제작 상담</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.mp-modal-backdrop {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(15, 20, 30, 0.65);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.mp-modal-backdrop.is-open { opacity: 1; pointer-events: auto; }
+.mp-modal {
+  position: relative;
+  background: var(--surface);
+  border-radius: 22px;
+  width: min(880px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 36px 36px 28px;
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.5);
+  transform: translateY(20px) scale(0.97);
+  opacity: 0;
+  transition: opacity 0.28s ease, transform 0.28s var(--ease);
+}
+.mp-modal-backdrop.is-open .mp-modal { opacity: 1; transform: translateY(0) scale(1); }
+.mp-modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 36px; height: 36px; border-radius: 18px;
+  background: var(--paper-2); border: none;
+  cursor: pointer; font-size: 20px; color: var(--ink);
+}
+.mp-modal-head { text-align: center; margin-bottom: 24px; }
+.mp-modal-head h3 {
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 700; letter-spacing: -0.025em; line-height: 1.25;
+  margin: 8px 0 8px;
+}
+.mp-modal-head p {
+  font-size: 14px; color: var(--text-2); line-height: 1.55;
+  margin: 0; max-width: 540px; margin: 0 auto;
+}
+.mp-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.mp-item {
+  padding: 0;
+  background: var(--paper-2);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.mp-item-vis {
+  width: 100%;
+  aspect-ratio: 4/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #FBF8EF 0%, #F5F1E6 100%);
+}
+.mp-item-vis.mp-vbg-2 { background: linear-gradient(180deg, #FBF8EF 0%, #F4E7D2 100%); }
+.mp-item-vis.mp-vbg-3 { background: linear-gradient(180deg, #EFF8F5 0%, #DDF0E7 100%); }
+.mp-item-vis.mp-vbg-4 { background: linear-gradient(180deg, #F5F1E6 0%, #E6E0D1 100%); }
+.mp-item-vis.mp-vbg-5 { background: linear-gradient(180deg, #DDF0E7 0%, #C8E5DB 100%); }
+.mp-item-vis.mp-vbg-6 { background: linear-gradient(180deg, #FBF8EF 0%, #F0E1CB 100%); }
+.mp-item-tag {
+  font-size: 13.5px; font-weight: 700; letter-spacing: -0.015em;
+  color: var(--ink); margin-bottom: 4px;
+  padding: 14px 16px 0;
+}
+.mp-item-meta {
+  font-size: 11px; color: var(--text-3); font-weight: 600;
+  margin-bottom: 8px;
+  padding: 0 16px;
+}
+.mp-item-desc {
+  font-size: 12.5px; color: var(--text-2); line-height: 1.5;
+  margin-bottom: 10px;
+  padding: 0 16px;
+}
+.mp-item-price {
+  font-size: 11.5px; color: var(--celadon-700); font-weight: 700;
+  padding: 8px 16px 14px;
+  border-top: 1px solid var(--line-2);
+}
+.mp-modal-cta {
+  display: flex; justify-content: center; gap: 10px;
+  padding-top: 14px; border-top: 1px solid var(--line-2);
+}
+.mp-modal-cta .btn { padding: 11px 22px; font-size: 13.5px; }
+@media (max-width: 640px) {
+  .mp-modal { padding: 24px 22px 22px; }
+  .mp-modal-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+(function () {
+  const btn = document.getElementById('mp-more-btn');
+  const bd = document.getElementById('mp-modal');
+  if (!btn || !bd) return;
+  function open() { bd.classList.add('is-open'); bd.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+  function close() { bd.classList.remove('is-open'); bd.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+  btn.addEventListener('click', open);
+  bd.addEventListener('click', (e) => { if (e.target === bd || e.target.closest('.mp-modal-close')) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && bd.classList.contains('is-open')) close(); });
+})();
+</script>
+
+<style>
+.mem-products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.mem-products.mem-products-compact {
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+.mp-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 14px 14px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.mp-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -16px rgba(31,42,58,0.16);
+  border-color: var(--celadon-300);
+}
+.mp-vis {
+  width: 100%;
+  aspect-ratio: 6/5;
+  background: linear-gradient(180deg, #FBF8EF 0%, #F5F1E6 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mp-card.mp-2 .mp-vis { background: linear-gradient(180deg, #FBF8EF 0%, #F4E7D2 100%); }
+.mp-card.mp-3 .mp-vis { background: linear-gradient(180deg, #EFF8F5 0%, #DDF0E7 100%); }
+.mp-card.mp-4 .mp-vis { background: linear-gradient(180deg, #F5F1E6 0%, #E6E0D1 100%); }
+.mp-card.mp-5 .mp-vis { background: linear-gradient(180deg, #DDF0E7 0%, #C8E5DB 100%); }
+.mp-card.mp-6 .mp-vis { background: linear-gradient(180deg, #FBF8EF 0%, #F0E1CB 100%); }
+.mp-card .mp-tag {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--text);
+}
+@media (max-width: 980px) {
+  .mem-products.mem-products-compact { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 480px) {
+  .mem-products.mem-products-compact { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+<div class="mem-modal-backdrop" id="mem-modal" aria-hidden="true">
+  <div class="mem-modal" role="dialog" aria-modal="true">
+    <button class="mem-modal-close" aria-label="닫기" type="button">×</button>
+    <div class="mem-modal-hero">
+      <img id="mem-modal-img" src="" alt=""/>
+      <div class="mem-modal-hero-tag" id="mem-modal-tag"></div>
+    </div>
+    <div class="mem-modal-body" id="mem-modal-body"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const AXES = {
+    '1': {
+      tag: '매일의 풍경 · 일상',
+      img: 'assets/samples/01-spring-walk.svg',
+      eye: '일상',
+      title: '어제와 오늘이 같았던 매일이,\n가장 그리운 풍경이 됩니다.',
+      lede: '걸음, 식사, 햇볕, 잠. 평범해서 잊혀지는 것들을 On:Gi가 자동으로 기록합니다. 1년 뒤, 오늘이 가장 따뜻한 페이지가 되어 있을 거예요.',
+      quote: '"엄마가 매일 같은 시간에 마당을 도는 그 모습이 이렇게 그리울 줄 몰랐어요. 사진은 다 못 찍었지만, 데이터로는 1,247번이 남아 있었어요."',
+      quoteBy: '— 서울 강남, 윤 보호자',
+      points: [
+        ['<b>자동 기록</b>', '걸음·수면·식사·복약 — 7개 신호가 부모님 모르게 매일을 적습니다.'],
+        ['<b>일별 카드</b>', '하루를 한 장의 카드로 — 사진 한 장과 짧은 문장으로 자동 정리.'],
+        ['<b>가족 타임라인</b>', '형제·자매·손주가 같은 일상을 함께 보고 댓글을 남깁니다.'],
+      ],
+    },
+    '2': {
+      tag: '사람과의 시간 · 관계',
+      img: 'assets/samples/00-wedding-1962.svg',
+      eye: '관계',
+      title: '사랑한 사람들과의 시간이,\n사라지기 전에 보존됩니다.',
+      lede: '아버지·어머니·배우자·자녀·손주·친구. 부모님의 인생을 거쳐간 사람들과의 이야기를 AI가 음성으로 인터뷰해 책처럼 엮어냅니다.',
+      quote: '"아버지가 어떻게 어머니를 만났는지, 처음 듣는 이야기였어요. 그게 마지막 대화가 됐고, 그날의 녹음이 가족 책의 첫 페이지가 됐죠."',
+      quoteBy: '— 인천, 김 보호자',
+      points: [
+        ['<b>AI 음성 인터뷰</b>', '부담 없는 질문 3-4개로 부모님의 인생 사연을 음성으로 보존.'],
+        ['<b>관계 그래프</b>', '함께한 사람들이 자동으로 연결되어 누구나 한눈에 봅니다.'],
+        ['<b>가족 책 제작</b>', '매년 한 권, 종이책으로 인쇄해 가족 모두에게 발송합니다.'],
+      ],
+    },
+    '3': {
+      tag: '곁의 물건 · 물품',
+      img: 'assets/samples/02-ring.svg',
+      eye: '물품',
+      title: '평생 곁에 둔 것들에는,\n사연이 함께 살고 있었어요.',
+      lede: '결혼 반지, 만년필, 손때 묻은 시계. 부모님이 아끼는 물건 하나에 AI가 인터뷰를 걸어, 60년 된 이야기를 30분 안에 보존합니다.',
+      quote: '"엄마 반지 한 짝에 13돈, 그게 1962년 봄에 아빠가 첫 월급을 모아 사준 거였대요. 모르고 그냥 둘 뻔했어요."',
+      quoteBy: '— 부산, 박 보호자',
+      points: [
+        ['<b>사진 + 사연</b>', '물건 한 장과 함께 AI가 자동으로 사연을 정리합니다.'],
+        ['<b>증여 의사 기록</b>', '누구에게 물려주고 싶은지를 평생 공증으로 보존.'],
+        ['<b>가족 미공개 옵션</b>', '민감한 내용은 부모님만 보고, 사후에 가족에게 공개됩니다.'],
+      ],
+    },
+    '4': {
+      tag: '손으로 빚은 것 · 작품',
+      img: 'assets/samples/03-embroidery.svg',
+      eye: '작품',
+      title: '직접 빚어낸 것들이,\n잊혀지지 않을 유산이 됩니다.',
+      lede: '자수, 도자기, 그림, 손편지, 김치 레시피. 부모님이 평생 만든 것들을 4K로 촬영하고 AI가 제작 과정·기법을 인터뷰합니다.',
+      quote: '"어머니가 80년 가까이 담그신 김장 김치 레시피를 손녀들이 영상으로 받아갔어요. 그게 우리 가족의 무형 유산이 됐어요."',
+      quoteBy: '— 광주, 최 보호자',
+      points: [
+        ['<b>4K 영상 보존</b>', '제작 과정과 손길까지 영상으로 보존합니다.'],
+        ['<b>레시피·기법 정리</b>', 'AI가 음성을 받아 가족만의 책으로 정리.'],
+        ['<b>전수 영상</b>', '손주가 따라할 수 있게 단계별 영상으로 편집됩니다.'],
+      ],
+    },
+  };
+
+  const backdrop = document.getElementById('mem-modal');
+  const img = document.getElementById('mem-modal-img');
+  const tag = document.getElementById('mem-modal-tag');
+  const body = document.getElementById('mem-modal-body');
+
+  function open(axis) {
+    const a = AXES[axis];
+    if (!a) return;
+    img.src = a.img;
+    img.alt = a.eye;
+    tag.textContent = a.tag;
+    body.innerHTML = `
+      <div class="mem-modal-eye">${a.eye}</div>
+      <h3>${a.title.replace(/\n/g, '<br>')}</h3>
+      <p class="lede">${a.lede}</p>
+      <blockquote>${a.quote}<span>${a.quoteBy}</span></blockquote>
+      <ul class="points">
+        ${a.points.map(([t, d]) => `<li><div>${t}<div style="color:var(--text-2);font-weight:500;margin-top:3px;">${d}</div></div></li>`).join('')}
+      </ul>
+      <div class="cta-row">
+        <a href="pricing.html" class="btn btn-primary">지금 무료 체험</a>
+        <a href="parent-app.html" class="btn btn-ghost">앱 미리보기</a>
+      </div>
+      <div class="price-hint">
+        패밀리 플랜 <b>월 19,900원</b> · 7일 무료 체험 · 카드 정보 없이 시작
+      </div>
+    `;
+    backdrop.classList.add('is-open');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    backdrop.classList.remove('is-open');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.mem-card[data-axis]').forEach(card => {
+    card.addEventListener('click', () => open(card.dataset.axis));
+  });
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop || e.target.closest('.mem-modal-close')) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && backdrop.classList.contains('is-open')) close();
+  });
+})();
+</script>
+
+<!-- ─────────── 운영 현황 ─────────── -->
+<section class="h-section h-section-tight" data-screen-label="04 현황">
+  <div class="container">
+    <div class="h-stack-head h-stack-head-tight">
+      <div class="left">
+        <h2>손에 잡히는 숫자로,<br>이미 부모님 곁에 있습니다.</h2>
+      </div>
+    </div>
+    <div class="h-stats">
+      <div class="h-stat">
+        <div class="sn">7<span>개</span></div>
+        <div class="sl">자동 추적되는<br>일상 신호 종류</div>
+      </div>
+      <div class="h-stat">
+        <div class="sn">4<span>결</span></div>
+        <div class="sl">일상·관계·물품·작품<br>네 가지로 모으는 기억</div>
+      </div>
+      <div class="h-stat">
+        <div class="sn">247<span>명</span></div>
+        <div class="sl">강남구 시범<br>운영 부모님 수</div>
+      </div>
+      <div class="h-stat">
+        <div class="sn">8<span>분</span></div>
+        <div class="sl">P1 위험 신호<br>평균 대응 시간</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── CTA ─────────── -->
+<section class="h-section">
+  <div class="container">
+    <div class="h-cta">
+      <div>
+        <h2>오늘부터 부모님의 곁을, 온기로 채워주세요.</h2>
+        <p>무료 베타 · 7일 체험 · 카드 정보 없이 시작</p>
+      </div>
+      <div class="ctas">
+        <a href="parent-app.html" class="btn btn-primary">무료로 시작하기</a>
+        <a href="pricing.html" class="btn btn-ghost">요금 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="container-wide">
+    <div class="foot-single">
+      <div class="foot-single-left">
+        <span class="ongi-mark">On:Gi</span>
+        <p>부모님의 평생을 보존하는 가족 서비스.</p>
+        <div class="foot-credits-inline">
+          <span class="fl-label">FOUNDING TEAM</span>
+          <span class="fl-people">
+            <span class="fl-p"><b>김태희</b> 대표</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>이민섭</b> 공동창업자 · CCO</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>김세연</b> 공동창업자 · CTO</span>
+          </span>
+        </div>
+        <div class="foot-credits-inline" style="margin-top:6px;">
+          <span class="fl-label" style="color:var(--sand);">ADVISOR</span>
+          <span class="fl-people">
+            <span class="fl-p"><b>원민재</b> 한국엔젤투자협회</span>
+          </span>
+        </div>
+      </div>
+      <div class="foot-single-right">
+        <nav class="foot-links">
+          <a href="parent-app.html">부모님앱</a>
+          <a href="control-center.html">돌봄 관제</a>
+          <a href="care-hub.html">관제 소개</a>
+          <a href="pricing.html">구독</a>
+          <a href="brand.html">브랜드</a>
+          <a href="design.html">디자인</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">기업·기관 문의</a>
+        </nav>
+        <div class="foot-meta">
+          <span>© 2026 On:Gi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Mobile nav toggle
+  document.addEventListener('click', function(e) {
+    var t = e.target.closest('.nav-mobile-toggle');
+    var nav = document.querySelector('.nav-links');
+    if (t && nav) {
+      e.preventDefault();
+      nav.classList.toggle('is-open');
+      return;
+    }
+    if (nav && nav.classList.contains('is-open') && !e.target.closest('.nav')) {
+      nav.classList.remove('is-open');
+    }
+  });
+  function attach() {
+    document.querySelectorAll('.nav .nav-links a, .app-bar .links a').forEach((a) => {
+      if (a.dataset.scrollTopBound) return;
+      a.dataset.scrollTopBound = '1';
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href') || '';
+        var samePage = href === '' || href.startsWith('#') ||
+          href.split('#')[0] === location.pathname.split('/').pop() ||
+          (href.split('#')[0] === '' && location.hash);
+        if (samePage) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (location.hash) history.replaceState(null, '', location.pathname);
+        }
+        // Close mobile menu on selection
+        var nav = document.querySelector('.nav-links');
+        if (nav) nav.classList.remove('is-open');
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attach);
+  } else { attach(); }
+  window.addEventListener('load', function () {
+    if (!location.hash) window.scrollTo(0, 0);
+  });
+})();
+</script>
+<script src="shared/fab-consult.js"></script>
 </body>
 </html>

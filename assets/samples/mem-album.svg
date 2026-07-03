@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="album-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F0E1CB"></stop>
+      <stop offset="100%" stop-color="#D9B88C"></stop>
+    </linearGradient>
+    <linearGradient id="album-cover" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A03030"></stop>
+      <stop offset="100%" stop-color="#5C1818"></stop>
+    </linearGradient>
+    <linearGradient id="album-page" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FBF8EF"></stop>
+      <stop offset="100%" stop-color="#F0E1CB"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#album-bg)"></rect>
+  <ellipse cx="300" cy="540" rx="280" ry="20" fill="#5C3618" opacity="0.25"></ellipse>
+
+  
+  <g transform="translate(300,300) rotate(-3)">
+    
+    <rect x="-250" y="-180" width="500" height="360" rx="12" fill="url(#album-cover)" stroke="#3D0F0F" stroke-width="2"></rect>
+    
+    <rect x="-238" y="-168" width="476" height="336" rx="8" fill="none" stroke="#E89B3A" stroke-width="2" opacity="0.7"></rect>
+    
+    <text x="0" y="-200" text-anchor="middle" font-size="20" font-weight="700" fill="#3D0F0F" font-family="system-ui" letter-spacing="-1">우리 가족 추억</text>
+
+    
+    <rect x="-238" y="-168" width="234" height="336" fill="url(#album-page)"></rect>
+    
+    <rect x="4" y="-168" width="234" height="336" fill="url(#album-page)"></rect>
+    
+    <line x1="0" y1="-168" x2="0" y2="168" stroke="#A8835A" stroke-width="2"></line>
+
+    
+    <g transform="translate(-120,-80) rotate(-4)">
+      <rect x="-58" y="-44" width="116" height="88" fill="white" stroke="#D9B88C" stroke-width="1"></rect>
+      <rect x="-54" y="-40" width="108" height="76" fill="#C8E5DB"></rect>
+      
+      <circle cx="-30" cy="-22" r="10" fill="#F4E7D2"></circle>
+      <path d="M -54 16 Q -30 6 0 12 Q 30 18 54 8 L 54 36 L -54 36 Z" fill="#7CC5A9"></path>
+      <ellipse cx="20" cy="0" rx="14" ry="20" fill="#3DA088"></ellipse>
+      <rect x="18" y="14" width="4" height="22" fill="#5C3618"></rect>
+      
+      <text x="0" y="38" text-anchor="middle" font-size="7" fill="#5C3618" font-family="system-ui" font-style="italic">1972 · 첫 봄나들이</text>
+    </g>
+
+    
+    <g transform="translate(-120,80) rotate(3)">
+      <rect x="-58" y="-44" width="116" height="88" fill="white" stroke="#D9B88C" stroke-width="1"></rect>
+      <rect x="-54" y="-40" width="108" height="76" fill="#FBE9E9"></rect>
+      
+      <ellipse cx="-14" cy="16" rx="14" ry="22" fill="#2C4A6B"></ellipse>
+      <circle cx="-14" cy="-8" r="8" fill="#E6C9A4"></circle>
+      <ellipse cx="14" cy="16" rx="13" ry="22" fill="#D94B4B"></ellipse>
+      <circle cx="14" cy="-8" r="8" fill="#FAE2C8"></circle>
+      
+      <path d="M -2 -22 a 2 2 0 0 1 4 0 a 2 2 0 0 1 4 0 c 0 2 -4 4 -4 4 c 0 0 -4 -2 -4 -4 z" fill="#D94B4B"></path>
+      <text x="0" y="38" text-anchor="middle" font-size="7" fill="#5C3618" font-family="system-ui" font-style="italic">1962 · 결혼식</text>
+    </g>
+
+    
+    <g transform="translate(120,-80) rotate(2)">
+      <rect x="-58" y="-44" width="116" height="88" fill="white" stroke="#D9B88C" stroke-width="1"></rect>
+      <rect x="-54" y="-40" width="108" height="76" fill="#F4E7D2"></rect>
+      
+      <ellipse cx="0" cy="8" rx="36" ry="14" fill="#8C5630"></ellipse>
+      <ellipse cx="-30" cy="0" rx="11" ry="14" fill="#8C5630"></ellipse>
+      <ellipse cx="-32" cy="2" rx="4" ry="6" fill="#3D210F"></ellipse>
+      <circle cx="-36" cy="-1" r="1.5" fill="#fff"></circle>
+      <text x="0" y="38" text-anchor="middle" font-size="7" fill="#5C3618" font-family="system-ui" font-style="italic">2012 · 단비 입양</text>
+    </g>
+
+    
+    <g transform="translate(120,80) rotate(-3)">
+      <rect x="-58" y="-44" width="116" height="88" fill="white" stroke="#D9B88C" stroke-width="1"></rect>
+      <rect x="-54" y="-40" width="108" height="76" fill="#DDF0E7"></rect>
+      
+      <ellipse cx="-18" cy="14" rx="14" ry="22" fill="#4FB89E"></ellipse>
+      <circle cx="-18" cy="-10" r="10" fill="#E6C9A4"></circle>
+      <ellipse cx="14" cy="20" rx="9" ry="14" fill="#E89B3A"></ellipse>
+      <circle cx="14" cy="4" r="7" fill="#FBE7CD"></circle>
+      <text x="0" y="38" text-anchor="middle" font-size="7" fill="#5C3618" font-family="system-ui" font-style="italic">2024 · 손주 첫돌</text>
+    </g>
+
+    
+    <g fill="#D9B88C" opacity="0.7">
+      <rect x="-130" y="-118" width="20" height="6" rx="1" transform="rotate(40 -120 -118)"></rect>
+      <rect x="-130" y="44" width="20" height="6" rx="1" transform="rotate(-40 -120 44)"></rect>
+      <rect x="110" y="-118" width="20" height="6" rx="1" transform="rotate(-40 120 -118)"></rect>
+      <rect x="110" y="44" width="20" height="6" rx="1" transform="rotate(40 120 44)"></rect>
+    </g>
+  </g>
+
+  
+  <g fill="#F4D4D4" opacity="0.5">
+    <circle cx="80" cy="100" r="5"></circle>
+    <circle cx="540" cy="80" r="4"></circle>
+    <circle cx="500" cy="500" r="4"></circle>
+    <circle cx="100" cy="500" r="5"></circle>
+  </g>
+</svg>

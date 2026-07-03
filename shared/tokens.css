@@ -1,0 +1,300 @@
+/* On-Gi 디자인 토큰 — Brand Master v1.0 기반 */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css');
+
+:root {
+  /* --- Brand Color: Celadon (청자) tonal scale --- */
+  --celadon-50:  #EFF8F5;
+  --celadon-100: #DDF0E7;
+  --celadon-200: #C8E5DB; /* Mist · 안개 */
+  --celadon-300: #A6D5C2;
+  --celadon-400: #7CC5A9;
+  --celadon-500: #4FB89E; /* PRIMARY · 청자 */
+  --celadon-600: #3DA088;
+  --celadon-700: #2F8270;
+  --celadon-800: #246356;
+  --celadon-900: #19463D;
+
+  /* --- Slate (심해) --- */
+  --slate-500: #2C4A6B;
+  --slate-700: #1E3450;
+
+  /* --- Warm (노을) --- */
+  --sand: #D9B88C;
+  --sand-soft: #F0E1CB;
+
+  /* --- Neutrals --- */
+  --ink: #1F2A3A;       /* 심야 · 본문 텍스트 */
+  --ink-2: #46546A;
+  --ink-3: #7B8699;
+  --ink-4: #B5BCC8;
+  --paper: #F5F1E6;     /* 한지 · 따뜻한 배경 */
+  --paper-2: #FBF8EF;
+  --white: #FFFFFF;
+  --line: #E6E0D1;
+  --line-2: #EDE8DC;
+
+  /* --- Semantic (위험도 P1-P4) --- */
+  --p1: #D94B4B;        /* 빨강 — 즉시 */
+  --p1-bg: #FBE9E9;
+  --p2: #E89B3A;        /* 앰버 — 당일 */
+  --p2-bg: #FAEFD9;
+  --p3: #6B7B92;        /* 슬레이트 — 예정 */
+  --p3-bg: #E6EAF0;
+  --p4: #4FB89E;        /* 민트 — 모니터링 */
+  --p4-bg: #E0F1EA;
+
+  /* --- Tokens --- */
+  --bg: var(--paper);
+  --surface: var(--white);
+  --surface-2: var(--paper-2);
+  --text: var(--ink);
+  --text-2: var(--ink-2);
+  --text-3: var(--ink-3);
+  --primary: var(--celadon-500);
+  --primary-press: var(--celadon-600);
+
+  /* --- Type --- */
+  --font: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* --- Radius --- */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 32px;
+  --r-full: 9999px;
+
+  /* --- Shadow (Apple-tone, very subtle) --- */
+  --sh-1: 0 1px 2px rgba(31, 42, 58, 0.04), 0 1px 1px rgba(31, 42, 58, 0.03);
+  --sh-2: 0 4px 16px rgba(31, 42, 58, 0.06), 0 1px 2px rgba(31, 42, 58, 0.04);
+  --sh-3: 0 18px 48px -16px rgba(31, 42, 58, 0.18), 0 4px 12px rgba(31, 42, 58, 0.04);
+  --sh-hero: 0 60px 120px -40px rgba(31, 42, 58, 0.28);
+
+  /* --- Motion --- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] {
+  --bg: #0E141C;
+  --surface: #15202E;
+  --surface-2: #1B2838;
+  --text: #ECEEF1;
+  --text-2: #B7BFCC;
+  --text-3: #7E8898;
+  --line: #243349;
+  --line-2: #1B2838;
+  --paper: #0E141C;
+  --paper-2: #15202E;
+  --white: #15202E;
+  --p1-bg: #2C1A1C;
+  --p2-bg: #2B2418;
+  --p3-bg: #1B232E;
+  --p4-bg: #16261F;
+}
+
+/* Senior mode — bigger type, higher contrast */
+[data-senior="true"] {
+  --text: #000000;
+  --text-2: #1F2A3A;
+  --line: #C8C2B0;
+}
+
+[data-senior="true"] body { font-size: 19px; }
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss01', 'tnum';
+  letter-spacing: -0.012em;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease);
+}
+button { font-family: inherit; }
+
+/* Apple-tone typography utilities */
+.t-display {
+  font-size: clamp(44px, 7.2vw, 96px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+}
+.t-headline {
+  font-size: clamp(32px, 4.2vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+}
+.t-title {
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+.t-body-l {
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  font-weight: 400;
+}
+.t-body {
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+}
+.t-caption {
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-3);
+}
+.t-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.t-mono {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* On:Gi wordmark — "On:Gi" text + signature dot, vertically centered */
+.ongi-mark {
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  line-height: 1;
+}
+.ongi-mark::after {
+  content: '';
+  display: inline-block;
+  width: 0.22em;
+  height: 0.22em;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-left: 0.16em;
+  align-self: center;
+  position: relative;
+  top: -0.02em;
+}
+
+/* Pill / chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: var(--r-full);
+  background: var(--celadon-50);
+  color: var(--celadon-700);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.chip-p1 { background: var(--p1-bg); color: var(--p1); }
+.chip-p2 { background: var(--p2-bg); color: var(--p2); }
+.chip-p3 { background: var(--p3-bg); color: var(--p3); }
+.chip-p4 { background: var(--p4-bg); color: var(--p4); }
+.chip-sand { background: #F4E7D2; color: #8C6433; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: var(--r-full);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  transition: transform 0.2s var(--ease), background 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--celadon-500); color: white; }
+.btn-primary:hover { background: var(--celadon-600); box-shadow: 0 6px 20px -8px rgba(79, 184, 158, 0.6); }
+.btn-ghost { background: transparent; color: var(--text); }
+.btn-ghost:hover { background: var(--line-2); }
+.btn-ink { background: var(--ink); color: white; }
+.btn-ink:hover { background: #2A3849; }
+.btn-link {
+  background: transparent;
+  color: var(--primary);
+  padding: 0;
+  font-weight: 600;
+}
+.btn-link::after {
+  content: '›';
+  margin-left: 4px;
+  transition: transform 0.2s var(--ease);
+  display: inline-block;
+}
+.btn-link:hover::after { transform: translateX(3px); }
+
+/* Card */
+.card {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--ink-4);
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--ink-3); }
+
+/* Utility */
+.container { width: min(1280px, 92%); margin: 0 auto; }
+.container-wide { width: min(1440px, 94%); margin: 0 auto; }
+.container-narrow { width: min(960px, 90%); margin: 0 auto; }
+
+/* Color palette alternates (via tweaks) */
+[data-palette="slate"] {
+  --primary: var(--slate-500);
+  --primary-press: var(--slate-700);
+  --celadon-50: #ECF1F6;
+  --celadon-500: var(--slate-500);
+  --celadon-600: var(--slate-700);
+}
+[data-palette="sand"] {
+  --primary: #C9A06E;
+  --primary-press: #A88455;
+  --celadon-50: #F7EFE0;
+  --celadon-500: #C9A06E;
+  --celadon-600: #A88455;
+}
+
+/* No-flash JS-applied attrs */
+[data-theme] body { color-scheme: light; }
+[data-theme="dark"] body { color-scheme: dark; }
+
+/* Senior mode global type bumps applied by data attribute */
+[data-senior="true"] .t-body { font-size: 19px; }
+[data-senior="true"] .t-body-l { font-size: 22px; }
+[data-senior="true"] .t-caption { font-size: 15px; color: var(--text-2); }
+[data-senior="true"] .btn { padding: 18px 32px; font-size: 17px; }

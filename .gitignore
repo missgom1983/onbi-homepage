@@ -1,0 +1,11 @@
+# 개발/작업용 파일 — 운영 배포에서 제외
+screenshots/
+v1/
+uploads/
+*.dc.html
+image-slot.js
+support.js
+
+# 에디터/OS
+.claude/
+.DS_Store

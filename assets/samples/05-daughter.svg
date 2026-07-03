@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="cute-d-bg" cx="0.5" cy="0.45">
+      <stop offset="0%" stop-color="#F0E1CB"></stop>
+      <stop offset="100%" stop-color="#FBE9E9"></stop>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#cute-d-bg)"></rect>
+  <circle cx="200" cy="200" r="170" fill="#FBE9E9" opacity="0.5"></circle>
+
+  
+  <path d="M 70 400 Q 110 285 200 285 Q 290 285 330 400 Z" fill="#D94B4B"></path>
+  <ellipse cx="200" cy="293" rx="52" ry="12" fill="#FBF8EF"></ellipse>
+
+  
+  <ellipse cx="200" cy="220" rx="116" ry="124" fill="#3D2A14"></ellipse>
+
+  
+  <circle cx="200" cy="220" r="92" fill="#FCE3CA"></circle>
+
+  
+  <path d="M 116 192 Q 138 130 200 126 Q 262 130 284 192 Q 260 162 220 158 Q 200 168 180 158 Q 140 162 116 192 Z" fill="#2C1810"></path>
+
+  
+  <circle cx="142" cy="240" r="14" fill="#F4B8B8" opacity="0.8"></circle>
+  <circle cx="258" cy="240" r="14" fill="#F4B8B8" opacity="0.8"></circle>
+
+  
+  <path d="M 156 224 Q 170 240 184 224" stroke="#2C1810" stroke-width="6" fill="none" stroke-linecap="round"></path>
+  <path d="M 216 224 Q 230 240 244 224" stroke="#2C1810" stroke-width="6" fill="none" stroke-linecap="round"></path>
+
+  
+  <path d="M 178 268 Q 200 286 222 268" stroke="#C44A3C" stroke-width="6" fill="none" stroke-linecap="round"></path>
+
+  
+  <circle cx="108" cy="232" r="4" fill="#E89B3A"></circle>
+  <circle cx="292" cy="232" r="4" fill="#E89B3A"></circle>
+
+  
+  <g fill="#4FB89E" opacity="0.6">
+    <circle cx="70" cy="80" r="6"></circle>
+    <circle cx="330" cy="100" r="5"></circle>
+  </g>
+  <g fill="#D94B4B" opacity="0.5">
+    <path d="M 50 320 a 5 5 0 0 1 10 0 a 5 5 0 0 1 10 0 c 0 5 -10 11 -10 11 c 0 0 -10 -6 -10 -11 z"></path>
+  </g>
+</svg>

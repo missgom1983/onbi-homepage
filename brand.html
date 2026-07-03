@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On:Gi · 브랜드 소개</title>
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/landing.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<script src="shared/theme.js"></script>
+<script src="shared/sso-menu.js"></script>
+<script src="shared/image-slot.js"></script>
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "light",
+  "senior": false,
+  "palette": "celadon"
+}/*EDITMODE-END*/;
+</script>
+<style>
+/* Brand-specific extras */
+.brand-hero {
+  text-align: center;
+  padding: 120px 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+.brand-hero .container { position: relative; }
+.brand-section {
+  padding: 96px 0;
+}
+.brand-section.paper { background: var(--paper-2); }
+
+/* Story (alternating) */
+.brand-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.brand-story.reverse .bs-text { order: 2; }
+.brand-story .bs-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--primary);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.brand-story .bs-h {
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+  margin: 0 0 24px;
+  text-wrap: balance;
+}
+.brand-story .bs-p {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-2);
+  margin: 0 0 16px;
+  text-wrap: pretty;
+}
+.brand-story .bs-visual {
+  aspect-ratio: 4/5;
+  background: var(--surface);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--sh-3);
+  position: relative;
+}
+.brand-story .bs-visual image-slot,
+.brand-story .bs-visual img,
+.brand-story .bs-visual svg,
+.brand-story .bs-visual video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Values grid */
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.value-card {
+  padding: 36px 32px;
+  background: var(--surface);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.value-card .vn {
+  font-family: ui-monospace, SF Mono, monospace;
+  font-size: 13px;
+  color: var(--celadon-600);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+.value-card h3 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.value-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-2);
+  margin: 0;
+}
+
+/* Founder quote */
+.founder {
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.founder blockquote {
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.32;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 0 0 36px;
+  text-wrap: balance;
+  color: var(--text);
+}
+.founder blockquote::before { content: '"'; color: var(--primary); margin-right: 4px; }
+.founder blockquote::after { content: '"'; color: var(--primary); margin-left: 4px; }
+.founder .fp {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 8px 8px 8px 8px;
+  background: var(--surface);
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+.founder .fp .av {
+  width: 44px; height: 44px; border-radius: 22px;
+  background: linear-gradient(135deg, var(--celadon-300), var(--celadon-600));
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; letter-spacing: -0.02em; font-size: 16px;
+}
+.founder .fp .fm { text-align: left; padding-right: 14px; }
+.founder .fp .fm .fn { font-weight: 700; letter-spacing: -0.015em; font-size: 14px; }
+.founder .fp .fm .fr { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+/* Milestones */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: ''; position: absolute;
+  left: 13px; top: 8px; bottom: 8px;
+  width: 2px; background: var(--line);
+}
+.tl-item {
+  padding: 8px 0 40px;
+  position: relative;
+}
+.tl-item::before {
+  content: ''; position: absolute;
+  left: -33px; top: 14px;
+  width: 12px; height: 12px;
+  border-radius: 6px;
+  background: var(--primary);
+  border: 3px solid var(--bg);
+}
+.tl-item.tl-future::before { background: var(--ink-4); }
+.tl-item .tld {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--celadon-600);
+  letter-spacing: 0.04em;
+}
+.tl-item .tlt {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 6px 0 6px;
+}
+.tl-item .tlp {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.55;
+  max-width: 560px;
+}
+
+@media (max-width: 980px) {
+  .brand-story { grid-template-columns: 1fr; gap: 32px; }
+  .values { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container-wide nav-inner">
+    <a href="index.html" class="nav-brand"><span class="ongi-mark">On:Gi</span></a>
+    <div class="nav-links">
+      <a href="index.html">서비스</a>
+      <a href="pricing.html">구독</a>
+      <a href="care-hub.html">돌봄 관제</a>
+      <a href="brand.html" style="color:var(--celadon-300);font-weight:600;">브랜드</a>
+      <a href="design.html">디자인</a>
+    </div>
+    <div class="nav-cta">
+      <div data-ongi-sso data-system="home"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="brand-hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+  <div class="container">
+    <span class="hero-eyebrow">BRAND · 우리가 만드는 것</span>
+    <h1 style="font-size: clamp(40px, 6.4vw, 88px); line-height: 1.04; letter-spacing: -0.04em; font-weight: 700; margin: 0 0 24px; text-wrap: balance;">
+      기억은 사라져도,<br>
+      <span class="accent">온기는 남습니다.</span>
+    </h1>
+    <p class="lead" style="font-size: clamp(18px, 1.7vw, 22px); line-height: 1.55; color: var(--text-2); max-width: 720px; margin: 0 auto 36px;">
+      매일의 돌봄이 데이터가 되고, 잊지 못할 순간이 보관함이 되고,<br>
+      평생 모은 것들이 가족의 책이 됩니다.
+    </p>
+  </div>
+</header>
+
+<!-- STORY 1: 시작 -->
+<section class="brand-section">
+  <div class="container">
+    <div class="brand-story">
+      <div class="bs-text">
+        <div class="bs-eyebrow">우리의 시작</div>
+        <h2 class="bs-h">
+          아버지의 걸음 수보다,<br>아버지가 무엇을 좋아하셨는지가<br>더 오래 남는다고 믿었습니다.
+        </h2>
+        <p class="bs-p">
+          요양원에서 아버지를 보내드린 후, 우리에게 남은 건 한 장의 사진과 몇 줄의 의무기록뿐이었습니다.
+          정작 아버지가 어떤 노래를 좋아하셨고, 낡은 손목시계에 어떤 사연이 담겼는지는 어디에도 적혀 있지 않았습니다.
+        </p>
+        <p class="bs-p">
+          On:Gi는 그 빈자리를 채우기 위해 시작됐습니다.<br>
+          매일의 데이터와 평생의 이야기를 함께 보존하는 가족 서비스입니다.
+        </p>
+      </div>
+      <div class="bs-visual">
+        <image-slot id="brand-1" placeholder="부모님 결혼 사진 · 1962" src="assets/samples/00-wedding-1962.svg" radius="0" fit="cover"></image-slot>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="brand-section paper">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:64px;">
+      <div class="sec-eyebrow">우리가 지키는 것</div>
+      <h2 class="sec-h" style="max-width:840px;margin:0 auto;">
+        세 가지 약속.
+      </h2>
+    </div>
+    <div class="values">
+      <div class="value-card">
+        <div class="vn">01 · 사람을 먼저</div>
+        <h3>부모님은<br>관찰의 대상이 아니라<br>대화의 상대입니다.</h3>
+        <p>모니터링이 아니라 같은 화면을 바라봅니다. 데이터를 모으되 사람을 보는 시선을 잃지 않습니다.</p>
+      </div>
+      <div class="value-card">
+        <div class="vn">02 · 보존</div>
+        <h3>잊혀질 수 있는 것은<br>지금 기록되어야<br>합니다.</h3>
+        <p>매일의 일곱 가지 신호와 평생의 기억 네 결 — 자동으로 모으되, 가족이 결정합니다. 사라질 데이터는 없습니다.</p>
+      </div>
+      <div class="value-card">
+        <div class="vn">03 · 연결</div>
+        <h3>혼자 책임지지<br>않아도 되는<br>돌봄을 만듭니다.</h3>
+        <p>가족, 요양보호사, 지자체가 한 화면에서. 짐은 나누고, 결정은 함께. 1개 계정, 3개 시스템.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY 2: 어떻게 -->
+<section class="brand-section">
+  <div class="container">
+    <div class="brand-story reverse">
+      <div class="bs-text">
+        <div class="bs-eyebrow">어떻게 만드는가</div>
+        <h2 class="bs-h">기술은 따뜻해야 합니다.</h2>
+        <p class="bs-p">
+          AI는 어머니의 사진과 음성을 학습합니다. 하지만 새로운 말을 만들어내지 않습니다.
+          이미 보유한 자료 내에서만 재현하고, 보호자의 동의 없이는 공개되지 않습니다.
+        </p>
+        <p class="bs-p">
+          임상심리 전문의와 변호사 자문을 거친 가이드라인을 모든 화면에 적용합니다.
+          민감한 정보는 부모님만 보고, 사후에야 가족에게 공개될 수 있습니다.
+        </p>
+      </div>
+      <div class="bs-visual">
+        <image-slot id="brand-2" placeholder="기억 모듈" src="assets/samples/09-album.svg" radius="0" fit="cover"></image-slot>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER QUOTE -->
+<section class="brand-section paper">
+  <div class="container">
+    <div class="founder">
+      <div class="sec-eyebrow" style="margin-bottom:32px;">창업자의 말</div>
+      <blockquote>
+        가장 따뜻한 기술은,<br>사람을 잊지 않는 기술입니다.
+      </blockquote>
+      <div class="fp">
+        <div class="av">김</div>
+        <div class="fm">
+          <div class="fn">김태희 · 창업자</div>
+          <div class="fr">전 SK인텔릭스 · 디지털 기획 14년 (2012~)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="brand-section">
+  <div class="container" style="max-width:880px;">
+    <div style="margin-bottom:48px;">
+      <div class="sec-eyebrow">여정</div>
+      <h2 class="sec-h">우리는 어디까지 왔고,<br>어디로 가는가.</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tld">2010 · 봄</div>
+        <div class="tlt">시작 — 아버지를 잃다</div>
+        <div class="tlp">창업자가 아버지를 떠나보낸 뒤, 평생의 기록이 사라지는 경험을 한다.</div>
+      </div>
+      <div class="tl-item tl-future">
+        <div class="tld">2026 · 겨울 · 예정</div>
+        <div class="tlt">CareOS v1.0 출시</div>
+        <div class="tlp">7개 일상 신호 자동 추적, 보호자 앱과 가족 공유 타임라인을 처음 선보일 예정.</div>
+      </div>
+      <div class="tl-item tl-future">
+        <div class="tld">2027 · 봄 · 예정</div>
+        <div class="tlt">Memory Module 추가</div>
+        <div class="tlp">네 가지 갈래(일상·관계·물품·작품)의 기억 모으기 출시. AI 음성 인터뷰로 사연 보존 시작.</div>
+      </div>
+      <div class="tl-item tl-future">
+        <div class="tld">2027 · 가을 · 예정</div>
+        <div class="tlt">기업·기관 돌봄 관제 시범</div>
+        <div class="tlp">강남구청과 247명 부모님 대상 시범 운영 시작. 가족-요양-지자체 3자 연결.</div>
+      </div>
+      <div class="tl-item tl-future">
+        <div class="tld">2028 · 예정</div>
+        <div class="tlt">전국 17개 지자체</div>
+        <div class="tlp">CareOS + Memory Module을 전국으로 확장. 인구 5%가 부모님을 함께 봅니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND VISION -->
+<section class="brand-section h-section-tight paper">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div class="sec-eyebrow">우리의 비전</div>
+      <h2 style="font-size: clamp(22px, 2.8vw, 32px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 700; margin: 8px 0 6px;">
+        사람을 잊지 않는 기술.
+      </h2>
+      <p style="font-size: 14px; color: var(--text-2); max-width: 580px; margin: 8px auto 0; line-height: 1.55;">
+        앱에서. 디바이스로. 로봇으로.
+      </p>
+    </div>
+
+    <div class="vision-grid">
+      <div class="vision-card">
+        <div class="vcard-year">NOW · 2026</div>
+        <div class="vcard-vis">
+          <svg viewBox="0 0 220 160" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs>
+              <linearGradient id="vp1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#E6E8EC"/></linearGradient>
+              <clipPath id="vp1-screen"><rect x="82" y="30" width="56" height="100" rx="8"/></clipPath>
+            </defs>
+            <ellipse cx="110" cy="148" rx="56" ry="4" fill="#1F2A3A" opacity="0.18"/>
+            <!-- Phone body (thin iPhone-like frame, white) -->
+            <rect x="80" y="16" width="60" height="128" rx="14" fill="url(#vp1)" stroke="#C8CCD2" stroke-width="0.6"/>
+            <!-- Inner bezel (thin) -->
+            <rect x="82" y="18" width="56" height="124" rx="12" fill="#FFFFFF"/>
+            <!-- Screen -->
+            <rect x="82" y="20" width="56" height="120" rx="10" fill="#F5F1E6"/>
+            <!-- Dynamic island (iPhone-style pill) -->
+            <rect x="104" y="22" width="12" height="3.5" rx="1.75" fill="#0E141C"/>
+            <!-- Camera lens -->
+            <circle cx="113.5" cy="23.75" r="0.7" fill="#1F2A3A"/>
+            <circle cx="113.5" cy="23.75" r="0.35" fill="#4FB89E" opacity="0.7"/>
+            <!-- Side buttons -->
+            <rect x="79" y="38" width="1" height="10" rx="0.5" fill="#B5BCC8"/>
+            <rect x="79" y="54" width="1" height="14" rx="0.5" fill="#B5BCC8"/>
+            <rect x="79" y="72" width="1" height="14" rx="0.5" fill="#B5BCC8"/>
+            <rect x="140" y="48" width="1" height="20" rx="0.5" fill="#B5BCC8"/>
+
+            <!-- Screen content (auto sliding through 3 screens) -->
+            <g clip-path="url(#vp1-screen)">
+              <g>
+                <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                  values="0,0; 0,0; -56,0; -56,0; -112,0; -112,0; 0,0"
+                  keyTimes="0; 0.27; 0.33; 0.6; 0.66; 0.93; 1"
+                  dur="9s" repeatCount="indefinite"/>
+
+                <!-- Screen 1: 케어 홈 (with vertical scroll motion) -->
+                <g transform="translate(82,30)">
+                  <g>
+                    <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                      values="0,0; 0,0; 0,-26; 0,-26; 0,0"
+                      keyTimes="0; 0.06; 0.22; 0.27; 1"
+                      dur="9s" repeatCount="indefinite"/>
+                    <text x="6" y="14" font-family="inherit" font-size="5" font-weight="700" fill="#7B8699">케어 홈</text>
+                    <rect x="4" y="20" width="52" height="22" rx="6" fill="#4FB89E"/>
+                    <text x="30" y="30" text-anchor="middle" font-family="inherit" font-size="5" font-weight="600" fill="#fff" opacity="0.85">컨디션</text>
+                    <text x="30" y="40" text-anchor="middle" font-family="inherit" font-size="10" font-weight="800" fill="#fff">87</text>
+                    <rect x="4" y="46" width="24" height="14" rx="3" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.6"/>
+                    <text x="16" y="55" text-anchor="middle" font-family="inherit" font-size="4" font-weight="700" fill="#246356">걸음</text>
+                    <rect x="32" y="46" width="24" height="14" rx="3" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.6"/>
+                    <text x="44" y="55" text-anchor="middle" font-family="inherit" font-size="4" font-weight="700" fill="#246356">복약</text>
+                    <rect x="4" y="64" width="52" height="20" rx="4" fill="#F4E7D2"/>
+                    <text x="8" y="73" font-family="inherit" font-size="4.5" font-weight="700" fill="#8C6433">바로 가기</text>
+                    <circle cx="10" cy="79" r="1.6" fill="#8C6433"/>
+                    <circle cx="16" cy="79" r="1.6" fill="#8C6433" opacity="0.7"/>
+                    <circle cx="22" cy="79" r="1.6" fill="#8C6433" opacity="0.5"/>
+                    <!-- Extra rows revealed by scroll -->
+                    <text x="6" y="92" font-family="inherit" font-size="4.5" font-weight="700" fill="#7B8699">오늘의 알림</text>
+                    <rect x="4" y="96" width="52" height="10" rx="2" fill="#DDF0E7"/>
+                    <circle cx="9" cy="101" r="1.2" fill="#4FB89E"/>
+                    <text x="14" y="103" font-family="inherit" font-size="3.5" fill="#246356">약 복용 완료</text>
+                    <rect x="4" y="108" width="52" height="10" rx="2" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.5"/>
+                    <circle cx="9" cy="113" r="1.2" fill="#C9A06E"/>
+                    <text x="14" y="115" font-family="inherit" font-size="3.5" fill="#8C6433">손녀 사진 1장 추가</text>
+                  </g>
+                </g>
+
+                <!-- Screen 2: 신호 (56px to the right) -->
+                <g transform="translate(138,30)">
+                  <text x="6" y="14" font-family="inherit" font-size="5" font-weight="700" fill="#7B8699">7신호</text>
+                  <!-- mini chart -->
+                  <rect x="4" y="20" width="52" height="30" rx="4" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.6"/>
+                  <polyline points="6,42 14,38 22,40 30,32 38,34 46,28 54,30" stroke="#4FB89E" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+                  <!-- 4 signal dots -->
+                  <circle cx="10" cy="60" r="3" fill="#4FB89E"/>
+                  <text x="10" y="62" text-anchor="middle" font-family="inherit" font-size="3" font-weight="700" fill="#fff">걸</text>
+                  <circle cx="22" cy="60" r="3" fill="#4FB89E"/>
+                  <text x="22" y="62" text-anchor="middle" font-family="inherit" font-size="3" font-weight="700" fill="#fff">수</text>
+                  <circle cx="34" cy="60" r="3" fill="#4FB89E"/>
+                  <text x="34" y="62" text-anchor="middle" font-family="inherit" font-size="3" font-weight="700" fill="#fff">약</text>
+                  <circle cx="46" cy="60" r="3" fill="#C9A06E"/>
+                  <text x="46" y="62" text-anchor="middle" font-family="inherit" font-size="3" font-weight="700" fill="#fff">심</text>
+                  <!-- list rows -->
+                  <rect x="4" y="68" width="52" height="6" rx="2" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.5"/>
+                  <rect x="4" y="76" width="52" height="6" rx="2" fill="#FBF8EF" stroke="#E6E0D1" stroke-width="0.5"/>
+                </g>
+
+                <!-- Screen 3: 기억 (112px right) -->
+                <g transform="translate(194,30)">
+                  <text x="6" y="14" font-family="inherit" font-size="5" font-weight="700" fill="#7B8699">기억 모듈</text>
+                  <rect x="4" y="20" width="25" height="28" rx="3" fill="#DDF0E7"/>
+                  <circle cx="16" cy="30" r="4" fill="#F4E7D2"/>
+                  <path d="M 6 42 L 16 36 L 27 42 L 27 46 L 6 46 Z" fill="#7CC5A9"/>
+                  <text x="16" y="55" text-anchor="middle" font-family="inherit" font-size="3.5" font-weight="700" fill="#246356">일상</text>
+                  <rect x="31" y="20" width="25" height="28" rx="3" fill="#F4E7D2"/>
+                  <circle cx="44" cy="34" r="5" fill="#C9A06E"/>
+                  <circle cx="44" cy="34" r="2.5" fill="none" stroke="#fff" stroke-width="0.8"/>
+                  <text x="44" y="55" text-anchor="middle" font-family="inherit" font-size="3.5" font-weight="700" fill="#8C6433">물품</text>
+                  <rect x="4" y="58" width="25" height="22" rx="3" fill="#FBE9E9"/>
+                  <text x="16" y="80" text-anchor="middle" font-family="inherit" font-size="3.5" font-weight="700" fill="#8C2929">관계</text>
+                  <rect x="31" y="58" width="25" height="22" rx="3" fill="#E6F0EC"/>
+                  <text x="44" y="80" text-anchor="middle" font-family="inherit" font-size="3.5" font-weight="700" fill="#246356">작품</text>
+                </g>
+              </g>
+            </g>
+
+            <!-- Bottom nav indicator -->
+            <g transform="translate(82,128)">
+              <circle cx="14" cy="0" r="2" fill="#4FB89E">
+                <animate attributeName="r" values="2.4;1.6;1.6;2.4;1.6;1.6;1.6;1.6;1.6;2.4" keyTimes="0;0.1;0.3;0.33;0.43;0.6;0.66;0.76;0.93;1" dur="9s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.5;0.5;1;0.5;0.5;0.5;0.5;0.5;1" keyTimes="0;0.1;0.3;0.33;0.43;0.6;0.66;0.76;0.93;1" dur="9s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="30" cy="0" r="1.6" fill="#B5BCC8">
+                <animate attributeName="r" values="1.6;1.6;1.6;1.6;2.4;1.6;1.6;1.6;1.6;1.6" keyTimes="0;0.1;0.3;0.33;0.43;0.6;0.66;0.76;0.93;1" dur="9s" repeatCount="indefinite"/>
+                <animate attributeName="fill" values="#B5BCC8;#B5BCC8;#B5BCC8;#B5BCC8;#4FB89E;#B5BCC8;#B5BCC8;#B5BCC8;#B5BCC8;#B5BCC8" keyTimes="0;0.1;0.3;0.33;0.43;0.6;0.66;0.76;0.93;1" dur="9s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="46" cy="0" r="1.6" fill="#B5BCC8">
+                <animate attributeName="r" values="1.6;1.6;1.6;1.6;1.6;1.6;1.6;2.4;1.6;1.6" keyTimes="0;0.1;0.3;0.33;0.43;0.6;0.66;0.76;0.93;1" dur="9s" repeatCount="indefinite"/>
+                <animate attributeName="fill" values="#B5BCC8;#B5BCC8;#B5BCC8;#B5BCC8;#B5BCC8;#B5BCC8;#B5BCC8;#4FB89E;#B5BCC8;#B5BCC8" keyTimes="0;0.1;0.3;0.33;0.43;0.6;0.66;0.76;0.93;1" dur="9s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+          </svg>
+        </div>
+        <h3>모바일 앱</h3>
+        <p>가족과 지자체가<br>같은 화면을 봅니다.</p>
+      </div>
+
+      <div class="vision-card">
+        <div class="vcard-year">NEXT · 2027</div>
+        <div class="vcard-vis">
+          <svg viewBox="0 0 220 160" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs>
+              <linearGradient id="vp2body" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="50%" stop-color="#F5F5F7"/>
+                <stop offset="100%" stop-color="#E0E2E6"/>
+              </linearGradient>
+              <linearGradient id="vp2back" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#EEF1F4"/>
+                <stop offset="100%" stop-color="#C8CCD2"/>
+              </linearGradient>
+              <radialGradient id="vp2top" cx="0.5" cy="0.5">
+                <stop offset="0%" stop-color="#4FB89E"/>
+                <stop offset="100%" stop-color="#246356"/>
+              </radialGradient>
+              <radialGradient id="vp2shade" cx="0.7" cy="0.5" r="0.6">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+                <stop offset="100%" stop-color="#1F2A3A" stop-opacity="0.18"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Ground shadow -->
+            <ellipse cx="110" cy="146" rx="48" ry="4" fill="#1F2A3A" opacity="0.18"/>
+
+            <!-- Swivel base (stays put, only base) -->
+            <ellipse cx="110" cy="142" rx="26" ry="3.5" fill="#C8CCD2"/>
+            <ellipse cx="110" cy="140" rx="26" ry="3.5" fill="#FFFFFF" stroke="#B5BCC8" stroke-width="0.5"/>
+
+            <!-- ============== Device body (static — no rotation) ============== -->
+            <g>
+
+              <!-- Rotation indicator — full dashed ellipse around device (higher position) -->
+              <g opacity="0.85">
+                <!-- Closed ellipse — full circle around device -->
+                <ellipse cx="110" cy="120" rx="38" ry="7" fill="none" stroke="#4FB89E" stroke-width="1.4" stroke-dasharray="4 3"/>
+                <!-- Arrow head on the right end (clockwise direction) -->
+                <polyline points="144,116 148,120 144,124" stroke="#4FB89E" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Center label below -->
+                <text x="110" y="156" text-anchor="middle" font-family="inherit" font-size="4.5" font-weight="700" fill="#4FB89E" letter-spacing="0.08em">360° 자동 회전</text>
+              </g>
+
+              <!-- BODY (always visible, fixed size) -->
+              <rect x="80" y="34" width="60" height="104" rx="24" ry="22" fill="url(#vp2body)" stroke="#C8CCD2" stroke-width="0.6"/>
+              <rect x="80" y="34" width="60" height="104" rx="24" ry="22" fill="url(#vp2shade)"/>
+
+              <!-- Subtle pottery segment lines -->
+              <g stroke="#D4D8DE" stroke-width="0.4" fill="none" opacity="0.7">
+                <path d="M 72 76 Q 110 80 148 76"/>
+                <path d="M 70 92 Q 110 96 150 92"/>
+                <path d="M 70 108 Q 110 112 150 108"/>
+                <path d="M 74 122 Q 110 126 146 122"/>
+              </g>
+
+              <!-- Neck rim -->
+              <ellipse cx="110" cy="42" rx="20" ry="4" fill="#E6E8EC"/>
+              <ellipse cx="110" cy="40" rx="20" ry="4" fill="#FFFFFF" stroke="#C8CCD2" stroke-width="0.4"/>
+
+              <!-- Top glass surface -->
+              <ellipse cx="110" cy="40" rx="16" ry="3" fill="#1F2A3A"/>
+              <ellipse cx="110" cy="39" rx="14" ry="2.5" fill="url(#vp2top)" opacity="0.9"/>
+              <ellipse cx="110" cy="39" rx="7" ry="1.3" fill="#fff" opacity="0.85"/>
+
+              <!-- ===== FRONT-FACE elements (camera, lens, toggle, brand, LED — always visible) ===== -->
+              <g>
+                <!-- Camera lens housing -->
+                <circle cx="110" cy="80" r="3.6" fill="#0E141C" stroke="#B5BCC8" stroke-width="0.4"/>
+                <!-- Lens active state — turns green when toggle is ON -->
+                <circle cx="110" cy="80" r="2.2" fill="#1F2A3A">
+                  <animate attributeName="fill" values="#1F2A3A;#4FB89E;#4FB89E;#4FB89E;#4FB89E;#1F2A3A" keyTimes="0;0.06;0.1;0.6;0.9;1" dur="10s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="110.7" cy="79.3" r="0.7" fill="#fff" opacity="0">
+                  <animate attributeName="opacity" values="0;0.7;0.7;0.7;0.7;0" keyTimes="0;0.06;0.1;0.6;0.9;1" dur="10s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- Privacy shutter — opens at start -->
+                <rect x="106.4" y="76.4" width="7.2" height="7.2" rx="0.6" fill="#7C8898">
+                  <animate attributeName="width" values="7.2;0;0;0" keyTimes="0;0.06;0.92;1" dur="10s" repeatCount="indefinite"/>
+                </rect>
+
+                <!-- Detection ring expanding -->
+                <circle cx="110" cy="80" r="4" fill="none" stroke="#4FB89E" stroke-width="0.7">
+                  <animate attributeName="r" values="4;4;9;4;4" keyTimes="0;0.62;0.72;0.82;1" dur="10s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="0;0.62;0.72;0.82;1" dur="10s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- Scanning vertical sweep before detection -->
+                <rect x="84" y="60" width="1" height="40" fill="#4FB89E" opacity="0">
+                  <animate attributeName="x" values="84;84;84;136;136" keyTimes="0;0.58;0.62;0.7;1" dur="10s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0;0;0.7;0;0" keyTimes="0;0.58;0.62;0.7;1" dur="10s" repeatCount="indefinite"/>
+                </rect>
+
+                <!-- Privacy toggle slider -->
+                <rect x="118" y="78" width="10" height="4" rx="2" fill="rgba(124,156,184,0.35)"/>
+                <circle cx="120.4" cy="80" r="1.8" fill="#7C8898">
+                  <animate attributeName="cx" values="120.4;125.6;125.6;125.6;125.6;120.4" keyTimes="0;0.06;0.1;0.6;0.9;1" dur="10s" repeatCount="indefinite"/>
+                  <animate attributeName="fill" values="#7C8898;#4FB89E;#4FB89E;#4FB89E;#4FB89E;#7C8898" keyTimes="0;0.06;0.1;0.6;0.9;1" dur="10s" repeatCount="indefinite"/>
+                </circle>
+
+                <!-- "감지" label -->
+                <g transform="translate(110, 60)">
+                  <rect x="-12" y="-7" width="24" height="10" rx="5" fill="rgba(15,20,30,0.85)" opacity="0">
+                    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.7;0.74;0.82;0.88;1" dur="10s" repeatCount="indefinite"/>
+                  </rect>
+                  <text x="0" y="0.5" text-anchor="middle" font-family="inherit" font-size="5" font-weight="700" fill="#4FB89E" letter-spacing="0.06em" opacity="0">
+                    감지
+                    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.7;0.74;0.82;0.88;1" dur="10s" repeatCount="indefinite"/>
+                  </text>
+                </g>
+
+                <!-- ON:GI brand mark — only visible between first and last scene -->
+                <text x="110" y="22" text-anchor="middle" font-family="inherit" font-size="6" font-weight="700" fill="#246356" letter-spacing="0.16em" opacity="0">ON:GI
+                  <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.35;0.65;0.75;1" dur="10s" repeatCount="indefinite"/>
+                </text>
+
+                <!-- Status LED -->
+                <rect x="106" y="130" width="8" height="2" rx="1" fill="#4FB89E" opacity="0.9">
+                  <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.6s" repeatCount="indefinite"/>
+                </rect>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <h3>돌봄 디바이스</h3>
+        <p>탁상 위에 놓는<br>친근한 안부 단말기.</p>
+      </div>
+
+      <div class="vision-card">
+        <div class="vcard-year">FUTURE · 2030+</div>
+        <div class="vcard-vis">
+          <svg viewBox="0 0 220 160" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs>
+              <linearGradient id="vp3body" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FBF8EF"/>
+                <stop offset="60%" stop-color="#E6F0EC"/>
+                <stop offset="100%" stop-color="#9FC4B5"/>
+              </linearGradient>
+              <linearGradient id="vp3metal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#D4DCE3"/>
+                <stop offset="100%" stop-color="#7C9CB8"/>
+              </linearGradient>
+              <linearGradient id="vp3screen" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0E141C"/>
+                <stop offset="100%" stop-color="#1E3450"/>
+              </linearGradient>
+              <radialGradient id="vp3glow" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0%" stop-color="#A6D5C2" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#4FB89E" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Perspective floor lines (depth cues, fixed) -->
+            <g stroke="#4FB89E" stroke-width="0.4" fill="none" opacity="0.2">
+              <line x1="20" y1="150" x2="200" y2="150"/>
+              <line x1="50" y1="138" x2="170" y2="138"/>
+              <line x1="74" y1="128" x2="146" y2="128"/>
+              <line x1="92" y1="120" x2="128" y2="120"/>
+            </g>
+
+            <!-- ========== APPROACHING ROBOT (scale 0.5 → 1.0, stays at 1.0 until fade) ========== -->
+            <g transform-origin="110 110">
+              <animateTransform attributeName="transform" attributeType="XML" type="scale"
+                values="0.5; 0.5; 1; 1; 1; 1" keyTimes="0; 0.05; 0.7; 0.88; 0.95; 1"
+                dur="6.5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                values="0,-30; 0,-30; 0,0; 0,0; 0,0; 0,0" keyTimes="0; 0.05; 0.7; 0.88; 0.95; 1"
+                additive="sum"
+                dur="6.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0; 1; 1; 1; 1; 0" keyTimes="0; 0.1; 0.7; 0.88; 0.96; 1"
+                dur="6.5s" repeatCount="indefinite"/>
+
+              <!-- (On:Gi brand logo removed) -->
+
+            <!-- Aura glow -->
+            <ellipse cx="110" cy="78" rx="76" ry="68" fill="url(#vp3glow)"/>
+            <!-- Floor shadow -->
+            <ellipse cx="110" cy="150" rx="48" ry="3" fill="#1F2A3A" opacity="0.18"/>
+
+            <!-- Wheels (with rotating spokes for rolling motion) -->
+            <g>
+              <ellipse cx="86" cy="146" rx="9" ry="3" fill="#1F2A3A" opacity="0.4"/>
+              <ellipse cx="86" cy="144" rx="9" ry="3" fill="url(#vp3metal)"/>
+              <!-- Spokes -->
+              <g transform-origin="86 144">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                  values="360;0" dur="1.4s" repeatCount="indefinite"/>
+                <line x1="80" y1="144" x2="92" y2="144" stroke="#4FB89E" stroke-width="0.6" opacity="0.8"/>
+                <line x1="83" y1="142" x2="89" y2="146" stroke="#4FB89E" stroke-width="0.5" opacity="0.6"/>
+                <line x1="89" y1="142" x2="83" y2="146" stroke="#4FB89E" stroke-width="0.5" opacity="0.6"/>
+              </g>
+              <circle cx="86" cy="144" r="1.2" fill="#4FB89E"/>
+
+              <ellipse cx="134" cy="146" rx="9" ry="3" fill="#1F2A3A" opacity="0.4"/>
+              <ellipse cx="134" cy="144" rx="9" ry="3" fill="url(#vp3metal)"/>
+              <g transform-origin="134 144">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                  values="360;0" dur="1.4s" repeatCount="indefinite"/>
+                <line x1="128" y1="144" x2="140" y2="144" stroke="#4FB89E" stroke-width="0.6" opacity="0.8"/>
+                <line x1="131" y1="142" x2="137" y2="146" stroke="#4FB89E" stroke-width="0.5" opacity="0.6"/>
+                <line x1="137" y1="142" x2="131" y2="146" stroke="#4FB89E" stroke-width="0.5" opacity="0.6"/>
+              </g>
+              <circle cx="134" cy="144" r="1.2" fill="#4FB89E"/>
+
+              <!-- Motion lines behind for forward feel -->
+              <g stroke="#4FB89E" stroke-width="0.8" stroke-linecap="round" opacity="0.45">
+                <line x1="40" y1="130" x2="56" y2="130">
+                  <animate attributeName="opacity" values="0.45;0;0.45" dur="0.7s" repeatCount="indefinite"/>
+                </line>
+                <line x1="44" y1="138" x2="58" y2="138">
+                  <animate attributeName="opacity" values="0;0.45;0" dur="0.7s" repeatCount="indefinite"/>
+                </line>
+                <line x1="36" y1="146" x2="52" y2="146">
+                  <animate attributeName="opacity" values="0.3;0;0.3" dur="0.9s" repeatCount="indefinite"/>
+                </line>
+              </g>
+            </g>
+
+            <!-- Hover ring base -->
+            <ellipse cx="110" cy="142" rx="32" ry="4" fill="none" stroke="#4FB89E" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.5"/>
+
+            <!-- Body (pebble-shaped, sleek) -->
+            <path d="M 70 92 Q 70 60 110 60 Q 150 60 150 92 L 150 128 Q 150 140 110 140 Q 70 140 70 128 Z"
+              fill="url(#vp3body)" stroke="rgba(124,156,184,0.4)" stroke-width="0.8"/>
+            <!-- Body highlight -->
+            <ellipse cx="100" cy="78" rx="22" ry="8" fill="#fff" opacity="0.55"/>
+
+            <!-- Cute arms with thumb + 3 fingers (waving + moving) -->
+            <g>
+              <!-- Whole robot subtly moves forward/back to suggest walking -->
+              <animateTransform attributeName="transform" attributeType="XML" type="translate"
+                values="0,0; -4,1; 0,0; 4,1; 0,0"
+                keyTimes="0; 0.25; 0.5; 0.75; 1"
+                dur="3.6s" repeatCount="indefinite"/>
+              <!-- Left arm -->
+              <g transform-origin="62 96">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                  values="-10; 18; -10"
+                  keyTimes="0; 0.5; 1"
+                  dur="2.4s" repeatCount="indefinite"/>
+                <path d="M 62 96 Q 52 100 50 116" stroke="url(#vp3metal)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <circle cx="50" cy="118" r="4" fill="url(#vp3body)" stroke="rgba(124,156,184,0.4)" stroke-width="0.6"/>
+                <!-- Thumb (sticking out to side) -->
+                <line x1="46" y1="117" x2="42" y2="118" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"/>
+                <!-- 3 fingers -->
+                <line x1="50" y1="121" x2="48" y2="125" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"/>
+                <line x1="50" y1="122" x2="50" y2="126" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"/>
+                <line x1="50" y1="121" x2="52" y2="125" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"/>
+              </g>
+              <!-- Right arm -->
+              <g transform-origin="158 96">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                  values="10; -22; 10"
+                  keyTimes="0; 0.5; 1"
+                  dur="2.4s" begin="0.4s" repeatCount="indefinite"/>
+                <path d="M 158 96 Q 168 98 172 110" stroke="url(#vp3metal)" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <circle cx="172" cy="112" r="4" fill="url(#vp3body)" stroke="rgba(124,156,184,0.4)" stroke-width="0.6"/>
+                <!-- Thumb -->
+                <line x1="176" y1="111" x2="180" y2="112" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"/>
+                <!-- 3 fingers -->
+                <line x1="172" y1="115" x2="170" y2="119" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"/>
+                <line x1="172" y1="116" x2="172" y2="120" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"/>
+                <line x1="172" y1="115" x2="174" y2="119" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"/>
+              </g>
+
+              <!-- Speech bubble (appears after robot arrives at 100%) -->
+              <g transform="translate(170, 40)">
+                <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.7;0.73;0.78;0.85;0.88;1" dur="6.5s" repeatCount="indefinite"/>
+                <path d="M 0 0 L 22 0 Q 26 0 26 4 L 26 16 Q 26 20 22 20 L 8 20 L 4 24 L 5 20 L 0 20 Q -4 20 -4 16 L -4 4 Q -4 0 0 0 Z"
+                  fill="#fff" stroke="#4FB89E" stroke-width="0.6"/>
+                <circle cx="6" cy="10" r="1.4" fill="#4FB89E">
+                  <animate attributeName="opacity" values="1;0.3;1" dur="0.6s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="11" cy="10" r="1.4" fill="#4FB89E">
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="0.6s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="16" cy="10" r="1.4" fill="#4FB89E">
+                  <animate attributeName="opacity" values="1;0.3;1" dur="0.6s" begin="0.3s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+            </g>
+
+            <!-- Neck (thicker, friendlier) -->
+            <path d="M 94 46 Q 94 56 100 60 L 120 60 Q 126 56 126 46 Z" fill="url(#vp3metal)"/>
+            <ellipse cx="110" cy="50" rx="14" ry="3" fill="#fff" opacity="0.3"/>
+            <line x1="100" y1="54" x2="120" y2="54" stroke="#fff" stroke-width="0.5" opacity="0.4"/>
+
+            <!-- Head (larger, more rounded for friendliness) -->
+            <ellipse cx="110" cy="32" rx="36" ry="24" fill="url(#vp3body)" stroke="rgba(124,156,184,0.4)" stroke-width="0.8"/>
+            <!-- Head highlight -->
+            <ellipse cx="100" cy="24" rx="16" ry="5" fill="#fff" opacity="0.65"/>
+
+            <!-- Face screen (dark glass) -->
+            <rect x="84" y="20" width="52" height="22" rx="11" fill="url(#vp3screen)"/>
+            <!-- Screen reflection -->
+            <ellipse cx="98" cy="24" rx="11" ry="2" fill="#fff" opacity="0.18"/>
+
+            <!-- Eyes — soft larger circles with happy glow -->
+            <ellipse cx="98" cy="30" rx="5" ry="5" fill="#4FB89E"/>
+            <ellipse cx="122" cy="30" rx="5" ry="5" fill="#4FB89E"/>
+            <!-- Pupil glints -->
+            <circle cx="100" cy="29" r="1.6" fill="#fff"/>
+            <circle cx="124" cy="29" r="1.6" fill="#fff"/>
+            <!-- Bottom of eyes flat (happy/squint smile feel) -->
+            <rect x="93" y="33" width="10" height="2" fill="url(#vp3screen)"/>
+            <rect x="117" y="33" width="10" height="2" fill="url(#vp3screen)"/>
+
+            <!-- Smile light (soft curve) -->
+            <path d="M 100 40 Q 110 44 120 40" stroke="#4FB89E" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+            <!-- Cheek glow (subtle pink) -->
+            <circle cx="86" cy="38" r="3" fill="#F4B8B8" opacity="0.3"/>
+            <circle cx="134" cy="38" r="3" fill="#F4B8B8" opacity="0.3"/>
+
+            <!-- Ear-side speaker dots -->
+            <g fill="rgba(124,156,184,0.5)">
+              <circle cx="78" cy="30" r="0.9"/>
+              <circle cx="78" cy="34" r="0.9"/>
+              <circle cx="78" cy="38" r="0.9"/>
+              <circle cx="142" cy="30" r="0.9"/>
+              <circle cx="142" cy="34" r="0.9"/>
+              <circle cx="142" cy="38" r="0.9"/>
+            </g>
+
+            <!-- Antenna -->
+            <line x1="110" y1="10" x2="110" y2="6" stroke="#4FB89E" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+            <circle cx="110" cy="4" r="2.5" fill="#4FB89E">
+              <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- Chest indicator -->
+            <circle cx="110" cy="98" r="9" fill="#0E141C" stroke="rgba(124,156,184,0.5)" stroke-width="0.5"/>
+            <path d="M 104 97 a 3 3 0 0 1 6 0 a 3 3 0 0 1 6 0 c 0 4 -6 8 -6 8 c 0 0 -6 -4 -6 -8 z"
+              transform="translate(0, -2)" fill="#D94B4B">
+              <animate attributeName="opacity" values="1;0.55;1" dur="1.4s" repeatCount="indefinite"/>
+            </path>
+
+            <!-- Side accent stripes -->
+            <rect x="72" y="108" width="2" height="20" rx="1" fill="#4FB89E"/>
+            <rect x="146" y="108" width="2" height="20" rx="1" fill="#4FB89E"/>
+
+            <!-- Status strip with dots -->
+            <g fill="#4FB89E">
+              <circle cx="102" cy="118" r="1.4">
+                <animate attributeName="opacity" values="1;0.3;1" dur="1.6s" begin="0s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="110" cy="118" r="1.4">
+                <animate attributeName="opacity" values="1;0.3;1" dur="1.6s" begin="0.4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="118" cy="118" r="1.4">
+                <animate attributeName="opacity" values="1;0.3;1" dur="1.6s" begin="0.8s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+            </g>
+          </svg>
+        </div>
+        <h3>동반자 로봇</h3>
+        <p>곁에서 말 걸고,<br>위급할 땐 함께 움직여요.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:24px;font-size:13.5px;color:var(--text-3);font-weight:600;letter-spacing:-0.005em;">
+      가장 따뜻한 기술은, 가장 가까이에서 시작됩니다. 우리는 멈추지 않습니다.
+    </div>
+  </div>
+</section>
+
+<style>
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.vision-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.vision-card:hover { transform: translateY(-3px); box-shadow: var(--sh-2); }
+.vcard-year {
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--celadon-600);
+  margin-bottom: 10px;
+}
+.vcard-vis {
+  width: 100%;
+  aspect-ratio: 11/8;
+  background: linear-gradient(180deg, #FBF8EF 0%, #F5F1E6 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vision-card:nth-child(2) .vcard-vis { background: linear-gradient(180deg, #FBF8EF 0%, #E6E8EC 100%); }
+.vision-card:nth-child(3) .vcard-vis { background: linear-gradient(180deg, #EFF8F5 0%, #DDF0E7 100%); }
+.vision-card h3 {
+  font-size: 16px; font-weight: 700;
+  letter-spacing: -0.018em;
+  margin: 0 0 6px;
+}
+.vision-card p {
+  font-size: 12.5px; color: var(--text-2);
+  line-height: 1.45; margin: 0;
+}
+@media (max-width: 680px) {
+  .vision-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- CTA -->
+<section class="brand-section paper">
+  <div class="container">
+    <div class="h-cta">
+      <div>
+        <h2>오늘부터, 부모님의 곁을 온기로 채워주세요.</h2>
+        <p>무료 베타 · 7일 체험 · 카드 정보 없이 시작</p>
+      </div>
+      <div class="ctas">
+        <a href="parent-app.html" class="btn btn-primary">무료로 시작하기</a>
+        <a href="pricing.html" class="btn btn-ghost">요금 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="container-wide">
+    <div class="foot-single">
+      <div class="foot-single-left">
+        <span class="ongi-mark">On:Gi</span>
+        <p>부모님의 평생을 보존하는 가족 서비스.</p>
+        <div class="foot-credits-inline">
+          <span class="fl-label">FOUNDING TEAM</span>
+          <span class="fl-people">
+            <span class="fl-p"><b>김태희</b> 대표</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>이민섭</b> 공동창업자 · CCO</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>김세연</b> 공동창업자 · CTO</span>
+          </span>
+        </div>
+        <div class="foot-credits-inline" style="margin-top:6px;">
+          <span class="fl-label" style="color:var(--sand);">ADVISOR</span>
+          <span class="fl-people">
+            <span class="fl-p"><b>원민재</b> 한국엔젤투자협회</span>
+          </span>
+        </div>
+      </div>
+      <div class="foot-single-right">
+        <nav class="foot-links">
+          <a href="parent-app.html">부모님앱</a>
+          <a href="control-center.html">돌봄 관제</a>
+          <a href="care-hub.html">관제 소개</a>
+          <a href="pricing.html">구독</a>
+          <a href="brand.html">브랜드</a>
+          <a href="design.html">디자인</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">기업·기관 문의</a>
+        </nav>
+        <div class="foot-meta">
+          <span>© 2026 On:Gi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// GNB: clicking any top-nav link scrolls to top
+(function () {
+  function attach() {
+    document.querySelectorAll('.nav .nav-links a, .app-bar .links a').forEach((a) => {
+      if (a.dataset.scrollTopBound) return;
+      a.dataset.scrollTopBound = '1';
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href') || '';
+        var samePage = href === '' || href.startsWith('#') ||
+          href.split('#')[0] === location.pathname.split('/').pop() ||
+          (href.split('#')[0] === '' && location.hash);
+        if (samePage) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (location.hash) history.replaceState(null, '', location.pathname);
+        }
+        // For cross-page links, just let browser navigate. We force top on load below.
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attach);
+  } else { attach(); }
+  // On load, if URL has no hash, scroll to top (overrides any cached scroll position)
+  window.addEventListener('load', function () {
+    if (!location.hash) window.scrollTo(0, 0);
+  });
+})();
+</script>
+</body>
+</html>
