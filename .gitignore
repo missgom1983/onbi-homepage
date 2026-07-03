@@ -12,3 +12,10 @@ uploads/
 
 # 빌드 참조 (배포 제외)
 _chrome.reference.html
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
