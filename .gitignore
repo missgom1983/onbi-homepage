@@ -3,8 +3,8 @@ screenshots/
 v1/
 uploads/
 *.dc.html
-image-slot.js
-support.js
+/image-slot.js
+/support.js
 
 # 에디터/OS
 .claude/
