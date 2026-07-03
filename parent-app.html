@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부모님앱 · On:Gi — 매일의 안부, 잊지 못할 순간</title>
+<meta name="description" content="부모님이 매일 쓰는 따뜻한 앱. 안부 전화와 금요편지, 기억 모듈과 인생책, 그리고 가족을 안심시키는 케어 신호까지.">
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/landing.css">
+<script src="shared/theme.js"></script>
+<script src="shared/sso-menu.js"></script>
+<script src="shared/image-slot.js"></script>
+<style>
+  .page{max-width:1080px;margin:0 auto;padding:0 24px}
+  .page-hero{text-align:center;padding:120px 0 56px}
+  .page-hero .eyebrow{display:inline-block;margin-bottom:16px;padding:6px 14px;border-radius:9999px;
+    background:var(--celadon-100);color:var(--celadon-800);font-size:13px;font-weight:600;letter-spacing:.02em}
+  .page-hero h1{margin:0 auto 18px;max-width:18ch;font-size:clamp(38px,5.4vw,66px);line-height:1.06;
+    letter-spacing:-.045em;font-weight:700;color:var(--ink);text-wrap:balance}
+  .page-hero p.lead{margin:0 auto 30px;max-width:36ch;font-size:19px;line-height:1.6;color:var(--text-2)}
+  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* Section shell */
+  .section{padding:56px 0}
+  .section-head{max-width:640px;margin:0 auto 40px;text-align:center}
+  .section-head .kicker{display:inline-block;margin-bottom:12px;font-size:13px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--celadon-600)}
+  .section-head h2{margin:0 0 12px;font-size:clamp(28px,3.4vw,40px);line-height:1.14;
+    letter-spacing:-.03em;font-weight:700;color:var(--ink);text-wrap:balance}
+  .section-head p{margin:0;font-size:17px;line-height:1.6;color:var(--text-2)}
+
+  /* 매일의 안부 — feature trio */
+  .daily{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .daily .feat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+    padding:30px 26px;box-shadow:var(--sh-1)}
+  .daily .feat .ico{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;
+    border-radius:var(--r-md);background:var(--celadon-100);color:var(--celadon-700);margin-bottom:18px}
+  .daily .feat .ico svg{width:24px;height:24px}
+  .daily .feat h3{margin:0 0 8px;font-size:19px;font-weight:700;color:var(--ink)}
+  .daily .feat p{margin:0;font-size:15px;line-height:1.6;color:var(--text-2)}
+
+  /* 기억 모듈 — memory cards */
+  .memory{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .mem-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+    padding:16px;box-shadow:var(--sh-1);overflow:hidden}
+  .mem-card image-slot{display:block;width:100%;aspect-ratio:16/11;margin-bottom:16px}
+  .mem-card .mem-body{padding:0 12px 12px}
+  .mem-card .mem-tag{display:inline-block;margin-bottom:8px;padding:4px 11px;border-radius:9999px;
+    background:var(--celadon-50);color:var(--celadon-700);font-size:12px;font-weight:600;letter-spacing:.02em}
+  .mem-card h3{margin:0 0 6px;font-size:19px;font-weight:700;color:var(--ink)}
+  .mem-card p{margin:0;font-size:14.5px;line-height:1.55;color:var(--text-2)}
+
+  /* 인생책 — split feature */
+  .book{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+    padding:44px;box-shadow:var(--sh-2)}
+  .book-copy h2{margin:0 0 14px;font-size:clamp(26px,3vw,36px);line-height:1.16;
+    letter-spacing:-.03em;font-weight:700;color:var(--ink)}
+  .book-copy p.lead{margin:0 0 22px;font-size:17px;line-height:1.65;color:var(--text-2)}
+  .book-copy ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+  .book-copy li{display:flex;gap:10px;font-size:15.5px;line-height:1.45;color:var(--text)}
+  .book-copy li svg{flex:0 0 auto;width:19px;height:19px;margin-top:2px;color:var(--celadon-600)}
+  .book-art image-slot{display:block;width:100%;aspect-ratio:4/5}
+
+  /* 케어 신호 — 3-state signal */
+  .care{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-xl);padding:44px}
+  .care-states{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  .state{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+    padding:26px 24px;text-align:center;box-shadow:var(--sh-1)}
+  .state .dot{width:16px;height:16px;border-radius:50%;margin:0 auto 14px;
+    box-shadow:0 0 0 6px var(--dot-halo)}
+  .state h3{margin:0 0 6px;font-size:18px;font-weight:700;color:var(--ink)}
+  .state p{margin:0;font-size:14px;line-height:1.55;color:var(--text-2)}
+  .state.s-calm{--dot-bg:var(--celadon-500);--dot-halo:var(--p4-bg)}
+  .state.s-watch{--dot-bg:var(--sand);--dot-halo:var(--p2-bg)}
+  .state.s-check{--dot-bg:var(--slate-500);--dot-halo:var(--p3-bg)}
+  .state .dot{background:var(--dot-bg)}
+  .care-note{margin:24px 0 0;text-align:center;font-size:14px;line-height:1.6;color:var(--text-3)}
+
+  /* CTA band (id=consult) */
+  .cta-band{max-width:960px;margin:56px auto 96px;padding:44px 28px;text-align:center;
+    background:var(--celadon-800);border-radius:var(--r-xl);color:#fff}
+  .cta-band h2{margin:0 0 10px;font-size:28px;font-weight:700;letter-spacing:-.02em}
+  .cta-band p{margin:0 0 22px;color:rgba(255,255,255,.82);font-size:16px}
+
+  @media(max-width:860px){
+    .daily{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+    .memory{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+    .book{grid-template-columns:1fr;gap:28px;padding:30px}
+    .book-art{order:-1;max-width:340px;margin:0 auto}
+    .care{padding:28px 20px}
+    .care-states{grid-template-columns:1fr;max-width:360px;margin:8px auto 0}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container-wide nav-inner">
+    <a href="index.html" class="nav-brand"><span class="ongi-mark">On:Gi</span></a>
+    <div class="nav-links">
+      <a href="index.html">서비스</a>
+      <a href="pricing.html">구독</a>
+      <a href="care-hub.html">돌봄 관제</a>
+      <a href="brand.html">브랜드</a>
+      <a href="design.html">디자인</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-mobile-toggle" aria-label="메뉴 열기" type="button">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="13" x2="20" y2="13"/><line x1="4" y1="19" x2="20" y2="19"/>
+        </svg>
+      </button>
+      <div data-ongi-sso data-system="parent-app"></div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <div class="page">
+      <span class="eyebrow">부모님앱</span>
+      <h1>부모님이 매일 여는, 따뜻한 앱</h1>
+      <p class="lead">복잡한 기능은 덜어내고 안부와 기억만 남겼어요. 오늘의 안부를 나누고, 소중한 순간을 담다 보면 어느새 한 권의 인생책이 됩니다.</p>
+      <div class="hero-cta">
+        <a href="#consult" data-ongi-consult class="btn btn-primary">부모님앱 시작하기</a>
+        <a href="pricing.html" class="btn btn-ghost">구독 살펴보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 매일의 안부 -->
+  <section class="page section">
+    <div class="section-head">
+      <span class="kicker">매일의 안부</span>
+      <h2>매일, 부드럽게 안부를 건네요</h2>
+      <p>부모님의 하루에 자연스럽게 스며드는 안부. 재촉하지 않고, 곁에 있는 사람처럼 다정하게 다가갑니다.</p>
+    </div>
+    <div class="daily">
+      <div class="feat">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        <h3>안부 전화</h3>
+        <p>주 1회부터 매일까지, 가족이 정한 주기로 부모님께 따뜻한 안부 전화를 건네요. 오늘의 이야기가 그대로 기억이 됩니다.</p>
+      </div>
+      <div class="feat">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg></span>
+        <h3>금요편지</h3>
+        <p>한 주가 저무는 금요일, 부모님과 나눈 대화를 편지 한 통으로 정리해 가족에게 전해드려요. 멀리 있어도 마음이 닿습니다.</p>
+      </div>
+      <div class="feat">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <h3>복약 · 일정 알림</h3>
+        <p>약 드실 시간과 병원 예약, 가족의 생일까지. 부모님이 잊지 않도록 다정한 목소리로 살며시 챙겨드려요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 기억 모듈 -->
+  <section class="page section">
+    <div class="section-head">
+      <span class="kicker">기억 모듈</span>
+      <h2>네 가지 결의 기억을 담아요</h2>
+      <p>일상의 장면부터 아끼는 물건, 손수 만든 작품까지. 부모님의 삶을 이루는 순간들을 저마다의 방식으로 기록합니다.</p>
+    </div>
+    <div class="memory">
+      <div class="mem-card">
+        <image-slot id="pa-1" placeholder="일상의 순간" src="assets/samples/01-spring-walk.svg" radius="22"></image-slot>
+        <div class="mem-body">
+          <span class="mem-tag">일상의 순간</span>
+          <h3>오늘의 산책, 창가의 햇살</h3>
+          <p>특별하지 않아 더 소중한 하루하루. 스쳐 지나갈 뻔한 평범한 순간들을 사진과 이야기로 붙잡아 둡니다.</p>
+        </div>
+      </div>
+      <div class="mem-card">
+        <image-slot id="pa-2" placeholder="관계 · 가족" src="assets/samples/00-wedding-1962.svg" radius="22"></image-slot>
+        <div class="mem-body">
+          <span class="mem-tag">관계 · 가족</span>
+          <h3>함께한 사람들의 이야기</h3>
+          <p>1962년의 결혼식부터 손주의 첫걸음까지. 부모님을 둘러싼 관계와 가족의 서사를 한자리에 이어 담아요.</p>
+        </div>
+      </div>
+      <div class="mem-card">
+        <image-slot id="pa-3" placeholder="애정 물품" src="assets/samples/02-ring.svg" radius="22"></image-slot>
+        <div class="mem-body">
+          <span class="mem-tag">애정 물품</span>
+          <h3>손때 묻은 물건에 담긴 사연</h3>
+          <p>오래 낀 반지, 낡은 손목시계, 즐겨 입던 옷. 아끼는 물건마다 깃든 이야기를 목소리로 남겨 기억으로 바꿉니다.</p>
+        </div>
+      </div>
+      <div class="mem-card">
+        <image-slot id="pa-4" placeholder="직접 만든 작품" src="assets/samples/03-embroidery.svg" radius="22"></image-slot>
+        <div class="mem-body">
+          <span class="mem-tag">직접 만든 작품</span>
+          <h3>손끝에서 태어난 작품들</h3>
+          <p>한 땀 한 땀 놓은 자수, 정성껏 담근 장. 부모님이 직접 만든 작품을 기록해 그 솜씨와 마음을 오래도록 간직해요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 인생책 -->
+  <section class="page section">
+    <div class="book">
+      <div class="book-copy">
+        <span class="kicker" style="display:inline-block;margin-bottom:12px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--celadon-600)">인생책</span>
+        <h2>매일의 기억이 한 권의 책이 됩니다</h2>
+        <p class="lead">따로 정리하지 않아도 괜찮아요. 안부 전화와 기억 모듈에 담긴 순간들이 자동으로 쌓여, 부모님만의 인생책으로 엮입니다.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>매일의 대화와 기억이 자동으로 축적</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>사진과 음성을 함께 첨부해 생생하게</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>가족이 언제든 함께 읽고 이어 쓰기</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>실물 인쇄본으로 제작해 평생 소장</li>
+        </ul>
+      </div>
+      <div class="book-art">
+        <image-slot id="pa-book" placeholder="인생책" src="assets/samples/09-album.svg" radius="22"></image-slot>
+      </div>
+    </div>
+  </section>
+
+  <!-- 케어 신호 -->
+  <section class="page section">
+    <div class="care">
+      <div class="section-head" style="margin-bottom:8px">
+        <span class="kicker">케어 신호</span>
+        <h2>가족을 안심시키는 세 가지 신호</h2>
+        <p>매일의 안부에서 읽어낸 부모님의 상태를 세 가지 신호로 부드럽게 전해드려요. 진단이 아니라, 가족의 관심을 돕는 안내입니다.</p>
+      </div>
+      <div class="care-states">
+        <div class="state s-calm">
+          <span class="dot"></span>
+          <h3>평안</h3>
+          <p>오늘도 안녕히 지내고 계세요. 평소와 다름없는 일상이 이어지고 있어요.</p>
+        </div>
+        <div class="state s-watch">
+          <span class="dot"></span>
+          <h3>살핌</h3>
+          <p>평소와 조금 다른 결이 느껴져요. 가벼운 안부 전화 한 통을 권해드려요.</p>
+        </div>
+        <div class="state s-check">
+          <span class="dot"></span>
+          <h3>확인</h3>
+          <p>한 번 살펴보시면 좋겠어요. 통화나 방문으로 부모님의 안부를 직접 확인해 보세요.</p>
+        </div>
+      </div>
+      <p class="care-note">케어 신호는 의료적 진단이 아니라, 가족이 안심하고 곁을 지킬 수 있도록 돕는 안심 안내예요.</p>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="cta-band" id="consult">
+    <h2>오늘부터, 부모님의 하루 곁에</h2>
+    <p>부모님과 가족의 상황을 알려주시면, On:Gi가 맞는 시작을 안내해 드립니다.</p>
+    <a href="#consult" data-ongi-consult class="btn btn-primary">상담 신청하기</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container-wide">
+    <div class="foot-single">
+      <div class="foot-single-left">
+        <span class="ongi-mark">On:Gi</span>
+        <p>부모님의 평생을 보존하는 가족 서비스.</p>
+        <div class="foot-credits-inline">
+          <span class="fl-label">FOUNDING TEAM</span>
+          <span class="fl-people">
+            <span class="fl-p"><b>김태희</b> 대표</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>이민섭</b> 공동창업자 · CCO</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>김세연</b> 공동창업자 · CTO</span>
+          </span>
+        </div>
+        <div class="foot-credits-inline" style="margin-top:6px;">
+          <span class="fl-label" style="color:var(--sand);">ADVISOR</span>
+          <span class="fl-people"><span class="fl-p"><b>원민재</b> 한국엔젤투자협회</span></span>
+        </div>
+      </div>
+      <div class="foot-single-right">
+        <nav class="foot-links">
+          <a href="parent-app.html">부모님앱</a>
+          <a href="control-center.html">돌봄 관제</a>
+          <a href="care-hub.html">관제 소개</a>
+          <a href="pricing.html">구독</a>
+          <a href="brand.html">브랜드</a>
+          <a href="design.html">디자인</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#consult" data-ongi-consult>기업·기관 문의</a>
+        </nav>
+        <div class="foot-meta"><span>© 2026 On:Gi</span></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.addEventListener('click', function(e) {
+    var t = e.target.closest('.nav-mobile-toggle');
+    var nav = document.querySelector('.nav-links');
+    if (t && nav) { e.preventDefault(); nav.classList.toggle('is-open'); return; }
+    if (nav && nav.classList.contains('is-open') && !e.target.closest('.nav')) nav.classList.remove('is-open');
+  });
+})();
+</script>
+<script src="shared/fab-consult.js"></script>
+</body>
+</html>

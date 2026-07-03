@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>구독 · On:Gi — 함께하는 방법을 선택하세요</title>
+<meta name="description" content="씨앗 · 이야기 · 평생 — 부모님과 가족에게 맞는 On:Gi 구독을 선택하세요.">
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/landing.css">
+<script src="shared/theme.js"></script>
+<script src="shared/sso-menu.js"></script>
+<script src="shared/image-slot.js"></script>
+<style>
+  .page{max-width:1080px;margin:0 auto;padding:0 24px}
+  .page-hero{text-align:center;padding:120px 0 56px}
+  .page-hero .eyebrow{display:inline-block;margin-bottom:16px;padding:6px 14px;border-radius:9999px;
+    background:var(--celadon-100);color:var(--celadon-800);font-size:13px;font-weight:600;letter-spacing:.02em}
+  .page-hero h1{margin:0 auto 18px;max-width:16ch;font-size:clamp(38px,5.4vw,66px);line-height:1.06;
+    letter-spacing:-.045em;font-weight:700;color:var(--ink);text-wrap:balance}
+  .page-hero p.lead{margin:0 auto;max-width:34ch;font-size:19px;line-height:1.6;color:var(--text-2)}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:36px 0 24px}
+  .plan{position:relative;display:flex;flex-direction:column;background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--r-xl);padding:30px 26px 28px;box-shadow:var(--sh-1)}
+  .plan.featured{border-color:var(--celadon-400);box-shadow:var(--sh-3)}
+  .plan .flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:6px 14px;border-radius:9999px;
+    background:var(--celadon-600);color:#fff;font-size:12px;font-weight:700;white-space:nowrap}
+  .plan h3{margin:0 0 4px;font-size:22px;font-weight:700;color:var(--ink)}
+  .plan .desc{margin:0 0 18px;font-size:14px;line-height:1.5;color:var(--text-2);min-height:42px}
+  .plan .price{display:flex;align-items:baseline;gap:4px;margin-bottom:20px}
+  .plan .price b{font-size:38px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+  .plan .price span{font-size:15px;color:var(--text-3)}
+  .plan ul{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-direction:column;gap:11px}
+  .plan li{display:flex;gap:9px;font-size:14.5px;line-height:1.4;color:var(--text)}
+  .plan li svg{flex:0 0 auto;width:18px;height:18px;margin-top:1px;color:var(--celadon-600)}
+  .plan .btn{margin-top:auto;justify-content:center;text-align:center}
+  .faq{max-width:760px;margin:0 auto;padding:56px 0 40px}
+  .faq h2{margin:0 0 8px;font-size:32px;font-weight:700;letter-spacing:-.03em;color:var(--ink);text-align:center}
+  .faq .faq-sub{margin:0 0 32px;color:var(--text-2);text-align:center}
+  .faq details{border-bottom:1px solid var(--line);padding:18px 4px}
+  .faq summary{cursor:pointer;list-style:none;font-size:17px;font-weight:600;color:var(--ink);
+    display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-size:22px;font-weight:400;color:var(--text-3)}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{margin:12px 0 2px;font-size:15px;line-height:1.65;color:var(--text-2)}
+  .cta-band{max-width:960px;margin:0 auto 96px;padding:44px 28px;text-align:center;
+    background:var(--celadon-800);border-radius:var(--r-xl);color:#fff}
+  .cta-band h2{margin:0 0 10px;font-size:28px;font-weight:700;letter-spacing:-.02em}
+  .cta-band p{margin:0 0 22px;color:rgba(255,255,255,.82);font-size:16px}
+  @media(max-width:860px){.plans{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container-wide nav-inner">
+    <a href="index.html" class="nav-brand"><span class="ongi-mark">On:Gi</span></a>
+    <div class="nav-links">
+      <a href="index.html">서비스</a>
+      <a href="pricing.html" class="nav-active">구독</a>
+      <a href="care-hub.html">돌봄 관제</a>
+      <a href="brand.html">브랜드</a>
+      <a href="design.html">디자인</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-mobile-toggle" aria-label="메뉴 열기" type="button">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="13" x2="20" y2="13"/><line x1="4" y1="19" x2="20" y2="19"/>
+        </svg>
+      </button>
+      <div data-ongi-sso data-system="pricing"></div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <div class="page">
+      <span class="eyebrow">구독</span>
+      <h1>함께하는 방법을 선택하세요</h1>
+      <p class="lead">요금제가 아니라, 부모님과 함께하는 방법이에요. 세 가지 모두 ‘이음’과 ‘새김’ 방식을 자유롭게 선택할 수 있어요.</p>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="plans">
+      <!-- 씨앗 -->
+      <div class="plan">
+        <h3>씨앗</h3>
+        <p class="desc">처음 시작하기 좋은 방법이에요.</p>
+        <div class="price"><b>9,900</b><span>원 / 월</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>주 1회 안부 전화</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>금요편지 발송</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>케어 신호 (평안·살핌·확인)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>가족 공유 1인</li>
+        </ul>
+        <a href="#consult" data-ongi-consult class="btn btn-ghost">상담 신청하기</a>
+      </div>
+      <!-- 이야기 -->
+      <div class="plan featured">
+        <span class="flag">가장 많이 선택해요</span>
+        <h3>이야기</h3>
+        <p class="desc">안부와 기억을 모두 담는 방법이에요.</p>
+        <div class="price"><b>19,900</b><span>원 / 월</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>씨앗의 모든 혜택</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>인생책 자동 축적</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>가족 공유 3인</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>사진 · 음성 첨부</li>
+        </ul>
+        <a href="#consult" data-ongi-consult class="btn btn-primary">상담 신청하기</a>
+      </div>
+      <!-- 평생 -->
+      <div class="plan">
+        <h3>평생</h3>
+        <p class="desc">모든 이야기를 평생 소장하는 방법이에요.</p>
+        <div class="price"><b>39,900</b><span>원 / 월</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>이야기의 모든 혜택</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>인생책 인쇄본 제작</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>가족 공유 인원 무제한</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>평생 소장 보관</li>
+        </ul>
+        <a href="#consult" data-ongi-consult class="btn btn-ghost">상담 신청하기</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2>자주 묻는 질문</h2>
+    <p class="faq-sub">더 궁금한 점이 있으신가요? 상담을 신청하시면 가족에게 맞는 방법을 함께 찾아드려요.</p>
+    <details><summary>요금제는 언제든 변경할 수 있나요?</summary><p>네, 언제든 다음 결제일부터 다른 요금제로 변경하실 수 있어요.</p></details>
+    <details><summary>이음과 새김 모드에 따라 요금이 다른가요?</summary><p>아니요, 세 가지 요금제 모두 이음과 새김 중 원하는 방식을 선택하실 수 있어요.</p></details>
+    <details><summary>첫인사꾸러미는 무엇인가요?</summary><p>서비스를 시작하기 전, 부모님과 가족 모두에게 안내를 드리는 시작 꾸러미예요.</p></details>
+    <details><summary>통화 내용은 가족 모두에게 공개되나요?</summary><p>아니요, 통화 내용은 부모님 본인의 동의 후에만 기록되며, 가족 외에는 공개되지 않아요.</p></details>
+    <details><summary>해지는 어떻게 하나요?</summary><p>마이페이지에서 언제든 직접 해지하실 수 있고, 상담을 통해서도 도와드려요.</p></details>
+    <details><summary>살핌·확인 신호가 뜨면 어떻게 해야 하나요?</summary><p>살핌·확인은 의료적 진단이 아니라 가족의 관심을 권해드리는 안내예요. 통화나 방문으로 안부를 나눠보시길 권해드려요.</p></details>
+  </section>
+
+  <section class="cta-band" id="consult">
+    <h2>어떤 방법이 맞을지 함께 찾아드려요</h2>
+    <p>부모님과 가족의 상황을 알려주시면, On:Gi가 맞는 시작을 안내해 드립니다.</p>
+    <a href="#consult" data-ongi-consult class="btn btn-primary">상담 신청하기</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container-wide">
+    <div class="foot-single">
+      <div class="foot-single-left">
+        <span class="ongi-mark">On:Gi</span>
+        <p>부모님의 평생을 보존하는 가족 서비스.</p>
+        <div class="foot-credits-inline">
+          <span class="fl-label">FOUNDING TEAM</span>
+          <span class="fl-people">
+            <span class="fl-p"><b>김태희</b> 대표</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>이민섭</b> 공동창업자 · CCO</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>김세연</b> 공동창업자 · CTO</span>
+          </span>
+        </div>
+        <div class="foot-credits-inline" style="margin-top:6px;">
+          <span class="fl-label" style="color:var(--sand);">ADVISOR</span>
+          <span class="fl-people"><span class="fl-p"><b>원민재</b> 한국엔젤투자협회</span></span>
+        </div>
+      </div>
+      <div class="foot-single-right">
+        <nav class="foot-links">
+          <a href="parent-app.html">부모님앱</a>
+          <a href="control-center.html">돌봄 관제</a>
+          <a href="care-hub.html">관제 소개</a>
+          <a href="pricing.html">구독</a>
+          <a href="brand.html">브랜드</a>
+          <a href="design.html">디자인</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#consult" data-ongi-consult>기업·기관 문의</a>
+        </nav>
+        <div class="foot-meta"><span>© 2026 On:Gi</span></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.addEventListener('click', function(e) {
+    var t = e.target.closest('.nav-mobile-toggle');
+    var nav = document.querySelector('.nav-links');
+    if (t && nav) { e.preventDefault(); nav.classList.toggle('is-open'); return; }
+    if (nav && nav.classList.contains('is-open') && !e.target.closest('.nav')) nav.classList.remove('is-open');
+  });
+})();
+</script>
+<script src="shared/fab-consult.js"></script>
+</body>
+</html>

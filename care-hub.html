@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>돌봄 관제 · On:Gi — 가족의 관심이 가장 빠른 응답입니다</title>
+<meta name="description" content="부모님의 하루를 가족이 함께 지킵니다. 케어 신호 · 가족 알림 · 필요 시 응답 — On:Gi 돌봄 관제 소개.">
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/landing.css">
+<script src="shared/theme.js"></script>
+<script src="shared/sso-menu.js"></script>
+<script src="shared/image-slot.js"></script>
+<style>
+  .page{max-width:1080px;margin:0 auto;padding:0 24px}
+  .page-hero{text-align:center;padding:120px 0 48px}
+  .page-hero .eyebrow{display:inline-block;margin-bottom:16px;padding:6px 14px;border-radius:9999px;
+    background:var(--celadon-100);color:var(--celadon-800);font-size:13px;font-weight:600;letter-spacing:.02em}
+  .page-hero h1{margin:0 auto 18px;max-width:17ch;font-size:clamp(38px,5.4vw,66px);line-height:1.06;
+    letter-spacing:-.045em;font-weight:700;color:var(--ink);text-wrap:balance}
+  .page-hero p.lead{margin:0 auto 30px;max-width:36ch;font-size:19px;line-height:1.6;color:var(--text-2)}
+  .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:16px 0 40px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+    padding:32px 26px;text-align:center;box-shadow:var(--sh-1)}
+  .stat b{display:block;font-size:clamp(34px,4.2vw,46px);font-weight:800;letter-spacing:-.03em;
+    color:var(--celadon-700);line-height:1}
+  .stat .stat-label{display:block;margin-top:10px;font-size:15px;color:var(--text-2);line-height:1.4}
+
+  /* section shell */
+  .sec{padding:56px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 36px}
+  .sec-head .eyebrow{display:inline-block;margin-bottom:12px;padding:5px 13px;border-radius:9999px;
+    background:var(--celadon-100);color:var(--celadon-800);font-size:12.5px;font-weight:600;letter-spacing:.02em}
+  .sec-head h2{margin:0 0 10px;font-size:clamp(28px,3.4vw,40px);font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+  .sec-head p{margin:0;font-size:16.5px;line-height:1.6;color:var(--text-2)}
+
+  /* signal cards */
+  .signals{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .signal{position:relative;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-xl);padding:28px 26px;box-shadow:var(--sh-1);overflow:hidden}
+  .signal::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .signal.s-calm::before{background:var(--p4)}
+  .signal.s-watch::before{background:var(--p2)}
+  .signal.s-check::before{background:var(--p1)}
+  .signal .sig-tag{display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;padding:5px 12px;
+    border-radius:9999px;font-size:12.5px;font-weight:700}
+  .signal.s-calm .sig-tag{background:var(--p4-bg);color:var(--p4)}
+  .signal.s-watch .sig-tag{background:var(--p2-bg);color:var(--p2)}
+  .signal.s-check .sig-tag{background:var(--p1-bg);color:var(--p1)}
+  .signal h3{margin:0 0 8px;font-size:20px;font-weight:700;color:var(--ink)}
+  .signal p{margin:0;font-size:14.5px;line-height:1.6;color:var(--text-2)}
+  .signal-note{margin:22px auto 0;max-width:620px;text-align:center;font-size:14px;line-height:1.6;color:var(--text-3)}
+
+  /* flow steps */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .step{position:relative;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-lg);padding:26px 22px;box-shadow:var(--sh-1)}
+  .step .step-n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;
+    border-radius:50%;background:var(--celadon-100);color:var(--celadon-800);font-weight:800;font-size:15px;margin-bottom:14px}
+  .step h3{margin:0 0 7px;font-size:17px;font-weight:700;color:var(--ink)}
+  .step p{margin:0;font-size:14px;line-height:1.55;color:var(--text-2)}
+
+  /* family features */
+  .family{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .fam{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-xl);padding:28px 26px}
+  .fam .fam-ic{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+    border-radius:var(--r-md);background:var(--celadon-100);color:var(--celadon-700);margin-bottom:16px}
+  .fam .fam-ic svg{width:24px;height:24px}
+  .fam h3{margin:0 0 8px;font-size:19px;font-weight:700;color:var(--ink)}
+  .fam p{margin:0;font-size:14.5px;line-height:1.6;color:var(--text-2)}
+  .privacy-note{margin:26px auto 0;max-width:640px;text-align:center;padding:18px 22px;
+    background:var(--celadon-50);border:1px solid var(--celadon-200);border-radius:var(--r-lg);
+    font-size:14.5px;line-height:1.6;color:var(--celadon-800)}
+
+  .brandline{text-align:center;padding:14px 0 4px;font-size:16px;color:var(--text-3);letter-spacing:.01em}
+
+  .cta-band{max-width:960px;margin:56px auto 96px;padding:44px 28px;text-align:center;
+    background:var(--celadon-800);border-radius:var(--r-xl);color:#fff}
+  .cta-band h2{margin:0 0 10px;font-size:28px;font-weight:700;letter-spacing:-.02em}
+  .cta-band p{margin:0 0 22px;color:rgba(255,255,255,.82);font-size:16px}
+
+  @media(max-width:860px){
+    .stats,.signals,.family{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto}
+    .flow{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:520px){.flow{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container-wide nav-inner">
+    <a href="index.html" class="nav-brand"><span class="ongi-mark">On:Gi</span></a>
+    <div class="nav-links">
+      <a href="index.html">서비스</a>
+      <a href="pricing.html">구독</a>
+      <a href="care-hub.html" class="nav-active">돌봄 관제</a>
+      <a href="brand.html">브랜드</a>
+      <a href="design.html">디자인</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-mobile-toggle" aria-label="메뉴 열기" type="button">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="13" x2="20" y2="13"/><line x1="4" y1="19" x2="20" y2="19"/>
+        </svg>
+      </button>
+      <div data-ongi-sso data-system="care-hub"></div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <div class="page">
+      <span class="eyebrow">돌봄 관제</span>
+      <h1>부모님의 하루를 가족이 함께 지킵니다</h1>
+      <p class="lead">멀리 있어도 마음은 곁에 있습니다. On:Gi 돌봄 관제는 부모님의 안부 신호를 살펴, 가족의 관심이 가장 빠른 응답이 되도록 이어드립니다.</p>
+      <div class="hero-ctas">
+        <a href="#consult" data-ongi-consult class="btn btn-primary">상담 신청하기</a>
+        <a href="control-center.html" class="btn btn-ghost">운영 콘솔 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="stats">
+      <div class="stat"><b>평균 8분</b><span class="stat-label">응급 상황 첫 응답 시간</span></div>
+      <div class="stat"><b>247명</b><span class="stat-label">강남구 시범 참여 부모님</span></div>
+      <div class="stat"><b>24시간</b><span class="stat-label">케어 신호 모니터링</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="page">
+      <div class="sec-head">
+        <span class="eyebrow">케어 신호</span>
+        <h2>평안 · 살핌 · 확인</h2>
+        <p>부모님의 안부를 세 단계 신호로 안내해 드립니다. 의료 진단이 아니라, 가족의 관심을 권해드리는 부드러운 안내예요.</p>
+      </div>
+      <div class="signals">
+        <div class="signal s-calm">
+          <span class="sig-tag">● 평안</span>
+          <h3>오늘도 평안하세요</h3>
+          <p>안부 전화와 일상 신호가 평소와 같을 때예요. 별다른 조치 없이, 마음 놓고 지내셔도 좋다는 뜻이에요.</p>
+        </div>
+        <div class="signal s-watch">
+          <span class="sig-tag">● 살핌</span>
+          <h3>한 번 살펴봐 주세요</h3>
+          <p>평소와 조금 다른 신호가 감지되었어요. 가벼운 안부 통화로 부모님의 하루를 살펴봐 주시길 권해드려요.</p>
+        </div>
+        <div class="signal s-check">
+          <span class="sig-tag">● 확인</span>
+          <h3>지금 확인해 주세요</h3>
+          <p>가족의 관심이 필요한 신호예요. 통화나 방문으로 안부를 확인하고, 필요하면 On:Gi가 함께 응답을 도와드려요.</p>
+        </div>
+      </div>
+      <p class="signal-note">케어 신호는 부모님을 진단하지 않습니다. 가족이 조금 더 자주, 조금 더 따뜻하게 안부를 나누도록 돕는 안내입니다.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="page">
+      <div class="sec-head">
+        <span class="eyebrow">이렇게 지켜드려요</span>
+        <h2>안부에서 응답까지, 끊기지 않는 흐름</h2>
+        <p>매일의 안부가 신호가 되고, 신호는 가족에게 닿습니다. 필요한 순간에는 가장 빠른 응답으로 이어드려요.</p>
+      </div>
+      <div class="flow">
+        <div class="step">
+          <span class="step-n">1</span>
+          <h3>안부 전화</h3>
+          <p>정해진 시간에 부모님께 따뜻한 안부 전화를 드리며 하루를 여쭤봅니다.</p>
+        </div>
+        <div class="step">
+          <span class="step-n">2</span>
+          <h3>신호 감지</h3>
+          <p>통화와 일상의 흐름에서 평소와 다른 변화를 살펴 케어 신호로 정리합니다.</p>
+        </div>
+        <div class="step">
+          <span class="step-n">3</span>
+          <h3>가족 알림</h3>
+          <p>살핌·확인이 필요할 때, 가족에게 부드럽게 알림을 보내 관심을 권해드립니다.</p>
+        </div>
+        <div class="step">
+          <span class="step-n">4</span>
+          <h3>필요 시 응답</h3>
+          <p>가족이 닿기 어려운 순간에는 On:Gi가 함께 확인하고 응답을 도와드립니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="page">
+      <div class="sec-head">
+        <span class="eyebrow">가족이 함께</span>
+        <h2>혼자가 아니라, 가족 모두가 함께</h2>
+        <p>여러 가족이 함께 안부를 나누고, 필요한 알림을 받고, 소중한 순간을 기록합니다.</p>
+      </div>
+      <div class="family">
+        <div class="fam">
+          <div class="fam-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>가족 공유</h3>
+          <p>형제·자매 여러 명이 함께 참여해 부모님의 안부를 나눠 살필 수 있어요. 한 사람에게만 부담이 쏠리지 않아요.</p>
+        </div>
+        <div class="fam">
+          <div class="fam-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h3>알림</h3>
+          <p>살핌·확인 신호가 뜨면 가족에게 즉시 알려드려요. 지금 무엇을 하면 좋을지도 함께 안내해 드려요.</p>
+        </div>
+        <div class="fam">
+          <div class="fam-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h3>통화 기록</h3>
+          <p>부모님과 나눈 안부 통화의 흐름을 가족이 함께 돌아볼 수 있어요. 소중한 이야기가 기억으로 남습니다.</p>
+        </div>
+      </div>
+      <p class="privacy-note">통화 내용과 기록은 부모님 본인의 동의 후에만 저장되며, 가족 외에는 공개되지 않습니다.</p>
+    </div>
+    <p class="brandline">기억은 사라져도, 온기는 남습니다.</p>
+  </section>
+
+  <section class="cta-band" id="consult">
+    <h2>부모님의 하루, 함께 지켜드릴게요</h2>
+    <p>부모님과 가족의 상황을 알려주시면, On:Gi가 맞는 시작을 안내해 드립니다.</p>
+    <a href="#consult" data-ongi-consult class="btn btn-primary">상담 신청하기</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container-wide">
+    <div class="foot-single">
+      <div class="foot-single-left">
+        <span class="ongi-mark">On:Gi</span>
+        <p>부모님의 평생을 보존하는 가족 서비스.</p>
+        <div class="foot-credits-inline">
+          <span class="fl-label">FOUNDING TEAM</span>
+          <span class="fl-people">
+            <span class="fl-p"><b>김태희</b> 대표</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>이민섭</b> 공동창업자 · CCO</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>김세연</b> 공동창업자 · CTO</span>
+          </span>
+        </div>
+        <div class="foot-credits-inline" style="margin-top:6px;">
+          <span class="fl-label" style="color:var(--sand);">ADVISOR</span>
+          <span class="fl-people"><span class="fl-p"><b>원민재</b> 한국엔젤투자협회</span></span>
+        </div>
+      </div>
+      <div class="foot-single-right">
+        <nav class="foot-links">
+          <a href="parent-app.html">부모님앱</a>
+          <a href="control-center.html">돌봄 관제</a>
+          <a href="care-hub.html">관제 소개</a>
+          <a href="pricing.html">구독</a>
+          <a href="brand.html">브랜드</a>
+          <a href="design.html">디자인</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#consult" data-ongi-consult>기업·기관 문의</a>
+        </nav>
+        <div class="foot-meta"><span>© 2026 On:Gi</span></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.addEventListener('click', function(e) {
+    var t = e.target.closest('.nav-mobile-toggle');
+    var nav = document.querySelector('.nav-links');
+    if (t && nav) { e.preventDefault(); nav.classList.toggle('is-open'); return; }
+    if (nav && nav.classList.contains('is-open') && !e.target.closest('.nav')) nav.classList.remove('is-open');
+  });
+})();
+</script>
+<script src="shared/fab-consult.js"></script>
+</body>
+</html>

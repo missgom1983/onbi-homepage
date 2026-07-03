@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자인 · On:Gi — 한지의 온기를 담은 디자인 시스템</title>
+<meta name="description" content="한지와 청자(celadon)의 온기를 담은 On:Gi 디자인 시스템 — 컬러 팔레트, 타이포그래피, 라운드·그림자, 브랜드 마크.">
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/landing.css">
+<script src="shared/theme.js"></script>
+<script src="shared/sso-menu.js"></script>
+<script src="shared/image-slot.js"></script>
+<style>
+  .page{max-width:1080px;margin:0 auto;padding:0 24px}
+  .page-hero{text-align:center;padding:120px 0 56px}
+  .page-hero .eyebrow{display:inline-block;margin-bottom:16px;padding:6px 14px;border-radius:9999px;
+    background:var(--celadon-100);color:var(--celadon-800);font-size:13px;font-weight:600;letter-spacing:.02em}
+  .page-hero h1{margin:0 auto 18px;max-width:18ch;font-size:clamp(38px,5.4vw,66px);line-height:1.06;
+    letter-spacing:-.045em;font-weight:700;color:var(--ink);text-wrap:balance}
+  .page-hero p.lead{margin:0 auto 26px;max-width:36ch;font-size:19px;line-height:1.6;color:var(--text-2)}
+  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* Section shell */
+  .ds-section{padding:52px 0 8px}
+  .ds-head{max-width:640px;margin:0 0 28px}
+  .ds-head .kicker{display:inline-block;margin-bottom:10px;font-size:12px;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--primary)}
+  .ds-head h2{margin:0 0 8px;font-size:clamp(28px,3.4vw,38px);line-height:1.12;
+    letter-spacing:-.03em;font-weight:700;color:var(--ink)}
+  .ds-head p{margin:0;font-size:16px;line-height:1.6;color:var(--text-2)}
+  .ds-group{margin:0 0 34px}
+  .ds-group-label{margin:0 0 14px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--text-2)}
+
+  /* Swatch grid */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:14px}
+  .swatch{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--surface);
+    box-shadow:var(--sh-1)}
+  .swatch .chip{display:block;height:82px;border:none;border-radius:0}
+  .swatch .meta{padding:10px 12px 12px}
+  .swatch .meta .name{display:block;font-size:13px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+  .swatch .meta .val{display:block;margin-top:2px;font-size:12px;color:var(--text-3);
+    font-variant-numeric:tabular-nums;text-transform:uppercase}
+
+  /* Typography scale */
+  .type-scale{border-top:1px solid var(--line)}
+  .type-row{display:flex;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);
+    flex-wrap:wrap}
+  .type-row .tr-meta{flex:0 0 132px;font-size:12.5px;color:var(--text-3);font-variant-numeric:tabular-nums}
+  .type-row .tr-meta b{display:block;font-size:13px;color:var(--text-2);font-weight:600}
+  .type-row .tr-sample{flex:1 1 auto;min-width:0;color:var(--ink);font-family:var(--font)}
+  .ts-display{font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.045em;font-weight:700}
+  .ts-headline{font-size:clamp(30px,4vw,48px);line-height:1.08;letter-spacing:-.038em;font-weight:700}
+  .ts-title{font-size:28px;line-height:1.2;letter-spacing:-.03em;font-weight:600}
+  .ts-body-l{font-size:20px;line-height:1.5;letter-spacing:-.012em;font-weight:400;color:var(--text-2)}
+  .ts-body{font-size:16px;line-height:1.55;font-weight:400;color:var(--text-2)}
+  .ts-caption{font-size:13px;line-height:1.45;letter-spacing:.01em;font-weight:500;color:var(--text-3)}
+
+  /* Radius & shadow */
+  .box-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px}
+  .radius-box{height:120px;display:flex;align-items:flex-end;padding:14px;border:1px solid var(--celadon-300);
+    background:var(--celadon-50)}
+  .radius-box span{font-size:12.5px;font-weight:600;color:var(--celadon-800);
+    font-variant-numeric:tabular-nums}
+  .shadow-card{height:120px;display:flex;align-items:flex-end;padding:16px;background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--r-lg)}
+  .shadow-card span{font-size:12.5px;font-weight:600;color:var(--text-2)}
+
+  /* Brand mark */
+  .brand-panel{display:flex;flex-wrap:wrap;gap:24px;align-items:stretch}
+  .brand-card{flex:1 1 260px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+    box-shadow:var(--sh-1);padding:40px 32px;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:16px;text-align:center;min-height:200px}
+  .brand-card .wordmark{font-size:clamp(40px,6vw,64px);color:var(--ink)}
+  .brand-card .symbols{display:flex;gap:32px;align-items:center}
+  .brand-card figcaption{font-size:13px;color:var(--text-3);margin-top:8px}
+  .brand-card .cap{font-size:13.5px;line-height:1.6;color:var(--text-2);max-width:30ch}
+
+  /* CTA band */
+  .cta-band{max-width:960px;margin:64px auto 96px;padding:44px 28px;text-align:center;
+    background:var(--celadon-800);border-radius:var(--r-xl);color:#fff}
+  .cta-band h2{margin:0 0 10px;font-size:28px;font-weight:700;letter-spacing:-.02em}
+  .cta-band p{margin:0 0 22px;color:rgba(255,255,255,.82);font-size:16px}
+
+  @media(max-width:640px){
+    .type-row .tr-meta{flex-basis:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container-wide nav-inner">
+    <a href="index.html" class="nav-brand"><span class="ongi-mark">On:Gi</span></a>
+    <div class="nav-links">
+      <a href="index.html">서비스</a>
+      <a href="pricing.html">구독</a>
+      <a href="care-hub.html">돌봄 관제</a>
+      <a href="brand.html">브랜드</a>
+      <a href="design.html" class="nav-active">디자인</a>
+    </div>
+    <div class="nav-cta">
+      <button class="nav-mobile-toggle" aria-label="메뉴 열기" type="button">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="13" x2="20" y2="13"/><line x1="4" y1="19" x2="20" y2="19"/>
+        </svg>
+      </button>
+      <div data-ongi-sso data-system="design"></div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <div class="page">
+      <span class="eyebrow">디자인</span>
+      <h1>한지의 온기를 담은 디자인 시스템</h1>
+      <p class="lead">청자(celadon) 팔레트와 한지의 결에서 시작한 On:Gi의 디자인 언어예요. 따뜻하고 단정하게, 부모님과 가족 모두에게 편안한 화면을 만듭니다.</p>
+      <div class="hero-cta">
+        <a href="brand.html" class="btn btn-primary">브랜드 보기</a>
+        <a href="pricing.html" class="btn btn-ghost">구독 살펴보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 컬러 팔레트 -->
+  <section class="page ds-section">
+    <div class="ds-head">
+      <span class="kicker">Color</span>
+      <h2>컬러 팔레트</h2>
+      <p>청자의 맑은 초록을 중심으로, 한지 종이의 따뜻한 중립색과 상태 색을 함께 사용해요. 각 칩은 토큰 값을 그대로 보여줍니다.</p>
+    </div>
+
+    <div class="ds-group">
+      <p class="ds-group-label">청자 (Celadon)</p>
+      <div class="swatches">
+        <div class="swatch"><span class="chip" style="background:var(--celadon-100)"></span><div class="meta"><span class="name">celadon-100</span><span class="val">#DDF0E7</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--celadon-200)"></span><div class="meta"><span class="name">celadon-200</span><span class="val">#C8E5DB</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--celadon-300)"></span><div class="meta"><span class="name">celadon-300</span><span class="val">#A6D5C2</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--celadon-400)"></span><div class="meta"><span class="name">celadon-400</span><span class="val">#7CC5A9</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--celadon-500)"></span><div class="meta"><span class="name">celadon-500 · PRIMARY</span><span class="val">#4FB89E</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--celadon-600)"></span><div class="meta"><span class="name">celadon-600</span><span class="val">#3DA088</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--celadon-700)"></span><div class="meta"><span class="name">celadon-700</span><span class="val">#2F8270</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--celadon-800)"></span><div class="meta"><span class="name">celadon-800</span><span class="val">#246356</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--celadon-900)"></span><div class="meta"><span class="name">celadon-900</span><span class="val">#19463D</span></div></div>
+      </div>
+    </div>
+
+    <div class="ds-group">
+      <p class="ds-group-label">중립 · 종이 (Neutrals &amp; Paper)</p>
+      <div class="swatches">
+        <div class="swatch"><span class="chip" style="background:var(--sand)"></span><div class="meta"><span class="name">sand · 노을</span><span class="val">#D9B88C</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--ink)"></span><div class="meta"><span class="name">ink · 본문</span><span class="val">#1F2A3A</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--paper)"></span><div class="meta"><span class="name">paper · 한지</span><span class="val">#F5F1E6</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--line)"></span><div class="meta"><span class="name">line · 경계선</span><span class="val">#E6E0D1</span></div></div>
+      </div>
+    </div>
+
+    <div class="ds-group">
+      <p class="ds-group-label">상태 (Status: P1–P4)</p>
+      <div class="swatches">
+        <div class="swatch"><span class="chip" style="background:var(--p1)"></span><div class="meta"><span class="name">p1 · 즉시</span><span class="val">#D94B4B</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--p2)"></span><div class="meta"><span class="name">p2 · 당일</span><span class="val">#E89B3A</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--p3)"></span><div class="meta"><span class="name">p3 · 예정</span><span class="val">#6B7B92</span></div></div>
+        <div class="swatch"><span class="chip" style="background:var(--p4)"></span><div class="meta"><span class="name">p4 · 모니터링</span><span class="val">#4FB89E</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 타이포그래피 -->
+  <section class="page ds-section">
+    <div class="ds-head">
+      <span class="kicker">Type</span>
+      <h2>타이포그래피</h2>
+      <p>본문 서체는 Pretendard(<code>--font</code>)예요. 큰 제목일수록 자간을 촘촘하게(−0.03 ~ −0.045em) 조여 단정한 인상을 만듭니다.</p>
+    </div>
+    <div class="type-scale">
+      <div class="type-row">
+        <div class="tr-meta"><b>Display</b>72px · −0.045em · 700</div>
+        <div class="tr-sample ts-display">온기를 담다</div>
+      </div>
+      <div class="type-row">
+        <div class="tr-meta"><b>Headline</b>48px · −0.038em · 700</div>
+        <div class="tr-sample ts-headline">부모님의 하루를 잇다</div>
+      </div>
+      <div class="type-row">
+        <div class="tr-meta"><b>Title</b>28px · −0.03em · 600</div>
+        <div class="tr-sample ts-title">가족이 함께 보는 안부</div>
+      </div>
+      <div class="type-row">
+        <div class="tr-meta"><b>Body Large</b>20px · −0.012em · 400</div>
+        <div class="tr-sample ts-body-l">매주 안부 전화와 금요편지로 부모님의 이야기를 차곡차곡 모아드려요.</div>
+      </div>
+      <div class="type-row">
+        <div class="tr-meta"><b>Body</b>16px · 1.55 · 400</div>
+        <div class="tr-sample ts-body">On:Gi는 요금제가 아니라 부모님과 함께하는 방법을 제안합니다. 씨앗, 이야기, 평생 — 세 가지 방식 모두 이음과 새김을 자유롭게 선택할 수 있어요.</div>
+      </div>
+      <div class="type-row">
+        <div class="tr-meta"><b>Caption</b>13px · +0.01em · 500</div>
+        <div class="tr-sample ts-caption">케어 신호 · 평안 · 살핌 · 확인</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 라운드 & 그림자 -->
+  <section class="page ds-section">
+    <div class="ds-head">
+      <span class="kicker">Shape &amp; Elevation</span>
+      <h2>라운드 &amp; 그림자</h2>
+      <p>부드러운 모서리와 아주 옅은 그림자로 한지 위에 놓인 듯한 깊이를 표현해요.</p>
+    </div>
+
+    <div class="ds-group">
+      <p class="ds-group-label">라운드 (Radius)</p>
+      <div class="box-grid">
+        <div class="radius-box" style="border-radius:var(--r-sm)"><span>--r-sm · 10px</span></div>
+        <div class="radius-box" style="border-radius:var(--r-md)"><span>--r-md · 16px</span></div>
+        <div class="radius-box" style="border-radius:var(--r-lg)"><span>--r-lg · 22px</span></div>
+        <div class="radius-box" style="border-radius:var(--r-xl)"><span>--r-xl · 32px</span></div>
+      </div>
+    </div>
+
+    <div class="ds-group">
+      <p class="ds-group-label">그림자 (Shadow)</p>
+      <div class="box-grid">
+        <div class="shadow-card" style="box-shadow:var(--sh-1)"><span>--sh-1</span></div>
+        <div class="shadow-card" style="box-shadow:var(--sh-2)"><span>--sh-2</span></div>
+        <div class="shadow-card" style="box-shadow:var(--sh-3)"><span>--sh-3</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 브랜드 마크 -->
+  <section class="page ds-section">
+    <div class="ds-head">
+      <span class="kicker">Brand Mark</span>
+      <h2>브랜드 마크</h2>
+      <p>워드마크 “On:Gi”와 심볼을 함께 사용해요. 워드마크의 콜론 뒤 점(dot)은 청자색으로, 잇고 새기는 온기의 신호예요.</p>
+    </div>
+    <div class="brand-panel">
+      <div class="brand-card">
+        <span class="wordmark"><span class="ongi-mark">On:Gi</span></span>
+        <p class="cap">워드마크 — Pretendard 700, 자간 −0.04em. 시그니처 점은 <code>--primary</code>(celadon-500).</p>
+      </div>
+      <figure class="brand-card">
+        <div class="symbols">
+          <img src="assets/onvi-symbol-ink.svg" alt="On:Gi 심볼" style="width:72px">
+          <img src="assets/onvi-symbol-ink-cheongja.svg" alt="On:Gi 청자 심볼" style="width:72px">
+        </div>
+        <figcaption>onvi-symbol-ink.svg · onvi-symbol-ink-cheongja.svg</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="cta-band" id="consult">
+    <h2>브랜드를 함께 그려나가요</h2>
+    <p>On:Gi의 디자인과 톤을 어떻게 담아낼지, 팀에게 맞는 방법을 함께 찾아드립니다.</p>
+    <a href="#consult" data-ongi-consult class="btn btn-primary">상담 신청하기</a>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container-wide">
+    <div class="foot-single">
+      <div class="foot-single-left">
+        <span class="ongi-mark">On:Gi</span>
+        <p>부모님의 평생을 보존하는 가족 서비스.</p>
+        <div class="foot-credits-inline">
+          <span class="fl-label">FOUNDING TEAM</span>
+          <span class="fl-people">
+            <span class="fl-p"><b>김태희</b> 대표</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>이민섭</b> 공동창업자 · CCO</span>
+            <span class="fl-sep">·</span>
+            <span class="fl-p"><b>김세연</b> 공동창업자 · CTO</span>
+          </span>
+        </div>
+        <div class="foot-credits-inline" style="margin-top:6px;">
+          <span class="fl-label" style="color:var(--sand);">ADVISOR</span>
+          <span class="fl-people"><span class="fl-p"><b>원민재</b> 한국엔젤투자협회</span></span>
+        </div>
+      </div>
+      <div class="foot-single-right">
+        <nav class="foot-links">
+          <a href="parent-app.html">부모님앱</a>
+          <a href="control-center.html">돌봄 관제</a>
+          <a href="care-hub.html">관제 소개</a>
+          <a href="pricing.html">구독</a>
+          <a href="brand.html">브랜드</a>
+          <a href="design.html">디자인</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#consult" data-ongi-consult>기업·기관 문의</a>
+        </nav>
+        <div class="foot-meta"><span>© 2026 On:Gi</span></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.addEventListener('click', function(e) {
+    var t = e.target.closest('.nav-mobile-toggle');
+    var nav = document.querySelector('.nav-links');
+    if (t && nav) { e.preventDefault(); nav.classList.toggle('is-open'); return; }
+    if (nav && nav.classList.contains('is-open') && !e.target.closest('.nav')) nav.classList.remove('is-open');
+  });
+})();
+</script>
+<script src="shared/fab-consult.js"></script>
+</body>
+</html>
