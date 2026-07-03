@@ -9,3 +9,6 @@ uploads/
 # 에디터/OS
 .claude/
 .DS_Store
+
+# 빌드 참조 (배포 제외)
+_chrome.reference.html
