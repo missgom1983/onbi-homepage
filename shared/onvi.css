@@ -1,0 +1,82 @@
+/* onvi.css — On:Vi 사이트 공용 스타일 (정적 컴파일본)
+ * .dc.html 디자인 컴포넌트를 표준 정적 페이지로 옮기며 공용 chrome/behavior를 담는다. */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: #1F2A3A;
+  background: #F5F1E6;
+}
+img { max-width: 100%; }
+
+/* ── 스크롤 리빌 ── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
+}
+
+/* ── 네비게이션 (고정 pill) ── */
+.onvi-nav {
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 100;
+  height: 56px; width: min(1280px, calc(100% - 32px));
+  padding: 0 10px 0 26px;
+  background: rgba(31,42,58,0.55);
+  backdrop-filter: saturate(180%) blur(24px); -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 999px;
+  box-shadow: 0 12px 32px -10px rgba(0,0,0,0.35), 0 4px 12px -4px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+}
+.onvi-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+.onvi-logo { display: flex; align-items: center; text-decoration: none; font-size: 21px; font-weight: 700; letter-spacing: -0.03em; color: #A6D5C2; transition: color .2s; }
+.onvi-logo:hover { color: #FFFFFF; }
+.onvi-logo .colon { color: #4FB89E; }
+.onvi-logo .dot { width: 5px; height: 5px; border-radius: 999px; background: #FFFFFF; margin-left: 7px; align-self: center; flex-shrink: 0; }
+.onvi-nav-links { display: flex; gap: 30px; align-items: center; position: absolute; left: 50%; transform: translateX(-50%); }
+.onvi-nav-links a {
+  text-decoration: none; font-size: 13.5px; letter-spacing: -0.005em; transition: color .2s;
+  font-weight: 500; color: rgba(255,255,255,0.7); padding-bottom: 2px; border-bottom: 2px solid transparent;
+}
+.onvi-nav-links a:hover { color: #FFFFFF; }
+.onvi-nav-links a.active { font-weight: 600; color: #FFFFFF; border-bottom-color: #7CC5A9; }
+.onvi-nav-cta { display: flex; align-items: center; gap: 4px; }
+.onvi-login { color: rgba(255,255,255,0.75); font-size: 13.5px; font-weight: 500; text-decoration: none; padding: 9px 14px; border-radius: 999px; white-space: nowrap; transition: color .2s; }
+.onvi-login:hover { color: #FFFFFF; }
+.onvi-signup { background: #4FB89E; color: #FFFFFF; font-size: 13.5px; font-weight: 700; padding: 10px 20px; border-radius: 999px; text-decoration: none; white-space: nowrap; letter-spacing: -0.01em; transition: background .2s, box-shadow .2s; }
+.onvi-signup:hover { background: #3DA088; box-shadow: 0 6px 20px -8px rgba(79,184,158,0.6); }
+
+/* 모바일 토글 */
+.onvi-nav-toggle { display: none; width: 38px; height: 38px; border-radius: 999px; border: none; background: transparent; flex-direction: column; align-items: center; justify-content: center; gap: 4.5px; cursor: pointer; padding: 0; }
+.onvi-nav-toggle span { width: 18px; height: 2px; border-radius: 2px; background: #FFFFFF; transition: transform .25s, opacity .25s; }
+.onvi-nav.open .onvi-nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.onvi-nav.open .onvi-nav-toggle span:nth-child(2) { opacity: 0; }
+.onvi-nav.open .onvi-nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.onvi-mobile-panel { display: none; position: absolute; top: 60px; left: 0; right: 0; background: rgba(31,42,58,0.95); backdrop-filter: saturate(180%) blur(24px); -webkit-backdrop-filter: saturate(180%) blur(24px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; flex-direction: column; }
+.onvi-nav.open .onvi-mobile-panel { display: flex; }
+.onvi-mobile-panel a { text-decoration: none; padding: 14px 24px; font-size: 15px; border-bottom: 1px solid rgba(255,255,255,0.06); font-weight: 500; color: rgba(255,255,255,0.75); }
+.onvi-mobile-panel a.active { font-weight: 600; color: #FFFFFF; }
+
+@media (max-width: 880px) {
+  .onvi-nav-links { display: none; }
+  .onvi-nav-toggle { display: flex; }
+  .onvi-login { display: none; }
+}
+
+/* ── 상담 배너 (하단 고정, 스크롤 시 등장) ── */
+@keyframes onviConsultPulse { 0%{ box-shadow:0 0 0 0 rgba(79,184,158,0.55);} 70%{ box-shadow:0 0 0 8px rgba(79,184,158,0);} 100%{ box-shadow:0 0 0 0 rgba(79,184,158,0);} }
+.onvi-consult { position: fixed; z-index: 90; right: 24px; bottom: 24px; left: auto; max-width: min(420px, calc(100vw - 32px)); opacity: 0; transform: translateY(24px); pointer-events: none; transition: opacity .4s cubic-bezier(.22,.61,.36,1), transform .4s cubic-bezier(.22,.61,.36,1); }
+.onvi-consult.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.onvi-consult-inner { position: relative; display: flex; align-items: center; gap: 18px; background: rgba(31,42,58,0.92); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 22px; padding: 16px 18px 16px 22px; box-shadow: 0 18px 44px -14px rgba(0,0,0,0.4); font-family: 'Pretendard Variable', Pretendard, sans-serif; }
+.onvi-consult-dot { position: absolute; left: 22px; top: 18px; width: 8px; height: 8px; border-radius: 999px; background: #4FB89E; animation: onviConsultPulse 2.2s ease-in-out infinite; }
+.onvi-consult-x { flex-shrink: 0; width: 30px; height: 30px; border-radius: 999px; border: none; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, color .2s; }
+.onvi-consult-x:hover { background: rgba(255,255,255,0.16); color: #FFFFFF; }

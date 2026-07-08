@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="vc-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FBF8EF"></stop>
+      <stop offset="100%" stop-color="#DDF0E7"></stop>
+    </linearGradient>
+    <linearGradient id="phone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2C4A6B"></stop>
+      <stop offset="100%" stop-color="#1E3450"></stop>
+    </linearGradient>
+    <radialGradient id="screen" cx="0.5" cy="0.5">
+      <stop offset="0%" stop-color="#C8E5DB"></stop>
+      <stop offset="100%" stop-color="#4FB89E"></stop>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#vc-bg)"></rect>
+  <circle cx="480" cy="120" r="120" fill="#F4E7D2" opacity="0.65"></circle>
+  <ellipse cx="300" cy="540" rx="260" ry="34" fill="#D9B88C" opacity="0.45"></ellipse>
+
+  <g transform="translate(300,380)">
+    
+    <path d="M -110 80 Q -120 30 -90 0 Q -60 -10 -30 0 L -30 60 Q -40 90 -70 90 Z" fill="#E6C9A4"></path>
+    <path d="M 110 80 Q 120 30 90 0 Q 60 -10 30 0 L 30 60 Q 40 90 70 90 Z" fill="#E6C9A4"></path>
+
+    
+    <rect x="-72" y="-160" width="144" height="220" rx="22" fill="url(#phone)" stroke="#0F1B2C" stroke-width="2"></rect>
+    
+    <rect x="-58" y="-146" width="116" height="192" rx="10" fill="url(#screen)"></rect>
+
+    
+    <g transform="translate(0,-60)">
+      
+      <circle cx="0" cy="0" r="44" fill="#3D2A14"></circle>
+      
+      <circle cx="0" cy="0" r="32" fill="#FCE3CA"></circle>
+      
+      <path d="M -28 -10 Q 0 -28 28 -10 Q 18 -20 0 -22 Q -18 -20 -28 -10 Z" fill="#2C1810"></path>
+      
+      <path d="M -16 4 Q -10 12 -4 4" stroke="#2C1810" stroke-width="3" fill="none" stroke-linecap="round"></path>
+      <path d="M 4 4 Q 10 12 16 4" stroke="#2C1810" stroke-width="3" fill="none" stroke-linecap="round"></path>
+      
+      <circle cx="-18" cy="12" r="5" fill="#F4B8B8" opacity="0.8"></circle>
+      <circle cx="18" cy="12" r="5" fill="#F4B8B8" opacity="0.8"></circle>
+      
+      <path d="M -6 22 Q 0 30 6 22" stroke="#C44A3C" stroke-width="3" fill="none" stroke-linecap="round"></path>
+    </g>
+
+    
+    <rect x="-50" y="14" width="100" height="22" rx="11" fill="rgba(255,255,255,0.85)"></rect>
+    <text x="0" y="29" text-anchor="middle" font-size="11" font-weight="700" fill="#2F8270" font-family="system-ui">지영 · 영상통화</text>
+    
+    <circle cx="-22" cy="50" r="11" fill="#D94B4B"></circle>
+    <text x="-22" y="54" text-anchor="middle" font-size="13" fill="white" font-family="system-ui">×</text>
+    <circle cx="22" cy="50" r="11" fill="#3DA088"></circle>
+    <path d="M 17 47 Q 22 53 27 47" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"></path>
+  </g>
+
+  <g fill="#D94B4B" opacity="0.65">
+    <path d="M 110 130 a 7 7 0 0 1 14 0 a 7 7 0 0 1 14 0 c 0 8 -14 17 -14 17 c 0 0 -14 -9 -14 -17 z"></path>
+    <path d="M 90 200 a 5 5 0 0 1 10 0 a 5 5 0 0 1 10 0 c 0 6 -10 12 -10 12 c 0 0 -10 -6 -10 -12 z" opacity="0.7"></path>
+    <path d="M 460 280 a 6 6 0 0 1 12 0 a 6 6 0 0 1 12 0 c 0 7 -12 14 -12 14 c 0 0 -12 -7 -12 -14 z" opacity="0.85"></path>
+  </g>
+
+  <g fill="none" stroke="#4FB89E" stroke-width="2" opacity="0.5">
+    <path d="M 160 380 Q 130 380 130 360"></path>
+    <path d="M 140 380 Q 100 380 100 340"></path>
+    <path d="M 440 380 Q 470 380 470 360"></path>
+    <path d="M 460 380 Q 500 380 500 340"></path>
+  </g>
+</svg>

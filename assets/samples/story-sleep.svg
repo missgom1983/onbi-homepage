@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FBF8EF"></stop><stop offset="100%" stop-color="#F0E1CB"></stop></linearGradient></defs>
+<rect width="400" height="400" fill="url(#bg)"></rect>
+<ellipse cx="200" cy="340" rx="180" ry="32" fill="#D9B88C" opacity="0.5"></ellipse>
+<ellipse cx="200" cy="330" rx="160" ry="40" fill="#F4D4D4"></ellipse>
+<ellipse cx="200" cy="330" rx="140" ry="30" fill="#FBE9E9"></ellipse>
+<g transform="translate(200,310)">
+  <ellipse cx="0" cy="0" rx="120" ry="40" fill="#A8753F"></ellipse>
+  <ellipse cx="0" cy="6" rx="100" ry="22" fill="#D9A875" opacity="0.6"></ellipse>
+  <g transform="translate(-86, 4)">
+    <circle cx="0" cy="0" r="34" fill="#A8753F"></circle>
+    <ellipse cx="-22" cy="10" rx="18" ry="14" fill="#D9A875"></ellipse>
+    <path d="M -10 -16 Q -18 -4 -22 22 Q -12 24 -2 16 Q 0 4 6 -10 Z" fill="#6B3D1C"></path>
+    <path d="M -38 8 Q -32 14 -24 12" stroke="#1A0F08" stroke-width="1.8" fill="none" stroke-linecap="round"></path>
+    <ellipse cx="-36" cy="6" rx="4" ry="3" fill="#1A0F08"></ellipse>
+    <path d="M -4 -4 Q 0 0 4 -4" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+  </g>
+  <g fill="#2C4A6B" opacity="0.55">
+    <text x="40" y="-30" font-size="20" font-weight="700" font-family="system-ui">Z</text>
+    <text x="60" y="-50" font-size="14" font-weight="700" font-family="system-ui">z</text>
+    <text x="74" y="-66" font-size="10" font-weight="700" font-family="system-ui">z</text>
+  </g>
+</g>
+</svg>

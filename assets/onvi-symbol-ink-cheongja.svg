@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+  <filter id="b8" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"></feGaussianBlur></filter>
+  <filter id="b6" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5.5"></feGaussianBlur></filter>
+  <filter id="b4" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4"></feGaussianBlur></filter>
+  <filter id="b2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2"></feGaussianBlur></filter>
+  <radialGradient id="halo"><stop offset="0%" stop-color="#3FA98F" stop-opacity="0.07"></stop><stop offset="55%" stop-color="#3FA98F" stop-opacity="0.03"></stop><stop offset="100%" stop-color="#3FA98F" stop-opacity="0"></stop></radialGradient>
+  <radialGradient id="dot"><stop offset="0%" stop-color="#3FA98F" stop-opacity="0.9"></stop><stop offset="55%" stop-color="#3FA98F" stop-opacity="0.72"></stop><stop offset="100%" stop-color="#3FA98F" stop-opacity="0"></stop></radialGradient>
+</defs>
+
+<circle cx="100" cy="100" r="92" fill="url(#halo)"></circle>
+
+<circle cx="98.5" cy="101.5" r="73" fill="none" stroke="#3FA98F" stroke-width="8" stroke-opacity="0.10" filter="url(#b8)"></circle>
+<circle cx="101" cy="99" r="72" fill="none" stroke="#3FA98F" stroke-width="5" stroke-opacity="0.15" stroke-dasharray="120 34 90 22" stroke-linecap="round" filter="url(#b6)"></circle>
+<circle cx="100" cy="100.5" r="70.5" fill="none" stroke="#3FA98F" stroke-width="3" stroke-opacity="0.11" stroke-dasharray="70 26 130 18" filter="url(#b6)"></circle>
+
+<circle cx="100.8" cy="98.8" r="48" fill="none" stroke="#3FA98F" stroke-width="6" stroke-opacity="0.22" stroke-dasharray="150 28 80 20" stroke-linecap="round" filter="url(#b4)"></circle>
+<circle cx="99" cy="101" r="47" fill="none" stroke="#3FA98F" stroke-width="3.2" stroke-opacity="0.13" filter="url(#b6)"></circle>
+
+<circle cx="100" cy="100" r="27" fill="#3FA98F" fill-opacity="0.11" filter="url(#b6)"></circle>
+<circle cx="97" cy="103" r="22" fill="#3FA98F" fill-opacity="0.07" filter="url(#b8)"></circle>
+
+<circle cx="100" cy="100" r="15" fill="#3FA98F" fill-opacity="0.16" filter="url(#b4)"></circle>
+<circle cx="100" cy="100" r="13" fill="url(#dot)" filter="url(#b2)"></circle>
+</svg>

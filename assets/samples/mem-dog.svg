@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="cute-dog-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EFF8F5"></stop>
+      <stop offset="100%" stop-color="#F0E1CB"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#cute-dog-bg)"></rect>
+  
+  <circle cx="180" cy="140" r="120" fill="#F4E7D2" opacity="0.7"></circle>
+  
+  <ellipse cx="300" cy="520" rx="320" ry="60" fill="#C8E5DB" opacity="0.7"></ellipse>
+
+  
+  <g transform="translate(300,370)">
+    
+    <ellipse cx="0" cy="110" rx="200" ry="14" fill="#6B3D1C" opacity="0.18"></ellipse>
+
+    
+    <rect x="-170" y="-30" width="320" height="120" rx="60" fill="#A8753F"></rect>
+    
+    <ellipse cx="-10" cy="60" rx="130" ry="24" fill="#D9A875" opacity="0.7"></ellipse>
+
+    
+    <rect x="-150" y="80" width="30" height="40" rx="14" fill="#A8753F"></rect>
+    <rect x="-100" y="80" width="30" height="40" rx="14" fill="#8C5C30"></rect>
+    <rect x="80" y="80" width="30" height="40" rx="14" fill="#A8753F"></rect>
+    <rect x="130" y="80" width="30" height="40" rx="14" fill="#8C5C30"></rect>
+
+    
+    <path d="M 150 -10 Q 200 -40 200 -70 Q 196 -82 188 -78 Q 196 -68 180 -50 Q 168 -30 144 -2" fill="#A8753F" stroke="#8C5C30" stroke-width="1.5"></path>
+
+    
+    <g transform="translate(-190,-10)">
+      
+      <circle cx="0" cy="0" r="64" fill="#A8753F"></circle>
+      
+      <ellipse cx="-44" cy="20" rx="32" ry="22" fill="#D9A875"></ellipse>
+      
+      <ellipse cx="-44" cy="30" rx="28" ry="6" fill="#8C5C30" opacity="0.3"></ellipse>
+
+      
+      <path d="M -20 -38 Q -36 -16 -42 36 Q -28 42 -10 32 Q -8 8 4 -28 Z" fill="#6B3D1C"></path>
+      
+      <path d="M 30 -38 Q 44 -16 46 24 Q 60 16 60 -10 Q 56 -32 40 -42 Z" fill="#6B3D1C" opacity="0.85"></path>
+
+      
+      <circle cx="6" cy="-8" r="10" fill="#fff"></circle>
+      <circle cx="6" cy="-6" r="8" fill="#2C1810"></circle>
+      <circle cx="8" cy="-8" r="3" fill="#fff"></circle>
+      
+      <ellipse cx="6" cy="-22" rx="5" ry="2" fill="#D9A875"></ellipse>
+
+      
+      <ellipse cx="-72" cy="14" rx="10" ry="8" fill="#1A0F08"></ellipse>
+      <circle cx="-74" cy="12" r="2" fill="#6B3D1C"></circle>
+
+      
+      <path d="M -60 26 Q -50 36 -38 30" stroke="#1A0F08" stroke-width="3" fill="none" stroke-linecap="round"></path>
+      
+      <ellipse cx="-46" cy="32" rx="4" ry="3" fill="#E89B3A"></ellipse>
+
+      
+      <circle cx="-22" cy="20" r="6" fill="#F4B8B8" opacity="0.7"></circle>
+    </g>
+
+    
+    <g transform="translate(-170, 32)">
+      <ellipse cx="0" cy="0" rx="40" ry="10" fill="#D94B4B"></ellipse>
+      <circle cx="0" cy="14" r="11" fill="#E89B3A" stroke="#fff" stroke-width="2"></circle>
+      <text x="0" y="18" text-anchor="middle" font-size="11" font-weight="800" fill="#fff" font-family="system-ui">단</text>
+    </g>
+  </g>
+
+  
+  <g fill="#D94B4B" opacity="0.6">
+    <path d="M 470 200 a 8 8 0 0 1 16 0 a 8 8 0 0 1 16 0 c 0 8 -16 16 -16 16 c 0 0 -16 -8 -16 -16 z"></path>
+    <path d="M 90 240 a 6 6 0 0 1 12 0 a 6 6 0 0 1 12 0 c 0 6 -12 12 -12 12 c 0 0 -12 -6 -12 -12 z" opacity="0.7"></path>
+  </g>
+</svg>
