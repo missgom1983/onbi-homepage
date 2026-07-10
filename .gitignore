@@ -18,3 +18,6 @@ _ds/
 shared/landing.css
 shared/theme.js
 shared/tokens.css
+
+# 문서 (배포 제외)
+*.docx
