@@ -21,3 +21,7 @@ shared/tokens.css
 
 # 문서 (배포 제외)
 *.docx
+
+# assets 폴더에 실수로 들어간 스크린샷 제외
+assets/Screenshot*
+assets/*.JPG
