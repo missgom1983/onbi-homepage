@@ -1,0 +1,34 @@
+/* site.css — On:Vi 새 디자인 시스템 (Kinfolk+Storyworth / 신뢰+온기)
+ * 색: 딥 슬레이트 네이비 앵커 + 청자 악센트 + 한지 뉴트럴
+ * 폰트: 헤드라인 Pretendard(정돈) · 감성 인용만 명조(Gowun Batang) */
+:root{
+  --celadon:#4FB89E; --celadon-700:#2F8270; --celadon-800:#246356; --celadon-300:#A6D5C2; --celadon-100:#DDF0E7; --celadon-50:#EAF4EF;
+  --ink:#1F2A3A; --ink-2:#46546A; --ink-3:#7B8699; --sand:#D9B88C; --sand-soft:#F0E1CB;
+  --paper:#F5F1E6; --paper-2:#FBF8EF; --line:#E6E0D1; --slate:#2C4A6B;
+  --navy:#22384F; --navy-deep:#1A2C40;
+}
+body{ background:var(--paper-2); color:var(--ink); font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif; letter-spacing:-0.012em; overflow-x:hidden; }
+.wrap{ width:min(1160px,90%); margin:0 auto; }
+.wide{ width:min(1400px,94%); margin:0 auto; }
+.serif{ font-family:'Gowun Batang',serif; }
+.label{ font-size:11.5px; font-weight:700; letter-spacing:0.24em; text-transform:uppercase; color:var(--celadon-700); }
+.rule{ width:34px; height:2px; background:var(--celadon); border:none; margin:16px 0 0; }
+h1,h2,h3{ margin:0; letter-spacing:-0.035em; text-wrap:balance; }
+.display{ font-size:clamp(36px,5vw,66px); line-height:1.14; font-weight:700; }
+.h2{ font-size:clamp(28px,3.8vw,48px); line-height:1.2; font-weight:700; }
+.h3{ font-size:clamp(20px,2.2vw,26px); line-height:1.3; font-weight:700; }
+.lead{ font-size:clamp(16px,1.5vw,18.5px); line-height:1.78; color:var(--ink-2); text-wrap:pretty; }
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; font-size:15px; font-weight:600; text-decoration:none; transition:transform .2s, background .2s, box-shadow .2s; }
+.btn-p{ background:var(--celadon); color:#fff; box-shadow:0 14px 30px -14px rgba(79,184,158,.55); }
+.btn-p:hover{ background:var(--celadon-700); transform:translateY(-2px); }
+.btn-o{ background:transparent; color:var(--ink); border:1px solid var(--line); }
+.btn-o:hover{ background:#fff; }
+img{ display:block; }
+section{ position:relative; }
+.split{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.photo{ border-radius:20px; overflow:hidden; box-shadow:0 30px 64px -34px rgba(31,42,58,.34); }
+.photo img{ width:100%; height:100%; object-fit:cover; }
+.section-pad{ padding:110px 0; }
+.center{ text-align:center; }
+.card{ background:#fff; border:1px solid var(--line); border-radius:20px; }
+@media (max-width:840px){ .split{ grid-template-columns:1fr; gap:36px; } }
