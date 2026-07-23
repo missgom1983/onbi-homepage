@@ -66,6 +66,24 @@
       });
     });
 
+    // 3.8) Lottie 애니메이션 — [data-lottie="경로.json"] 요소에 자동 로드
+    //      (shared/lottie.min.js 가 로드된 페이지에서만 동작; 없으면 조용히 건너뜀)
+    if (window.lottie) {
+      document.querySelectorAll('[data-lottie]').forEach(function (el) {
+        if (el.dataset.lottieReady) return;
+        el.dataset.lottieReady = '1';
+        try {
+          window.lottie.loadAnimation({
+            container: el,
+            renderer: 'svg',
+            loop: el.getAttribute('data-lottie-loop') !== 'false',
+            autoplay: el.getAttribute('data-lottie-autoplay') !== 'false',
+            path: el.getAttribute('data-lottie')
+          });
+        } catch (e) {}
+      });
+    }
+
     // 4) 상담 배너
     var consult = document.querySelector('.onvi-consult');
     if (consult) {
