@@ -32,3 +32,19 @@ section{ position:relative; }
 .center{ text-align:center; }
 .card{ background:#fff; border:1px solid var(--line); border-radius:20px; }
 @media (max-width:840px){ .split{ grid-template-columns:1fr; gap:36px; } }
+
+/* ── 모바일 반응형 최적화 ── */
+@media (max-width:760px){
+  /* 인라인 3~4열 그리드 → 1열 스택 (페이지별 수정 없이 전역 대응) */
+  [style*="repeat(3"], [style*="repeat(4"]{ grid-template-columns:1fr !important; }
+  /* 세대 콜라주 등 계단식 상단 여백 제거 */
+  main figure{ margin-top:0 !important; }
+  /* 섹션 좌우 여백 안전 */
+  .split{ gap:32px; }
+}
+@media (max-width:600px){
+  /* 와이드 히어로 사진: 모바일에서 너무 얇지 않게 */
+  [style*="aspect-ratio:21/9"]{ aspect-ratio:16/10 !important; }
+  /* 큰 섹션 상하 여백 완화(히어로=첫 섹션은 네비 여백 위해 제외) */
+  main > section:not(:first-of-type){ padding-top:72px !important; padding-bottom:72px !important; }
+}
