@@ -43,10 +43,9 @@
   .quote{ font-family:var(--font-letter),'Gowun Batang',serif; font-weight:700; text-wrap:balance; }
   .gen{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
   /* GNB */
-  nav.pill{ position:fixed; top:16px; left:0; right:0; z-index:300; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none; }
-  nav.pill > .bar{ pointer-events:auto; width:min(1120px,94%); display:flex; align-items:center; justify-content:space-between; gap:16px; background:rgba(31,42,58,0.55); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:9px 9px 9px 24px; box-shadow:0 18px 44px -20px rgba(31,42,58,0.45); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); }
-  nav.pill a{ text-decoration:none; }
-  .burger:focus-visible, nav.pill a:focus-visible{ outline:2px solid #FFF; outline-offset:2px; }
+    .onvi-nav-root > .bar{ pointer-events:auto; width:min(1120px,94%); display:flex; align-items:center; justify-content:space-between; gap:16px; background:rgba(31,42,58,0.55); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:9px 9px 9px 24px; box-shadow:0 18px 44px -20px rgba(31,42,58,0.45); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); }
+    .onvi-nav-root a{ text-decoration:none; }
+  .burger:focus-visible, .onvi-nav-root a:focus-visible{ outline:2px solid #FFF; outline-offset:2px; }
   .nav-logo{ display:inline-flex; align-items:center; font-size:19px; font-weight:700; letter-spacing:-0.03em; color:color-mix(in srgb, var(--cheongja,#4FB89E) 55%, #FFFFFF); flex-shrink:0; }
   .nav-logo:hover{ color:color-mix(in srgb, var(--cheongja,#4FB89E) 70%, #FFFFFF); }
   .nav-links{ display:flex; align-items:center; gap:2px; flex-wrap:wrap; justify-content:center; }
@@ -83,26 +82,43 @@
     [style*="aspect-ratio:21/9"]{ aspect-ratio:4/3 !important; }
   }
   [hidden]{ display:none !important; }
+  body, footer, nav, [data-onvi-consult], [data-onvi-modal]{ word-break:keep-all; overflow-wrap:break-word; }
+  .onvi-nav-root{ position:fixed; top:16px; left:0; right:0; z-index:300; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none; transition:transform .38s cubic-bezier(.22,.61,.36,1); will-change:transform; }
+  .onvi-nav-root.onvi-nav-hidden{ transform:translateY(calc(-100% - 24px)); }
+  @media (prefers-reduced-motion: reduce){ .onvi-nav-root{ transition:none !important; } }
   .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
   .nav-user:hover{ background:rgba(255,255,255,0.18); }
-  .nav-user-badge{ width:32px; height:32px; border-radius:999px; background:var(--cheongja,#4FB89E); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#FFF; flex-shrink:0; }
+  .nav-user-badge{ width:32px; height:32px; border-radius:999px; overflow:hidden; flex-shrink:0; border:1.5px solid rgba(255,255,255,0.4); display:inline-block; }
+  .nav-user-badge img{ width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block; }
   .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
-  [hidden]{ display:none !important; }
-  .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
-  .nav-user:hover{ background:rgba(255,255,255,0.18); }
-  .nav-user-badge{ width:32px; height:32px; border-radius:999px; background:var(--cheongja,#4FB89E); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#FFF; flex-shrink:0; }
-  .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
+  .panel-foot{ margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .panel-foot a{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72); min-height:44px; }
+  .panel-foot a:hover{ color:#FFF; background:none; }
+  footer br[data-m]{ display:none; }
+  @media (max-width: 760px){
+    footer br[data-m]{ display:inline !important; }
+    [data-ft-tag]{ display:none; }
+    [data-ft-row]{ flex-direction:column; gap:22px !important; }
+    [data-ft-people]{ flex-wrap:wrap; align-items:baseline !important; gap:7px 9px !important; }
+    [data-ft-people] > span{ white-space:nowrap; font-size:12.5px !important; }
+    [data-ft-people] > span[data-ft-label]{ width:100%; font-size:10.5px !important; }
+  }
   /* 페이지 고유 */
     *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; background: #F5F1E6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    body { word-break: keep-all; overflow-wrap: break-word; margin: 0; background: #F5F1E6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     a { color: #2A7360; } a:hover { color: #1F5D4D; }
     .ov-rv { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
     .ov-rv.ov-on { opacity: 1; transform: none; }
+    .ov-dots { display: none; justify-content: center; gap: 7px; margin-top: 18px; }
     @media (prefers-reduced-motion: reduce) { .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; } }
     @media (max-width: 760px) {
-      [data-ov-cards] { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px !important; margin: 0 -24px; padding: 0 24px 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      [data-cta] { flex-wrap: nowrap !important; gap: 10px !important; }
+      [data-cta] > a, [data-cta] > button { flex: 1 1 0; justify-content: center !important; padding: 13px 10px !important; font-size: 13.5px !important; white-space: nowrap; }
+      [data-ov-cards] { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px !important; margin: 0 -24px !important; padding: 0 24px 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
       [data-ov-cards]::-webkit-scrollbar { display: none; }
       [data-ov-cards] > div, [data-ov-cards] > a { flex: 0 0 82%; scroll-snap-align: center; }
+      [data-ov-cards] > .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .ov-dots { display: flex; margin: 16px 0 28px; }
       h1 br, h2 br, h3 br, blockquote br, p br { display:none; }
       section { padding-top:72px !important; padding-bottom:72px !important; }
       section:first-of-type { padding-top:118px !important; }
@@ -125,7 +141,7 @@
 
 <div style="font-family:var(--font-ui); background:var(--hanji); color:var(--simya); letter-spacing:-0.012em;">
 
-  <nav class="pill">
+  <div class="onvi-nav-root" id="navRoot">
   <div class="bar">
     <a class="nav-logo" href="index.html"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center;"></span></a>
     <div class="nav-links">
@@ -135,9 +151,9 @@
       <a href="support.html">고객지원</a>
     </div>
     <div class="nav-cta">
-      <a class="nav-user" id="navUser" href="mypage.html" hidden><span class="nav-user-badge" id="navUserInitial"></span><span class="nav-user-name" id="navUserName"></span></a>
+      <a class="nav-user" id="navUser" href="mypage.html" hidden><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span></a>
       <a class="start" id="navLogin" href="login.html">로그인</a>
-      <button class="burger" type="button" aria-label="메뉴" aria-expanded="false" onclick="var p=document.getElementById('navPanel');var o=p.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span><span></span><span></span><span></span></span></button>
+      <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" id="navBurger"><span><span></span><span></span><span></span></span></button>
     </div>
   </div>
   <div class="panel" id="navPanel">
@@ -145,17 +161,18 @@
     <a href="pricing.html">요금제</a>
     <a href="brand.html">브랜드</a>
     <a href="support.html">고객지원</a>
-    <a href="mypage.html" id="panelUser" hidden style="font-weight:700; color:color-mix(in srgb, var(--cheongja,#4FB89E) 65%, #FFFFFF);"></a>
-    <a href="login.html" id="panelLogin" style="font-weight:700; color:color-mix(in srgb, var(--cheongja,#4FB89E) 65%, #FFFFFF);">로그인</a>
-    <a href="contact.html">상담 신청</a>
+    <div class="panel-foot">
+      <a href="mypage.html" id="panelUser" hidden></a>
+      <a href="login.html" id="panelLogin">로그인 ›</a>
+    </div>
   </div>
-</nav>
+</div>
 
   <!-- ── HERO ── -->
   <section style="padding:140px 0 56px; text-align:center;">
     <div style="width:min(760px,90%); margin:0 auto;">
       <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">무료 상담</div>
-      <h1 style="font-size:clamp(30px,4.2vw,52px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:20px 0 22px; color:var(--simya); text-wrap:balance;">상담을 신청하시면,<br>가족에게 맞는 방법을<br>함께 찾아드려요.</h1>
+      <h1 style="font-size:clamp(30px,4.2vw,52px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:20px 0 22px; color:var(--simya); text-wrap:balance;">상담을 신청하시면, <br>가족에게 맞는 방법을 <br>함께 찾아드려요.</h1>
       <p style="font-size:clamp(16px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; max-width:540px; margin:0 auto; text-wrap:pretty;">글을 쓸 필요도, 준비할 것도 없습니다. 성함과 연락처만 남겨주시면 온비가 먼저 연락드려, 부모님과 가족에게 맞는 방법을 차분히 안내해드립니다.</p>
     </div>
   </section>
@@ -187,7 +204,7 @@
             </div>
           </div>
         </div>
-        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <div data-cta="" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
           <a class="hv1" href="service.html#sample" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; min-height:44px; transition:background .2s;">금요편지 미리 읽어보기</a>
           <button class="hv2" type="button" id="resetBtn" style="display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:999px; background:transparent; border:1px solid #E6E0D1; color:var(--simya); font-size:15px; font-weight:600; cursor:pointer; font-family:inherit; min-height:44px; transition:border-color .2s;">다시 신청하기</button>
         </div>
@@ -247,7 +264,7 @@
 
         <div>
           <button class="hv4" type="submit" style="width:100%; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:17px 30px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:16px; font-weight:700; letter-spacing:-0.01em; border:none; cursor:pointer; font-family:inherit; transition:background .2s, box-shadow .2s;">상담 신청하기 →</button>
-          <p style="font-size:12.5px; color:#6A7789; margin:14px 0 0; line-height:1.6; text-align:center;">신청하기를 누르면 메일 앱이 열려 내용이 자동으로 담깁니다.<br>메일이 열리지 않으면 <a href="mailto:contact@onvi.kr" style="color:#2A7360;">contact@onvi.kr</a> 로 보내주세요.</p>
+          <p style="font-size:12.5px; color:#6A7789; margin:14px 0 0; line-height:1.6; text-align:center;">신청하기를 누르면 메일 앱이 열려 내용이 자동으로 담깁니다. <br>메일이 열리지 않으면 <a href="mailto:contact@onvi.kr" style="color:#2A7360;">contact@onvi.kr</a> 로 보내주세요.</p>
         </div>
       </form>
     </div>
@@ -280,35 +297,28 @@
   <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
-        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center;"></span></a>
-        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</p>
+        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center; flex-shrink:0;"></span></a>
+        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<span data-ft-tag=""> <br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</span></p>
       </div>
-      <nav class="flinks" style="display:flex; flex-wrap:wrap; gap:8px 22px; justify-content:flex-end;">
-        <a href="service.html">서비스</a>
-        <a href="pricing.html">요금제</a>
-        <a href="brand.html">브랜드</a>
-        <a href="support.html">고객지원</a>
-        <a href="contact.html" style="color:#7CC5A9; font-weight:600;">상담 신청</a>
-      </nav>
     </div>
-    <div style="display:flex; flex-wrap:wrap; gap:14px 40px; align-items:baseline; padding-top:26px; border-top:1px solid rgba(255,255,255,0.09);">
-      <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
-        <span style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:var(--cheongja,#4FB89E); white-space:nowrap;">만드는 사람들</span>
-        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">김태희</b> 대표</span>
-        <span style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">이민섭</b> 공동창업자 CCO</span>
-        <span style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">김세연</b> 공동창업자 CTO</span>
+    <div data-ft-row="" style="display:flex; flex-wrap:wrap; gap:14px 40px; align-items:baseline; padding-top:26px; border-top:1px solid rgba(255,255,255,0.09);">
+      <div data-ft-people="" style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
+        <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--cheongja,#4FB89E) 50%, #FFFFFF); white-space:nowrap;">만드는 사람들</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">김태희</b> 대표</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">이민섭</b> COO</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">김세연</b> CTO</span>
       </div>
-      <div style="display:flex; align-items:baseline; gap:14px;">
-        <span style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:#7EE8C9; white-space:nowrap;">ADVISOR</span>
-        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">정준교</b> 고문</span>
-        <span style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">원민재</b> 한국엔젤투자협회</span>
+      <div data-ft-people="" style="display:flex; align-items:baseline; gap:14px;">
+        <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--noeul,#D9B88C) 75%, #FFFFFF); white-space:nowrap;">도움을 주는 사람들</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">정준교</b> 고문</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">원민재</b> 한국엔젤투자협회</span>
       </div>
     </div>
     <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
-      <p style="margin:0; font-size:11.5px; line-height:1.65; color:rgba(255,255,255,0.38); max-width:560px;">온비는 정보 제공 서비스이며, 의료 진단, 응급 대응 서비스가 아닙니다. 통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
+      <p style="margin:0; font-size:11.5px; line-height:1.65; color:rgba(255,255,255,0.38); max-width:560px;">온비는 정보 제공 서비스이며, 의료 진단, 응급 대응 서비스가 아닙니다. <br data-m="">통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
       <div style="display:flex; align-items:center; gap:14px; font-size:11.5px; color:rgba(255,255,255,0.4); white-space:nowrap;">
         <span style="color:#7C9CB8;">onvi.kr</span><span style="color:rgba(255,255,255,0.2);">·</span><span>© 2026 On:Vi</span>
       </div>
@@ -319,17 +329,40 @@
 <script src="shared/reveal.js"></script>
 <script>
   (function () {
+    var root = document.getElementById('navRoot');
     var panel = document.getElementById('navPanel');
-    var burger = document.querySelector('.burger');
-    if (panel && burger) {
-      var close = function () { panel.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); };
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-      document.addEventListener('pointerdown', function (e) {
-        if (!panel.classList.contains('open')) return;
-        if (!panel.contains(e.target) && !burger.contains(e.target)) close();
-      });
-      panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') close(); });
+    var burger = document.getElementById('navBurger');
+    var open = false;
+
+    function setOpen(v) {
+      open = v;
+      panel.classList.toggle('open', v);
+      burger.setAttribute('aria-expanded', v ? 'true' : 'false');
     }
+    if (panel && burger) {
+      burger.addEventListener('click', function () { setOpen(!open); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (!open) return;
+        if (!root.contains(e.target)) setOpen(false);
+      });
+      panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
+    }
+
+    // 모바일: 아래로 스크롤하면 네비를 감추고, 위로 올리면 다시 보여준다
+    var lastY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      if (!window.matchMedia('(max-width: 900px)').matches) {
+        root.classList.remove('onvi-nav-hidden');
+        return;
+      }
+      var y = window.scrollY;
+      var d = y - lastY;
+      if (Math.abs(d) < 8) return;
+      lastY = y;
+      if (d > 0 && y > 140 && !open) root.classList.add('onvi-nav-hidden');
+      else if (d < 0 || y <= 140) root.classList.remove('onvi-nav-hidden');
+    }, { passive: true });
 
     // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
     function paint() {
@@ -341,11 +374,7 @@
       var pUser = document.getElementById('panelUser');
       if (name) {
         if (login) login.hidden = true;
-        if (user) {
-          user.hidden = false;
-          document.getElementById('navUserName').textContent = name + ' 님';
-          document.getElementById('navUserInitial').textContent = name.slice(-2, -1) || name.charAt(0);
-        }
+        if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; }
         if (pLogin) pLogin.hidden = true;
         if (pUser) { pUser.hidden = false; pUser.textContent = name + ' 님의 공간'; }
       } else {
