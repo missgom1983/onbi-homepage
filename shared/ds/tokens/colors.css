@@ -1,0 +1,52 @@
+/* On:Vi (온비) — Color tokens
+ * CORE 6 (불변, immutable): the ONLY colors functional UI may use.
+ * EXTENSION 4 (+ apricot/deep-rose derivatives): DECORATIVE background-pattern layers ONLY.
+ *   Never used for buttons, alerts, charts, or status. ('빨간색 UI 금지' — no red UI.)
+ */
+:root {
+  /* ---- CORE PALETTE (immutable) ---- */
+  --hanji:    #F5F1E6; /* 한지 · paper where stories are written · ~60% of every screen */
+  --simya:    #1F2A3A; /* 심야 · midnight ink · text + dark UI */
+  --cheongja: #4FB89E; /* 청자 · celadon · preservation · PRIMARY action */
+  --simhae:   #2C4A6B; /* 심해 · deep sea · secondary / trust */
+  --noeul:    #D9B88C; /* 노을 · dusk · warm accent */
+  --angae:    #C8E5DB; /* 안개 · morning mist · soft mint surface */
+
+  /* ---- EXTENSION PALETTE (decorative pattern layers ONLY — never functional UI) ---- */
+  --saebyeok: #E9F3EE; /* 새벽 · dawn · mist at lowest intensity · Whisper bg, long body/legal */
+  --haneul:   #C3DCEF; /* 하늘 · sky · deep-sea pastelized · 이음 family colorway */
+  --morae:    #EBD9C5; /* 모래 · sand · dusk desaturated */
+  --beotkkot: #F5C6D2; /* 벚꽃 · cherry blossom · only truly-new hue · HSL S≤65 L≥85 */
+  --salgu:    #F0C9A8; /* 살구 · apricot · noeul-gyeol partner */
+  --diprose:  #E59CB4; /* 딥로즈 · deep rose · 봄결 LINE color only (never a pastel fill) */
+
+  /* ---- SEMANTIC ALIASES (functional UI → core only) ---- */
+  --bg-base:        var(--hanji);        /* L0 canvas */
+  --surface-card:   #FFFFFF;             /* white scrim — body text always sits on this */
+  --surface-mist:   var(--angae);        /* soft mint surface */
+  --surface-dawn:   var(--saebyeok);     /* whisper background */
+
+  --text-strong:    var(--simya);        /* headings, high-contrast titles on bg */
+  --text-body:      #2A3646;             /* body copy (simya softened) */
+  --text-muted:     #5C6675;             /* secondary text */
+  --text-on-dark:   var(--hanji);        /* text on 심야 surfaces */
+  --text-on-accent: #FFFFFF;             /* text on 청자/심해 fills */
+
+  --action-primary:        var(--cheongja);
+  --action-primary-hover:  #45A88F;      /* 청자 one step darker */
+  --action-primary-press:  #3B9880;
+  --action-secondary:      var(--simhae);
+  --action-secondary-hover:#25405C;
+  --action-secondary-press:#1E344D;
+
+  --border-hairline: #E4DECF;            /* on hanji */
+  --border-card:     #ECE7DA;
+  --border-strong:   var(--simya);
+
+  --focus-ring:      var(--cheongja);
+
+  /* ---- CARE SIGNAL (평안·살핌·확인 — the ONLY status system; never red/danger) ---- */
+  --care-peace:   var(--cheongja); /* 평안 · at peace */
+  --care-watch:   var(--noeul);    /* 살핌 · looking after */
+  --care-confirm: var(--simhae);   /* 확인 · please confirm */
+}

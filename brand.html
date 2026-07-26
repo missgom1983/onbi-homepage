@@ -1,181 +1,360 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>브랜드 이야기 · On:Vi</title>
-<meta name="description" content="온비는 케어 회사가 아니라 기억 회사입니다. 매주의 안부가 세대를 잇는 이야기가 되고, 3대의 목소리가 담긴 공간을 남깁니다. 사라지지 않는 온기를, 온 가족이 함께.">
-<link rel="stylesheet" href="shared/onvi.css">
-<link rel="stylesheet" href="shared/site.css">
-<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}</style></noscript>
+<title>브랜드 이야기 · On:Vi — 기억은 사라져도, 온기는 남습니다</title>
+<meta name="description" content="매주의 안부가 평생의 이야기가 되고, 한 사람의 삶이 가족의 책이 됩니다. 기억 회사 온비의 이야기.">
+<link rel="stylesheet" href="shared/ds/tokens/fonts.css">
+<link rel="stylesheet" href="shared/ds/tokens/colors.css">
+<link rel="stylesheet" href="shared/ds/tokens/colorways.css">
+<link rel="stylesheet" href="shared/ds/tokens/typography.css">
+<link rel="stylesheet" href="shared/ds/tokens/spacing.css">
+<link rel="stylesheet" href="shared/ds/styles.css">
+<style>
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--hanji,#F5F1E6); color:var(--simya,#1F2A3A); font-family:var(--font-ui),'Pretendard Variable',Pretendard,sans-serif; letter-spacing:-0.012em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  a{ color:#2A7360; } a:hover{ color:#1F5D4D; }
+  .ov-rv{ opacity:0; transform:translateY(18px); transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
+  .ov-rv.ov-on{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .ov-rv{ opacity:1 !important; transform:none !important; transition:none !important; } }
+  .stack{ width:calc(100% - 40px); max-width:1880px; margin:20px auto 0; display:flex; flex-direction:column; gap:20px; padding-bottom:20px; }
+  .stack > section{ border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); }
+  .stack > section > .wrap{ width:100%; max-width:1160px; }
+  .wrap{ width:min(1160px,90%); margin:0 auto; }
+  .eyebrow{ font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360; }
+  .rule{ display:block; width:34px; height:2px; background:var(--cheongja,#4FB89E); border:none; margin:20px 0 0; }
+  h1{ font-size:clamp(34px,5.2vw,64px); line-height:1.14; letter-spacing:-0.035em; font-weight:700; margin:22px 0 24px; text-wrap:balance; }
+  h2{ font-size:clamp(26px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 20px; text-wrap:balance; }
+  h3{ font-size:21px; font-weight:700; letter-spacing:-0.025em; margin:0 0 10px; }
+  .lede{ font-size:clamp(15.5px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; text-wrap:pretty; }
+  .split{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(40px,6vw,80px); align-items:center; }
+  .photo{ border-radius:18px; overflow:hidden; box-shadow:0 30px 60px -34px rgba(31,42,58,0.34); }
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:15px 30px; border-radius:999px; background:var(--cheongja,#4FB89E); color:#FFF; font-size:15.5px; font-weight:700; text-decoration:none; transition:background .2s, box-shadow .2s, transform .2s; }
+  .btn:hover{ background:var(--action-primary-hover,#45A88F); color:#FFF; box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); transform:translateY(-1px); }
+  .btn-ghost{ display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:14px 28px; border-radius:999px; background:rgba(255,255,255,0.7); border:1px solid #E6E0D1; color:var(--simya,#1F2A3A); font-size:15px; font-weight:600; text-decoration:none; transition:border-color .2s, background .2s; }
+  .btn-ghost:hover{ border-color:var(--cheongja,#4FB89E); background:#FFF; color:var(--simya,#1F2A3A); }
+  .btn-ghost-dark{ background:transparent; border-color:rgba(255,255,255,0.28); color:#FFF; }
+  .btn-ghost-dark:hover{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.6); color:#FFF; }
+  .card{ background:#FFF; border:1px solid #E6E0D1; border-radius:20px; padding:16px 16px 30px; }
+  .card p{ margin:0; font-size:15px; color:#3F4D62; line-height:1.65; }
+  .num{ font-size:13px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja,#4FB89E); margin-bottom:12px; }
+  .quote{ font-family:var(--font-letter),'Gowun Batang',serif; font-weight:700; text-wrap:balance; }
+  .gen{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  /* GNB */
+  nav.pill{ position:fixed; top:16px; left:0; right:0; z-index:300; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none; }
+  nav.pill > .bar{ pointer-events:auto; width:min(1120px,94%); display:flex; align-items:center; justify-content:space-between; gap:16px; background:rgba(31,42,58,0.55); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:9px 9px 9px 24px; box-shadow:0 18px 44px -20px rgba(31,42,58,0.45); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); }
+  nav.pill a{ text-decoration:none; }
+  .burger:focus-visible, nav.pill a:focus-visible{ outline:2px solid #FFF; outline-offset:2px; }
+  .nav-logo{ display:inline-flex; align-items:center; font-size:19px; font-weight:700; letter-spacing:-0.03em; color:color-mix(in srgb, var(--cheongja,#4FB89E) 55%, #FFFFFF); flex-shrink:0; }
+  .nav-logo:hover{ color:color-mix(in srgb, var(--cheongja,#4FB89E) 70%, #FFFFFF); }
+  .nav-links{ display:flex; align-items:center; gap:2px; flex-wrap:wrap; justify-content:center; }
+  .nav-links a{ font-size:14px; display:inline-flex; align-items:center; min-height:44px; padding:10px 16px; border-radius:999px; color:rgba(255,255,255,0.82); font-weight:600; transition:color .2s, background .2s; }
+  .nav-links a:hover{ color:#FFF; background:rgba(255,255,255,0.14); }
+  .nav-links a.active{ color:#FFF; font-weight:700; background:rgba(255,255,255,0.16); }
+  .nav-cta{ display:flex; align-items:center; gap:6px; flex-shrink:0; }
+  .nav-cta a.start{ display:inline-flex; align-items:center; background:var(--cheongja,#4FB89E); color:#FFF; font-size:14px; font-weight:700; padding:11px 22px; border-radius:999px; }
+  .nav-cta a.start:hover{ background:var(--action-primary-hover,#45A88F); color:#FFF; }
+  .burger{ display:none; align-items:center; justify-content:center; width:42px; height:42px; margin-left:2px; background:transparent; border:none; border-radius:999px; cursor:pointer; padding:0; }
+  .burger span{ display:block; width:22px; height:2px; border-radius:2px; background:#FFF; }
+  .burger > span{ display:flex; flex-direction:column; gap:5px; align-items:center; width:auto; height:auto; background:none; }
+  .panel{ pointer-events:auto; display:none; width:min(1120px,94%); flex-direction:column; gap:2px; padding:10px; background:rgba(31,42,58,0.86); border:1px solid rgba(255,255,255,0.14); border-radius:22px; box-shadow:0 22px 50px -22px rgba(31,42,58,0.5); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  .panel.open{ display:flex; }
+  .panel a{ min-height:44px; padding:14px 16px; border-radius:14px; font-size:15.5px; font-weight:600; color:rgba(255,255,255,0.9); }
+  .panel a:hover{ background:rgba(255,255,255,0.12); color:#FFF; }
+  footer.site{ background:#26282A; color:rgba(255,255,255,0.55); font-size:13px; padding:56px 0 34px; }
+  footer.site a{ text-decoration:none; }
+  footer.site .flinks a{ font-size:13.5px; color:rgba(255,255,255,0.7); }
+  footer.site .flinks a:hover{ color:var(--cheongja,#4FB89E); }
+  .dark-cta{ padding:112px 0; background:#22384F; color:#FFF; text-align:center; }
+  .dark-cta h2{ margin:0; }
+  @media (max-width: 900px){
+    .nav-links{ display:none !important; }
+    .burger{ display:inline-flex; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+  @media (max-width: 760px){
+    h1 br, h2 br, h3 br, blockquote br, p br{ display:none; }
+    section{ padding-top:72px !important; padding-bottom:72px !important; }
+    section:first-of-type{ padding-top:118px !important; }
+    .gen{ grid-template-columns:1fr; }
+    .gen figure{ margin:0 !important; }
+    [style*="aspect-ratio:21/9"]{ aspect-ratio:4/3 !important; }
+  }
+</style>
 </head>
-<body>
-
-<nav class="onvi-nav">
-  <div class="onvi-nav-inner">
-    <a href="index.html" class="onvi-logo"><span style="display:flex;align-items:baseline;"><span>On</span><span class="colon">:</span><span>Vi</span></span><span class="dot" aria-hidden="true"></span></a>
-    <div class="onvi-nav-links">
+<body><nav class="pill">
+  <div class="bar">
+    <a class="nav-logo" href="index.html"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center;"></span></a>
+    <div class="nav-links">
       <a href="service.html">서비스</a>
       <a href="pricing.html">요금제</a>
       <a href="brand.html" class="active">브랜드</a>
       <a href="support.html">고객지원</a>
     </div>
-    <div class="onvi-nav-cta">
-      <a href="#" class="onvi-login">로그인</a>
-      <a href="contact.html" class="onvi-signup">시작하기</a>
-      <button class="onvi-nav-toggle" aria-label="메뉴 열기" type="button"><span></span><span></span><span></span></button>
+    <div class="nav-cta">
+      <a class="start" href="contact.html">상담 신청</a>
+      <button class="burger" type="button" aria-label="메뉴" aria-expanded="false" onclick="var p=document.getElementById('navPanel');var o=p.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span><span></span><span></span><span></span></span></button>
     </div>
   </div>
-  <div class="onvi-mobile-panel">
-    <a href="service.html">서비스</a><a href="pricing.html">요금제</a><a href="brand.html" class="active">브랜드</a><a href="support.html">고객지원</a><a href="contact.html">시작하기</a>
+  <div class="panel" id="navPanel">
+    <a href="service.html">서비스</a>
+    <a href="pricing.html">요금제</a>
+    <a href="brand.html" class="active">브랜드</a>
+    <a href="support.html">고객지원</a>
+    <a href="contact.html" style="font-weight:700; color:color-mix(in srgb, var(--cheongja,#4FB89E) 65%, #FFFFFF);">상담 신청</a>
   </div>
 </nav>
-
-<main>
-
-  <!-- ── HERO : 중앙 대형 헤드라인 (Kinfolk) ── -->
-  <section style="padding:120px 0 96px; text-align:center;">
-    <div class="wrap" style="max-width:900px;">
-      <div class="label">Our Brand Story</div>
-      <h1 class="display" style="margin:22px 0 24px;">사라지지 않는 온기를,<br>온 가족이 함께.</h1>
-      <p class="lead" style="max-width:560px; margin:0 auto;">온비는 부모님의 한 주를 편지로 남기고, 온 가족이 그 곁에 함께 머무는 공간입니다. 매주의 안부가 모여, 세대를 잇는 우리 가족의 기억이 됩니다.</p>
-    </div>
-  </section>
-
-  <!-- ── 미션/철학 : 분할 + 와이드 사진 (Storyworth) ── -->
-  <section style="padding:24px 0 120px;">
-    <div class="wrap split">
-      <div>
-        <div class="label">Mission</div>
-        <hr class="rule">
-        <h2 class="h2" style="margin:22px 0 20px;">우리는 케어 회사가 아니라,<br>기억 회사입니다.</h2>
-        <p class="lead" style="margin-bottom:18px;">건강을 확인하는 안부 전화로 끝나지 않습니다. 부모님이 오늘 무슨 이야기를 하셨는지, 그 목소리가 어떤 온기를 담고 있었는지 — 온비는 그것을 남깁니다.</p>
-        <p class="lead">매주의 안부가 한 편의 편지가 되고, 그 편지들이 쌓여 세대를 잇는 이야기가 됩니다. 우리가 지키려는 것은 시간이 아니라, 사라지지 않는 온기입니다.</p>
-      </div>
-      <div class="photo" style="aspect-ratio:5/6;"><img src="assets/photos/mother-daughter-river.jpeg" alt="강가를 함께 걷는 어머니와 딸" style="object-position:center 40%;"></div>
-    </div>
-  </section>
-
-  <!-- ── 대형 인용 : 다크 네이비 + 명조 (감성 풀-쿼트) ── -->
-  <section style="padding:120px 0; background:var(--navy); color:#fff; text-align:center;">
-    <div class="wrap" style="max-width:860px;">
-      <div class="label" style="color:var(--celadon-300);">Why It Stays</div>
-      <blockquote class="serif" style="font-size:clamp(28px,4vw,50px); line-height:1.38; font-weight:700; margin:26px auto 0; text-wrap:balance;">"사진첩은 버려도,<br>3대의 목소리가 담긴 공간은<br>못 버립니다."</blockquote>
-    </div>
-  </section>
-
-  <!-- ── 세대를 잇는 아카이브 : 3대 콜라주 (Kinfolk 변주) ── -->
-  <section style="padding:112px 0;">
-    <div class="wrap" style="text-align:center;">
-      <div class="label">Across Three Generations</div>
-      <h2 class="h2" style="margin:18px 0 14px;">세대를 잇는 아카이브</h2>
-      <p class="lead" style="max-width:560px; margin:0 auto 60px;">주인공은 부모님이지만, 무대는 가족 전체입니다. 오늘 댓글을 다는 자녀가, 언젠가 이야기의 주인공이 됩니다. 그렇게 온기는 세대를 건너 이어집니다.</p>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:920px; margin:0 auto;">
-        <figure style="margin:0;"><div style="border-radius:16px; overflow:hidden; aspect-ratio:3/4; box-shadow:0 30px 60px -34px rgba(31,42,58,.34);"><img src="assets/photos/wedding-1985.jpeg" alt="조부모 세대의 사진" style="width:100%;height:100%;object-fit:cover;"></div><figcaption style="font-size:12px; color:var(--celadon-700); font-weight:700; margin-top:12px; letter-spacing:0.12em;">조부모 · 1985</figcaption></figure>
-        <figure style="margin:32px 0 0;"><div style="border-radius:16px; overflow:hidden; aspect-ratio:3/4; box-shadow:0 30px 60px -34px rgba(31,42,58,.34);"><img src="assets/photos/mother-daughter-river.jpeg" alt="부모 세대의 사진" style="width:100%;height:100%;object-fit:cover;"></div><figcaption style="font-size:12px; color:var(--celadon-700); font-weight:700; margin-top:12px; letter-spacing:0.12em;">부모</figcaption></figure>
-        <figure style="margin:64px 0 0;"><div style="border-radius:16px; overflow:hidden; aspect-ratio:3/4; box-shadow:0 30px 60px -34px rgba(31,42,58,.34);"><img src="assets/photos/family-denim.jpg" alt="자녀 세대의 사진" style="width:100%;height:100%;object-fit:cover;"></div><figcaption style="font-size:12px; color:var(--celadon-700); font-weight:700; margin-top:12px; letter-spacing:0.12em;">자녀</figcaption></figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 이름의 의미 / 온기 : 에디토리얼 분할 (반대 방향) ── -->
-  <section style="padding:112px 0; background:var(--paper);">
-    <div class="wrap split">
-      <div class="photo" style="aspect-ratio:4/5; order:0;"><img src="assets/photos/care-voice2.jpg" alt="따뜻한 안부 통화" style="object-position:center 42%;"></div>
-      <div>
-        <div class="label">The Name</div>
-        <hr class="rule">
-        <h2 class="h2" style="margin:22px 0 22px;">On:Vi,<br>온기를 잇다.</h2>
-        <p class="lead" style="margin-bottom:18px;"><b style="color:var(--ink);">On</b>은 곁에 켜져 있는 상태 — 언제나 연결된 마음입니다. <b style="color:var(--ink);">Vi</b>는 삶(vita)이자, 우리말 <b style="color:var(--ink);">‘잇다’</b>의 소리입니다. 그리고 두 글자 사이의 <b style="color:var(--celadon-700);">콜론(:)</b>은, 부모님과 자녀 세대를 잇는 다리입니다.</p>
-        <p class="lead">그래서 On:Vi는 <b style="color:var(--ink);">‘온기를 잇다’</b>. 매주의 다정한 안부가 꺼지지 않고, 세대에서 세대로 이어지기를 바라는 마음을 이름에 담았습니다.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 창업팀 미션 : 차분한 중앙 (신뢰) ── -->
-  <section style="padding:112px 0;">
-    <div class="wrap" style="max-width:760px; text-align:center;">
-      <div class="label">Founding Team</div>
-      <h2 class="h2" style="margin:18px 0 24px;">왜 우리는<br>이 서비스를 만드는가.</h2>
-      <p class="lead" style="margin:0 auto 40px;">우리도 멀리 사는 자녀였고, 통화가 끝나면 늘 아쉬움이 남았습니다. 부모님의 하루가 어딘가에 남지 않고 그냥 흘러가 버리는 것이 아까웠습니다. 그래서 매주의 안부를 기억으로 남기고, 온 가족이 그 곁에 함께 머물 수 있는 공간을 만들기로 했습니다. 온비는 그 마음에서 시작된 회사입니다.</p>
-      <div style="display:flex; gap:14px 40px; justify-content:center; flex-wrap:wrap; padding-top:32px; border-top:1px solid var(--line);">
-        <span style="font-size:15px; color:var(--ink-2);"><b style="color:var(--ink); font-weight:700;">김태희</b> 대표</span>
-        <span style="color:var(--line);">·</span>
-        <span style="font-size:15px; color:var(--ink-2);"><b style="color:var(--ink); font-weight:700;">이민섭</b> 공동창업자 CCO</span>
-        <span style="color:var(--line);">·</span>
-        <span style="font-size:15px; color:var(--ink-2);"><b style="color:var(--ink); font-weight:700;">김세연</b> 공동창업자 CTO</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA band ── -->
-  <section data-hide-consult="" style="padding:112px 0; background:var(--navy-deep); color:#fff; text-align:center;">
-    <div class="wrap" style="max-width:720px;">
-      <h2 class="h2">오늘, 우리 가족의 첫 이야기를<br>시작하세요.</h2>
-      <p class="lead" style="color:rgba(255,255,255,.7); margin:20px auto 34px; max-width:520px;">부모님과 가족에게 맞는 방법을 온비가 함께 찾아드립니다. 부담 없이 상담부터 시작해보세요.</p>
-      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <a href="contact.html" class="btn btn-p">무료로 시작하기</a>
-        <a href="service.html" class="btn btn-o" style="color:#fff; border-color:rgba(255,255,255,.28);">서비스 살펴보기 ›</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<!-- 상담 배너 -->
-<div class="onvi-consult">
-  <div class="onvi-consult-inner">
-    <span class="onvi-consult-dot"></span>
-    <div style="display:flex;flex-direction:column;gap:3px;padding-left:18px;">
-      <span style="font-size:14.5px;font-weight:700;color:#FFFFFF;letter-spacing:-0.015em;line-height:1.35;">가족에게 맞는 방법,<br>함께 찾아드려요</span>
-      <span style="font-size:12.5px;color:rgba(255,255,255,0.62);">부담 없이 상담부터 시작해보세요</span>
-    </div>
-    <a href="contact.html" style="flex-shrink:0;display:inline-flex;align-items:center;background:#4FB89E;color:#FFFFFF;font-size:14px;font-weight:700;padding:12px 22px;border-radius:999px;text-decoration:none;white-space:nowrap;letter-spacing:-0.01em;transition:background .2s,box-shadow .2s;" style-hover="background:#3DA088;box-shadow:0 6px 20px -8px rgba(79,184,158,0.6);">상담 신청 →</a>
-    <button class="onvi-consult-x" aria-label="닫기" type="button">✕</button>
+<section style="padding:160px 0 96px; text-align:center;">
+  <div style="width:min(1080px,92%); margin:0 auto;">
+    <div class="eyebrow">온비의 이야기 · 기억 회사</div>
+    <h1 style="font-size:clamp(36px,5.6vw,72px); line-height:1.12; letter-spacing:-0.04em; margin:24px auto 24px;">기억은 사라져도,<br><span style="color:#2A7360;">온기는 남습니다.</span></h1>
+    <p class="lede" style="max-width:640px; margin:0 auto;">매주의 안부가 평생의 이야기가 되고,<br>한 사람의 삶이 가족의 책이 됩니다.</p>
   </div>
-</div>
+</section>
 
-<!-- FOOTER -->
-<footer style="background:#22384F;color:rgba(255,255,255,0.55);font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:13px;padding:56px 0 34px;">
-  <div style="width:min(1160px,90%);margin:0 auto;display:flex;flex-direction:column;gap:34px;">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;">
-      <div style="display:flex;flex-direction:column;gap:12px;max-width:360px;">
-        <a href="index.html" style="display:inline-flex;align-items:center;text-decoration:none;font-size:20px;font-weight:700;letter-spacing:-0.03em;color:#FFFFFF;"><span style="display:inline-flex;align-items:baseline;"><span>On</span><span style="color:#4FB89E;">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px;height:4.5px;border-radius:999px;background:#D9B88C;margin-left:7px;align-self:center;flex-shrink:0;"></span></a>
-        <p style="margin:0;color:rgba(255,255,255,0.62);line-height:1.6;font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</p>
+<div class="stack">
+
+<section style="background:color-mix(in srgb, var(--hanji,#F5F1E6) 72%, #FFFFFF);">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">우리의 시작</div>
+      <hr class="rule">
+      <h2 class="quote" style="font-size:clamp(24px,3.2vw,38px); line-height:1.45; margin:22px 0 26px;">아버지의 걸음 수보다,<br>아버지가 무엇을 좋아하셨는지가<br>더 오래 남는다고 믿었어요.</h2>
+      <p style="font-size:16px; color:#3F4D62; line-height:1.85; margin:0 0 18px;">부모님을 떠나보낸 뒤, 저희에게 남은 건 한 장의 사진과 몇 줄의 기록뿐이었어요. 정작 어떤 노래를 좋아하셨는지, 낡은 손목시계에 어떤 사연이 담겼는지는 어디에도 적혀 있지 않았습니다.</p>
+      <p style="font-size:16px; color:#3F4D62; line-height:1.85; margin:0;">온비는 그 빈자리를 채우기 위해 시작됐어요. 매주의 안부가 평생의 이야기가 되도록, 한 사람의 삶을 가족의 곁에 남기는 일이에요.</p>
+    </div>
+    <div style="position:relative; border-radius:20px; overflow:hidden; aspect-ratio:4/5; background:#F2E4CE; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:clamp(20px,3vw,36px); box-shadow:0 30px 60px -34px rgba(31,42,58,0.2);">
+      <img src="assets/photos/problem-album.jpg" alt="몇 장의 사진만 남은 오래된 앨범" style="width:100%; height:auto; display:block;">
+      <p class="quote" style="font-size:clamp(14px,1.3vw,17px); color:#6B5A3E; margin:0; text-align:center; line-height:1.6;">남은 것은 몇 장의 사진뿐,<br>이야기는 어디에도 없었습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:#FBF8EF;">
+  <div style="max-width:1400px; margin:0 auto;">
+    <div style="text-align:center; max-width:560px; margin:0 auto 52px;">
+      <div class="eyebrow">우리가 지키는 것</div>
+      <hr class="rule" style="margin:20px auto 0;">
+      <h2 style="font-size:clamp(28px,4vw,50px); margin:22px 0 0;">세 가지 약속.</h2>
+    </div>
+    <div data-ov-cards style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px;">
+      <div style="background:#FFF; border:1px solid #E6E0D1; border-radius:24px; padding:40px 34px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.08em; margin-bottom:18px;"><span style="color:var(--cheongja,#4FB89E);">01</span> <span style="color:#6A7789;">같은 화면</span></div>
+        <h3 style="font-size:22px; font-weight:700; letter-spacing:-0.02em; line-height:1.35; margin:0 0 14px;">들여다보지 않고,<br>같은 곳을 봅니다.</h3>
+        <p style="font-size:15px; color:#3F4D62; line-height:1.75; margin:0;">부모님은 관찰의 대상이 아니라 대화의 상대입니다. 온비는 가족과 같은 화면을 함께 봅니다.</p>
       </div>
-      <nav style="display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:flex-end;">
-        <a href="service.html" style="font-size:13.5px;color:rgba(255,255,255,0.7);text-decoration:none;" style-hover="color:#4FB89E;">서비스</a>
-        <a href="pricing.html" style="font-size:13.5px;color:rgba(255,255,255,0.7);text-decoration:none;" style-hover="color:#4FB89E;">요금제</a>
-        <a href="brand.html" style="font-size:13.5px;color:rgba(255,255,255,0.7);text-decoration:none;" style-hover="color:#4FB89E;">브랜드</a>
-        <a href="support.html" style="font-size:13.5px;color:rgba(255,255,255,0.7);text-decoration:none;" style-hover="color:#4FB89E;">고객지원</a>
-        <a href="contact.html" style="font-size:13.5px;color:#7CC5A9;font-weight:600;text-decoration:none;" style-hover="color:#4FB89E;">상담 신청</a>
+      <div style="background:#FFF; border:1px solid #E6E0D1; border-radius:24px; padding:40px 34px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.08em; margin-bottom:18px;"><span style="color:var(--cheongja,#4FB89E);">02</span> <span style="color:#6A7789;">권유</span></div>
+        <h3 style="font-size:22px; font-weight:700; letter-spacing:-0.02em; line-height:1.35; margin:0 0 14px;">지시하지 않고,<br>권합니다.</h3>
+        <p style="font-size:15px; color:#3F4D62; line-height:1.75; margin:0;">\u2018하세요\u2019가 아니라 \u2018어떠세요\u2019. 명령이 아닌 권유의 언어로, 매주 부드럽게 안부를 여쭙니다.</p>
+      </div>
+      <div style="background:#FFF; border:1px solid #E6E0D1; border-radius:24px; padding:40px 34px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.08em; margin-bottom:18px;"><span style="color:var(--cheongja,#4FB89E);">03</span> <span style="color:#6A7789;">사람 먼저</span></div>
+        <h3 style="font-size:22px; font-weight:700; letter-spacing:-0.02em; line-height:1.35; margin:0 0 14px;">데이터보다,<br>사람을 먼저.</h3>
+        <p style="font-size:15px; color:#3F4D62; line-height:1.75; margin:0;">수치를 말하기 전에 사람을 말합니다. \u201C오늘은 평소와 같아요\u201D처럼, 늘 사람의 언어로 전합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:color-mix(in srgb, var(--hanji,#F5F1E6) 72%, #FFFFFF);">
+  <div class="wrap split">
+    <div class="photo" style="aspect-ratio:4/5;"><img src="assets/photos/care-voice2.jpg" alt="따뜻한 안부 통화" style="object-position:center 42%;"></div>
+    <div>
+      <div class="eyebrow">우리가 믿는 기술</div>
+      <hr class="rule">
+      <h2 class="quote" style="font-size:clamp(24px,3.2vw,38px); line-height:1.4; margin:22px 0 26px;">기술은 따뜻해야 합니다.</h2>
+      <p style="font-size:16px; color:#3F4D62; line-height:1.85; margin:0 0 18px;">온비는 부모님의 매주 한 통 전화를 <b style="color:#2A7360;">금요편지</b>와 <b style="color:#2A7360;">인생책</b>으로 옮깁니다. 기술은 뒤에 서고, 앞에는 늘 부모님의 목소리와 가족의 시간이 있습니다.</p>
+      <p style="font-size:16px; color:#3F4D62; line-height:1.85; margin:0;">빠르게, 그러나 차갑지 않게. 새로운 습관을 만들지 않고 이미 있는 행동 위에 온기만 얹습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--saebyeok,#E9F3EE); text-align:center;">
+  <div style="max-width:860px; margin:0 auto;">
+    <div class="eyebrow">창업자가 믿는 한 줄</div>
+    <blockquote class="quote" style="font-size:clamp(25px,3.8vw,46px); line-height:1.4; margin:28px 0 36px; color:var(--simya,#1F2A3A);">\u201C가장 따뜻한 기술은,<br>사람을 잊지 않는 기술입니다.\u201D</blockquote>
+    <div style="display:inline-flex; align-items:center; gap:14px; background:#FFF; border:1px solid #E6E0D1; border-radius:999px; padding:12px 24px 12px 12px; box-shadow:0 10px 30px -14px rgba(31,42,58,0.16);">
+      <span style="width:44px; height:44px; border-radius:999px; background:var(--cheongja,#4FB89E); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; color:#FFF; flex-shrink:0;">김</span>
+      <span style="display:flex; flex-direction:column; align-items:flex-start; gap:2px;">
+        <span style="font-size:14.5px; font-weight:700; color:var(--simya,#1F2A3A);">김태희 대표</span>
+        <span style="font-size:12.5px; color:#6A7789;">따뜻한 기억을, 매일 새기다</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<section style="background:color-mix(in srgb, var(--hanji,#F5F1E6) 72%, #FFFFFF);">
+  <div style="max-width:1080px; margin:0 auto;">
+    <div style="margin-bottom:52px;">
+      <div class="eyebrow">여정</div>
+      <hr class="rule">
+      <h2 style="font-size:clamp(28px,4vw,50px); margin:22px 0 0;">우리는 어디까지 왔고,<br>어디로 가는가.</h2>
+    </div>
+    <div style="display:flex; flex-direction:column;">
+      <div style="display:grid; grid-template-columns:180px 1fr; gap:28px; padding:26px 0; border-top:1px solid #E6E0D1;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <span style="width:11px; height:11px; border-radius:999px; margin-top:3px; flex-shrink:0; background:var(--cheongja,#4FB89E); border:2px solid var(--cheongja,#4FB89E);"></span>
+          <span style="font-size:13.5px; font-weight:700; color:#6A7789; letter-spacing:0.02em; padding-top:1px;">시작</span>
+        </div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px;">창업가의 아버지를 잃다</h3>
+          <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0; max-width:600px;">평생을 일에 바친 창업가의 아버지를 떠나보내며, 남은 건 통장이 아니라 미처 듣지 못한 이야기였습니다. 온비는 그 후회에서 시작됐습니다.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:180px 1fr; gap:28px; padding:26px 0; border-top:1px solid #E6E0D1;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <span style="width:11px; height:11px; border-radius:999px; margin-top:3px; flex-shrink:0; background:var(--cheongja,#4FB89E); border:2px solid var(--cheongja,#4FB89E);"></span>
+          <span style="font-size:13.5px; font-weight:700; color:#2A7360; letter-spacing:0.02em; padding-top:1px;">2026.07</span>
+        </div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px;">검증의 시작</h3>
+          <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0; max-width:600px;">50가구 가족과 함께, 부모님이 통화를 얼마나 반겨주시는지부터 확인합니다.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:180px 1fr; gap:28px; padding:26px 0; border-top:1px solid #E6E0D1;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <span style="width:11px; height:11px; border-radius:999px; margin-top:3px; flex-shrink:0; background:#FBF8EF; border:2px solid var(--angae,#C8E5DB);"></span>
+          <span style="font-size:13.5px; font-weight:700; color:#2A7360; letter-spacing:0.02em; padding-top:1px;">2026 하반기</span>
+        </div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px;">반자동 MVP</h3>
+          <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0; max-width:600px;">사람과 AI가 함께 매주 금요편지를 손으로 빚습니다.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:180px 1fr; gap:28px; padding:26px 0; border-top:1px solid #E6E0D1;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <span style="width:11px; height:11px; border-radius:999px; margin-top:3px; flex-shrink:0; background:#FBF8EF; border:2px solid var(--angae,#C8E5DB);"></span>
+          <span style="font-size:13.5px; font-weight:700; color:#2A7360; letter-spacing:0.02em; padding-top:1px;">2026 말</span>
+        </div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px;">90일 게이트</h3>
+          <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0; max-width:600px;">90일 동안 부모님이 먼저 반겨주시는 통화가 절반을 넘는지 \u2014 그 마음이 다음 문을 엽니다.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:180px 1fr; gap:28px; padding:26px 0; border-top:1px solid #E6E0D1;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <span style="width:11px; height:11px; border-radius:999px; margin-top:3px; flex-shrink:0; background:#FBF8EF; border:2px solid var(--angae,#C8E5DB);"></span>
+          <span style="font-size:13.5px; font-weight:700; color:#2A7360; letter-spacing:0.02em; padding-top:1px;">2027.01</span>
+        </div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px;">1차 런칭</h3>
+          <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0; max-width:600px;">금요편지와 인생책, 첫 가족에게 닿습니다.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:180px 1fr; gap:28px; padding:26px 0; border-top:1px solid #E6E0D1;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <span style="width:11px; height:11px; border-radius:999px; margin-top:3px; flex-shrink:0; background:#FBF8EF; border:2px solid var(--angae,#C8E5DB);"></span>
+          <span style="font-size:13.5px; font-weight:700; color:#6A7789; letter-spacing:0.02em; padding-top:1px;">그 이후</span>
+        </div>
+        <div>
+          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px;">곁에 더 오래</h3>
+          <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0; max-width:600px;">인쇄 자서전과 유산 키트로, 떠난 뒤에도 기억은 곁에 남습니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#FBF8EF;">
+  <div style="max-width:1400px; margin:0 auto;">
+    <div style="text-align:center; max-width:600px; margin:0 auto 52px;">
+      <div class="eyebrow">우리의 비전</div>
+      <hr class="rule" style="margin:20px auto 0;">
+      <h2 style="font-size:clamp(28px,4vw,50px); margin:22px 0 14px;">사람을 잊지 않는 기술.</h2>
+      <p class="lede" style="margin:0;">앱에서, 디바이스로, 로봇으로.</p>
+    </div>
+    <div data-ov-cards style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px;">
+      <div style="background:#FFF; border-radius:24px; padding:18px 18px 32px; border:1px solid #E6E0D1; display:flex; flex-direction:column;">
+        <div style="text-align:center; font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2A7360; margin:14px 0 16px;">지금 · 2026</div>
+        <div style="border-radius:18px; background:linear-gradient(160deg,#F4EEDD 0%,#FBF8EF 100%); aspect-ratio:1/0.84; display:flex; align-items:center; justify-content:center; padding:24px;"><img src="assets/samples/motion-mobile-app.svg" alt="모바일 앱" style="width:74%; height:auto; display:block;"></div>
+        <h3 style="text-align:center; font-size:21px; font-weight:700; letter-spacing:-0.02em; margin:26px 0 12px;">모바일 앱</h3>
+        <p style="text-align:center; font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">온 가족이<br>같은 화면을 봅니다.</p>
+      </div>
+      <div style="background:#FFF; border-radius:24px; padding:18px 18px 32px; border:1px solid #E6E0D1; display:flex; flex-direction:column;">
+        <div style="text-align:center; font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2A7360; margin:14px 0 16px;">다음 · 2027</div>
+        <div style="border-radius:18px; background:linear-gradient(160deg,#EEF0F1 0%,#F8F7F4 100%); aspect-ratio:1/0.84; display:flex; align-items:center; justify-content:center; padding:24px;"><img src="assets/samples/motion-care-device.svg" alt="살핌 디바이스" style="width:66%; height:auto; display:block;"></div>
+        <h3 style="text-align:center; font-size:21px; font-weight:700; letter-spacing:-0.02em; margin:26px 0 12px;">살핌 디바이스</h3>
+        <p style="text-align:center; font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">탁상 위에 놓는<br>친근한 안부 단말기.</p>
+      </div>
+      <div style="background:#FFF; border-radius:24px; padding:18px 18px 32px; border:1px solid #E6E0D1; display:flex; flex-direction:column;">
+        <div style="text-align:center; font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2A7360; margin:14px 0 16px;">미래 · 2030+</div>
+        <div style="border-radius:18px; background:linear-gradient(160deg,#E4F1EA 0%,#F4FAF6 100%); aspect-ratio:1/0.84; display:flex; align-items:center; justify-content:center; padding:24px;"><img src="assets/samples/motion-companion-robot.svg" alt="동반자 로봇" style="width:78%; height:auto; display:block;"></div>
+        <h3 style="text-align:center; font-size:21px; font-weight:700; letter-spacing:-0.02em; margin:26px 0 12px;">동반자 로봇</h3>
+        <p style="text-align:center; font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">곁에서 말 걸고,<br>필요할 땐 함께 움직여요.</p>
+      </div>
+    </div>
+    <p style="text-align:center; font-size:15px; font-weight:600; color:#6A7789; line-height:1.7; margin:44px auto 0;">가장 따뜻한 기술은, 가장 가까이에서 시작됩니다.</p>
+  </div>
+</section>
+
+<section class="dark-cta" data-hide-consult>
+  <div style="max-width:720px; margin:0 auto;">
+    <h2>오늘부터, 부모님의 곁을<br>온기로 채워주세요.</h2>
+    <p class="lede" style="color:rgba(255,255,255,0.7); margin:20px auto 34px; max-width:520px;">부담 없이 상담부터 시작할 수 있어요.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a class="btn" href="contact.html">무료로 상담 신청하기</a>
+      <a class="btn-ghost btn-ghost-dark" href="pricing.html">요금제 보기</a>
+    </div>
+  </div>
+</section>
+
+</div>
+<footer class="site">
+  <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
+        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center;"></span></a>
+        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</p>
+      </div>
+      <nav class="flinks" style="display:flex; flex-wrap:wrap; gap:8px 22px; justify-content:flex-end;">
+        <a href="service.html">서비스</a>
+        <a href="pricing.html">요금제</a>
+        <a href="brand.html">브랜드</a>
+        <a href="support.html">고객지원</a>
+        <a href="contact.html" style="color:#7CC5A9; font-weight:600;">상담 신청</a>
       </nav>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:14px 40px;align-items:baseline;padding-top:26px;border-top:1px solid rgba(255,255,255,0.09);">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
-        <span style="font-size:10.5px;font-weight:700;letter-spacing:0.16em;color:#4FB89E;white-space:nowrap;">FOUNDING TEAM</span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF;font-weight:600;">김태희</b> 대표</span>
+    <div style="display:flex; flex-wrap:wrap; gap:14px 40px; align-items:baseline; padding-top:26px; border-top:1px solid rgba(255,255,255,0.09);">
+      <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
+        <span style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:var(--cheongja,#4FB89E); white-space:nowrap;">만드는 사람들</span>
+        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">김태희</b> 대표</span>
         <span style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF;font-weight:600;">이민섭</b> 공동창업자 CCO</span>
+        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">이민섭</b> 공동창업자 CCO</span>
         <span style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF;font-weight:600;">김세연</b> 공동창업자 CTO</span>
+        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">김세연</b> 공동창업자 CTO</span>
       </div>
-      <div style="display:flex;align-items:baseline;gap:14px;">
-        <span style="font-size:10.5px;font-weight:700;letter-spacing:0.16em;color:#D9B88C;white-space:nowrap;">ADVISOR</span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF;font-weight:600;">정준교</b> 고문</span>
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:#7EE8C9; white-space:nowrap;">ADVISOR</span>
+        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">정준교</b> 고문</span>
         <span style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF;font-weight:600;">원민재</b> 한국엔젤투자협회</span>
+        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">원민재</b> 한국엔젤투자협회</span>
       </div>
     </div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;">
-      <p style="margin:0;font-size:11.5px;line-height:1.65;color:rgba(255,255,255,0.38);max-width:560px;">온비는 정보 제공 서비스이며, 의료 진단, 응급 대응 서비스가 아닙니다. 통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
-      <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;color:rgba(255,255,255,0.4);white-space:nowrap;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
+      <p style="margin:0; font-size:11.5px; line-height:1.65; color:rgba(255,255,255,0.38); max-width:560px;">온비는 정보 제공 서비스이며, 의료 진단, 응급 대응 서비스가 아닙니다. 통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
+      <div style="display:flex; align-items:center; gap:14px; font-size:11.5px; color:rgba(255,255,255,0.4); white-space:nowrap;">
         <span style="color:#7C9CB8;">onvi.kr</span><span style="color:rgba(255,255,255,0.2);">·</span><span>© 2026 On:Vi</span>
       </div>
     </div>
   </div>
 </footer>
-
-<script src="shared/onvi.js"></script>
+<script>
+  (function () {
+    var targets = [];
+    document.querySelectorAll('.stack > section').forEach(function (sec) { targets.push(sec); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('ov-on'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) return;
+      el.classList.add('ov-rv');
+      io.observe(el);
+    });
+  })();
+</script>
 </body>
 </html>

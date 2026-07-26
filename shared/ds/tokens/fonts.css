@@ -1,0 +1,9 @@
+/* On:Vi (온비) — Webfonts
+ * Pretendard (UI/body) and Gowun Batang (letters) — both SIL OFL, commercial use OK.
+ * Loaded via CDN. Pretendard: cdn.jsdelivr.net/gh/orioncactus/pretendard.
+ * Gowun Batang: Google Fonts.
+ * NOTE: no local binaries copied — served from CDN. If offline/self-hosting is
+ * required, download the OFL binaries and swap these @import/link URLs.
+ */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap");

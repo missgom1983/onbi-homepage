@@ -1,0 +1,21 @@
+/* On:Vi (온비) — Colorway tokens (콜로웨이)
+ * A colorway is a decorative pairing bound to a service context.
+ * ONE colorway + ONE pattern grammar per page. Pattern fills only — never functional UI.
+ *   봄결 Bom-gyeol   : 새김(self-directed) · 인생책(life book) · emotional campaigns · OG
+ *   하늘결 Haneul-gyeol: 이음(family) · weekly call · home hero
+ *   노을결 Noeul-gyeol : 금요편지(Friday letter) · retrospective · gratitude
+ */
+:root {
+  /* 봄결 — mist × cherry blossom (line: deep rose) */
+  --cw-bom-a:    var(--angae);
+  --cw-bom-b:    var(--beotkkot);
+  --cw-bom-line: var(--diprose);
+
+  /* 하늘결 — sky × sand */
+  --cw-haneul-a: var(--haneul);
+  --cw-haneul-b: var(--morae);
+
+  /* 노을결 — sand × apricot */
+  --cw-noeul-a:  var(--morae);
+  --cw-noeul-b:  var(--salgu);
+}

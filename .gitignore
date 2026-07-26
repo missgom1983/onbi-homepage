@@ -21,7 +21,17 @@ shared/tokens.css
 
 # 문서 (배포 제외)
 *.docx
+CLAUDE.md
 
 # assets 폴더에 실수로 들어간 스크린샷 제외
 assets/Screenshot*
 assets/*.JPG
+
+# iCloud 동기화 충돌 사본 (" 2" 접미사) — 배포 제외
+_ds 2/
+assets 2/
+uploads 2/
+
+# 디자인툴 원본 고해상도 PNG — 배포에는 최적화된 .jpg 를 사용
+assets/photos/*.png
+!assets/photos/pattern-*.png

@@ -1,0 +1,8 @@
+/* On:Vi (온비) Design System — global entry point.
+ * Consumers link THIS file only. @import list only; no rules here.
+ */
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/colorways.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
