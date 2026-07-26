@@ -19,6 +19,9 @@ shared/landing.css
 shared/theme.js
 shared/tokens.css
 
+# 빌드 도구 (저장소에는 두되 배포에서 제외)
+_tools/
+
 # 문서 (배포 제외)
 *.docx
 CLAUDE.md

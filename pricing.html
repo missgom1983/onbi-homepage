@@ -82,6 +82,16 @@
     .gen figure{ margin:0 !important; }
     [style*="aspect-ratio:21/9"]{ aspect-ratio:4/3 !important; }
   }
+  [hidden]{ display:none !important; }
+  .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
+  .nav-user:hover{ background:rgba(255,255,255,0.18); }
+  .nav-user-badge{ width:32px; height:32px; border-radius:999px; background:var(--cheongja,#4FB89E); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#FFF; flex-shrink:0; }
+  .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
+  [hidden]{ display:none !important; }
+  .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
+  .nav-user:hover{ background:rgba(255,255,255,0.18); }
+  .nav-user-badge{ width:32px; height:32px; border-radius:999px; background:var(--cheongja,#4FB89E); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#FFF; flex-shrink:0; }
+  .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
   /* 페이지 고유 */
     *, *::before, *::after { box-sizing: border-box; }
     body { margin: 0; background: #F5F1E6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -122,7 +132,8 @@
       <a href="support.html">고객지원</a>
     </div>
     <div class="nav-cta">
-      <a class="start" href="contact.html">상담 신청</a>
+      <a class="nav-user" id="navUser" href="mypage.html" hidden><span class="nav-user-badge" id="navUserInitial"></span><span class="nav-user-name" id="navUserName"></span></a>
+      <a class="start" id="navLogin" href="login.html">로그인</a>
       <button class="burger" type="button" aria-label="메뉴" aria-expanded="false" onclick="var p=document.getElementById('navPanel');var o=p.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span><span></span><span></span><span></span></span></button>
     </div>
   </div>
@@ -131,7 +142,9 @@
     <a href="pricing.html">요금제</a>
     <a href="brand.html">브랜드</a>
     <a href="support.html">고객지원</a>
-    <a href="contact.html" style="font-weight:700; color:color-mix(in srgb, var(--cheongja,#4FB89E) 65%, #FFFFFF);">상담 신청</a>
+    <a href="mypage.html" id="panelUser" hidden style="font-weight:700; color:color-mix(in srgb, var(--cheongja,#4FB89E) 65%, #FFFFFF);"></a>
+    <a href="login.html" id="panelLogin" style="font-weight:700; color:color-mix(in srgb, var(--cheongja,#4FB89E) 65%, #FFFFFF);">로그인</a>
+    <a href="contact.html">상담 신청</a>
   </div>
 </nav>
   <!-- ── HERO ── -->
@@ -203,7 +216,7 @@
               <span style="font-size:clamp(34px,3vw,42px); font-weight:700; letter-spacing:-0.04em; line-height:1; color:#FFFFFF;">19,900</span>
               <span style="font-size:15px; font-weight:600; color:rgba(255,255,255,0.6);">원/월</span>
             </div>
-            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:rgba(255,255,255,0.72);">온 가족이 함께 답하고, 인생책이 쌓이는 플랜.</p>
+            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:rgba(255,255,255,0.72);">온 가족이 함께 답하고, 인생책이 쌓이는 방법.</p>
             <div style="height:1px; margin:24px 0; background:rgba(255,255,255,0.14);"></div>
             <div style="display:flex; flex-direction:column; gap:12px;">
                 <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,0.85);"><span style="font-weight:700; flex-shrink:0; color:#7CC5A9;">✓</span>씨앗의 모든 혜택</span>
@@ -220,7 +233,7 @@
               <span style="font-size:clamp(34px,3vw,42px); font-weight:700; letter-spacing:-0.04em; line-height:1; color:#1F2A3A;">39,900</span>
               <span style="font-size:15px; font-weight:600; color:#6A7789;">원/월</span>
             </div>
-            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:#3F4D62;">평생 소장까지, 가장 깊게 남기는 플랜.</p>
+            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:#3F4D62;">평생 소장까지, 가장 깊게 남기는 방법.</p>
             <div style="height:1px; margin:24px 0; background:#E6E0D1;"></div>
             <div style="display:flex; flex-direction:column; gap:12px;">
                 <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>이야기의 모든 혜택</span>
@@ -333,14 +346,43 @@
   (function () {
     var panel = document.getElementById('navPanel');
     var burger = document.querySelector('.burger');
-    if (!panel || !burger) return;
-    function close() { panel.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-    document.addEventListener('pointerdown', function (e) {
-      if (!panel.classList.contains('open')) return;
-      if (!panel.contains(e.target) && !burger.contains(e.target)) close();
-    });
-    panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') close(); });
+    if (panel && burger) {
+      var close = function () { panel.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); };
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+      document.addEventListener('pointerdown', function (e) {
+        if (!panel.classList.contains('open')) return;
+        if (!panel.contains(e.target) && !burger.contains(e.target)) close();
+      });
+      panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') close(); });
+    }
+
+    // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
+    function paint() {
+      var name = '';
+      try { name = localStorage.getItem('onvi.user.name') || ''; } catch (e) { /* 무시 */ }
+      var login = document.getElementById('navLogin');
+      var user = document.getElementById('navUser');
+      var pLogin = document.getElementById('panelLogin');
+      var pUser = document.getElementById('panelUser');
+      if (name) {
+        if (login) login.hidden = true;
+        if (user) {
+          user.hidden = false;
+          document.getElementById('navUserName').textContent = name + ' 님';
+          document.getElementById('navUserInitial').textContent = name.slice(-2, -1) || name.charAt(0);
+        }
+        if (pLogin) pLogin.hidden = true;
+        if (pUser) { pUser.hidden = false; pUser.textContent = name + ' 님의 공간'; }
+      } else {
+        if (login) login.hidden = false;
+        if (user) user.hidden = true;
+        if (pLogin) pLogin.hidden = false;
+        if (pUser) pUser.hidden = true;
+      }
+    }
+    paint();
+    window.addEventListener('storage', paint);
+    window.addEventListener('onvi-auth', paint);
   })();
 </script>
 <script>
