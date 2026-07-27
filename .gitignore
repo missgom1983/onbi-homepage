@@ -40,3 +40,5 @@ uploads 2/
 # 디자인툴 원본 고해상도 PNG — 배포에는 최적화된 .jpg 를 사용
 assets/photos/*.png
 !assets/photos/pattern-*.png
+
+v3.2/
