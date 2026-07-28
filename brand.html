@@ -54,13 +54,12 @@
   .letter p{ margin:0; text-wrap:pretty; }
   .quote{ font-family:var(--font-letter),'Gowun Batang',serif; font-weight:700; text-wrap:balance; }
   /* GNB */
-  nav.pill{ position:fixed; top:16px; left:0; right:0; z-index:300; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none; }
-  nav.pill > .bar{ pointer-events:auto; width:min(1120px,94%); display:flex; align-items:center; justify-content:space-between; gap:16px; background:rgba(31,42,58,0.55); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:9px 9px 9px 24px; box-shadow:0 18px 44px -20px rgba(31,42,58,0.45); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); }
-  nav.pill a{ text-decoration:none; }
-  nav.pill{ transition:transform .38s cubic-bezier(.22,.61,.36,1); will-change:transform; }
-  nav.pill.nav-hide{ transform:translateY(calc(-100% - 24px)); }
-  @media (prefers-reduced-motion: reduce){ nav.pill{ transition:none; } }
-  .burger:focus-visible, nav.pill a:focus-visible{ outline:2px solid #FFF; outline-offset:2px; }
+  .onvi-nav-root{ position:fixed; top:16px; left:0; right:0; z-index:300; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none; transition:transform .38s cubic-bezier(.22,.61,.36,1); will-change:transform; }
+  .onvi-nav-root.onvi-nav-hidden{ transform:translateY(calc(-100% - 24px)); }
+  @media (prefers-reduced-motion: reduce){ .onvi-nav-root{ transition:none !important; } }
+  .onvi-nav-root > .bar{ pointer-events:auto; width:min(1120px,94%); display:flex; align-items:center; justify-content:space-between; gap:16px; background:rgba(31,42,58,0.55); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:9px 9px 9px 24px; box-shadow:0 18px 44px -20px rgba(31,42,58,0.45); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); }
+  .onvi-nav-root a{ text-decoration:none; }
+  .burger:focus-visible, .onvi-nav-root a:focus-visible{ outline:2px solid #FFF; outline-offset:2px; }
   .nav-logo{ display:inline-flex; align-items:center; font-size:19px; font-weight:700; letter-spacing:-0.03em; color:color-mix(in srgb, var(--cheongja,#4FB89E) 55%, #FFFFFF); flex-shrink:0; }
   .nav-logo:hover{ color:color-mix(in srgb, var(--cheongja,#4FB89E) 70%, #FFFFFF); }
   .nav-links{ display:flex; align-items:center; gap:2px; flex-wrap:wrap; justify-content:center; }
@@ -77,10 +76,35 @@
   .panel.open{ display:flex; }
   .panel a{ min-height:44px; padding:14px 16px; border-radius:14px; font-size:15.5px; font-weight:600; color:rgba(255,255,255,0.9); }
   .panel a:hover{ background:rgba(255,255,255,0.12); color:#FFF; }
+  .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
+  .nav-user:hover{ background:rgba(255,255,255,0.18); }
+  .nav-user-badge{ width:32px; height:32px; border-radius:999px; overflow:hidden; flex-shrink:0; border:1.5px solid rgba(255,255,255,0.4); display:inline-block; }
+  .nav-user-badge img{ width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block; }
+  .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
+  .panel-foot{ margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .panel-foot a{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72); min-height:44px; }
+  .panel-foot a:hover{ color:#FFF; background:none; }
   footer.site{ background:#26282A; color:rgba(255,255,255,0.55); font-size:13px; padding:56px 0 34px; }
   footer.site a{ text-decoration:none; }
   footer.site .flinks a{ font-size:13.5px; color:rgba(255,255,255,0.7); }
   footer.site .flinks a:hover{ color:var(--cheongja,#4FB89E); }
+  /* 상담 FAB · 모달 */
+  [hidden]{ display:none !important; }
+  body, footer, nav, [data-onvi-consult], [data-onvi-modal]{ word-break:keep-all; overflow-wrap:break-word; }
+  @keyframes onviConsultIn{ 0%{ opacity:0; transform:translateY(14px); } 100%{ opacity:1; transform:translateY(0); } }
+  @keyframes onviModalIn{ 0%{ opacity:0; transform:translateY(16px) scale(0.98); } 100%{ opacity:1; transform:translateY(0) scale(1); } }
+  @keyframes onviFadeIn{ 0%{ opacity:0; } 100%{ opacity:1; } }
+  @media (prefers-reduced-motion: reduce){
+    [data-onvi-consult], [data-onvi-consult] *, [data-onvi-modal], [data-onvi-modal] *{ animation:none !important; }
+  }
+  [data-onvi-modal] input::placeholder{ color:#6A7789; }
+  [data-onvi-modal] input:focus{ outline:none; background:#FFFFFF; border-color:#4FB89E !important; box-shadow:0 0 0 4px #EAF4EF; }
+  br[data-keep]{ display:inline !important; }
+  .hv1:hover{ background:var(--action-primary-hover); transform:translateY(-2px); }
+  .hv2:hover{ color:var(--simya); border-color:#D5CDB9; }
+  .hv3:hover{ background:var(--action-primary-hover); box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); }
+  .hv4:hover{ background:var(--action-primary-hover); }
+  .hv5:hover{ border-color:var(--cheongja); background:#FFFFFF; }
   @media (max-width: 900px){
     .nav-links{ display:none !important; }
     .burger{ display:inline-flex; }
@@ -111,7 +135,8 @@
 </style>
 <noscript><style>.ov-rv{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
-<body><nav class="pill">
+<body>
+<div class="onvi-nav-root" id="navRoot">
   <div class="bar">
     <a class="nav-logo" href="index.html"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center;"></span></a>
     <div class="nav-links">
@@ -121,8 +146,9 @@
       <a href="support.html">고객지원</a>
     </div>
     <div class="nav-cta">
-      <a class="start" href="contact.html">상담 신청</a>
-      <button class="burger" type="button" aria-label="메뉴" aria-expanded="false" onclick="var p=document.getElementById('navPanel');var o=p.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span><span></span><span></span><span></span></span></button>
+      <a class="nav-user" id="navUser" href="mypage.html" hidden><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span></a>
+      <a class="start" id="navLogin" href="login.html">로그인</a>
+      <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" id="navBurger"><span><span></span><span></span><span></span></span></button>
     </div>
   </div>
   <div class="panel" id="navPanel">
@@ -130,11 +156,54 @@
     <a href="pricing.html">요금제</a>
     <a href="brand.html">브랜드</a>
     <a href="support.html">고객지원</a>
-    <div style="margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12);">
-      <a href="login.html" style="display:inline-flex; padding:10px 12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72);">로그인 ›</a>
+    <div class="panel-foot">
+      <a href="mypage.html" id="panelUser" hidden></a>
+      <a href="login.html" id="panelLogin">로그인 ›</a>
     </div>
   </div>
-</nav>
+</div>
+<div data-onvi-consult="" id="consultFab" hidden style="position:fixed; right:20px; bottom:20px; z-index:500;">
+  <button class="hv1" type="button" id="consultOpen" aria-label="무료 상담 신청" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; width:56px; height:56px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; border:none; cursor:pointer; box-shadow:0 16px 40px -14px rgba(79,184,158,0.75); animation:onviConsultIn .45s cubic-bezier(.22,.61,.36,1); transition:background .2s, transform .2s;">
+    <span style="font-size:13.5px; font-weight:700; letter-spacing:-0.01em; line-height:1.2;">상담</span>
+    <span aria-hidden="true" style="font-size:10px; opacity:0.85; line-height:1;">무료</span>
+  </button>
+</div>
+<div data-onvi-modal="" id="consultModal" hidden role="dialog" aria-modal="true" aria-label="무료 상담 신청" style="position:fixed; inset:0; z-index:600; display:flex; align-items:center; justify-content:center; padding:16px;">
+  <div id="consultBackdrop" style="position:absolute; inset:0; background:rgba(31,42,58,0.45); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); animation:onviFadeIn .25s ease;"></div>
+  <div style="position:relative; width:min(420px, 100%); max-height:calc(100vh - 48px); overflow-y:auto; background:#FFFFFF; border-radius:24px; padding:30px 28px; box-shadow:0 40px 90px -30px rgba(31,42,58,0.55); animation:onviModalIn .3s cubic-bezier(.22,.61,.36,1);">
+    <button type="button" class="consult-close hv2" aria-label="닫기" style="position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:999px; background:#FBF8EF; color:#6A7789; border:1px solid #E6E0D1; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; padding:0;">✕</button>
+
+    <div id="consultFormWrap">
+      <div style="font-size:11.5px; font-weight:700; letter-spacing:0.14em; color:#2A7360; margin-bottom:12px;">무료 상담</div>
+      <h2 style="font-size:21px; font-weight:700; letter-spacing:-0.025em; line-height:1.4; margin:0 0 8px; color:var(--simya); text-wrap:balance;">가족에게 맞는 방법, <br>함께 찾아드려요.</h2>
+      <p style="font-size:13.5px; line-height:1.6; color:#3F4D62; margin:0 0 22px;">성함과 연락처만 남겨주시면 온비가 먼저 연락드려요.</p>
+      <form id="consultForm" novalidate style="display:flex; flex-direction:column; gap:14px;">
+        <div>
+          <label for="cb-name" style="display:block; font-size:13px; font-weight:700; color:var(--simya); margin-bottom:7px;">성함<span style="color:#2A7360; margin-left:3px;">*</span></label>
+          <input id="cb-name" name="name" type="text" placeholder="예) 김온비" style="width:100%; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:12px; padding:12px 14px; font-family:inherit; font-size:14.5px; color:var(--simya); transition:border-color .2s, box-shadow .2s, background .2s;">
+        </div>
+        <div>
+          <label for="cb-phone" style="display:block; font-size:13px; font-weight:700; color:var(--simya); margin-bottom:7px;">연락처<span style="color:#2A7360; margin-left:3px;">*</span></label>
+          <input id="cb-phone" name="phone" type="text" inputmode="tel" placeholder="예) 010-1234-5678" style="width:100%; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:12px; padding:12px 14px; font-family:inherit; font-size:14.5px; color:var(--simya); transition:border-color .2s, box-shadow .2s, background .2s;">
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:9px; padding:12px 14px; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:12px;">
+          <input id="cb-agree" name="agree" type="checkbox" style="width:18px; height:18px; margin:1px 0 0; accent-color:#4FB89E; flex-shrink:0; cursor:pointer;">
+          <label for="cb-agree" style="font-size:12.5px; color:#3F4D62; line-height:1.55; cursor:pointer;">개인정보 수집·이용에 동의합니다. 상담 안내 목적으로만 사용 후 파기됩니다. <span style="color:#2A7360; font-weight:700;">(필수)</span></label>
+        </div>
+        <p id="consultError" hidden style="margin:0; font-size:13px; font-weight:600; color:var(--simhae);"></p>
+        <button class="hv3" type="submit" style="width:100%; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 24px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15px; font-weight:700; letter-spacing:-0.01em; border:none; cursor:pointer; font-family:inherit; min-height:44px; transition:background .2s, box-shadow .2s;">상담 신청하기 →</button>
+      </form>
+      <p style="font-size:12px; color:#6A7789; margin:14px 0 0; line-height:1.55; text-align:center;">더 자세히 적고 싶다면 <a href="contact.html" style="color:#2A7360; font-weight:600;">상담 신청 페이지</a>를 이용하세요.</p>
+    </div>
+
+    <div id="consultSent" hidden style="text-align:center; padding:14px 0 6px;">
+      <div style="width:52px; height:52px; border-radius:999px; background:var(--saebyeok); display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:22px; color:#2A7360;">✓</div>
+      <h2 style="font-size:20px; font-weight:700; letter-spacing:-0.025em; margin:0 0 10px; color:var(--simya);">신청이 접수되었어요.</h2>
+      <p style="font-size:14px; line-height:1.65; color:#3F4D62; margin:0 0 24px;"><span id="consultSentName"></span> 님, 평일 09:00–18:00 사이에 <br data-keep="">남겨주신 번호로 온비가 먼저 연락드립니다.</p>
+      <button type="button" class="consult-close hv4" style="display:inline-flex; align-items:center; justify-content:center; padding:12px 28px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:14.5px; font-weight:700; border:none; cursor:pointer; font-family:inherit; min-height:44px; transition:background .2s;">확인</button>
+    </div>
+  </div>
+</div>
 
 <!-- S1 · Hero -->
 <section style="position:relative; overflow:hidden; min-height:min(88vh,860px); display:grid; place-items:center; text-align:center; padding:150px 24px 80px;">
@@ -349,7 +418,7 @@
         <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center;"></span></a>
         <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간. <br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</p>
       </div>
-      
+
     </div>
     <div data-ft-row="" style="display:flex; flex-wrap:wrap; gap:14px 40px; align-items:baseline; padding-top:26px; border-top:1px solid rgba(255,255,255,0.09);">
       <div data-ft-people="" style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
@@ -419,21 +488,134 @@
   })();
 </script>
 
-<script data-x="nav-hide-script">
-(function(){
-  var nav=document.querySelector('nav.pill'); if(!nav) return;
-  var last=window.scrollY;
-  window.addEventListener('scroll',function(){
-    if(!window.matchMedia('(max-width:900px)').matches){ nav.classList.remove('nav-hide'); return; }
-    var y=window.scrollY, d=y-last;
-    if(Math.abs(d)<8) return;
-    last=y;
-    var panel=document.getElementById('navPanel');
-    var open=panel&&panel.classList.contains('open');
-    if(d>0&&y>140&&!open) nav.classList.add('nav-hide');
-    else if(d<0||y<=140) nav.classList.remove('nav-hide');
-  },{passive:true});
-})();
+<script>
+  (function () {
+    var root = document.getElementById('navRoot');
+    var panel = document.getElementById('navPanel');
+    var burger = document.getElementById('navBurger');
+    var open = false;
+
+    function setOpen(v) {
+      open = v;
+      panel.classList.toggle('open', v);
+      burger.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    if (panel && burger) {
+      burger.addEventListener('click', function () { setOpen(!open); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (!open) return;
+        if (!root.contains(e.target)) setOpen(false);
+      });
+      panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
+    }
+
+    // 모바일: 아래로 스크롤하면 네비를 감추고, 위로 올리면 다시 보여준다
+    var lastY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      if (!window.matchMedia('(max-width: 900px)').matches) {
+        root.classList.remove('onvi-nav-hidden');
+        return;
+      }
+      var y = window.scrollY;
+      var d = y - lastY;
+      if (Math.abs(d) < 8) return;
+      lastY = y;
+      if (d > 0 && y > 140 && !open) root.classList.add('onvi-nav-hidden');
+      else if (d < 0 || y <= 140) root.classList.remove('onvi-nav-hidden');
+    }, { passive: true });
+
+    // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
+    function paint() {
+      var name = '';
+      try { name = localStorage.getItem('onvi.user.name') || ''; } catch (e) { /* 무시 */ }
+      var login = document.getElementById('navLogin');
+      var user = document.getElementById('navUser');
+      var pLogin = document.getElementById('panelLogin');
+      var pUser = document.getElementById('panelUser');
+      if (name) {
+        if (login) login.hidden = true;
+        if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; }
+        if (pLogin) pLogin.hidden = true;
+        if (pUser) { pUser.hidden = false; pUser.textContent = name + ' 님의 공간'; }
+      } else {
+        if (login) login.hidden = false;
+        if (user) user.hidden = true;
+        if (pLogin) pLogin.hidden = false;
+        if (pUser) pUser.hidden = true;
+      }
+    }
+    paint();
+    window.addEventListener('storage', paint);
+    window.addEventListener('onvi-auth', paint);
+  })();
+</script>
+<script>
+  (function () {
+    var fab = document.getElementById('consultFab');
+    var modal = document.getElementById('consultModal');
+    if (!fab || !modal) return;
+    var form = document.getElementById('consultForm');
+    var err = document.getElementById('consultError');
+    var formWrap = document.getElementById('consultFormWrap');
+    var sentPanel = document.getElementById('consultSent');
+    var sentName = document.getElementById('consultSentName');
+    var open = false;
+    var scrolled = false;
+    var visible = 0;   // 화면에 보이는 [data-hide-consult] 섹션 수
+
+    function sync() {
+      fab.hidden = !(scrolled && visible === 0 && !open);
+    }
+    function setOpen(v) {
+      open = v;
+      modal.hidden = !v;
+      if (v) { formWrap.hidden = false; sentPanel.hidden = true; err.hidden = true; }
+      sync();
+    }
+
+    document.getElementById('consultOpen').addEventListener('click', function () { setOpen(true); });
+    document.getElementById('consultBackdrop').addEventListener('click', function () { setOpen(false); });
+    document.querySelectorAll('.consult-close').forEach(function (b) {
+      b.addEventListener('click', function () { setOpen(false); });
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
+
+    window.addEventListener('scroll', function () {
+      var s = window.scrollY > 480;
+      if (s !== scrolled) { scrolled = s; sync(); }
+    }, { passive: true });
+
+    // CTA 섹션이 보이는 동안에는 플로팅 버튼을 감춘다
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { visible += e.isIntersecting ? 1 : -1; });
+      if (visible < 0) visible = 0;
+      sync();
+    }, { threshold: 0.08 });
+    setTimeout(function () {
+      document.querySelectorAll('[data-hide-consult]').forEach(function (el) { io.observe(el); });
+    }, 500);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      function fail(m, f) { err.textContent = m; err.hidden = false; if (f) f.focus(); }
+      var name = (form.name.value || '').trim();
+      var phone = (form.phone.value || '').trim();
+      if (!name) { fail('성함을 다시 확인해 주세요.', form.name); return; }
+      if (!phone) { fail('연락처를 다시 확인해 주세요.', form.phone); return; }
+      if (!form.agree.checked) { fail('개인정보 수집·이용에 동의해 주세요.'); return; }
+      err.hidden = true;
+      sentName.textContent = name;
+      formWrap.hidden = true;
+      sentPanel.hidden = false;
+      var subject = '[상담 신청] ' + name + ' 님';
+      var lines = ['성함: ' + name, '연락처: ' + phone, '', '(플로팅 배너에서 신청)', '개인정보 수집·이용 동의: 동의함'];
+      window.location.href = 'mailto:contact@onvi.kr?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(lines.join('\n'));
+    });
+
+    sync();
+  })();
 </script>
 </body>
 </html>
