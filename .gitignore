@@ -42,3 +42,8 @@ assets/photos/*.png
 !assets/photos/pattern-*.png
 
 v3.2/
+
+# 실험용 샌드박스 (배포 제외)
+sandbox-*
+
+v3.2.1/

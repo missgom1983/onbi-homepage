@@ -23,7 +23,7 @@
   @keyframes ovWordIn{ from{ opacity:0; transform:translateY(16px); filter:blur(7px); } to{ opacity:1; transform:none; filter:none; } }
   .ov-w{ display:inline-block; opacity:0; animation:ovWordIn .75s cubic-bezier(.22,.61,.36,1) forwards; }
   @keyframes ovTitleIn{ from{ opacity:0; transform:translateY(104%); } to{ opacity:1; transform:none; } }
-  .ov-title{ display:inline-block; opacity:0; animation:ovTitleIn .95s cubic-bezier(.22,.61,.36,1) 1.8s forwards; }
+  .ov-title{ display:inline-block; opacity:0; animation:ovTitleIn .95s cubic-bezier(.22,.61,.36,1) .75s forwards; }
   @keyframes ovChev{ 0%{ opacity:0; transform:translateY(-6px); } 45%{ opacity:1; } 100%{ opacity:0; transform:translateY(6px); } }
   .ov-chev{ animation:ovChev 2s ease-in-out infinite; }
     .ov-wave{ transform-origin:bottom; animation:ovWave 1.05s ease-in-out infinite; }
@@ -69,6 +69,11 @@
   .nav-cta{ display:flex; align-items:center; gap:6px; flex-shrink:0; }
   .nav-cta a.start{ display:inline-flex; align-items:center; background:var(--cheongja,#4FB89E); color:#FFF; font-size:14px; font-weight:700; padding:11px 22px; border-radius:999px; }
   .nav-cta a.start:hover{ background:var(--action-primary-hover,#45A88F); color:#FFF; }
+  .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
+  .nav-user:hover{ background:rgba(255,255,255,0.18); }
+  .nav-user-badge{ width:32px; height:32px; border-radius:999px; overflow:hidden; flex-shrink:0; border:1.5px solid rgba(255,255,255,0.4); display:inline-block; }
+  .nav-user-badge img{ width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block; }
+  .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
   .burger{ display:none; align-items:center; justify-content:center; width:42px; height:42px; margin-left:2px; background:transparent; border:none; border-radius:999px; cursor:pointer; padding:0; }
   .burger span{ display:block; width:22px; height:2px; border-radius:2px; background:#FFF; }
   .burger > span{ display:flex; flex-direction:column; gap:5px; align-items:center; width:auto; height:auto; background:none; }
@@ -76,11 +81,6 @@
   .panel.open{ display:flex; }
   .panel a{ min-height:44px; padding:14px 16px; border-radius:14px; font-size:15.5px; font-weight:600; color:rgba(255,255,255,0.9); }
   .panel a:hover{ background:rgba(255,255,255,0.12); color:#FFF; }
-  .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
-  .nav-user:hover{ background:rgba(255,255,255,0.18); }
-  .nav-user-badge{ width:32px; height:32px; border-radius:999px; overflow:hidden; flex-shrink:0; border:1.5px solid rgba(255,255,255,0.4); display:inline-block; }
-  .nav-user-badge img{ width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block; }
-  .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
   .panel-foot{ margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .panel-foot a{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72); min-height:44px; }
   .panel-foot a:hover{ color:#FFF; background:none; }
@@ -88,9 +88,6 @@
   footer.site a{ text-decoration:none; }
   footer.site .flinks a{ font-size:13.5px; color:rgba(255,255,255,0.7); }
   footer.site .flinks a:hover{ color:var(--cheongja,#4FB89E); }
-  /* 상담 FAB · 모달 */
-  [hidden]{ display:none !important; }
-  body, footer, nav, [data-onvi-consult], [data-onvi-modal]{ word-break:keep-all; overflow-wrap:break-word; }
   @keyframes onviConsultIn{ 0%{ opacity:0; transform:translateY(14px); } 100%{ opacity:1; transform:translateY(0); } }
   @keyframes onviModalIn{ 0%{ opacity:0; transform:translateY(16px) scale(0.98); } 100%{ opacity:1; transform:translateY(0) scale(1); } }
   @keyframes onviFadeIn{ 0%{ opacity:0; } 100%{ opacity:1; } }
@@ -99,7 +96,7 @@
   }
   [data-onvi-modal] input::placeholder{ color:#6A7789; }
   [data-onvi-modal] input:focus{ outline:none; background:#FFFFFF; border-color:#4FB89E !important; box-shadow:0 0 0 4px #EAF4EF; }
-  br[data-keep]{ display:inline !important; }
+  /* 디자인 툴 hover */
   .hv1:hover{ background:var(--action-primary-hover); transform:translateY(-2px); }
   .hv2:hover{ color:var(--simya); border-color:#D5CDB9; }
   .hv3:hover{ background:var(--action-primary-hover); box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); }
@@ -120,6 +117,7 @@
     [data-ft-people] > span{ white-space:nowrap; font-size:12.5px !important; }
     [data-ft-people] > span[data-ft-label]{ width:100%; font-size:10.5px !important; }
     [data-letter-lp]{ width:min(52%,200px) !important; right:0 !important; bottom:3% !important; opacity:0.4 !important; }
+    [data-letter-deco]{ display:none !important; }
     [data-ft-row]{ flex-direction:column; gap:22px !important; }
     h1 br, h2 br, h3 br, blockquote br, p br{ display:none; }
     br[data-m], br[data-keep]{ display:inline !important; }
@@ -212,10 +210,9 @@
   <span data-blob="" aria-hidden="true" style="position:absolute; width:min(52vw,680px); aspect-ratio:1; border-radius:50%; background:radial-gradient(circle, rgba(79,184,158,0.13) 0%, rgba(79,184,158,0) 62%); top:6%; left:-16%; animation:ovDrift2 26s ease-in-out infinite alternate-reverse; pointer-events:none;"></span>
   <span aria-hidden="true" style="position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); width:min(80vw,900px); aspect-ratio:1.4; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 65%); pointer-events:none;"></span>
   <div style="position:relative; max-width:720px; margin:0 auto;">
-    <p style="font-size:clamp(17px,2vw,22px); line-height:1.75; color:#3F4D62; letter-spacing:-0.015em; margin:0; text-wrap:balance;"><span class="ov-w" style="animation-delay:.12s;">우리는</span> <span class="ov-w" style="animation-delay:.26s;">부모님과</span> <span class="ov-w" style="animation-delay:.4s;">함께</span> <span class="ov-w" style="animation-delay:.54s;">산</span> <span class="ov-w" style="animation-delay:.68s;">시간보다</span></p>
-    <p style="font-size:clamp(17px,2vw,22px); line-height:1.75; color:#3F4D62; letter-spacing:-0.015em; margin:6px 0 0; text-wrap:balance;"><span class="ov-w" style="animation-delay:.95s;">떨어져</span> <span class="ov-w" style="animation-delay:1.09s;">산</span> <span class="ov-w" style="animation-delay:1.23s;">시간이</span> <span class="ov-w" style="animation-delay:1.37s;">더</span> <span class="ov-w" style="animation-delay:1.51s;">길어졌습니다.</span></p>
+    <p class="ov-seq" style="animation-delay:.15s; font-size:clamp(19px,2.4vw,26px); line-height:1.7; color:#3F4D62; letter-spacing:-0.02em; margin:0; text-wrap:balance;">우리는 부모님과 함께 산 시간보다 <br data-keep>떨어져 산 시간이 더 길어졌습니다.</p>
     <h1 style="overflow:hidden; padding-bottom:.06em; line-height:1.16;"><span class="ov-title">온비 이야기</span></h1>
-    <div class="ov-seq" style="animation-delay:2.7s; margin-top:44px; display:flex; justify-content:center;">
+    <div class="ov-seq" style="animation-delay:1.6s; margin-top:44px; display:flex; justify-content:center;">
       <button type="button" aria-label="이야기 읽기" onclick="var s=document.querySelector('.stack > section'); if(s) window.scrollTo({top:s.getBoundingClientRect().top+window.scrollY-64,behavior:'smooth'});" style="display:flex; flex-direction:column; align-items:center; gap:9px; background:none; border:none; cursor:pointer; padding:12px 20px; min-height:44px; border-radius:14px;">
         <span style="font-size:12.5px; font-weight:700; letter-spacing:0.12em; color:#2A7360;">이야기 읽기</span>
         <span style="display:flex; flex-direction:column; align-items:center; gap:2px;">
@@ -246,10 +243,22 @@
 </section>
 
 <!-- S3 · 파운더 레터 -->
-<section style="position:relative; overflow:hidden; background:#FFFFFF; padding:clamp(56px,7vw,110px) clamp(24px,5vw,88px);">
+<section style="position:relative; overflow:hidden; --paper:color-mix(in srgb, var(--hanji,#F5F1E6) 48%, #FFFFFF); background:var(--paper); padding:clamp(56px,7vw,110px) clamp(24px,5vw,88px);">
   <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;">
-    <img data-letter-lp="" src="assets/photos/founder-lp.jpg" alt="" style="position:absolute; right:2%; bottom:6%; width:min(38%, 440px); height:auto; opacity:0.72; -webkit-mask-image:radial-gradient(ellipse 82% 80% at 52% 50%, #000 44%, transparent 82%); mask-image:radial-gradient(ellipse 82% 80% at 52% 50%, #000 44%, transparent 82%);">
-    <span style="position:absolute; inset:0; background:linear-gradient(100deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.55) 46%, rgba(255,255,255,0.12) 74%, rgba(255,255,255,0) 100%);"></span>
+    <span style="position:absolute; inset:0; background:radial-gradient(42% 34% at 8% 12%, rgba(122,98,62,0.05), transparent 70%), radial-gradient(36% 30% at 94% 6%, rgba(122,98,62,0.04), transparent 70%), radial-gradient(50% 42% at 88% 92%, rgba(122,98,62,0.06), transparent 72%), radial-gradient(30% 26% at 4% 88%, rgba(122,98,62,0.045), transparent 70%), radial-gradient(130% 100% at 50% 46%, transparent 60%, rgba(122,98,62,0.05) 100%);"></span>
+    <span style="position:absolute; inset:0; opacity:0.035; mix-blend-mode:multiply; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>&quot;); background-size:240px;"></span>
+    <span data-letter-deco style="position:absolute; right:-8%; bottom:-14%; width:58%; aspect-ratio:1; background:radial-gradient(circle, color-mix(in srgb, var(--noeul,#D98263) 13%, transparent) 0%, color-mix(in srgb, var(--noeul,#D98263) 5%, transparent) 44%, transparent 70%);"></span>
+    <span data-letter-deco style="position:absolute; right:13%; bottom:24%; width:1px; height:1px;">
+      <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(30vw,340px); aspect-ratio:1; border:1.2px solid color-mix(in srgb, var(--cheongja,#4FB89E) 16%, transparent); border-radius:50%;"></span>
+      <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(42vw,480px); aspect-ratio:1; border:1.2px solid color-mix(in srgb, var(--cheongja,#4FB89E) 10%, transparent); border-radius:50%;"></span>
+      <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(56vw,640px); aspect-ratio:1; border:1.2px solid color-mix(in srgb, var(--cheongja,#4FB89E) 6%, transparent); border-radius:50%;"></span>
+      <span style="position:absolute; left:calc(50% - min(21vw,240px)); top:calc(50% - min(15vw,170px)); width:5px; height:5px; border-radius:50%; background:color-mix(in srgb, var(--cheongja,#4FB89E) 30%, transparent);"></span>
+      <span style="position:absolute; left:calc(50% - min(10vw,115px)); top:calc(50% - min(24vw,275px)); width:4px; height:4px; border-radius:50%; background:color-mix(in srgb, var(--cheongja,#4FB89E) 22%, transparent);"></span>
+      <span style="position:absolute; left:calc(50% + min(6vw,70px)); top:calc(50% - min(19vw,215px)); width:3px; height:3px; border-radius:50%; background:color-mix(in srgb, var(--cheongja,#4FB89E) 16%, transparent);"></span>
+    </span>
+    <img data-letter-lp src="assets/photos/founder-lp.jpg" alt="" style="position:absolute; right:2%; bottom:6%; width:min(40%, 470px); height:auto; opacity:0.78; -webkit-mask-image:radial-gradient(ellipse 84% 82% at 52% 50%, #000 42%, transparent 86%); mask-image:radial-gradient(ellipse 84% 82% at 52% 50%, #000 42%, transparent 86%);">
+    <span data-letter-deco style="position:absolute; right:-8%; bottom:-12%; width:62%; aspect-ratio:1.15; opacity:0.11; mix-blend-mode:multiply; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='170' height='170' filter='url(%23n)'/></svg>&quot;); background-size:170px; -webkit-mask-image:radial-gradient(circle at 60% 58%, #000 26%, transparent 74%); mask-image:radial-gradient(circle at 60% 58%, #000 26%, transparent 74%);"></span>
+    <span style="position:absolute; inset:0; background:linear-gradient(100deg, color-mix(in srgb, var(--paper) 94%, transparent) 0%, color-mix(in srgb, var(--paper) 62%, transparent) 46%, color-mix(in srgb, var(--paper) 15%, transparent) 74%, transparent 100%);"></span>
   </div>
   <div style="position:relative; max-width:640px; margin:0 auto;">
     <div class="eyebrow">파운더 레터</div>
@@ -277,15 +286,15 @@
     </div>
     <div style="display:flex; flex-direction:column;">
       <div style="display:flex; gap:clamp(18px,2.5vw,28px); border-top:1px solid #E6E0D1; padding:24px 0;">
-        <h3 style="width:44px; flex-shrink:0; font-size:20px; margin:0; color:var(--simya,#1F2A3A);">On</h3>
+        <h3 style="width:44px; flex-shrink:0; font-size:20px; margin:0; color:var(--simya,#1F2A3A); text-align:center;">On</h3>
         <p style="margin:0; font-size:15px; line-height:1.7; color:#3F4D62; text-wrap:pretty;">꺼지지 않고 켜둔다는 뜻. 순우리말 ‘온’이자 따뜻할 온(溫)처럼, 온비는 부모님 곁을 온종일 지킵니다.</p>
       </div>
       <div style="display:flex; gap:clamp(18px,2.5vw,28px); border-top:1px solid #E6E0D1; padding:24px 0;">
-        <h3 style="width:44px; flex-shrink:0; font-size:20px; margin:0; color:#2A7360;">:</h3>
+        <h3 style="width:44px; flex-shrink:0; font-size:20px; margin:0; color:#2A7360; text-align:center;">:</h3>
         <p style="margin:0; font-size:15px; line-height:1.7; color:#3F4D62; text-wrap:pretty;">가운데 콜론은 잇는 실. 부모와 자녀를, 어제와 오늘을 온비가 잇습니다.</p>
       </div>
       <div style="display:flex; gap:clamp(18px,2.5vw,28px); border-top:1px solid #E6E0D1; border-bottom:1px solid #E6E0D1; padding:24px 0;">
-        <h3 style="width:44px; flex-shrink:0; font-size:20px; margin:0; color:var(--simya,#1F2A3A);">Vi</h3>
+        <h3 style="width:44px; flex-shrink:0; font-size:20px; margin:0; color:var(--simya,#1F2A3A); text-align:center;">Vi</h3>
         <p style="margin:0; font-size:15px; line-height:1.7; color:#3F4D62; text-wrap:pretty;">삶(vie). 부모님의 오늘과, 살아오신 모든 날을 온비가 함께 담습니다.</p>
       </div>
     </div>
@@ -293,32 +302,36 @@
 </section>
 
 <!-- S7 · 약속 -->
-<section style="background:#FFFFFF;">
-  <div style="max-width:1120px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:clamp(32px,5vw,90px); align-items:start;">
+<section style="position:relative; overflow:hidden; --paper:color-mix(in srgb, var(--hanji,#F5F1E6) 48%, #FFFFFF); background:linear-gradient(180deg, #FFFFFF 0%, var(--paper) 34%, var(--paper) 100%); padding:clamp(48px,6vw,96px) clamp(24px,5vw,88px);">
+  <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;">
+    <span style="position:absolute; left:-10%; top:-16%; width:52%; aspect-ratio:1; background:radial-gradient(circle, color-mix(in srgb, var(--cheongja,#4FB89E) 7%, transparent) 0%, transparent 68%);"></span>
+    <span style="position:absolute; right:-12%; bottom:-20%; width:56%; aspect-ratio:1; background:radial-gradient(circle, color-mix(in srgb, var(--noeul,#D98263) 8%, transparent) 0%, transparent 70%);"></span>
+    <span style="position:absolute; inset:0; opacity:0.028; mix-blend-mode:multiply; background-image:url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>&quot;); background-size:240px;"></span>
+  </div>
+  <div style="position:relative; max-width:1120px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:clamp(32px,5vw,90px); align-items:start;">
     <div>
       <div class="eyebrow">온비의 약속</div>
       <hr class="rule">
       <h2 style="margin:22px 0 16px;">부모님과 먼저 한 <br>세 가지 약속</h2>
-      <p style="font-size:15.5px; line-height:1.7; color:#3F4D62; margin:0 0 26px; text-wrap:pretty;">기술보다 먼저, 지키는 순서를 정했습니다.</p>
-      <a href="support.html" style="font-size:14px; font-weight:700; letter-spacing:-0.01em; text-decoration:none;">개인정보 처리방침 전문 보기 →</a>
+      <p style="font-size:15.5px; line-height:1.7; color:#3F4D62; margin:0 0 26px; text-wrap:pretty;">기술보다 먼저, <br>지키는 순서를 정했습니다.</p>
     </div>
     <div style="display:flex; flex-direction:column;">
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:clamp(18px,2.5vw,30px); padding:clamp(24px,3vw,34px) 0; border-top:1px solid #F0EBDD; align-items:start;">
-        <div aria-hidden="true" style="font-size:clamp(38px,4.2vw,54px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#EAE3D0; min-width:1.55em;">01</div>
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:clamp(18px,2.5vw,30px); padding:clamp(24px,3vw,34px) 0; border-top:1px solid #E7DFCC; align-items:start;">
+        <div aria-hidden="true" style="font-size:clamp(38px,4.2vw,54px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#DCD2B8; min-width:1.55em;">01</div>
         <div>
           <h3 style="font-size:clamp(17.5px,1.9vw,20px); margin:0 0 8px; text-wrap:balance;">부모님이 허락하셔야 시작됩니다.</h3>
-          <p style="margin:0; font-size:15px; line-height:1.7; color:#3F4D62; text-wrap:pretty;">자녀가 결제해도, 부모님이 직접 동의하지 않으면 온비는 아무것도 수집하지 않습니다.</p>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:#3F4D62; text-wrap:pretty;">자녀가 결제해도, 부모님이 직접 동의하지 않으면 <br>온비는 아무것도 수집하지 않습니다.</p>
         </div>
       </div>
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:clamp(18px,2.5vw,30px); padding:clamp(24px,3vw,34px) 0; border-top:1px solid #F0EBDD; align-items:start;">
-        <div aria-hidden="true" style="font-size:clamp(38px,4.2vw,54px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#EAE3D0; min-width:1.55em;">02</div>
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:clamp(18px,2.5vw,30px); padding:clamp(24px,3vw,34px) 0; border-top:1px solid #E7DFCC; align-items:start;">
+        <div aria-hidden="true" style="font-size:clamp(38px,4.2vw,54px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#DCD2B8; min-width:1.55em;">02</div>
         <div>
           <h3 style="font-size:clamp(17.5px,1.9vw,20px); margin:0 0 8px; text-wrap:balance;">부모님도 똑같이 보십니다.</h3>
-          <p style="margin:0; font-size:15px; line-height:1.7; color:#3F4D62; text-wrap:pretty;">자녀에게 가는 모든 소식은 부모님 화면에도 그대로 보입니다. 몰래 보는 서비스가 아닙니다.</p>
+          <p style="margin:0; font-size:15px; line-height:1.7; color:#3F4D62; text-wrap:pretty;">자녀에게 가는 모든 소식은 부모님 화면에도 그대로 보입니다. <br data-keep>몰래 보는 서비스가 아닙니다.</p>
         </div>
       </div>
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:clamp(18px,2.5vw,30px); padding:clamp(24px,3vw,34px) 0 6px; border-top:1px solid #F0EBDD; align-items:start;">
-        <div aria-hidden="true" style="font-size:clamp(38px,4.2vw,54px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#EAE3D0; min-width:1.55em;">03</div>
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:clamp(18px,2.5vw,30px); padding:clamp(24px,3vw,34px) 0 6px; border-top:1px solid #E7DFCC; align-items:start;">
+        <div aria-hidden="true" style="font-size:clamp(38px,4.2vw,54px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#DCD2B8; min-width:1.55em;">03</div>
         <div>
           <h3 style="font-size:clamp(17.5px,1.9vw,20px); margin:0 0 8px; text-wrap:balance;">지우고 싶으면 지워집니다.</h3>
           <p style="margin:0; font-size:15px; line-height:1.7; color:#3F4D62; text-wrap:pretty;">이야기든 기록이든, 부모님이 원하시면 언제든 삭제됩니다.</p>
@@ -343,56 +356,33 @@
           <span style="display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:700; letter-spacing:0.06em; color:#2A7360;"><span style="width:7px; height:7px; border-radius:999px; background:var(--cheongja,#4FB89E);"></span>지금</span>
           <span style="font-size:12px; font-weight:700; color:#9AA6B2; letter-spacing:0.04em;">2026</span>
         </div>
-        <div role="img" aria-label="온비 모바일 앱 컨셉" style="position:relative; border-radius:16px; background:linear-gradient(160deg,#F4EEDD 0%,#FBF8EF 100%); aspect-ratio:1/0.78; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <span aria-hidden="true" style="position:absolute; top:15%; left:50%; transform:translateX(-50%); width:66%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle, rgba(79,184,158,0.16) 0%, rgba(79,184,158,0) 68%);"></span>
-          <div style="position:relative; width:43%; border-radius:20px; background:#20293A; padding:6px 6px 7px; box-shadow:0 26px 46px -20px rgba(31,42,58,0.55);">
-            <div style="border-radius:14px; background:#FBFAF5; padding:10px 9px 12px;">
-              <div style="width:24%; height:4px; border-radius:99px; background:#20293A; opacity:0.8; margin:0 auto 9px;"></div>
-              <div style="font-size:6px; font-weight:700; letter-spacing:0.04em; color:#94A0AC;">오늘의 안부</div>
-              <div style="display:flex; align-items:center; gap:4px; margin:4px 0 8px;"><span class="ov-glow" style="width:7px; height:7px; border-radius:99px; background:#4FB89E; box-shadow:0 0 0 3px rgba(79,184,158,0.18);"></span><span style="font-size:9px; font-weight:800; color:#1F2A3A;">평안해요</span></div>
-              <div style="border-radius:7px; background:#EEF5F1; border:1px solid #DCEAE3; padding:6px 7px; margin-bottom:6px;"><div style="font-size:6px; font-weight:800; color:#2A7360;">금요편지 도착</div><div style="height:3px; width:78%; border-radius:9px; background:#CFE0D8; margin-top:4px;"></div></div>
-              <div style="display:flex; align-items:flex-end; gap:2px; height:15px;"><span class="ov-wave" style="flex:1; height:100%; background:#B7C2CD; border-radius:9px; animation-delay:0s;"></span><span class="ov-wave" style="flex:1; height:100%; background:#4FB89E; border-radius:9px; animation-delay:.13s;"></span><span class="ov-wave" style="flex:1; height:100%; background:#4FB89E; border-radius:9px; animation-delay:.26s;"></span><span class="ov-wave" style="flex:1; height:100%; background:#4FB89E; border-radius:9px; animation-delay:.39s;"></span><span class="ov-wave" style="flex:1; height:100%; background:#8FCFBD; border-radius:9px; animation-delay:.52s;"></span><span class="ov-wave" style="flex:1; height:100%; background:#B7C2CD; border-radius:9px; animation-delay:.65s;"></span><span class="ov-wave" style="flex:1; height:100%; background:#B7C2CD; border-radius:9px; animation-delay:.78s;"></span></div>
-            </div>
-          </div>
+        <div style="position:relative; border-radius:16px; aspect-ratio:1/0.78; overflow:hidden; background:#F4EEDD;">
+          <video src="assets/videos/vision-app.mp4" autoplay loop muted playsinline aria-label="온비 모바일 앱 컨셉 영상" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
         </div>
         <h3 style="font-size:20px; margin:24px 0 8px;">모바일 앱</h3>
-        <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">온 가족이 같은 화면에서 부모님의 하루를 봅니다.</p>
+        <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">온 가족이 같은 화면에서 부모님의 하루를 봅니다. <br data-keep>안부가 흩어지지 않고 이야기로 남아요.</p>
       </div>
       <div style="position:relative; background:#FFFFFF; border-radius:24px; padding:26px 22px 30px; border:1px solid #E6E0D1; display:flex; flex-direction:column;">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
           <span style="display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:700; letter-spacing:0.06em; color:#2A7360;"><span style="width:7px; height:7px; border-radius:999px; background:var(--cheongja,#4FB89E); opacity:0.55;"></span>다음</span>
           <span style="font-size:12px; font-weight:700; color:#9AA6B2; letter-spacing:0.04em;">2027</span>
         </div>
-        <div role="img" aria-label="온비 살핌 디바이스 컨셉" style="position:relative; border-radius:16px; background:linear-gradient(160deg,#EEF0F1 0%,#F8F7F4 100%); aspect-ratio:1/0.78; overflow:hidden; display:flex; align-items:flex-end; justify-content:center;">
-          <span class="ov-ripple" aria-hidden="true" style="position:absolute; top:16%; left:50%; width:66%; aspect-ratio:1; border:1.5px solid rgba(79,184,158,0.45); border-radius:50%;"></span>
-          <span aria-hidden="true" style="position:absolute; top:12%; left:50%; transform:translateX(-50%); width:82%; aspect-ratio:1; border:1.5px solid rgba(79,184,158,0.18); border-radius:50%;"></span>
-          <span aria-hidden="true" style="position:absolute; top:22%; left:50%; transform:translateX(-50%); width:56%; aspect-ratio:1; border:1.5px solid rgba(79,184,158,0.30); border-radius:50%;"></span>
-          <span aria-hidden="true" style="position:absolute; bottom:11%; left:50%; transform:translateX(-50%); width:52%; height:7%; border-radius:50%; background:rgba(31,42,58,0.14); filter:blur(3px);"></span>
-          <div class="ov-float" style="position:relative; width:40%; aspect-ratio:1/1.18; margin-bottom:13%; border-radius:47% 47% 42% 42% / 55% 55% 42% 42%; background:radial-gradient(120% 85% at 38% 22%, #FFFFFF 0%, #EDF0F1 60%, #D9DFE1 100%); box-shadow:inset 0 6px 12px rgba(255,255,255,0.7), inset 0 -10px 18px rgba(31,42,58,0.08), 0 18px 30px -16px rgba(31,42,58,0.35);">
-            <span class="ov-glow" aria-hidden="true" style="position:absolute; top:27%; left:50%; transform:translateX(-50%); width:44%; height:8%; border-radius:99px; background:#4FB89E; box-shadow:0 0 10px 1px rgba(79,184,158,0.6);"></span>
-          </div>
+        <div style="position:relative; border-radius:16px; aspect-ratio:1/0.78; overflow:hidden; background:#EEF0F1;">
+          <video src="assets/videos/vision-device.mp4" autoplay loop muted playsinline aria-label="온비 살핌 디바이스 컨셉 영상" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
         </div>
         <h3 style="font-size:20px; margin:24px 0 8px;">살핌 디바이스</h3>
-        <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">탁상 위에 놓는, 버튼 하나로 이어지는 안부 단말기.</p>
+        <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">버튼 하나로 이어지는 탁상 위 안부. <br data-keep>어제 나눈 이야기를 잊지 않고 먼저 말을 건네요.</p>
       </div>
       <div style="position:relative; background:#FFFFFF; border-radius:24px; padding:26px 22px 30px; border:1px solid #E6E0D1; display:flex; flex-direction:column;">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
           <span style="display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:700; letter-spacing:0.06em; color:#2A7360;"><span style="width:7px; height:7px; border-radius:999px; background:var(--cheongja,#4FB89E); opacity:0.3;"></span>그 다음</span>
           <span style="font-size:12px; font-weight:700; color:#9AA6B2; letter-spacing:0.04em;">2030+</span>
         </div>
-        <div role="img" aria-label="온비 동반자 로봇 컨셉" style="position:relative; border-radius:16px; background:linear-gradient(160deg,#E4F1EA 0%,#F4FAF6 100%); aspect-ratio:1/0.78; overflow:hidden; display:flex; align-items:flex-end; justify-content:center;">
-          <span aria-hidden="true" style="position:absolute; bottom:10%; left:50%; transform:translateX(-50%); width:52%; height:7%; border-radius:50%; background:rgba(31,42,58,0.14); filter:blur(3px);"></span>
-          <div class="ov-float" style="position:relative; width:50%; aspect-ratio:1/1.02; margin-bottom:12%; border-radius:44% 44% 40% 40% / 50% 50% 42% 42%; background:radial-gradient(120% 90% at 40% 22%, #FFFFFF 0%, #EEF3F0 62%, #DCE6E1 100%); box-shadow:inset 0 6px 12px rgba(255,255,255,0.75), 0 18px 30px -16px rgba(31,42,58,0.32);">
-            <span aria-hidden="true" style="position:absolute; top:-17%; left:50%; transform:translateX(-50%); width:5%; height:15%; background:#C9D4CE; border-radius:99px;"></span>
-            <span class="ov-glow" aria-hidden="true" style="position:absolute; top:-23%; left:50%; transform:translateX(-50%); width:11%; aspect-ratio:1; border-radius:99px; background:#4FB89E; box-shadow:0 0 8px rgba(79,184,158,0.6);"></span>
-            <div style="position:absolute; top:21%; left:50%; transform:translateX(-50%); width:66%; height:44%; border-radius:15px; background:linear-gradient(160deg,#233043 0%,#1A2431 100%); box-shadow:inset 0 2px 6px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; gap:15%;">
-              <span class="ov-blink" style="width:15%; aspect-ratio:1; border-radius:99px; background:#4FB89E; box-shadow:0 0 6px rgba(79,184,158,0.7);"></span>
-              <span class="ov-blink" style="width:15%; aspect-ratio:1; border-radius:99px; background:#4FB89E; box-shadow:0 0 6px rgba(79,184,158,0.7);"></span>
-            </div>
-          </div>
+        <div style="position:relative; border-radius:16px; aspect-ratio:1/0.78; overflow:hidden; background:#E4F1EA; container-type:inline-size;">
+          <video src="assets/videos/vision-robot.mp4" autoplay loop muted playsinline aria-label="온비 동반자 로봇 컨셉 영상" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
         </div>
-        <h3 style="font-size:20px; margin:24px 0 8px;">동반자 로봇</h3>
-        <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">곁에서 말을 걸고, 필요할 땐 함께 움직입니다.</p>
+        <h3 style="font-size:20px; margin:24px 0 8px;">컴패니언 로봇</h3>
+        <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">곁에서 말을 걸고, 필요할 땐 함께 움직입니다. <br data-keep>좋아하시는 노래까지 기억하는 동반자예요.</p>
       </div>
     </div>
     <p style="text-align:center; font-size:15px; font-weight:600; color:#6A7789; line-height:1.7; margin:clamp(36px,4vw,48px) auto 0; text-wrap:pretty;">먼 이야기 같지만, 온비는 지금 부모님 곁의 안부에서 그 길을 시작합니다.</p>
@@ -402,7 +392,7 @@
 <!-- S8 · CTA -->
 <section data-hide-consult style="background:#22384F; color:#FFF; text-align:center;">
   <div style="max-width:720px; margin:0 auto;">
-    <h2 style="margin:0;">부모님의 오늘부터 <br>시작하세요.</h2>
+    <h2 style="margin:0;">이번 주, 부모님의 안부부터 <br>시작하세요.</h2>
     <p style="font-size:clamp(15px,1.4vw,17px); line-height:1.7; color:rgba(255,255,255,0.7); margin:20px auto 34px; max-width:520px; text-wrap:pretty;">부모님과 가족에게 맞는 방법을 온비가 함께 찾아드립니다.</p>
     <div style="display:flex; justify-content:center;">
       <a class="btn" href="pricing.html" style="white-space:nowrap;">함께하는 방법 보기 →</a>
@@ -416,7 +406,7 @@
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
         <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center;"></span></a>
-        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간. <br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</p>
+        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">매주의 안부가 온 가족의 기억이 되는 곳.</p>
       </div>
 
     </div>
@@ -487,7 +477,6 @@
     });
   })();
 </script>
-
 <script>
   (function () {
     var root = document.getElementById('navRoot');
