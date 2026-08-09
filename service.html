@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>서비스 · On:Vi — 부모님은 통화만, 기억은 온 가족이 함께</title>
+<title>서비스 · On:Vi — "괜찮다"는 대답 너머의 한 주</title>
 
 <link rel="stylesheet" href="shared/ds/tokens/fonts.css">
 <link rel="stylesheet" href="shared/ds/tokens/colors.css">
@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="shared/ds/tokens/typography.css">
 <link rel="stylesheet" href="shared/ds/tokens/spacing.css">
 <link rel="stylesheet" href="shared/ds/styles.css">
+<script src="shared/letters-v6.js"></script>
+<script src="shared/letter-ui.js" defer></script>
 <style>
   *,*::before,*::after{ box-sizing:border-box; }
   body{ margin:0; background:var(--hanji,#F5F1E6); color:var(--simya,#1F2A3A); font-family:var(--font-ui),'Pretendard Variable',Pretendard,sans-serif; letter-spacing:-0.012em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
@@ -94,6 +96,26 @@
   .panel-foot{ margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .panel-foot a{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72); min-height:44px; }
   .panel-foot a:hover{ color:#FFF; background:none; }
+  .nav-user-wrap{ position:relative; flex-shrink:0; }
+  .nav-user{ cursor:pointer; font-family:inherit; padding:6px 14px 6px 6px; }
+  .nav-caret{ width:6px; height:6px; border-right:1.5px solid rgba(255,255,255,0.6); border-bottom:1.5px solid rgba(255,255,255,0.6); flex-shrink:0; margin-left:1px; transition:transform .22s; transform:rotate(45deg) translateY(-1px); }
+  .nav-user[aria-expanded="true"] .nav-caret{ transform:rotate(-135deg) translateY(1px); }
+  .nav-menu{ position:absolute; right:0; top:calc(100% + 10px); width:264px; display:flex; flex-direction:column; gap:2px; padding:8px; background:rgba(31,42,58,0.96); border:1px solid rgba(255,255,255,0.14); border-radius:20px; box-shadow:0 24px 54px -22px rgba(31,42,58,0.6); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  .nav-menu-main{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-radius:14px; background:rgba(79,184,158,0.16); min-height:44px; }
+  .nav-menu-main:hover{ background:rgba(79,184,158,0.28); }
+  .nav-menu-main > span:first-child{ display:flex; flex-direction:column; gap:2px; }
+  .nav-menu-main .t{ font-size:14.5px; font-weight:700; color:#FFFFFF; letter-spacing:-0.015em; }
+  .nav-menu-main .d{ font-size:12px; color:rgba(255,255,255,0.55); }
+  .nav-menu-main .arr{ font-size:13px; color:var(--cheongja,#4FB89E); flex-shrink:0; }
+  .nav-menu-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; border-radius:14px; font-size:14px; font-weight:600; color:rgba(255,255,255,0.9); min-height:44px; }
+  .nav-menu-row:hover{ background:rgba(255,255,255,0.12); }
+  .nav-menu-row .chev{ font-size:13px; color:rgba(255,255,255,0.4); flex-shrink:0; }
+  .nav-menu-out{ display:flex; width:100%; align-items:center; padding:13px 16px; border-radius:14px; background:none; border:none; font-family:inherit; font-size:14px; font-weight:600; color:rgba(255,255,255,0.55); cursor:pointer; text-align:left; min-height:44px; transition:color .2s; }
+  .nav-menu-out:hover{ color:#FFFFFF; background:rgba(255,255,255,0.12); }
+  .panel-user{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .panel-space{ background:rgba(79,184,158,0.2); font-weight:700 !important; color:#FFFFFF !important; padding:11px 16px !important; }
+  .panel-space:hover{ background:rgba(79,184,158,0.32) !important; }
+  .panel-my{ padding:11px 12px !important; }
   footer br[data-m]{ display:none; }
   @media (max-width: 760px){
     footer br[data-m]{ display:inline !important; }
@@ -112,37 +134,103 @@
   [data-onvi-modal] input::placeholder{ color:#6A7789; }
   [data-onvi-modal] input:focus{ outline:none; background:#FFFFFF; border-color:#4FB89E !important; box-shadow:0 0 0 4px #EAF4EF; }
   br[data-keep]{ display:inline !important; }
+  [data-onvi-consult] [data-m-only]{ display:none; }
+  @media (max-width: 760px){
+    [data-onvi-consult]{ right:20px !important; bottom:20px !important; }
+    [data-onvi-consult] > button{ width:56px !important; height:56px !important; padding:0 !important; flex-direction:column !important; gap:1px !important; }
+    [data-onvi-consult] [data-pc-only]{ display:none !important; }
+    [data-onvi-consult] [data-m-only]{ display:block !important; }
+  }
+  .ovm-dlg{ position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:min(680px, calc(100vw - 32px)); height:86vh; border-radius:24px; z-index:620; animation:ovmIn .18s cubic-bezier(.22,.61,.36,1); }
+  .ovm-grab{ display:none; }
+  @keyframes ovmIn{ from{ opacity:0; transform:translate(-50%,-50%) scale(0.98); } to{ opacity:1; transform:translate(-50%,-50%) scale(1); } }
+  @keyframes ovmUp{ from{ transform:translateY(24px); opacity:0; } to{ transform:none; opacity:1; } }
+  @keyframes ovmAct{ from{ opacity:0; transform:translateX(10px); } to{ opacity:1; transform:none; } }
+  .ovm-act{ animation:ovmAct .18s cubic-bezier(.22,.61,.36,1); }
+  @media (max-width: 760px){
+    .ovm-dlg{ left:0; top:auto; bottom:0; transform:none; width:100vw; height:92vh; border-radius:24px 24px 0 0; animation:ovmUp .18s cubic-bezier(.22,.61,.36,1); }
+    .ovm-grab{ display:block; }
+    .ovm-step span{ display:none; }
+    .ovc-care{ grid-template-columns:1fr !important; }
+  }
+  @media (max-width: 360px){ .ovm-spread{ grid-template-columns:1fr !important; } }
+  @media (prefers-reduced-motion: reduce){ .ovm-dlg, .ovm-act{ animation:none !important; } }
   /* 페이지 고유 */
     *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body { word-break: keep-all; overflow-wrap: break-word; margin: 0; background: #F5F1E6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     a { color: #2A7360; } a:hover { color: #1F5D4D; }
-    .ov-rv { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
-    .ov-rv.ov-on { opacity: 1; transform: none; }
-    .ov-dots { display: none; justify-content: center; gap: 7px; margin-top: 18px; }
-    @media (prefers-reduced-motion: reduce) { .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; } }
-    @media (max-width: 760px) {
-      [data-cta] { flex-wrap: nowrap !important; gap: 10px !important; }
-      [data-cta] > a, [data-cta] > button { flex: 1 1 0; justify-content: center !important; padding: 13px 10px !important; font-size: 13.5px !important; white-space: nowrap; }
-      [data-ov-cards] { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px !important; margin: 0 -24px !important; padding: 0 24px 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-      [data-ov-cards]::-webkit-scrollbar { display: none; }
-      [data-ov-cards] > div, [data-ov-cards] > a { flex: 0 0 82%; scroll-snap-align: center; }
-      [data-ov-cards] > .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .ov-dots { display: flex; margin: 16px 0 28px; }
-      h1 br, h2 br, h3 br, blockquote br, p br { display:none; }
-      section { padding-top:72px !important; padding-bottom:72px !important; }
-      section:first-of-type { padding-top:118px !important; }
-      figure { margin-top:0 !important; }
-      [style*="repeat(3,1fr)"], [style*="repeat(3, 1fr)"] { grid-template-columns:1fr !important; }
-      [style*="aspect-ratio:21/9"] { aspect-ratio:4/3 !important; }
-      [style*="grid-template-columns:repeat(2"] { grid-template-columns:1fr !important; }
+    br[data-m] { display: none; }
+    @keyframes ovChev { 0% { opacity: 0; transform: translateY(-6px); } 45% { opacity: 1; } 100% { opacity: 0; transform: translateY(6px); } }
+    .ov-chev { animation: ovChev 2s ease-in-out infinite; }
+    .ov-slider { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 8px 24px 18px; }
+    .ov-slider::-webkit-scrollbar { display: none; }
+    .ov-slide { scroll-snap-align: center; }
+    .ov-week { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; position: relative; }
+    @media (max-width: 1180px) { .ov-week { gap: 14px; } .ov-week > div p { font-size: 13px; } }
+    @media (max-width: 1080px) {
+      .ov-week { grid-template-columns: repeat(3, minmax(0,1fr)) !important; gap: 14px !important; }
+      .ov-week > div { background: rgba(255,255,255,0.9); border-radius: 18px; padding: 20px 16px; box-shadow: 0 2px 12px rgba(31,42,58,0.06); }
+      .ov-week-line { display: none !important; }
     }
+    @media (max-width: 760px) { .ov-week-line { display: block !important; } }
+    .ov-two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) {
+      /* 모바일: 세로 나열 대신 가로 스와이프로 길이 축소 */
+      .ov-week {
+        display: flex !important; grid-template-columns: none !important;
+        overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px !important;
+        margin: 0 -20px !important; padding: 0 20px 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+      }
+      .ov-week::-webkit-scrollbar { display: none; }
+      .ov-week > div { flex: 0 0 68%; scroll-snap-align: center; display: flex !important; grid-template-columns: none !important; flex-direction: column !important; align-items: center !important; text-align: center !important; background: #FFFFFF; border-radius: 18px; padding: 22px 18px; box-shadow: 0 2px 12px rgba(31,42,58,0.06); }
+      .ov-week > div > div:first-child { grid-row: auto !important; width: 62px !important; height: 62px !important; }
+      .ov-week > div p { max-width: none !important; }
+      .ov-week-line { display: none !important; }
+      #ready [style*="64px 1fr 56px"] { padding: 20px 20px !important; }
+      #ready [style*="64px 1fr 56px"] p { font-size: 14.5px !important; line-height: 1.65 !important; }
+    }
+    .ov-gslider::-webkit-scrollbar { display: none; }
+    @media (max-width: 900px) { .ov-garrow { display: none !important; }
+      .ov-gslider { margin: 0 -20px; padding-left: 20px; padding-right: 20px; } }
+    @media (max-width: 560px) { .ov-gcard { width: 74vw !important; } }
+    .ov-swipe-hint { display: none; }
+    @media (max-width: 700px) { .ov-swipe-hint { display: flex; justify-content: center; gap: 7px; margin-top: 6px; font-size: 12px; color: #6A7789; } }
+    @media (max-width: 900px) {
+      .ov-week { grid-template-columns: 1fr !important; gap: 8px; }
+      .ov-two { grid-template-columns: 1fr; }
+      .ov-cards { grid-template-columns: 1fr !important; }
+      #ready [style*="64px 1fr 56px"] { grid-template-columns: 48px 1fr !important; }
+      #ready [style*="64px 1fr 56px"] > span:last-child { display: none !important; }
+    }
+    @media (max-width: 760px) {
+      h1 br, h2 br, h3 br, blockquote br, p br { display: none; }
+      br[data-m], br[data-keep] { display: inline !important; }
+      section { padding-top: 72px !important; padding-bottom: 72px !important; }
+      section:first-of-type { padding-top: 0 !important; padding-bottom: 0 !important; }
+      .ov-slide { width: min(76vw, 300px) !important; }
+      .ov-preview { max-height: 78px !important; }
+      #letters h2 br { display: inline !important; }
+      [data-cta] { flex-wrap: nowrap !important; gap: 10px !important; }
+      [data-cta] > a { flex: 1 1 0; height: 52px !important; padding: 0 10px !important; font-size: 14px !important; white-space: nowrap; }
+      .ov-week { grid-template-columns: 1fr !important; gap: 26px !important; }
+      .ov-week > div { display: grid !important; grid-template-columns: 62px 1fr; gap: 0 16px; text-align: left !important; align-items: start; }
+      .ov-week > div > div:first-child { width: 62px !important; height: 62px !important; grid-row: 1 / span 3; }
+      .ov-week > div > div:first-child svg { width: 28px; height: 28px; }
+      .ov-week > div > div:nth-child(2) { margin-top: 2px !important; }
+      .ov-week > div p { max-width: none !important; margin-top: 5px !important; }
+      .ov-week-line { left: 30px !important; right: auto !important; top: 40px !important; bottom: 40px !important; width: 1.5px; height: auto !important; background: repeating-linear-gradient(180deg, #CBBFA0 0 6px, transparent 6px 12px) !important; }
+    }
+    @media (prefers-reduced-motion: reduce) { .ov-chev { animation: none !important; opacity: 1 !important; } html { scroll-behavior: auto; } }
   
   /* 디자인 툴 hover */
-  .hv1:hover{ background:var(--action-primary-hover); transform:translateY(-2px); }
+  .hv1:hover{ transform:translateY(-2px); filter:saturate(1.12); box-shadow:0 26px 50px -14px rgba(79,184,158,0.78), inset 0 1px 0 rgba(255,255,255,0.55); }
   .hv2:hover{ color:var(--simya); border-color:#D5CDB9; }
   .hv3:hover{ background:var(--action-primary-hover); box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); }
   .hv4:hover{ background:var(--action-primary-hover); }
-  .hv5:hover{ border-color:var(--cheongja); background:#FFFFFF; }
+  .hv5:hover{ transform:translateY(3px); }
+  .hv6:hover{ transform:translateY(-4px); box-shadow:0 16px 40px rgba(31,42,58,0.16); }
+  .hv7:hover{ transform:translateY(-6px); }
 </style>
 </head>
 <body>
@@ -159,7 +247,17 @@
       <a href="support.html">고객지원</a>
     </div>
     <div class="nav-cta">
-      <a class="nav-user" id="navUser" href="mypage.html" hidden><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span></a>
+      <div class="nav-user-wrap" id="navUser" hidden>
+        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
+        <div class="nav-menu" id="navMenu" role="menu" hidden>
+          <a href="https://my.onvi.kr" role="menuitem" class="nav-menu-main">
+            <span><span class="t">가족 공간 열기</span><span class="d">편지 / 답장 / 이야기 기록</span></span>
+            <span aria-hidden="true" class="arr">↗</span>
+          </a>
+          <a href="mypage.html" role="menuitem" class="nav-menu-row"><span>마이페이지</span><span aria-hidden="true" class="chev">›</span></a>
+          <button type="button" role="menuitem" class="nav-menu-out" id="navLogout">로그아웃</button>
+        </div>
+      </div>
       <a class="start" id="navLogin" href="login.html">로그인</a>
       <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" id="navBurger"><span><span></span><span></span><span></span></span></button>
     </div>
@@ -170,15 +268,20 @@
     <a href="brand.html">브랜드</a>
     <a href="support.html">고객지원</a>
     <div class="panel-foot">
-      <a href="mypage.html" id="panelUser" hidden></a>
+      <div class="panel-user" id="panelUser" hidden>
+        <a href="https://my.onvi.kr" class="panel-space">가족 공간 열기 <span aria-hidden="true">↗</span></a>
+        <a href="mypage.html" class="panel-my">마이페이지 ›</a>
+      </div>
       <a href="login.html" id="panelLogin">로그인 ›</a>
     </div>
   </div>
 </div>
-  <div data-onvi-consult="" id="consultFab" hidden style="position:fixed; right:20px; bottom:20px; z-index:500;">
-  <button class="hv1" type="button" id="consultOpen" aria-label="무료 상담 신청" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; width:56px; height:56px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; border:none; cursor:pointer; box-shadow:0 16px 40px -14px rgba(79,184,158,0.75); animation:onviConsultIn .45s cubic-bezier(.22,.61,.36,1); transition:background .2s, transform .2s;">
-    <span style="font-size:13.5px; font-weight:700; letter-spacing:-0.01em; line-height:1.2;">상담</span>
-    <span aria-hidden="true" style="font-size:10px; opacity:0.85; line-height:1;">무료</span>
+  <div data-onvi-consult="" id="consultFab" hidden style="position:fixed; right:28px; bottom:28px; z-index:500;">
+  <button class="hv1" type="button" id="consultOpen" aria-label="무료 상담 신청" style="display:inline-flex; align-items:center; justify-content:center; gap:9px; height:56px; padding:0 26px; border-radius:999px; background:linear-gradient(120deg, #5FD3B4 0%, #86E3C4 42%, #FFD79A 100%); color:#12332B; border:1px solid rgba(255,255,255,0.55); cursor:pointer; box-shadow:0 18px 40px -14px rgba(79,184,158,0.7), inset 0 1px 0 rgba(255,255,255,0.45); animation:onviConsultIn .45s cubic-bezier(.22,.61,.36,1); transition:box-shadow .25s, transform .25s, filter .25s;">
+    <span data-pc-only="" aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:999px; background:#FFFFFF; color:#2A7360; font-size:12px; line-height:1; box-shadow:0 2px 6px rgba(18,51,43,0.18);"><svg viewBox="0 0 24 24" width="13" height="13" fill="#E8749B" aria-hidden="true"><path d="M12 20.5 C6.5 16.8 3.5 13.6 3.5 10.2 3.5 7.6 5.5 5.8 7.9 5.8 c1.6 0 3.1 0.8 4.1 2.2 1-1.4 2.5-2.2 4.1-2.2 2.4 0 4.4 1.8 4.4 4.4 0 3.4-3 6.6-8.5 10.3 z"></path></svg></span>
+    <span data-pc-only="" style="font-size:15px; font-weight:700; letter-spacing:-0.01em; line-height:1.2; color:#FFFFFF; text-shadow:0 1px 6px rgba(18,51,43,0.35);">무료 상담 신청</span>
+    <span data-m-only="" style="font-size:13.5px; font-weight:700; letter-spacing:-0.01em; line-height:1.2;">상담</span>
+    <span data-m-only="" aria-hidden="true" style="font-size:10px; opacity:0.85; line-height:1;">무료</span>
   </button>
 </div>
 <div data-onvi-modal="" id="consultModal" hidden role="dialog" aria-modal="true" aria-label="무료 상담 신청" style="position:fixed; inset:0; z-index:600; display:flex; align-items:center; justify-content:center; padding:16px;">
@@ -218,218 +321,324 @@
   </div>
 </div>
 
-  <!-- ── HERO ── -->
-  <div class="stack">
-<section style="padding:150px 0 0; text-align:center;">
-    <div style="width:min(1160px,90%); margin:0 auto;">
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">온비가 함께하는 방법</div>
-      <h1 style="font-size:clamp(36px,4.8vw,60px); line-height:1.16; letter-spacing:-0.035em; font-weight:700; margin:22px auto 24px; max-width:860px; color:var(--simya); text-wrap:balance;">부모님은 통화만. <br>기억은 온 가족이 함께 쌓습니다.</h1>
-      <p style="font-size:clamp(16px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; max-width:540px; margin:0 auto 56px; text-wrap:pretty;">준비물은 늘 하던 전화 한 통뿐. 이야기를 남기고, 답하고, 엮는 일은 온비가 합니다.</p>
-      <div style="border-radius:20px; overflow:hidden; aspect-ratio:21/9; box-shadow:0 40px 80px -40px rgba(31,42,58,0.4);"><img src="assets/photos/care-voice2.jpg" alt="안부 전화를 받으며 함께 웃는 노부부" style="width:100%; height:100%; object-fit:cover; object-position:center 42%; display:block;"></div>
+  <!-- S1 오프닝 · 아빠 편지 왔다 -->
+  <section id="s1" style="position:relative; overflow:hidden; min-height:clamp(600px,88vh,820px); display:flex; align-items:flex-end;">
+    <div aria-hidden="true" style="position:absolute; inset:0; background-image:url('assets/photos/service-hero-breakfast.jpg'); background-size:cover; background-position:center 42%;"></div>
+    <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0.14) 34%, rgba(31,42,58,0.70) 100%);"></div>
+    <div aria-hidden="true" style="position:absolute; inset:0; background:radial-gradient(ellipse 62% 48% at 30% 42%, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0) 74%);"></div>
+    <div style="position:relative; width:min(1160px,92%); margin:0 auto; padding:150px 0 clamp(116px,12vw,150px);">
+      <div style="max-width:640px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#D6F3E9; text-shadow:0 1px 10px rgba(31,42,58,0.8);">매주 금요일, 편지 한 통</div>
+        <h1 style="font-family:var(--font-letter); font-size:clamp(29px,4.4vw,50px); line-height:1.35; font-weight:700; letter-spacing:-0.02em; color:#FFFFFF; margin:16px 0 12px; text-shadow:0 2px 20px rgba(31,42,58,0.55); text-wrap:balance;">"아빠 편지 왔다!" <br data-keep="">온 가족이 모이는 한마디예요.</h1>
+        <p style="font-size:clamp(15.5px,1.6vw,18px); line-height:1.7; color:rgba(255,255,255,0.88); margin:0 0 28px; text-shadow:0 1px 10px rgba(31,42,58,0.5);">편지 하나로 시작되는 가족의 대화, 온비의 금요편지예요.</p>
+      </div>
+    </div>
+    <div style="position:absolute; left:0; right:0; bottom:clamp(22px,3vw,38px); display:flex; justify-content:center; pointer-events:none;">
+      <a class="hv5" href="#letters" data-ev="cta_click" data-ev-pos="hero_scroll" aria-label="편지 읽어보기" style="pointer-events:auto; display:inline-flex; flex-direction:column; align-items:center; gap:9px; padding:12px 20px; min-height:44px; border-radius:14px; text-decoration:none; transition:transform .25s;">
+        <span style="font-size:12.5px; font-weight:700; letter-spacing:0.12em; color:#FFFFFF; text-shadow:0 1px 10px rgba(31,42,58,0.6);">편지 읽어보기</span>
+        <span style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+          <svg class="ov-chev" width="16" height="10" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M1 1.5 L9 10 L17 1.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <svg class="ov-chev" width="16" height="10" viewBox="0 0 18 12" fill="none" aria-hidden="true" style="animation-delay:.3s;"><path d="M1 1.5 L9 10 L17 1.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"></path></svg>
+        </span>
+      </a>
     </div>
   </section>
 
-  <!-- ── 카드 스택 ── -->
   <div style="width:calc(100% - 40px); max-width:1880px; margin:20px auto 0; display:flex; flex-direction:column; gap:20px; padding-bottom:20px;">
 
-  <!-- ── 작동 4단계 ── -->
-  <section id="lifebook" style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF);">
-    <div style="width:100%; max-width:1160px; margin:0 auto;">
-      <div style="max-width:640px; margin-bottom:56px;">
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">매주의 순환</div>
-        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px 0 0;">
-        <h2 style="font-size:clamp(28px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 16px; color:var(--simya); text-wrap:balance;">매주 반복되는, <br>단순하고 다정한 순환.</h2>
-        <p style="font-size:clamp(16px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; margin:0; text-wrap:pretty;">네 단계가 매주 돌고, 그 이야기가 모여 인생책이 됩니다.</p>
-      </div>
-      <div data-ov-cards="" data-ov-dots="" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:16px;">
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:30px 26px;">
-          <div style="font-size:13px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja); margin-bottom:16px;">01</div>
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 9px; color:var(--simya);">매주 안부 통화</h3>
-          <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">온비가 부모님께 전화를 걸어 한 주의 이야기를 다정하게 여쭙습니다.</p>
-        </div>
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:30px 26px;">
-          <div style="font-size:13px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja); margin-bottom:16px;">02</div>
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 9px; color:var(--simya);">한 편의 편지로 도착</h3>
-          <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">가장 따뜻한 순간이 금요편지가 되어 온 가족에게 전해집니다.</p>
-        </div>
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:30px 26px;">
-          <div style="font-size:13px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja); margin-bottom:16px;">03</div>
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 9px; color:var(--simya);">온 가족이 답장</h3>
-          <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">댓글과 음성으로 답장을 남깁니다. TV 보듯이 아니라, 대화하듯이.</p>
-        </div>
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:30px 26px;">
-          <div style="font-size:13px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja); margin-bottom:16px;">04</div>
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 9px; color:var(--simya);">다음 통화에 다시</h3>
-          <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">가족의 반응이 다음 통화에 반영됩니다. 대화가 끊기지 않고 순환해요.</p>
-        </div>
-      </div>
-      <div style="display:flex; align-items:center; gap:12px; padding:16px 20px; background:var(--saebyeok); border-radius:14px; margin-top:20px; max-width:480px;">
-        <span style="width:8px; height:8px; border-radius:999px; background:var(--cheongja); flex-shrink:0;"></span>
-        <span style="font-size:14.5px; font-weight:600; color:#2A7360; letter-spacing:-0.01em;">이렇게 계절이 지나면 인생책이 엮이고, 다음 권으로 이어집니다.</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 금요편지 샘플 전문 ── -->
-  <section id="sample" style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:#FBF8EF;">
-    <div style="width:100%; max-width:1160px; margin:0 auto;">
-      <div style="text-align:center; max-width:600px; margin:0 auto 48px;">
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">금요편지 한 통</div>
+  <!-- S2 금요편지 쇼케이스 -->
+  <section id="letters" style="position:relative; overflow:hidden; background:#FFFFFF; border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <span aria-hidden="true" style="position:absolute; left:-10%; top:-18%; width:52%; aspect-ratio:1; background:radial-gradient(circle, color-mix(in srgb, var(--cheongja) 7%, transparent) 0%, transparent 68%); pointer-events:none;"></span>
+    <span aria-hidden="true" style="position:absolute; right:-12%; bottom:-22%; width:56%; aspect-ratio:1; background:radial-gradient(circle, color-mix(in srgb, var(--noeul) 8%, transparent) 0%, transparent 70%); pointer-events:none;"></span>
+    <div style="position:relative; width:min(1160px,94%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:38px; padding:0 3%;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">먼저 받아본 가족들</div>
         <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
-        <h2 style="font-size:clamp(26px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 16px; color:var(--simya); text-wrap:balance;">편지 한 통을, <br>미리 읽어보세요.</h2>
-        <p style="font-size:clamp(15.5px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; margin:0; text-wrap:pretty;">부모님이 들려주신 이야기를 온비가 이렇게 옮겨 적습니다. 실제로 가족에게 도착하는 편지예요.</p>
+        <blockquote style="margin:26px auto 14px; padding:0; max-width:680px; font-family:var(--font-letter); font-size:clamp(23px,3.3vw,36px); line-height:1.55; font-weight:700; letter-spacing:-0.015em; color:var(--simya); text-wrap:balance;">"평생 안 하시던 얘기를, <br>편지에서 처음 봤어요."</blockquote>
+        <p style="font-size:14px; color:#6A7789; margin:0;">— 아버지의 편지를 받는 따님, 김○○ 님</p>
       </div>
-      <article style="max-width:720px; margin:0 auto; background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:clamp(30px,5vw,64px); box-shadow:0 40px 80px -44px rgba(31,42,58,0.32);">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; padding-bottom:26px; border-bottom:1px solid #F0EBDD; margin-bottom:34px;">
-          <span style="font-size:13px; font-weight:700; letter-spacing:0.12em; color:#2A7360;">금요편지 · 열두 번째</span>
-          <span style="font-size:13px; color:#6A7789;">2026년 3월 13일 금요일</span>
-        </div>
-        <p style="font-family:var(--font-letter); font-size:23px; line-height:1.6; font-weight:700; letter-spacing:-0.02em; color:var(--simya); margin:0 0 30px; text-wrap:balance;">봄비가 한 번 지나가고, <br>어머니는 앨범을 꺼내셨습니다.</p>
-        <div style="display:flex; flex-direction:column; gap:22px; font-family:var(--font-letter); font-size:17px; line-height:1.85; color:#2A3646;">
-          <p style="margin:0;">이번 주 어머니는 오래 미뤄두셨던 일을 하셨어요. 장롱 위에 올려둔 앨범을 내려 먼지를 닦으셨다고 합니다. "언젠가 정리해야지 했는데, 비 오는 날이 딱이더라" 하고 웃으시더군요.</p>
-          <p style="margin:0;">가장 오래 붙잡고 계신 사진은 아버지와 처음 바다에 가셨던 날의 것이었습니다. 그날 아버지가 신으신 구두가 모래에 다 젖어서, 돌아오는 버스에서 내내 발이 시렸다는 이야기를 하시며 한참 웃으셨어요.</p>
-          <p style="margin:0;">목요일에는 앞집 어르신과 함께 시장에 다녀오셨습니다. 봄나물이 나왔다고, 다음에 아이들 오면 무쳐줘야겠다고 하셨어요. 그 말씀을 하실 때 목소리가 유난히 밝았습니다.</p>
-        </div>
-        <div style="margin:38px 0 0; padding:24px 26px; background:#FBF8EF; border-radius:16px;">
-          <div style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2A7360; margin-bottom:12px;">이번 주, 어머니의 한마디</div>
-          <p style="font-family:var(--font-letter); font-size:19px; line-height:1.65; font-weight:700; color:var(--simya); margin:0; letter-spacing:-0.015em;">"사진은 그대로인데, 나만 나이를 먹었구나."</p>
-        </div>
-        <div style="margin:34px 0 0; padding-top:30px; border-top:1px solid #F0EBDD;">
-          <div style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:#2A7360; margin-bottom:18px;">가족의 답장 3</div>
-          <div style="display:flex; flex-direction:column; gap:16px;">
-            <div style="display:flex; gap:12px; align-items:flex-start;">
-              <span style="flex-shrink:0; width:34px; height:34px; border-radius:999px; background:var(--angae); display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#2A7360;">딸</span>
-              <div style="display:flex; flex-direction:column; gap:3px;">
-                <span style="font-size:15px; line-height:1.6; color:#2A3646;">엄마 그 바다 나도 기억나요. 다음 달에 같이 또 가요, 이번엔 운동화 신고!</span>
-                <span style="font-size:12px; color:#6A7789;">금요일 저녁</span>
-              </div>
-            </div>
-            <div style="display:flex; gap:12px; align-items:flex-start;">
-              <span style="flex-shrink:0; width:34px; height:34px; border-radius:999px; background:var(--morae); display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#7A5526;">아들</span>
-              <div style="display:flex; flex-direction:column; gap:3px;">
-                <span style="font-size:15px; line-height:1.6; color:#2A3646;">봄나물 무쳐주시는 거 잊지 마세요. 이번 주말에 내려갈게요.</span>
-                <span style="font-size:12px; color:#6A7789;">토요일 아침</span>
-              </div>
-            </div>
-            <div style="display:flex; gap:12px; align-items:center;">
-              <span style="flex-shrink:0; width:34px; height:34px; border-radius:999px; background:var(--saebyeok); display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#2A7360;">손주</span>
-              <span style="display:inline-flex; align-items:center; gap:9px; padding:10px 18px; border-radius:999px; background:var(--saebyeok); font-size:14px; font-weight:600; color:#2A7360; min-height:44px;">▶ 할머니 사랑해요 · 0:14</span>
-            </div>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; margin-top:24px; padding:14px 18px; background:var(--saebyeok); border-radius:12px;">
-            <span style="width:7px; height:7px; border-radius:999px; background:var(--cheongja); flex-shrink:0;"></span>
-            <span style="font-size:14px; font-weight:600; color:#2A7360; line-height:1.5;">이 답장들은 다음 주 통화에서 어머니께 그대로 전해드렸어요.</span>
-          </div>
-        </div>
-      </article>
-      <p style="text-align:center; font-size:13.5px; color:#6A7789; margin:26px 0 0; line-height:1.6;">실제 이용 가족의 편지를 동의를 받아 각색했습니다.</p>
+      <div class="ov-slider">
+        
+          <button type="button" class="ov-slide hv6" data-ev="segment_card_open" data-letter-seg="E" style="flex:0 0 auto; width:300px; display:flex; flex-direction:column; text-align:left; background:#FFFFFF; border:1px solid #EAE4D3; border-radius:20px; box-shadow:0 8px 32px rgba(31,42,58,0.10); padding:0; overflow:hidden; font-family:inherit; cursor:pointer; transition:transform .2s, box-shadow .2s;">
+            <span style="position:relative; display:block; aspect-ratio:16/9.5; overflow:hidden; flex-shrink:0;">
+              <span aria-hidden="true" style="position:absolute; inset:0; background-image:url('assets/photos/venice-family.jpg'); background-size:cover; background-position:center 45%;"></span>
+              <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0) 40%, rgba(31,42,58,0.45) 100%);"></span>
+              <span style="position:absolute; left:16px; bottom:12px; font-size:12.5px; font-weight:700; letter-spacing:0.02em; color:#FFFFFF; text-shadow:0 1px 6px rgba(31,42,58,0.5);"><span data-seg-name=""></span></span>
+            </span>
+            <span style="display:block; padding:18px 22px 0;">
+            <span style="display:block; font-size:19px; line-height:1.45; font-weight:700; letter-spacing:-0.025em; color:var(--simya); margin:0 0 12px; text-wrap:balance;"><span data-seg-hook1=""></span> <br data-keep=""><span data-seg-hook2=""></span></span>
+            <span class="ov-preview" data-seg-preview="" style="position:relative; display:block; overflow:hidden; font-family:var(--font-letter); font-size:15.5px; line-height:1.75; color:#2A3646; max-height:108px;"><span aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 92%);"></span></span>
+            </span>
+            <span style="display:flex; justify-content:space-between; align-items:center; gap:10px; border-top:1px solid #EFEAD9; margin-top:auto; padding:14px 22px; font-size:12.5px; width:100%;">
+              <span style="font-weight:700; color:#2A7360;">편지 읽어보기 →</span>
+            </span>
+          </button>
+          <button type="button" class="ov-slide hv6" data-ev="segment_card_open" data-letter-seg="C" style="flex:0 0 auto; width:300px; display:flex; flex-direction:column; text-align:left; background:#FFFFFF; border:1px solid #EAE4D3; border-radius:20px; box-shadow:0 8px 32px rgba(31,42,58,0.10); padding:0; overflow:hidden; font-family:inherit; cursor:pointer; transition:transform .2s, box-shadow .2s;">
+            <span style="position:relative; display:block; aspect-ratio:16/9.5; overflow:hidden; flex-shrink:0;">
+              <span aria-hidden="true" style="position:absolute; inset:0; background-image:url('assets/photos/grandma-kimchi.jpeg'); background-size:cover; background-position:center 35%;"></span>
+              <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0) 40%, rgba(31,42,58,0.45) 100%);"></span>
+              <span style="position:absolute; left:16px; bottom:12px; font-size:12.5px; font-weight:700; letter-spacing:0.02em; color:#FFFFFF; text-shadow:0 1px 6px rgba(31,42,58,0.5);"><span data-seg-name=""></span></span>
+            </span>
+            <span style="display:block; padding:18px 22px 0;">
+            <span style="display:block; font-size:19px; line-height:1.45; font-weight:700; letter-spacing:-0.025em; color:var(--simya); margin:0 0 12px; text-wrap:balance;"><span data-seg-hook1=""></span> <br data-keep=""><span data-seg-hook2=""></span></span>
+            <span class="ov-preview" data-seg-preview="" style="position:relative; display:block; overflow:hidden; font-family:var(--font-letter); font-size:15.5px; line-height:1.75; color:#2A3646; max-height:108px;"><span aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 92%);"></span></span>
+            </span>
+            <span style="display:flex; justify-content:space-between; align-items:center; gap:10px; border-top:1px solid #EFEAD9; margin-top:auto; padding:14px 22px; font-size:12.5px; width:100%;">
+              <span style="font-weight:700; color:#2A7360;">편지 읽어보기 →</span>
+            </span>
+          </button>
+          <button type="button" class="ov-slide hv6" data-ev="segment_card_open" data-letter-seg="D" style="flex:0 0 auto; width:300px; display:flex; flex-direction:column; text-align:left; background:#FFFFFF; border:1px solid #EAE4D3; border-radius:20px; box-shadow:0 8px 32px rgba(31,42,58,0.10); padding:0; overflow:hidden; font-family:inherit; cursor:pointer; transition:transform .2s, box-shadow .2s;">
+            <span style="position:relative; display:block; aspect-ratio:16/9.5; overflow:hidden; flex-shrink:0;">
+              <span aria-hidden="true" style="position:absolute; inset:0; background-image:url('assets/photos/cherry-couple.jpg'); background-size:cover; background-position:center 32%;"></span>
+              <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0) 40%, rgba(31,42,58,0.45) 100%);"></span>
+              <span style="position:absolute; left:16px; bottom:12px; font-size:12.5px; font-weight:700; letter-spacing:0.02em; color:#FFFFFF; text-shadow:0 1px 6px rgba(31,42,58,0.5);"><span data-seg-name=""></span></span>
+            </span>
+            <span style="display:block; padding:18px 22px 0;">
+            <span style="display:block; font-size:19px; line-height:1.45; font-weight:700; letter-spacing:-0.025em; color:var(--simya); margin:0 0 12px; text-wrap:balance;"><span data-seg-hook1=""></span> <br data-keep=""><span data-seg-hook2=""></span></span>
+            <span class="ov-preview" data-seg-preview="" style="position:relative; display:block; overflow:hidden; font-family:var(--font-letter); font-size:15.5px; line-height:1.75; color:#2A3646; max-height:108px;"><span aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 92%);"></span></span>
+            </span>
+            <span style="display:flex; justify-content:space-between; align-items:center; gap:10px; border-top:1px solid #EFEAD9; margin-top:auto; padding:14px 22px; font-size:12.5px; width:100%;">
+              <span style="font-weight:700; color:#2A7360;">편지 읽어보기 →</span>
+            </span>
+          </button>
+          <button type="button" class="ov-slide hv6" data-ev="segment_card_open" data-letter-seg="A" style="flex:0 0 auto; width:300px; display:flex; flex-direction:column; text-align:left; background:#FFFFFF; border:1px solid #EAE4D3; border-radius:20px; box-shadow:0 8px 32px rgba(31,42,58,0.10); padding:0; overflow:hidden; font-family:inherit; cursor:pointer; transition:transform .2s, box-shadow .2s;">
+            <span style="position:relative; display:block; aspect-ratio:16/9.5; overflow:hidden; flex-shrink:0;">
+              <span aria-hidden="true" style="position:absolute; inset:0; background-image:url('assets/photos/care-call-grandma.jpg'); background-size:cover; background-position:center 30%;"></span>
+              <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0) 40%, rgba(31,42,58,0.45) 100%);"></span>
+              <span style="position:absolute; left:16px; bottom:12px; font-size:12.5px; font-weight:700; letter-spacing:0.02em; color:#FFFFFF; text-shadow:0 1px 6px rgba(31,42,58,0.5);"><span data-seg-name=""></span></span>
+            </span>
+            <span style="display:block; padding:18px 22px 0;">
+            <span style="display:block; font-size:19px; line-height:1.45; font-weight:700; letter-spacing:-0.025em; color:var(--simya); margin:0 0 12px; text-wrap:balance;"><span data-seg-hook1=""></span> <br data-keep=""><span data-seg-hook2=""></span></span>
+            <span class="ov-preview" data-seg-preview="" style="position:relative; display:block; overflow:hidden; font-family:var(--font-letter); font-size:15.5px; line-height:1.75; color:#2A3646; max-height:108px;"><span aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 92%);"></span></span>
+            </span>
+            <span style="display:flex; justify-content:space-between; align-items:center; gap:10px; border-top:1px solid #EFEAD9; margin-top:auto; padding:14px 22px; font-size:12.5px; width:100%;">
+              <span style="font-weight:700; color:#2A7360;">편지 읽어보기 →</span>
+            </span>
+          </button>
+          <button type="button" class="ov-slide hv6" data-ev="segment_card_open" data-letter-seg="B" style="flex:0 0 auto; width:300px; display:flex; flex-direction:column; text-align:left; background:#FFFFFF; border:1px solid #EAE4D3; border-radius:20px; box-shadow:0 8px 32px rgba(31,42,58,0.10); padding:0; overflow:hidden; font-family:inherit; cursor:pointer; transition:transform .2s, box-shadow .2s;">
+            <span style="position:relative; display:block; aspect-ratio:16/9.5; overflow:hidden; flex-shrink:0;">
+              <span aria-hidden="true" style="position:absolute; inset:0; background-image:url('assets/photos/founder-shoes.jpg'); background-size:cover; background-position:center 60%;"></span>
+              <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0) 40%, rgba(31,42,58,0.45) 100%);"></span>
+              <span style="position:absolute; left:16px; bottom:12px; font-size:12.5px; font-weight:700; letter-spacing:0.02em; color:#FFFFFF; text-shadow:0 1px 6px rgba(31,42,58,0.5);"><span data-seg-name=""></span></span>
+            </span>
+            <span style="display:block; padding:18px 22px 0;">
+            <span style="display:block; font-size:19px; line-height:1.45; font-weight:700; letter-spacing:-0.025em; color:var(--simya); margin:0 0 12px; text-wrap:balance;"><span data-seg-hook1=""></span> <br data-keep=""><span data-seg-hook2=""></span></span>
+            <span class="ov-preview" data-seg-preview="" style="position:relative; display:block; overflow:hidden; font-family:var(--font-letter); font-size:15.5px; line-height:1.75; color:#2A3646; max-height:108px;"><span aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 92%);"></span></span>
+            </span>
+            <span style="display:flex; justify-content:space-between; align-items:center; gap:10px; border-top:1px solid #EFEAD9; margin-top:auto; padding:14px 22px; font-size:12.5px; width:100%;">
+              <span style="font-weight:700; color:#2A7360;">편지 읽어보기 →</span>
+            </span>
+          </button>
+      </div>
+      <div style="display:flex; justify-content:center; gap:8px; margin-top:6px;">
+        <span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span>
+      </div>
     </div>
   </section>
 
-  <!-- ── 부모님 안심 · 첫인사꾸러미 ── -->
-  <section style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF);">
-    <div style="width:100%; max-width:1160px; margin:0 auto;">
-      <div style="text-align:center; max-width:620px; margin:0 auto 52px;">
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">부모님을 위한 준비</div>
+  <!-- S3 온비의 일주일 -->
+  <section id="promise" style="position:relative; overflow:hidden; background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius:28px; padding:clamp(48px,5.5vw,88px) clamp(20px,4vw,80px);">
+    <div aria-hidden="true" style="position:absolute; left:0; right:0; top:0; height:66%; background-image:url('assets/photos/care-lifebook.jpg'); background-size:cover; background-position:center 42%; pointer-events:none;"></div>
+    <div aria-hidden="true" style="position:absolute; left:0; right:0; top:0; height:66%; background:radial-gradient(ellipse 52% 56% at 50% 32%, rgba(248,245,237,0.92) 0%, rgba(248,245,237,0.70) 52%, rgba(248,245,237,0.24) 100%), linear-gradient(180deg, rgba(248,245,237,0.42) 0%, rgba(248,245,237,0.46) 56%, color-mix(in srgb, var(--hanji) 72%, #FFFFFF) 100%); pointer-events:none;"></div>
+    <div id="week" style="position:relative; width:min(1160px,90%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:38px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">온비의 일주일</div>
         <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
-        <h2 style="font-size:clamp(26px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 16px; color:var(--simya); text-wrap:balance;">"부모님이 부담스러워하시면 <br>어떡하죠?"</h2>
-        <p style="font-size:clamp(15.5px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; margin:0; text-wrap:pretty;">가장 많이 듣는 질문이에요. 그래서 온비는 부모님이 먼저 편안해지시는 것부터 시작합니다.</p>
-      </div>
-      <div data-ov-cards="" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px; margin-bottom:34px;">
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:32px 30px;">
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.025em; margin:0 0 10px; color:var(--simya);">첫인사꾸러미가 먼저 갑니다</h3>
-          <p style="margin:0; font-size:15px; color:#3F4D62; line-height:1.65;">통화 전에 손편지와 안내가 담긴 꾸러미를 보내드려요. 낯선 번호가 아니라, 이미 인사를 나눈 곳에서 걸려옵니다.</p>
-        </div>
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:32px 30px;">
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.025em; margin:0 0 10px; color:var(--simya);">같은 요일, 같은 시간에</h3>
-          <p style="margin:0; font-size:15px; color:#3F4D62; line-height:1.65;">부모님이 편한 시간을 정해두고 그 시간에만 전화드려요. 예상하지 못한 연락은 드리지 않습니다.</p>
-        </div>
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:32px 30px;">
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.025em; margin:0 0 10px; color:var(--simya);">기록은 동의 후에만</h3>
-          <p style="margin:0; font-size:15px; color:#3F4D62; line-height:1.65;">통화 내용은 부모님 본인이 허락하신 뒤에만 편지가 됩니다. 언제든 그만 두실 수 있어요.</p>
+        <h2 style="font-size:clamp(26px,3.8vw,46px); line-height:1.24; letter-spacing:-0.035em; font-weight:700; margin:22px 0 18px; color:var(--simya); text-wrap:balance;"><span style="text-shadow:0 1px 22px rgba(248,245,237,0.95), 0 0 8px rgba(248,245,237,0.85);">"괜찮다"는 말 너머, <br data-keep="">부모님의 이야기가 시작됩니다.</span></h2>
+        <div style="display:inline-block;">
+          <div style="padding:13px 6px; border-top:1px solid rgba(31,42,58,0.12); border-bottom:1px solid rgba(31,42,58,0.12); font-size:15px; font-weight:600; color:var(--simhae); line-height:1.7; text-wrap:balance;">한 통의 편지가 오가는 동안, 이야기가 쌓여요</div>
         </div>
       </div>
-      <div style="display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap; padding:22px 26px; background:#FFFFFF; border:1px solid #E6E0D1; border-radius:18px; max-width:720px; margin:0 auto;">
-        <span style="font-size:15px; color:#3F4D62; line-height:1.6;">부모님이 받으실 부담은, 늘 <b style="color:var(--simya);">통화 한 통</b>입니다. 앱도, 글쓰기도 없어요.</span>
+      <div class="ov-week" style="position:relative;">
+        <span class="ov-week-line" aria-hidden="true" style="position:absolute; left:8%; right:8%; top:37px; height:1.5px; background:repeating-linear-gradient(90deg, #CBBFA0 0 6px, transparent 6px 12px);"></span>
+        <div data-ev="process_scene_view" style="position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;">
+          <div style="position:relative; z-index:1; width:64px; height:64px; border-radius:999px; background:color-mix(in srgb, var(--hanji) 42%, #FFFFFF); box-shadow:0 3px 14px rgba(31,42,58,0.07), inset 0 0 0 1px rgba(140,122,94,0.2); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#8C7A5E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="9.5" width="24" height="21" rx="2.5"></rect><path d="M8 24.5 l6.5-6 5 4.5 5-4 6.5 5.5"></path><circle cx="15" cy="16" r="2.2" stroke="var(--cheongja)" stroke-width="1.3"></circle><path d="M13.5 34.5 h13" stroke="#C9A66B" stroke-width="1.2" opacity="0.8"></path></svg></div>
+          <div style="margin-top:12px; font-size:12px; font-weight:700; letter-spacing:0.08em; color:#2A7360;">전날</div>
+          <div style="margin-top:5px; font-size:15.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya);">미리 보내드려요</div>
+          <p style="font-size:13.5px; line-height:1.65; color:#3F4D62; margin:6px 0 0; max-width:210px;">사진 한 장을 먼저 보내드려요. <br data-keep="">하루 동안 천천히 떠올리시면 돼요.</p>
+        </div>
+        <div data-ev="process_scene_view" style="position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;">
+          <div style="position:relative; z-index:1; width:64px; height:64px; border-radius:999px; background:color-mix(in srgb, var(--hanji) 42%, #FFFFFF); box-shadow:0 3px 14px rgba(31,42,58,0.07), inset 0 0 0 1px rgba(140,122,94,0.2); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#8C7A5E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 9.5 q-3 0-3 3 0 12.5 13.5 20.5 3 0 3-3 v-3.5 l-6-2.5-2.5 2.5 q-4-2.5-7-8.5 l2.5-2.5-2.5-6 z"></path><path d="M25 12 q4.5 1.8 6 6" stroke="var(--cheongja)" stroke-width="1.3"></path><path d="M28.5 8 q6.5 2.6 8.5 9" stroke="#C9A66B" stroke-width="1.2" opacity="0.7"></path></svg></div>
+          <div style="margin-top:12px; font-size:12px; font-weight:700; letter-spacing:0.08em; color:#2A7360;">그날</div>
+          <div style="margin-top:5px; font-size:15.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya);">이야기 통화</div>
+          <p style="font-size:13.5px; line-height:1.65; color:#3F4D62; margin:6px 0 0; max-width:210px;">같은 시간, 같은 목소리로 전화드려요.</p>
+        </div>
+        <div data-ev="process_scene_view" style="position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;">
+          <div style="position:relative; z-index:1; width:64px; height:64px; border-radius:999px; background:color-mix(in srgb, var(--hanji) 42%, #FFFFFF); box-shadow:0 3px 14px rgba(31,42,58,0.07), inset 0 0 0 1px rgba(140,122,94,0.2); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#8C7A5E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 13 q0-2.5 2.5-2.5 h20 q2.5 0 2.5 2.5 v14 q0 2.5-2.5 2.5 h-20 q-2.5 0-2.5-2.5 z"></path><path d="M8 13.5 L20 22.5 L32 13.5" stroke="var(--cheongja)" stroke-width="1.4"></path><path d="M8.5 28.5 l7.5-6 M31.5 28.5 l-7.5-6" opacity="0.6"></path></svg></div>
+          <div style="margin-top:12px; font-size:12px; font-weight:700; letter-spacing:0.08em; color:#2A7360;">금요일</div>
+          <div style="margin-top:5px; font-size:15.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya);">금요편지</div>
+          <p style="font-size:13.5px; line-height:1.65; color:#3F4D62; margin:6px 0 0; max-width:210px;">그날의 이야기가 편지가 되어 도착해요.</p>
+        </div>
+        <div data-ev="process_scene_view" style="position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;">
+          <div style="position:relative; z-index:1; width:64px; height:64px; border-radius:999px; background:color-mix(in srgb, var(--hanji) 42%, #FFFFFF); box-shadow:0 3px 14px rgba(31,42,58,0.07), inset 0 0 0 1px rgba(140,122,94,0.2); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#8C7A5E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 12.5 q0-2.5 2.5-2.5 h13 q2.5 0 2.5 2.5 v7.5 q0 2.5-2.5 2.5 h-8 l-5 4 v-4 q-2.5 0-2.5-2.5 z"></path><path d="M18 21.5 h13 q2.5 0 2.5 2.5 v6 q0 2.5-2.5 2.5 h-6 l-4.5 3.5 v-3.5 q-2.5 0-2.5-2.5" stroke="var(--cheongja)" stroke-width="1.4"></path></svg></div>
+          <div style="margin-top:12px; font-size:12px; font-weight:700; letter-spacing:0.08em; color:#2A7360;">주말</div>
+          <div style="margin-top:5px; font-size:15.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya);">가족의 답장</div>
+          <p style="font-size:13.5px; line-height:1.65; color:#3F4D62; margin:6px 0 0; max-width:210px;">온 가족이 한마디씩 답을 남겨요.</p>
+        </div>
+        <div data-ev="process_scene_view" style="position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;">
+          <div style="position:relative; z-index:1; width:64px; height:64px; border-radius:999px; background:color-mix(in srgb, var(--hanji) 42%, #FFFFFF); box-shadow:0 3px 14px rgba(31,42,58,0.07), inset 0 0 0 1px rgba(140,122,94,0.2); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#8C7A5E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14 q-4-3-11-2.5 v17 q7-.6 11 2.5 4-3.1 11-2.5 v-17 q-7-.5-11 2.5 z"></path><path d="M20 14 v17" stroke="var(--cheongja)" stroke-width="1.4"></path><path d="M27.5 34.5 q4.5-1.5 6-5" stroke="#C9A66B" stroke-width="1.2" opacity="0.75"></path></svg></div>
+          <div style="margin-top:12px; font-size:12px; font-weight:700; letter-spacing:0.08em; color:#2A7360;">그리고 다시</div>
+          <div style="margin-top:5px; font-size:15.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya);">다시 부모님께</div>
+          <p style="font-size:13.5px; line-height:1.65; color:#3F4D62; margin:6px 0 0; max-width:210px;">그 마음을 다음 통화에서 읽어드려요.</p>
+        </div>
+      </div>
+      <div class="ov-swipe-hint"><span aria-hidden="true">←</span>옆으로 넘겨보세요<span aria-hidden="true">→</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:26px;">
+        <svg width="220" height="34" viewBox="0 0 220 34" fill="none" aria-hidden="true"><path d="M206 4 C206 24 168 30 110 30 C52 30 14 24 14 4" stroke="#CBBFA0" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 6"></path><path d="M9 10 L14 3 L19 10" stroke="var(--cheongja)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+        <p style="margin:0; text-align:center; font-family:var(--font-letter); font-size:15.5px; line-height:1.65; font-weight:700; color:var(--simya); text-wrap:balance;">그 한마디가, 다음 주 이야기의 시작이 돼요.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:30px; padding-top:26px; border-top:1px solid rgba(140,122,94,0.22);">
+        <a class="hv3" href="contact.html" data-ev="cta_click" data-ev-pos="mid_process" style="display:inline-flex; align-items:center; justify-content:center; gap:10px; height:56px; padding:0 14px 0 30px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; transition:background .2s, box-shadow .2s;">첫 편지 신청하기 <span style="display:inline-flex; align-items:center; height:32px; padding:0 13px; border-radius:999px; background:rgba(255,255,255,0.22); font-size:12.5px; font-weight:700;">선착순 30가족</span></a>
       </div>
     </div>
   </section>
 
-  <!-- ── 온 가족의 자리 · 분할 ── -->
-  <section style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF);">
-    <div style="width:100%; max-width:1160px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:clamp(40px,6vw,88px); align-items:center;">
-      <div style="border-radius:18px; overflow:hidden; aspect-ratio:4/5; box-shadow:0 30px 60px -34px rgba(31,42,58,0.34);"><img src="assets/photos/family-denim.jpg" alt="함께 모인 온 가족" style="width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block;"></div>
-      <div>
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">온 가족이 함께</div>
-        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px 0 0;">
-        <h2 style="font-size:clamp(28px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 30px; color:var(--simya); text-wrap:balance;">받기만 하던 편지가, <br>온 가족의 자리가 됩니다.</h2>
-        <div style="display:flex; flex-direction:column;">
-          <div style="padding:20px 0; border-top:1px solid #E6E0D1;">
-            <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 7px; color:var(--simya);">함께 대화</h3>
-            <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">형제·자매·손주까지, 같은 편지에 모여 댓글로 이야기를 나눕니다.</p>
+  <!-- S4 하는 것 / 하지 않는 것 -->
+  <section id="give" style="background:#FFFFFF; border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:40px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">온비가 해드리는 것</div>
+        <span style="display:none;"></span>
+        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
+        <h2 style="font-size:clamp(24px,3.4vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; color:var(--simya); text-wrap:balance;">사라지던 이야기를, <br>가족의 기억으로 남겨요.</h2>
+      </div>
+      <div style="position:relative;">
+        <div class="ov-gslider" style="display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding:8px 4px 18px; scrollbar-width:none; -webkit-overflow-scrolling:touch;">
+          <div class="ov-gcard hv7" style="position:relative; flex:0 0 auto; width:300px; aspect-ratio:3/4; border-radius:24px; overflow:hidden; scroll-snap-align:center; box-shadow:0 10px 34px rgba(31,42,58,0.16); transition:transform .3s cubic-bezier(.22,.61,.36,1);">
+            <img src="assets/photos/care-call-grandma.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block;">
+            <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0.02) 34%, rgba(31,42,58,0.52) 66%, rgba(31,42,58,0.88) 100%);"></span>
+            <span aria-hidden="true" style="position:absolute; left:22px; top:20px; font-family:var(--font-letter); font-size:30px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:rgba(255,255,255,0.72);">01</span>
+            <div style="position:absolute; left:22px; right:22px; bottom:22px;">
+              <span aria-hidden="true" style="display:block; width:26px; height:2px; background:var(--cheongja); margin-bottom:12px;"></span>
+              <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.03em; margin:0 0 7px; color:#FFFFFF; text-shadow:0 1px 12px rgba(31,42,58,0.6);">이야기 통화</h3>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:rgba(255,255,255,0.86); text-shadow:0 1px 10px rgba(31,42,58,0.6);">매주 한 번, 같은 시간 같은 목소리로</p>
+            </div>
           </div>
-          <div style="padding:20px 0; border-top:1px solid #E6E0D1;">
-            <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 7px; color:var(--simya);">목소리로</h3>
-            <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">글 대신 음성 답장을 남기면, 부모님은 가족의 목소리를 그대로 듣습니다.</p>
+          <div class="ov-gcard hv7" style="position:relative; flex:0 0 auto; width:300px; aspect-ratio:3/4; border-radius:24px; overflow:hidden; scroll-snap-align:center; box-shadow:0 10px 34px rgba(31,42,58,0.16); transition:transform .3s cubic-bezier(.22,.61,.36,1);">
+            <img src="assets/photos/letter-bg.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 60%; display:block;">
+            <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0.02) 34%, rgba(31,42,58,0.52) 66%, rgba(31,42,58,0.88) 100%);"></span>
+            <span aria-hidden="true" style="position:absolute; left:22px; top:20px; font-family:var(--font-letter); font-size:30px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:rgba(255,255,255,0.72);">02</span>
+            <div style="position:absolute; left:22px; right:22px; bottom:22px;">
+              <span aria-hidden="true" style="display:block; width:26px; height:2px; background:var(--cheongja); margin-bottom:12px;"></span>
+              <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.03em; margin:0 0 7px; color:#FFFFFF; text-shadow:0 1px 12px rgba(31,42,58,0.6);">금요편지</h3>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:rgba(255,255,255,0.86); text-shadow:0 1px 10px rgba(31,42,58,0.6);">한 주의 이야기가 편지가 되어 온 가족에게</p>
+            </div>
           </div>
-          <div style="padding:20px 0; border-top:1px solid #E6E0D1; border-bottom:1px solid #E6E0D1;">
-            <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 7px; color:var(--simya);">하나의 아카이브</h3>
-            <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">편지·사진·목소리·답장이 한곳에 쌓여 우리 가족의 기록이 됩니다.</p>
+          <div class="ov-gcard hv7" style="position:relative; flex:0 0 auto; width:300px; aspect-ratio:3/4; border-radius:24px; overflow:hidden; scroll-snap-align:center; box-shadow:0 10px 34px rgba(31,42,58,0.16); transition:transform .3s cubic-bezier(.22,.61,.36,1);">
+            <img src="assets/photos/family-reply.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%; display:block;">
+            <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0.02) 34%, rgba(31,42,58,0.52) 66%, rgba(31,42,58,0.88) 100%);"></span>
+            <span aria-hidden="true" style="position:absolute; left:22px; top:20px; font-family:var(--font-letter); font-size:30px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:rgba(255,255,255,0.72);">03</span>
+            <div style="position:absolute; left:22px; right:22px; bottom:22px;">
+              <span aria-hidden="true" style="display:block; width:26px; height:2px; background:var(--cheongja); margin-bottom:12px;"></span>
+              <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.03em; margin:0 0 7px; color:#FFFFFF; text-shadow:0 1px 12px rgba(31,42,58,0.6);">가족 씨앗</h3>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:rgba(255,255,255,0.86); text-shadow:0 1px 10px rgba(31,42,58,0.6);">가족이 남긴 사진이 다음 통화의 이야깃거리로</p>
+            </div>
+          </div>
+          <div class="ov-gcard hv7" style="position:relative; flex:0 0 auto; width:300px; aspect-ratio:3/4; border-radius:24px; overflow:hidden; scroll-snap-align:center; box-shadow:0 10px 34px rgba(31,42,58,0.16); transition:transform .3s cubic-bezier(.22,.61,.36,1);">
+            <img src="assets/photos/problem-album.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 45%; display:block;">
+            <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0.02) 34%, rgba(31,42,58,0.52) 66%, rgba(31,42,58,0.88) 100%);"></span>
+            <span aria-hidden="true" style="position:absolute; left:22px; top:20px; font-family:var(--font-letter); font-size:30px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:rgba(255,255,255,0.72);">04</span>
+            <div style="position:absolute; left:22px; right:22px; bottom:22px;">
+              <span aria-hidden="true" style="display:block; width:26px; height:2px; background:var(--cheongja); margin-bottom:12px;"></span>
+              <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.03em; margin:0 0 7px; color:#FFFFFF; text-shadow:0 1px 12px rgba(31,42,58,0.6);">언젠가 목록</h3>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:rgba(255,255,255,0.86); text-shadow:0 1px 10px rgba(31,42,58,0.6);">지나가듯 하신 바람을 잊지 않고 모아요</p>
+            </div>
+          </div>
+          <div class="ov-gcard hv7" style="position:relative; flex:0 0 auto; width:300px; aspect-ratio:3/4; border-radius:24px; overflow:hidden; scroll-snap-align:center; box-shadow:0 10px 34px rgba(31,42,58,0.16); transition:transform .3s cubic-bezier(.22,.61,.36,1);">
+            <img src="assets/photos/letter-delivery-box.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 55%; display:block;">
+            <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0.02) 34%, rgba(31,42,58,0.52) 66%, rgba(31,42,58,0.88) 100%);"></span>
+            <span aria-hidden="true" style="position:absolute; left:22px; top:20px; font-family:var(--font-letter); font-size:30px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:rgba(255,255,255,0.72);">05</span>
+            <div style="position:absolute; left:22px; right:22px; bottom:22px;">
+              <span aria-hidden="true" style="display:block; width:26px; height:2px; background:var(--cheongja); margin-bottom:12px;"></span>
+              <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.03em; margin:0 0 7px; color:#FFFFFF; text-shadow:0 1px 12px rgba(31,42,58,0.6);">부모님 수신본</h3>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:rgba(255,255,255,0.86); text-shadow:0 1px 10px rgba(31,42,58,0.6);">큰 글씨 편지와 계절 종이 묶음을 우편으로</p>
+            </div>
+          </div>
+          <div class="ov-gcard hv7" style="position:relative; flex:0 0 auto; width:300px; aspect-ratio:3/4; border-radius:24px; overflow:hidden; scroll-snap-align:center; box-shadow:0 10px 34px rgba(31,42,58,0.16); transition:transform .3s cubic-bezier(.22,.61,.36,1);">
+            <img src="assets/photos/care-officer.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%; display:block;">
+            <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0.02) 34%, rgba(31,42,58,0.52) 66%, rgba(31,42,58,0.88) 100%);"></span>
+            <span aria-hidden="true" style="position:absolute; left:22px; top:20px; font-family:var(--font-letter); font-size:30px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:rgba(255,255,255,0.72);">06</span>
+            <div style="position:absolute; left:22px; right:22px; bottom:22px;">
+              <span aria-hidden="true" style="display:block; width:26px; height:2px; background:var(--cheongja); margin-bottom:12px;"></span>
+              <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.03em; margin:0 0 7px; color:#FFFFFF; text-shadow:0 1px 12px rgba(31,42,58,0.6);">곁을 살피는 신호</h3>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:rgba(255,255,255,0.86); text-shadow:0 1px 10px rgba(31,42,58,0.6);">평안·살핌·확인 세 가지로만, 조용히</p>
+            </div>
+          </div>
+          <div class="ov-gcard hv7" style="position:relative; flex:0 0 auto; width:300px; aspect-ratio:3/4; border-radius:24px; overflow:hidden; scroll-snap-align:center; box-shadow:0 10px 34px rgba(31,42,58,0.16); transition:transform .3s cubic-bezier(.22,.61,.36,1);">
+            <img src="assets/photos/care-lifebook.jpg" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block;">
+            <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.34) 0%, rgba(31,42,58,0.02) 34%, rgba(31,42,58,0.52) 66%, rgba(31,42,58,0.88) 100%);"></span>
+            <span aria-hidden="true" style="position:absolute; left:22px; top:20px; font-family:var(--font-letter); font-size:30px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:rgba(255,255,255,0.72);">07</span>
+            <div style="position:absolute; left:22px; right:22px; bottom:22px;">
+              <span aria-hidden="true" style="display:block; width:26px; height:2px; background:var(--cheongja); margin-bottom:12px;"></span>
+              <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.03em; margin:0 0 7px; color:#FFFFFF; text-shadow:0 1px 12px rgba(31,42,58,0.6);">인생책</h3>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:rgba(255,255,255,0.86); text-shadow:0 1px 10px rgba(31,42,58,0.6);">서른 편이 모이면 차례를 갖춘 한 권으로</p>
+            </div>
           </div>
         </div>
+        <button type="button" class="ov-garrow" aria-label="이전" data-give-prev="" style="position:absolute; left:-22px; top:38%; width:44px; height:44px; border-radius:999px; background:#FFFFFF; border:1px solid #E7DFCC; box-shadow:0 6px 18px rgba(31,42,58,0.12); color:var(--simya); font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center;">←</button>
+        <button type="button" class="ov-garrow" aria-label="다음" data-give-next="" style="position:absolute; right:-22px; top:38%; width:44px; height:44px; border-radius:999px; background:#FFFFFF; border:1px solid #E7DFCC; box-shadow:0 6px 18px rgba(31,42,58,0.12); color:var(--simya); font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center;">→</button>
+      </div>
+      <div style="display:flex; justify-content:center; gap:8px; margin-top:6px;">
+        <span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span><span style="width:7px; height:7px; border-radius:999px; transition:width .25s, background .25s; background:#D8D0BC;"></span>
+      </div>
+      <p style="max-width:720px; margin:26px auto 0; text-align:center; font-size:12.5px; line-height:1.75; color:#6A7789;">온비는 안부 확인 서비스도, 자서전 대필도 아니에요. 곁을 살피는 신호는 참고 정보일 뿐, 의료 진단·응급 대응 서비스가 아닙니다.</p>
+      </div>
+    </div>
+  <div></section>
+
+  <!-- S6 부모님을 위한 준비 -->
+  <section id="ready" style="background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <div style="width:min(880px,90%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:40px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">부모님의 마음이 먼저입니다</div>
+        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
+        <h2 style="font-size:clamp(24px,3.4vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:22px 0 14px; color:var(--simya); text-wrap:balance;">"부모님이 부담스러워하시면요?"</h2>
+        <p style="font-size:clamp(15.5px,1.5vw,18px); line-height:1.7; color:#3F4D62; margin:0;">부모님이 낯설지 않게, 세 단계로 시작해요.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:grid; grid-template-columns:64px 1fr 56px; gap:18px; background:#FFFFFF; border-radius:18px; box-shadow:0 2px 12px rgba(31,42,58,0.06); padding:26px 28px; align-items:center;">
+          <span aria-hidden="true" style="font-size:clamp(38px,4.2vw,52px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#DCD2B8; align-self:start;">01</span>
+          <div>
+            <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">첫인사 꾸러미가 먼저 가요</h3>
+            <p style="font-size:15px; line-height:1.75; color:#3F4D62; margin:0;">손편지와 담당자 소개가 우편으로 먼저 도착해요. 낯선 번호가 아니라, 이미 인사 나눈 사람의 전화예요.</p>
+          </div>
+          <span aria-hidden="true" style="width:56px; height:56px; border-radius:999px; background:color-mix(in srgb, var(--hanji) 78%, #FFFFFF); box-shadow:inset 0 0 0 1px rgba(140,122,94,0.16); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#8C7A5E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5 q0-2 2-2 h19 q2 0 2 2 v12 q0 2-2 2 h-19 q-2 0-2-2 z"></path><path d="M9 15 q5.5 5.5 11 8 5.5-2.5 11-8" stroke="var(--cheongja)" stroke-width="1.3"></path><path d="M15 9.5 q3-2.5 5 0 2-2 5-.5" stroke="#C9A66B" stroke-width="1.2"></path></svg></span>
+        </div>
+        <div style="display:grid; grid-template-columns:64px 1fr 56px; gap:18px; background:#FFFFFF; border-radius:18px; box-shadow:0 2px 12px rgba(31,42,58,0.06); padding:26px 28px; align-items:center;">
+          <span aria-hidden="true" style="font-size:clamp(38px,4.2vw,52px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#DCD2B8; align-self:start;">02</span>
+          <div>
+            <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">같은 요일, 같은 시간, 같은 목소리</h3>
+            <p style="font-size:15px; line-height:1.75; color:#3F4D62; margin:0;">부모님이 편한 시간에만, 늘 같은 담당자가 전화드려요.</p>
+          </div>
+          <span aria-hidden="true" style="width:56px; height:56px; border-radius:999px; background:color-mix(in srgb, var(--hanji) 78%, #FFFFFF); box-shadow:inset 0 0 0 1px rgba(140,122,94,0.16); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#8C7A5E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 10 q-2.5 0-2.5 2.5 0 12.5 12.5 20 2.5 0 2.5-2.5 v-3.5 l-6-2.5-2.5 2.5 q-3.5-2.5-6.5-8 l2.5-2.5-2.5-6 z"></path><path d="M25 13.5 q4 1.5 5.5 5.5" stroke="var(--cheongja)" stroke-width="1.3"></path><path d="M28.5 9 q6 2.5 8 8.5" stroke="#C9A66B" stroke-width="1.2" opacity="0.75"></path></svg></span>
+        </div>
+        <div style="display:grid; grid-template-columns:64px 1fr 56px; gap:18px; background:#FFFFFF; border-radius:18px; box-shadow:0 2px 12px rgba(31,42,58,0.06); padding:26px 28px; align-items:center;">
+          <span aria-hidden="true" style="font-size:clamp(38px,4.2vw,52px); font-weight:700; line-height:0.92; letter-spacing:-0.04em; color:#DCD2B8; align-self:start;">03</span>
+          <div>
+            <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">부모님이 허락하셔야 시작돼요</h3>
+            <p style="font-size:15px; line-height:1.75; color:#3F4D62; margin:0;">첫 통화에서 "네" 하셔야 이야기를 담아요. 원치 않으시면 그 자리에서 끝나고, 아무것도 남기지 않아요.</p>
+          </div>
+          <span aria-hidden="true" style="width:56px; height:56px; border-radius:999px; background:color-mix(in srgb, var(--hanji) 78%, #FFFFFF); box-shadow:inset 0 0 0 1px rgba(140,122,94,0.16); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 40 40" width="30" height="30" fill="none" stroke="#8C7A5E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 12 q0-2.5 2.5-2.5 h18 q2.5 0 2.5 2.5 v13 q0 2.5-2.5 2.5 h-12 l-6 5 v-5 h-0.5 q-2.5 0-2.5-2.5 z"></path><path d="M20 24 q-5-3.2-6.5-6.2 -1.2-2.5 0.7-4.1 1.9-1.6 3.8 0.3 l2 2 2-2 q1.9-1.9 3.8-0.3 1.9 1.6 0.7 4.1 -1.5 3-6.5 6.2 z" stroke="var(--cheongja)" stroke-width="1.4"></path></svg></span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ── 케어 신호 ── -->
-  <section style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF);">
-    <div style="width:100%; max-width:1160px; margin:0 auto; text-align:center;">
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">케어 신호</div>
-      <h2 style="font-size:clamp(28px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:20px 0 16px; color:var(--simya); text-wrap:balance;">기억을 쌓는 동안, <br>가만히 곁을 살핍니다.</h2>
-      <p style="font-size:clamp(16px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; max-width:560px; margin:0 auto 56px; text-wrap:pretty;">매주의 통화에서 느껴지는 변화를 세 가지 신호로 가족에게 전합니다.</p>
-      <div data-ov-cards="" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:16px; text-align:left;">
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:30px 28px;">
-          <span style="display:inline-flex; align-items:center; gap:9px; padding:7px 15px; border-radius:999px; background:var(--saebyeok); margin-bottom:18px;"><span style="width:8px; height:8px; border-radius:999px; background:var(--care-peace);"></span><span style="font-size:13px; font-weight:700; color:#2A7360;">평안</span></span>
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">평소와 같아요</h3>
-          <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">목소리도 생활 리듬도 평소와 같습니다. 기록만 조용히 쌓아둘게요.</p>
-        </div>
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:30px 28px;">
-          <span style="display:inline-flex; align-items:center; gap:9px; padding:7px 15px; border-radius:999px; background:var(--morae); margin-bottom:18px;"><span style="width:8px; height:8px; border-radius:999px; background:var(--care-watch);"></span><span style="font-size:13px; font-weight:700; color:#8C6433;">살핌</span></span>
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">한 번 여쭤보세요</h3>
-          <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">평소와 조금 다른 기색이 느껴져요. 전화 한 통이면 충분합니다.</p>
-        </div>
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:20px; padding:30px 28px;">
-          <span style="display:inline-flex; align-items:center; gap:9px; padding:7px 15px; border-radius:999px; background:var(--haneul); margin-bottom:18px;"><span style="width:8px; height:8px; border-radius:999px; background:var(--care-confirm);"></span><span style="font-size:13px; font-weight:700; color:var(--simhae);">확인</span></span>
-          <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">직접 챙겨주세요</h3>
-          <p style="margin:0; font-size:14.5px; color:#3F4D62; line-height:1.65;">뚜렷한 변화가 이어지고 있어요. 직접 확인해 보시길 권해드립니다.</p>
-        </div>
-      </div>
-      <p style="font-size:13px; color:#6A7789; margin:26px 0 0;">케어 신호는 안부의 참고 정보이며, 의료 진단이나 응급 대응 서비스가 아닙니다.</p>
-    </div>
-  </section>
-
-  <!-- ── 다크 인용 ── -->
-  <section style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:var(--saebyeok); color:var(--simya); text-align:center;">
-    <div style="width:100%; max-width:860px; margin:0 auto;">
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">부담은 통화 한 통</div>
-      <blockquote style="font-family:var(--font-letter); font-size:clamp(26px,3.6vw,44px); line-height:1.42; font-weight:700; margin:26px auto 0; text-wrap:balance;">부모님은 통화만 하면 됩니다. <br>나머지는 온비와 <br>온 가족이 함께.</blockquote>
-    </div>
-  </section>
-
-  <!-- ── CTA ── -->
-  <section data-hide-consult="" style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); text-align:center; background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF);">
-    <div style="width:100%; max-width:720px; margin:0 auto;">
-      <h2 style="font-size:clamp(26px,3.2vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:0 0 18px; color:var(--simya); text-wrap:balance;">우리 가족에게 맞는 방법이 궁금하다면</h2>
-      <p style="font-size:clamp(15px,1.4vw,17px); line-height:1.7; color:#3F4D62; margin:0 auto 32px; max-width:480px; text-wrap:pretty;">요금제를 비교해 보거나, 부담 없이 상담부터 시작해보세요.</p>
-      <div data-cta="" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <a class="hv3" href="pricing.html" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; transition:background .2s, box-shadow .2s;">요금제 보기</a>
-        <a class="hv5" href="contact.html" style="display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:999px; background:rgba(255,255,255,0.7); border:1px solid #E6E0D1; color:var(--simya); font-size:15px; font-weight:600; text-decoration:none; transition:border-color .2s, background .2s;">무료 상담 신청 ›</a>
+  <!-- S7 클로징 -->
+  <section id="s7" data-hide-consult="" style="background:#22384F; color:#FFFFFF; text-align:center; border-radius:28px; padding:clamp(56px,7vw,104px) clamp(24px,5vw,88px);">
+    <div style="max-width:720px; margin:0 auto;">
+      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja);">선착순 30가족 · 첫 편지 무료</div>
+      <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
+      <h2 style="font-size:clamp(26px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; text-wrap:balance;">30가족만 먼저 모십니다.</h2>
+      <p style="font-size:clamp(15px,1.4vw,17px); line-height:1.7; color:rgba(255,255,255,0.7); margin:20px auto 34px; max-width:520px; text-wrap:pretty;">첫 통화와 첫 편지는 무료로 드려요. <br data-keep="">자리가 차면 다음 기수를 기다리셔야 해요.</p>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+        <a class="hv3" href="pricing.html" data-ev="cta_click" data-ev-pos="closing" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; min-height:44px; white-space:nowrap; transition:background .2s, box-shadow .2s;">시범 기간 신청하기 →</a>
+        <a href="contact.html" data-ev="cta_click" data-ev-pos="closing_secondary" style="font-size:14.5px; font-weight:600; color:rgba(255,255,255,0.82); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.35); padding-bottom:2px;">먼저 상담부터 받아볼게요</a>
       </div>
     </div>
   </section>
-</div>
 
-    </div>
+  </div>
 
   <footer class="site">
   <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
@@ -463,6 +672,8 @@
     </div>
   </div>
 </footer>
+
+  <div id="letterModalRoot"></div>
 </div>
 <script src="shared/reveal.js"></script>
 <script>
@@ -478,7 +689,7 @@
       burger.setAttribute('aria-expanded', v ? 'true' : 'false');
     }
     if (panel && burger) {
-      burger.addEventListener('click', function () { setOpen(!open); });
+      burger.addEventListener('click', function () { setOpen(!open); setMenu(false); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
       document.addEventListener('pointerdown', function (e) {
         if (!open) return;
@@ -490,17 +701,37 @@
     // 모바일: 아래로 스크롤하면 네비를 감추고, 위로 올리면 다시 보여준다
     var lastY = window.scrollY;
     window.addEventListener('scroll', function () {
-      if (!window.matchMedia('(max-width: 900px)').matches) {
-        root.classList.remove('onvi-nav-hidden');
-        return;
-      }
       var y = window.scrollY;
       var d = y - lastY;
       if (Math.abs(d) < 8) return;
       lastY = y;
-      if (d > 0 && y > 140 && !open) root.classList.add('onvi-nav-hidden');
+      if (d > 0 && y > 140 && !open && !menuOpen) root.classList.add('onvi-nav-hidden');
       else if (d < 0 || y <= 140) root.classList.remove('onvi-nav-hidden');
     }, { passive: true });
+
+    // 프로필 드롭다운
+    var menuOpen = false;
+    var userBtn = document.getElementById('navUserBtn');
+    var menu = document.getElementById('navMenu');
+    function setMenu(v) {
+      menuOpen = v;
+      if (menu) menu.hidden = !v;
+      if (userBtn) userBtn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    if (userBtn && menu) {
+      userBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!menuOpen); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menuOpen) setMenu(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (menuOpen && !root.contains(e.target)) setMenu(false);
+      });
+    }
+    var logoutBtn = document.getElementById('navLogout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function () {
+        try { localStorage.removeItem('onvi.user.name'); window.dispatchEvent(new Event('onvi-auth')); } catch (e) { /* 무시 */ }
+        window.location.href = 'index.html';
+      });
+    }
 
     // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
     function paint() {
@@ -514,7 +745,7 @@
         if (login) login.hidden = true;
         if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; }
         if (pLogin) pLogin.hidden = true;
-        if (pUser) { pUser.hidden = false; pUser.textContent = name + ' 님의 공간'; }
+        if (pUser) pUser.hidden = false;
       } else {
         if (login) login.hidden = false;
         if (user) user.hidden = true;
@@ -557,6 +788,7 @@
       b.addEventListener('click', function () { setOpen(false); });
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
+    window.addEventListener('onvi-consult-open', function () { setOpen(true); });
 
     window.addEventListener('scroll', function () {
       var s = window.scrollY > 480;
@@ -592,6 +824,56 @@
     });
 
     sync();
+  })();
+</script>
+<script>
+  (function () {
+    // 세그먼트 카드는 letters-v6 데이터로 채운다
+    function fill() {
+      var D = window.ONVI_V6;
+      if (!D) return false;
+      document.querySelectorAll('[data-letter-seg]').forEach(function (btn) {
+        var k = btn.getAttribute('data-letter-seg');
+        var s = D.segments[k];
+        if (!s) return;
+        var rep = D.episodes[s.rep];
+        var set = function (sel, txt) { var el = btn.querySelector(sel); if (el) el.textContent = txt; };
+        set('[data-seg-name]', s.name);
+        set('[data-seg-hook1]', s.hook[0]);
+        set('[data-seg-hook2]', s.hook[1]);
+        var pv = btn.querySelector('[data-seg-preview]');
+        if (pv && pv.firstChild) pv.firstChild.nodeValue = (rep.paras || [''])[0];
+      });
+      return true;
+    }
+    if (!fill()) {
+      var poll = setInterval(function () { if (fill()) clearInterval(poll); }, 120);
+    }
+
+    // 슬라이더 진행 도트
+    function bindDots(sliderSel, dotsSel, n) {
+      var el = document.querySelector(sliderSel);
+      var dots = document.querySelectorAll(dotsSel + ' > span');
+      if (!el || !dots.length) return;
+      var update = function () {
+        var max = el.scrollWidth - el.clientWidth;
+        var i = max > 0 ? Math.min(n - 1, Math.max(0, Math.round(el.scrollLeft / max * (n - 1)))) : 0;
+        dots.forEach(function (d, j) {
+          d.style.width = j === i ? '18px' : '7px';
+          d.style.background = j === i ? 'var(--cheongja)' : '#D8D0BC';
+        });
+      };
+      el.addEventListener('scroll', update, { passive: true });
+      update();
+    }
+    bindDots('.ov-slider', '[data-seg-dots]', 5);
+    bindDots('.ov-gslider', '[data-give-dots]', 7);
+
+    var g = document.querySelector('.ov-gslider');
+    var prev = document.querySelector('[data-give-prev]');
+    var next = document.querySelector('[data-give-next]');
+    if (g && prev) prev.addEventListener('click', function () { g.scrollBy({ left: -344, behavior: 'smooth' }); });
+    if (g && next) next.addEventListener('click', function () { g.scrollBy({ left: 344, behavior: 'smooth' }); });
   })();
 </script>
 </body>

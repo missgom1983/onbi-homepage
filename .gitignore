@@ -3,6 +3,10 @@ screenshots/
 v1/
 v3.0/
 v3.1/
+v3.2/
+v3.2.1/
+v3.3/
+온비_v3.4/
 uploads/
 *.dc.html
 /image-slot.js
@@ -10,6 +14,7 @@ uploads/
 
 # 에디터/OS
 .claude/
+.wrangler/
 .DS_Store
 
 # 빌드 참조 (배포 제외)
@@ -47,3 +52,6 @@ v3.2/
 sandbox-*
 
 v3.2.1/
+v3.3/
+v3.4/
+온비_v3.4/

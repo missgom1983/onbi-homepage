@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>요금제 · On:Vi — 함께하는 방법을 선택하세요</title>
+<title>요금제 · On:Vi — 첫 통화와 첫 편지는 무료</title>
 
 <link rel="stylesheet" href="shared/ds/tokens/fonts.css">
 <link rel="stylesheet" href="shared/ds/tokens/colors.css">
@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="shared/ds/tokens/typography.css">
 <link rel="stylesheet" href="shared/ds/tokens/spacing.css">
 <link rel="stylesheet" href="shared/ds/styles.css">
+
 <style>
   *,*::before,*::after{ box-sizing:border-box; }
   body{ margin:0; background:var(--hanji,#F5F1E6); color:var(--simya,#1F2A3A); font-family:var(--font-ui),'Pretendard Variable',Pretendard,sans-serif; letter-spacing:-0.012em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
@@ -94,6 +95,26 @@
   .panel-foot{ margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .panel-foot a{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72); min-height:44px; }
   .panel-foot a:hover{ color:#FFF; background:none; }
+  .nav-user-wrap{ position:relative; flex-shrink:0; }
+  .nav-user{ cursor:pointer; font-family:inherit; padding:6px 14px 6px 6px; }
+  .nav-caret{ width:6px; height:6px; border-right:1.5px solid rgba(255,255,255,0.6); border-bottom:1.5px solid rgba(255,255,255,0.6); flex-shrink:0; margin-left:1px; transition:transform .22s; transform:rotate(45deg) translateY(-1px); }
+  .nav-user[aria-expanded="true"] .nav-caret{ transform:rotate(-135deg) translateY(1px); }
+  .nav-menu{ position:absolute; right:0; top:calc(100% + 10px); width:264px; display:flex; flex-direction:column; gap:2px; padding:8px; background:rgba(31,42,58,0.96); border:1px solid rgba(255,255,255,0.14); border-radius:20px; box-shadow:0 24px 54px -22px rgba(31,42,58,0.6); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  .nav-menu-main{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-radius:14px; background:rgba(79,184,158,0.16); min-height:44px; }
+  .nav-menu-main:hover{ background:rgba(79,184,158,0.28); }
+  .nav-menu-main > span:first-child{ display:flex; flex-direction:column; gap:2px; }
+  .nav-menu-main .t{ font-size:14.5px; font-weight:700; color:#FFFFFF; letter-spacing:-0.015em; }
+  .nav-menu-main .d{ font-size:12px; color:rgba(255,255,255,0.55); }
+  .nav-menu-main .arr{ font-size:13px; color:var(--cheongja,#4FB89E); flex-shrink:0; }
+  .nav-menu-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; border-radius:14px; font-size:14px; font-weight:600; color:rgba(255,255,255,0.9); min-height:44px; }
+  .nav-menu-row:hover{ background:rgba(255,255,255,0.12); }
+  .nav-menu-row .chev{ font-size:13px; color:rgba(255,255,255,0.4); flex-shrink:0; }
+  .nav-menu-out{ display:flex; width:100%; align-items:center; padding:13px 16px; border-radius:14px; background:none; border:none; font-family:inherit; font-size:14px; font-weight:600; color:rgba(255,255,255,0.55); cursor:pointer; text-align:left; min-height:44px; transition:color .2s; }
+  .nav-menu-out:hover{ color:#FFFFFF; background:rgba(255,255,255,0.12); }
+  .panel-user{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .panel-space{ background:rgba(79,184,158,0.2); font-weight:700 !important; color:#FFFFFF !important; padding:11px 16px !important; }
+  .panel-space:hover{ background:rgba(79,184,158,0.32) !important; }
+  .panel-my{ padding:11px 12px !important; }
   footer br[data-m]{ display:none; }
   @media (max-width: 760px){
     footer br[data-m]{ display:inline !important; }
@@ -103,46 +124,42 @@
     [data-ft-people] > span{ white-space:nowrap; font-size:12.5px !important; }
     [data-ft-people] > span[data-ft-label]{ width:100%; font-size:10.5px !important; }
   }
-  @keyframes onviConsultIn{ 0%{ opacity:0; transform:translateY(14px); } 100%{ opacity:1; transform:translateY(0); } }
-  @keyframes onviModalIn{ 0%{ opacity:0; transform:translateY(16px) scale(0.98); } 100%{ opacity:1; transform:translateY(0) scale(1); } }
-  @keyframes onviFadeIn{ 0%{ opacity:0; } 100%{ opacity:1; } }
-  @media (prefers-reduced-motion: reduce){
-    [data-onvi-consult], [data-onvi-consult] *, [data-onvi-modal], [data-onvi-modal] *{ animation:none !important; }
-  }
-  [data-onvi-modal] input::placeholder{ color:#6A7789; }
-  [data-onvi-modal] input:focus{ outline:none; background:#FFFFFF; border-color:#4FB89E !important; box-shadow:0 0 0 4px #EAF4EF; }
-  br[data-keep]{ display:inline !important; }
   /* 페이지 고유 */
     *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body { word-break: keep-all; overflow-wrap: break-word; margin: 0; background: #F5F1E6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     a { color: #2A7360; } a:hover { color: #1F5D4D; }
     .ov-rv { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
     .ov-rv.ov-on { opacity: 1; transform: none; }
-    .ov-dots { display: none; justify-content: center; gap: 7px; margin-top: 18px; }
-    @media (prefers-reduced-motion: reduce) { .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; } }
+    br[data-m] { display: none; }
+    .ov-faq { border-top: 1px solid #E6E0D1; }
+    .ov-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 4px; font-size: 16.5px; font-weight: 700; letter-spacing: -0.02em; color: #1F2A3A; min-height: 44px; }
+    .ov-faq summary::-webkit-details-marker { display: none; }
+    .ov-faq summary::after { content: "+"; flex-shrink: 0; width: 28px; height: 28px; border-radius: 999px; border: 1px solid #E6E0D1; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 500; color: #6A7789; }
+    .ov-faq[open] summary::after { content: "−"; color: #2A7360; border-color: #4FB89E; }
+    .ov-faq > p { margin: 0; padding: 0 4px 24px; font-size: 15.5px; line-height: 1.75; color: #3F4D62; max-width: 640px; text-wrap: pretty; }
+    .ov-in { width: 100%; background: #FFFFFF; border: 1px solid #E6E0D1; border-radius: 12px; padding: 14px 16px; font-family: inherit; font-size: 15.5px; color: #1F2A3A; min-height: 52px; }
+    .ov-in:focus { outline: 2px solid #4FB89E; outline-offset: 1px; }
+    .ov-chip input { position: absolute; opacity: 0; pointer-events: none; }
+    .ov-chip span { display: inline-flex; align-items: center; justify-content: center; padding: 12px 22px; border-radius: 999px; border: 1px solid #E6E0D1; background: #FFFFFF; font-size: 14.5px; font-weight: 600; color: #3F4D62; cursor: pointer; min-height: 44px; transition: background .2s, color .2s, border-color .2s; }
+    .ov-chip input:checked + span { background: #E6F3EE; border-color: #4FB89E; color: #2A7360; }
+    .ov-chip input:focus-visible + span { outline: 2px solid #4FB89E; outline-offset: 1px; }
+    .ov-two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .ov-bar { display: none; }
+    @media (max-width: 900px) { .ov-two { grid-template-columns: 1fr; } }
     @media (max-width: 760px) {
-      [data-cta] { flex-wrap: nowrap !important; gap: 10px !important; }
-      [data-cta] > a, [data-cta] > button { flex: 1 1 0; justify-content: center !important; padding: 13px 10px !important; font-size: 13.5px !important; white-space: nowrap; }
-      [data-ov-cards] { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px !important; margin: 0 -24px !important; padding: 0 24px 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-      [data-ov-cards]::-webkit-scrollbar { display: none; }
-      [data-ov-cards] > div, [data-ov-cards] > a { flex: 0 0 82%; scroll-snap-align: center; }
-      [data-ov-cards] > .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .ov-dots { display: flex; margin: 16px 0 28px; }
-      h1 br, h2 br, h3 br, blockquote br, p br { display:none; }
-      section { padding-top:72px !important; padding-bottom:72px !important; }
-      section:first-of-type { padding-top:118px !important; }
-      figure { margin-top:0 !important; }
-      [style*="repeat(3,1fr)"], [style*="repeat(3, 1fr)"] { grid-template-columns:1fr !important; }
-      [style*="aspect-ratio:21/9"] { aspect-ratio:4/3 !important; }
-      [style*="grid-template-columns:repeat(2"] { grid-template-columns:1fr !important; }
+      h1 br, h2 br, h3 br, blockquote br, p br { display: none; }
+      br[data-m], br[data-keep] { display: inline !important; }
+      section { padding-top: 72px !important; padding-bottom: 72px !important; }
+      section:first-of-type { padding-top: 118px !important; }
+      .ov-row { grid-template-columns: 1fr !important; }
+      .ov-bar { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 480; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(31,42,58,0.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transform: translateY(115%); transition: transform .35s cubic-bezier(.22,.61,.36,1); }
+      .ov-bar[data-on="true"] { transform: none; }
     }
+    @media (prefers-reduced-motion: reduce) { .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; } html { scroll-behavior: auto; } }
   
   /* 디자인 툴 hover */
-  .hv1:hover{ background:var(--action-primary-hover); transform:translateY(-2px); }
-  .hv2:hover{ color:var(--simya); border-color:#D5CDB9; }
-  .hv3:hover{ background:var(--action-primary-hover); box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); }
-  .hv4:hover{ background:var(--action-primary-hover); }
-  .hv5:hover{ background:#4FB89E; color:#FFFFFF; border-color:#4FB89E; }
+  .hv1:hover{ background:var(--action-primary-hover); box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); }
 </style>
 </head>
 <body>
@@ -159,7 +176,17 @@
       <a href="support.html">고객지원</a>
     </div>
     <div class="nav-cta">
-      <a class="nav-user" id="navUser" href="mypage.html" hidden><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span></a>
+      <div class="nav-user-wrap" id="navUser" hidden>
+        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
+        <div class="nav-menu" id="navMenu" role="menu" hidden>
+          <a href="https://my.onvi.kr" role="menuitem" class="nav-menu-main">
+            <span><span class="t">가족 공간 열기</span><span class="d">편지 / 답장 / 이야기 기록</span></span>
+            <span aria-hidden="true" class="arr">↗</span>
+          </a>
+          <a href="mypage.html" role="menuitem" class="nav-menu-row"><span>마이페이지</span><span aria-hidden="true" class="chev">›</span></a>
+          <button type="button" role="menuitem" class="nav-menu-out" id="navLogout">로그아웃</button>
+        </div>
+      </div>
       <a class="start" id="navLogin" href="login.html">로그인</a>
       <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" id="navBurger"><span><span></span><span></span><span></span></span></button>
     </div>
@@ -170,209 +197,324 @@
     <a href="brand.html">브랜드</a>
     <a href="support.html">고객지원</a>
     <div class="panel-foot">
-      <a href="mypage.html" id="panelUser" hidden></a>
+      <div class="panel-user" id="panelUser" hidden>
+        <a href="https://my.onvi.kr" class="panel-space">가족 공간 열기 <span aria-hidden="true">↗</span></a>
+        <a href="mypage.html" class="panel-my">마이페이지 ›</a>
+      </div>
       <a href="login.html" id="panelLogin">로그인 ›</a>
     </div>
   </div>
 </div>
-  <div data-onvi-consult="" id="consultFab" hidden style="position:fixed; right:20px; bottom:20px; z-index:500;">
-  <button class="hv1" type="button" id="consultOpen" aria-label="무료 상담 신청" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; width:56px; height:56px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; border:none; cursor:pointer; box-shadow:0 16px 40px -14px rgba(79,184,158,0.75); animation:onviConsultIn .45s cubic-bezier(.22,.61,.36,1); transition:background .2s, transform .2s;">
-    <span style="font-size:13.5px; font-weight:700; letter-spacing:-0.01em; line-height:1.2;">상담</span>
-    <span aria-hidden="true" style="font-size:10px; opacity:0.85; line-height:1;">무료</span>
-  </button>
-</div>
-<div data-onvi-modal="" id="consultModal" hidden role="dialog" aria-modal="true" aria-label="무료 상담 신청" style="position:fixed; inset:0; z-index:600; display:flex; align-items:center; justify-content:center; padding:16px;">
-  <div id="consultBackdrop" style="position:absolute; inset:0; background:rgba(31,42,58,0.45); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); animation:onviFadeIn .25s ease;"></div>
-  <div style="position:relative; width:min(420px, 100%); max-height:calc(100vh - 48px); overflow-y:auto; background:#FFFFFF; border-radius:24px; padding:30px 28px; box-shadow:0 40px 90px -30px rgba(31,42,58,0.55); animation:onviModalIn .3s cubic-bezier(.22,.61,.36,1);">
-    <button type="button" class="consult-close hv2" aria-label="닫기" style="position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:999px; background:#FBF8EF; color:#6A7789; border:1px solid #E6E0D1; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; padding:0;">✕</button>
 
-    <div id="consultFormWrap">
-      <div style="font-size:11.5px; font-weight:700; letter-spacing:0.14em; color:#2A7360; margin-bottom:12px;">무료 상담</div>
-      <h2 style="font-size:21px; font-weight:700; letter-spacing:-0.025em; line-height:1.4; margin:0 0 8px; color:var(--simya); text-wrap:balance;">가족에게 맞는 방법, <br>함께 찾아드려요.</h2>
-      <p style="font-size:13.5px; line-height:1.6; color:#3F4D62; margin:0 0 22px;">성함과 연락처만 남겨주시면 온비가 먼저 연락드려요.</p>
-      <form id="consultForm" novalidate style="display:flex; flex-direction:column; gap:14px;">
-        <div>
-          <label for="cb-name" style="display:block; font-size:13px; font-weight:700; color:var(--simya); margin-bottom:7px;">성함<span style="color:#2A7360; margin-left:3px;">*</span></label>
-          <input id="cb-name" name="name" type="text" placeholder="예) 김온비" style="width:100%; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:12px; padding:12px 14px; font-family:inherit; font-size:14.5px; color:var(--simya); transition:border-color .2s, box-shadow .2s, background .2s;">
-        </div>
-        <div>
-          <label for="cb-phone" style="display:block; font-size:13px; font-weight:700; color:var(--simya); margin-bottom:7px;">연락처<span style="color:#2A7360; margin-left:3px;">*</span></label>
-          <input id="cb-phone" name="phone" type="text" inputmode="tel" placeholder="예) 010-1234-5678" style="width:100%; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:12px; padding:12px 14px; font-family:inherit; font-size:14.5px; color:var(--simya); transition:border-color .2s, box-shadow .2s, background .2s;">
-        </div>
-        <div style="display:flex; align-items:flex-start; gap:9px; padding:12px 14px; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:12px;">
-          <input id="cb-agree" name="agree" type="checkbox" style="width:18px; height:18px; margin:1px 0 0; accent-color:#4FB89E; flex-shrink:0; cursor:pointer;">
-          <label for="cb-agree" style="font-size:12.5px; color:#3F4D62; line-height:1.55; cursor:pointer;">개인정보 수집·이용에 동의합니다. 상담 안내 목적으로만 사용 후 파기됩니다. <span style="color:#2A7360; font-weight:700;">(필수)</span></label>
-        </div>
-        <p id="consultError" hidden style="margin:0; font-size:13px; font-weight:600; color:var(--simhae);"></p>
-        <button class="hv3" type="submit" style="width:100%; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 24px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15px; font-weight:700; letter-spacing:-0.01em; border:none; cursor:pointer; font-family:inherit; min-height:44px; transition:background .2s, box-shadow .2s;">상담 신청하기 →</button>
-      </form>
-      <p style="font-size:12px; color:#6A7789; margin:14px 0 0; line-height:1.55; text-align:center;">더 자세히 적고 싶다면 <a href="contact.html" style="color:#2A7360; font-weight:600;">상담 신청 페이지</a>를 이용하세요.</p>
-    </div>
-
-    <div id="consultSent" hidden style="text-align:center; padding:14px 0 6px;">
-      <div style="width:52px; height:52px; border-radius:999px; background:var(--saebyeok); display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:22px; color:#2A7360;">✓</div>
-      <h2 style="font-size:20px; font-weight:700; letter-spacing:-0.025em; margin:0 0 10px; color:var(--simya);">신청이 접수되었어요.</h2>
-      <p style="font-size:14px; line-height:1.65; color:#3F4D62; margin:0 0 24px;"><span id="consultSentName"></span> 님, 평일 09:00–18:00 사이에 <br data-keep="">남겨주신 번호로 온비가 먼저 연락드립니다.</p>
-      <button type="button" class="consult-close hv4" style="display:inline-flex; align-items:center; justify-content:center; padding:12px 28px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:14.5px; font-weight:700; border:none; cursor:pointer; font-family:inherit; min-height:44px; transition:background .2s;">확인</button>
-    </div>
-  </div>
-</div>
-
-  <!-- ── HERO ── -->
-  <div class="stack">
-<section style="padding:150px 0 72px; text-align:center;">
-    <div style="width:min(860px,90%); margin:0 auto;">
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">함께하는 방법</div>
-      <h1 style="font-size:clamp(36px,4.8vw,58px); line-height:1.16; letter-spacing:-0.035em; font-weight:700; margin:22px auto 24px; color:var(--simya); text-wrap:balance;">요금이 아니라, <br>함께하는 방법을 선택하세요.</h1>
-      <p style="font-size:clamp(16px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; max-width:520px; margin:0 auto; text-wrap:pretty;">매주의 안부 통화와 금요편지는 모든 요금제에 담겨 있어요. 월 9,900원부터, 가족이 어디까지 함께할지만 고르시면 됩니다.</p>
-    </div>
-  </section>
-
-  <!-- ── 카드 스택 ── -->
-  <div style="width:calc(100% - 40px); max-width:1880px; margin:20px auto 0; display:flex; flex-direction:column; gap:20px; padding-bottom:20px;">
-
-  <!-- ── 두 방식 · 이음/새김 ── -->
-  <section style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF);">
-    <div style="width:100%; max-width:1160px; margin:0 auto;">
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:16px;">
-        <div style="position:relative; background:var(--cw-haneul-a); border-radius:24px; padding:38px 36px; overflow:hidden;">
-          <div style="position:absolute; right:-40px; bottom:-40px; width:180px; height:180px; border-radius:999px; background:var(--cw-haneul-b); opacity:0.55; pointer-events:none;"></div>
-          <div style="position:relative;">
-            <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:var(--simhae);">함께 잇는 방식</div>
-            <h2 style="font-size:clamp(24px,2.6vw,32px); font-weight:700; letter-spacing:-0.03em; margin:14px 0 10px; color:var(--simya);">이음</h2>
-            <p style="margin:0; font-size:15.5px; line-height:1.65; color:#2A3646; max-width:380px;">매주의 대화로 곁을 잇는 방식. 금요편지와 가족의 답장이 매주의 리듬이 됩니다.</p>
-          </div>
-        </div>
-        <div style="position:relative; background:var(--cw-bom-a); border-radius:24px; padding:38px 36px; overflow:hidden;">
-          <div style="position:absolute; right:-40px; bottom:-40px; width:180px; height:180px; border-radius:999px; background:var(--cw-bom-b); opacity:0.55; pointer-events:none;"></div>
-          <div style="position:relative;">
-            <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">한 권으로 새기는 방식</div>
-            <h2 style="font-size:clamp(24px,2.6vw,32px); font-weight:700; letter-spacing:-0.03em; margin:14px 0 10px; color:var(--simya);">새김</h2>
-            <p style="margin:0; font-size:15.5px; line-height:1.65; color:#2A3646; max-width:380px;">한 권씩 새겨 남기는 방식. 평생의 이야기를 인생책으로 차곡차곡 새깁니다.</p>
-          </div>
-        </div>
+  <!-- P1 오프닝 -->
+  <section id="p1" style="padding:170px 0 92px; text-align:center;">
+    <div style="width:min(760px,90%); margin:0 auto;">
+      <span style="display:inline-flex; align-items:center; gap:8px; padding:8px 18px; border-radius:999px; background:#FFFFFF; border:1px solid #E0D9C6; font-size:13px; font-weight:600; letter-spacing:0.04em; color:#2A7360;"><span style="width:7px; height:7px; border-radius:999px; background:var(--cheongja);"></span>시범 프로그램 · 30가구 한정</span>
+      <h1 style="font-size:clamp(28px,4.2vw,54px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:26px 0 20px; color:var(--simya); text-wrap:balance;">첫 통화와 첫 편지는 무료. <br>그다음은, 그때 정하세요.</h1>
+      <p style="font-size:clamp(16px,1.6vw,18px); line-height:1.75; color:#3F4D62; margin:0 auto 34px; max-width:520px; text-wrap:pretty;">매주 30분의 이야기 통화와 금요편지 — <br data-keep="">온비의 전부를 먼저 경험해 보시고 결정하실 수 있습니다.</p>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:18px;">
+        <a class="hv1" href="#apply" data-ev="cta_click" data-ev-pos="hero" style="display:inline-flex; align-items:center; justify-content:center; gap:9px; height:56px; padding:0 34px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:16.5px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; transition:background .2s, box-shadow .2s;">무료 첫 통화 신청하기 <span aria-hidden="true">→</span></a>
+        <a href="service.html" style="font-size:15px; font-weight:600; text-decoration:none;">온비가 어떤 편지를 쓰는지 궁금하시다면 → 서비스 소개 보기</a>
       </div>
-      <p style="text-align:center; font-size:14px; color:#3F4D62; margin:20px 0 0; line-height:1.65;">이음과 새김은 요금 차이가 없어요. 어느 쪽이 맞을지 상담에서 함께 찾아드립니다.</p>
     </div>
   </section>
 
-  <!-- ── 요금제 3종 ── -->
-  <section style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:#FBF8EF;">
-    <div style="width:100%; max-width:1160px; margin:0 auto;">
-      <div style="text-align:center; max-width:560px; margin:0 auto 56px;">
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">함께하는 방법</div>
+  <div style="width:calc(100% - 40px); max-width:1880px; margin:0 auto; display:flex; flex-direction:column; gap:20px; padding-bottom:20px;">
+
+  <!-- P2 참여비 -->
+  <section id="join" data-ev="join_card_view" style="background:#FFFFFF; border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <div style="width:min(880px,90%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:38px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">무엇이, 얼마인가요</div>
         <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
-        <h2 style="font-size:clamp(28px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; color:var(--simya); text-wrap:balance;">세 가지 요금제</h2>
+        <h2 style="font-size:clamp(24px,3.4vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; color:var(--simya); text-wrap:balance;">시범 참여비는 <br>3개월, 29,700원입니다.</h2>
       </div>
-      <div data-ov-cards="" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px; align-items:stretch;">
-                  <div style="position:relative; display:flex; flex-direction:column; background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:38px 34px;">
-            <div style="font-size:15px; font-weight:700; letter-spacing:-0.01em; color:#2A7360;">씨앗</div>
-            <div style="display:flex; align-items:baseline; gap:6px; margin-top:14px;">
-              <span style="font-size:clamp(34px,3vw,42px); font-weight:700; letter-spacing:-0.04em; line-height:1; color:#1F2A3A;">9,900</span>
-              <span style="font-size:15px; font-weight:600; color:#6A7789;">원/월</span>
-            </div>
-            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:#3F4D62;">매주의 안부와 금요편지, 가장 단정한 시작.</p>
-            <div style="height:1px; margin:24px 0; background:#E6E0D1;"></div>
-            <div style="display:flex; flex-direction:column; gap:12px;">
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>주 1회 안부 전화</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>금요편지</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>케어 신호 (평안·살핌·확인)</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>가족 공유 1인</span>
-            </div>
-            <a class="hv5" href="contact.html" style="display:inline-flex; align-items:center; justify-content:center; margin-top:28px; padding:14px 24px; border-radius:999px; font-size:15px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; transition:background .2s, border-color .2s; background:transparent; border:1.5px solid #4FB89E; color:#2A7360;">씨앗으로 시작하기</a>
+      <div style="max-width:560px; margin:0 auto; background:#FFFFFF; border:1px solid #EAE4D3; border-top:2px solid var(--noeul); border-radius:20px; box-shadow:0 8px 32px rgba(31,42,58,0.10); padding:clamp(26px,4.5vw,40px);">
+        <div style="text-align:center; padding-bottom:22px; border-bottom:1px solid #EFEAD9;">
+          <div style="font-size:14px; font-weight:700; color:#2A7360;">시범 참여비</div>
+          <div style="font-size:clamp(30px,4vw,38px); font-weight:700; letter-spacing:-0.03em; color:var(--simya); margin-top:8px;">3개월 29,700원</div>
+          <div style="font-size:14px; color:#6A7789; margin-top:5px;">월 9,900원 꼴</div>
+        </div>
+        <div style="padding:22px 0; border-bottom:1px solid #EFEAD9;">
+          <div style="font-size:12px; font-weight:700; letter-spacing:0.12em; color:var(--simhae); margin-bottom:14px; text-align:center;">포함 내역</div>
+          <div style="display:flex; flex-direction:column; gap:9px;">
+                          <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">이야기 통화</strong> 매주 1회·30분·같은 담당자</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">주중 안부</strong> 씨앗 배달과 가벼운 안부</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">금요편지</strong> 매주 1통·이야기와 한 주의 안부·가족 여러 명 수신</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">가족 씨앗</strong> 사진·영상 올리기, 질문 남기기</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">언젠가 목록</strong> 부모님의 바람 모음</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">받아 적은 별지</strong> 레시피·약도·노랫말 정리</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">목소리 조각</strong> 그 주의 한마디를 음성으로 보관</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">부모님 수신본</strong> 큰 글씨 편지+계절 종이 묶음</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">가족 아카이브</strong> 언제든 다시 읽고 내려받기</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">곁을 살피는 신호</strong> 평안·살핌·확인</p></div>
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="width:5px; height:5px; border-radius:999px; background:var(--cheongja); flex-shrink:0; transform:translateY(-2px);"></span><p style="margin:0; font-size:14.5px; line-height:1.6; color:#3F4D62;"><strong style="color:var(--simya);">특별한 날</strong> 생신·명절 특집 편지</p></div>
           </div>
-          <div style="position:relative; display:flex; flex-direction:column; background:#22384F; border-radius:24px; padding:38px 34px; color:#FFFFFF; box-shadow:0 34px 70px -36px rgba(31,42,58,0.55);">
-            <span style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); display:inline-flex; align-items:center; padding:6px 16px; border-radius:999px; background:#4FB89E; color:#FFFFFF; font-size:12px; font-weight:700; letter-spacing:0.02em; white-space:nowrap;">가장 많이 선택해요</span>
-            <div style="font-size:15px; font-weight:700; letter-spacing:-0.01em; color:#7CC5A9;">이야기</div>
-            <div style="display:flex; align-items:baseline; gap:6px; margin-top:14px;">
-              <span style="font-size:clamp(34px,3vw,42px); font-weight:700; letter-spacing:-0.04em; line-height:1; color:#FFFFFF;">19,900</span>
-              <span style="font-size:15px; font-weight:600; color:rgba(255,255,255,0.6);">원/월</span>
-            </div>
-            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:rgba(255,255,255,0.72);">온 가족이 함께 답하고, 인생책이 쌓이는 방법.</p>
-            <div style="height:1px; margin:24px 0; background:rgba(255,255,255,0.14);"></div>
-            <div style="display:flex; flex-direction:column; gap:12px;">
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,0.85);"><span style="font-weight:700; flex-shrink:0; color:#7CC5A9;">✓</span>씨앗의 모든 혜택</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,0.85);"><span style="font-weight:700; flex-shrink:0; color:#7CC5A9;">✓</span>인생책 자동 축적</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,0.85);"><span style="font-weight:700; flex-shrink:0; color:#7CC5A9;">✓</span>가족 댓글·음성 답장</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,0.85);"><span style="font-weight:700; flex-shrink:0; color:#7CC5A9;">✓</span>가족 공유 3인</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:rgba(255,255,255,0.85);"><span style="font-weight:700; flex-shrink:0; color:#7CC5A9;">✓</span>사진·음성 첨부</span>
-            </div>
-            <a class="hv4" href="contact.html" style="display:inline-flex; align-items:center; justify-content:center; margin-top:28px; padding:14px 24px; border-radius:999px; font-size:15px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; transition:background .2s, border-color .2s; background:#4FB89E; color:#FFFFFF;">이야기로 시작하기</a>
-          </div>
-          <div style="position:relative; display:flex; flex-direction:column; background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:38px 34px;">
-            <div style="font-size:15px; font-weight:700; letter-spacing:-0.01em; color:#2A7360;">평생</div>
-            <div style="display:flex; align-items:baseline; gap:6px; margin-top:14px;">
-              <span style="font-size:clamp(34px,3vw,42px); font-weight:700; letter-spacing:-0.04em; line-height:1; color:#1F2A3A;">39,900</span>
-              <span style="font-size:15px; font-weight:600; color:#6A7789;">원/월</span>
-            </div>
-            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:#3F4D62;">평생 소장까지, 가장 깊게 남기는 방법.</p>
-            <div style="height:1px; margin:24px 0; background:#E6E0D1;"></div>
-            <div style="display:flex; flex-direction:column; gap:12px;">
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>이야기의 모든 혜택</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>인생책 인쇄본 제작</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>가족 공유 무제한</span>
-                <span style="display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.5; color:#3F4D62;"><span style="font-weight:700; flex-shrink:0; color:#4FB89E;">✓</span>평생 소장 보관</span>
-            </div>
-            <a class="hv5" href="contact.html" style="display:inline-flex; align-items:center; justify-content:center; margin-top:28px; padding:14px 24px; border-radius:999px; font-size:15px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; transition:background .2s, border-color .2s; background:transparent; border:1.5px solid #4FB89E; color:#2A7360;">평생으로 시작하기</a>
-          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:9px; padding-top:22px;">
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#3F4D62;">· 첫 통화와 첫 편지까지는 무료입니다. 받아보시고 결정하세요.</p>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#3F4D62;">· 참여비는 첫 편지를 받아보신 뒤에 안내드립니다. 미리 받지 않습니다.</p>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#3F4D62;">· 언제든 그만두실 수 있고, 남은 기간과 관계없이 전액 돌려드립니다.</p>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#3F4D62;">· 3개월 뒤 자동으로 연장되지 않습니다. 종료 2주 전에 미리 여쭙습니다.</p>
+        </div>
       </div>
-      <p style="text-align:center; font-size:13px; color:#6A7789; margin:24px 0 0;">모든 요금제는 약정과 위약금이 없으며, 언제든 변경·해지할 수 있습니다.</p>
+      <p style="text-align:center; font-size:15px; color:#6A7789; margin:24px 0 0;">정식 출시 후에는 월 9,900원~19,900원의 요금제로 운영될 예정입니다.</p>
     </div>
   </section>
 
-  <!-- ── FAQ ── -->
-  <section style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF);">
-    <div style="width:100%; max-width:760px; margin:0 auto;">
-      <div style="text-align:center; margin-bottom:48px;">
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:none; color:#2A7360;">자주 묻는 질문</div>
-        <h2 style="font-size:clamp(26px,3.2vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:18px 0 12px; color:var(--simya);">요금에 대해 자주 묻는 질문</h2>
-        <p style="font-size:15px; color:#3F4D62; line-height:1.7; margin:0;">시작·가족 참여에 대한 질문은 <a href="support.html#faq" style="color:#2A7360; font-weight:600;">고객지원</a>에 모아두었어요.</p>
+  <!-- P3 서른 가정의 자리 -->
+  <section id="p3" style="background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <div style="width:min(880px,90%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:40px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">먼저 시작하신 분들께</div>
+        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
+        <h2 style="font-size:clamp(24px,3.4vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; color:var(--simya); text-wrap:balance;">서른 가정과 함께, <br>온비를 만들어갑니다.</h2>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        
+          <div style="display:grid; grid-template-columns:64px 1fr; gap:18px; background:#FFFFFF; border-radius:18px; box-shadow:0 2px 12px rgba(31,42,58,0.06); padding:26px 28px; align-items:start;">
+            <span style="font-size:44px; font-weight:200; line-height:1; color:var(--cheongja);">01</span>
+            <div>
+              <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">시범가 유지</h3>
+              <p style="font-size:15px; line-height:1.75; color:#3F4D62; margin:0;">정식 출시 후에도, 시범 가정은 첫 6개월간 지금의 참여비 기준으로 이어가실 수 있습니다.</p>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:64px 1fr; gap:18px; background:#FFFFFF; border-radius:18px; box-shadow:0 2px 12px rgba(31,42,58,0.06); padding:26px 28px; align-items:start;">
+            <span style="font-size:44px; font-weight:200; line-height:1; color:var(--cheongja);">02</span>
+            <div>
+              <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">인생책 첫 제작 우선권</h3>
+              <p style="font-size:15px; line-height:1.75; color:#3F4D62; margin:0;">실물 인생책 제작이 시작되면 가장 먼저 안내드리고, 첫 제작 가정으로 모십니다.</p>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:64px 1fr; gap:18px; background:#FFFFFF; border-radius:18px; box-shadow:0 2px 12px rgba(31,42,58,0.06); padding:26px 28px; align-items:start;">
+            <span style="font-size:44px; font-weight:200; line-height:1; color:var(--cheongja);">03</span>
+            <div>
+              <h3 style="font-size:18px; font-weight:700; letter-spacing:-0.02em; margin:0 0 8px; color:var(--simya);">만드는 과정에의 초대</h3>
+              <p style="font-size:15px; line-height:1.75; color:#3F4D62; margin:0;">분기마다 시범 가정의 이야기를 듣는 자리를 엽니다. 온비는 이 서른 가정과 함께 만들어지는 서비스입니다.</p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- P4 절차 -->
+  <section id="p4" style="background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <div style="width:min(720px,90%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:44px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">신청부터 첫 편지까지</div>
+        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
+        <h2 style="font-size:clamp(24px,3.4vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; color:var(--simya); text-wrap:balance;">다섯 걸음이면, <br>첫 편지가 도착합니다.</h2>
       </div>
       <div style="display:flex; flex-direction:column;">
-                  <div style="border-top:1px solid #E6E0D1;">
-            <button class="faq-q" type="button" aria-expanded="false" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 4px; background:none; border:none; cursor:pointer; text-align:left; font-family:inherit; min-height:44px;">
-              <span style="font-size:16.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya); line-height:1.4;">도중에 다른 요금제로 바꿀 수 있나요?</span>
-              <span class="chev" style="font-size:15px; color:#6A7789; flex-shrink:0; transition:transform .25s;">▾</span>
-            </button>
-            <p class="faq-a" hidden style="margin:0; padding:0 4px 24px; font-size:15px; line-height:1.7; color:#3F4D62; max-width:640px;">네, 언제든 바꿀 수 있어요. 다음 결제일부터 새 요금제가 적용되고, 그동안 쌓인 편지와 기록은 그대로 이어집니다.</p>
+        
+          <div style="display:grid; grid-template-columns:36px 1fr; gap:0 18px;">
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; font-size:14px; font-weight:700; flex-shrink:0; background:#FFFFFF; color:var(--simhae); box-shadow:inset 0 0 0 1.5px #D8D0BC;">1</span>
+              <span aria-hidden="true" style="flex:1; width:1.5px; background:#D8D0BC; min-height:24px;"></span>
+            </div>
+            <div style="padding:5px 0 26px;">
+              <h3 style="font-size:17px; font-weight:700; letter-spacing:-0.02em; margin:0 0 6px; color:var(--simya);">신청 <span style="font-size:13.5px; font-weight:600; color:#2A7360;">1분</span></h3>
+              <p style="font-size:14.5px; line-height:1.75; color:#3F4D62; margin:0; max-width:520px;">아래 폼에 성함과 연락처만 남겨주세요.</p>
+            </div>
           </div>
-          <div style="border-top:1px solid #E6E0D1;">
-            <button class="faq-q" type="button" aria-expanded="false" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 4px; background:none; border:none; cursor:pointer; text-align:left; font-family:inherit; min-height:44px;">
-              <span style="font-size:16.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya); line-height:1.4;">약정이나 위약금이 있나요?</span>
-              <span class="chev" style="font-size:15px; color:#6A7789; flex-shrink:0; transition:transform .25s;">▾</span>
-            </button>
-            <p class="faq-a" hidden style="margin:0; padding:0 4px 24px; font-size:15px; line-height:1.7; color:#3F4D62; max-width:640px;">없습니다. 원하실 때 해지하실 수 있고, 해지 후에도 쌓인 편지와 기록은 내려받아 간직하실 수 있도록 안내해드려요.</p>
+          <div style="display:grid; grid-template-columns:36px 1fr; gap:0 18px;">
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; font-size:14px; font-weight:700; flex-shrink:0; background:#FFFFFF; color:var(--simhae); box-shadow:inset 0 0 0 1.5px #D8D0BC;">2</span>
+              <span aria-hidden="true" style="flex:1; width:1.5px; background:#D8D0BC; min-height:24px;"></span>
+            </div>
+            <div style="padding:5px 0 26px;">
+              <h3 style="font-size:17px; font-weight:700; letter-spacing:-0.02em; margin:0 0 6px; color:var(--simya);">안내 전화 <span style="font-size:13.5px; font-weight:600; color:#2A7360;">하루 안에</span></h3>
+              <p style="font-size:14.5px; line-height:1.75; color:#3F4D62; margin:0; max-width:520px;">온비가 먼저 전화드려 부모님 성향과 편한 시간을 여쭙습니다. 부모님께 미리 건넬 한마디도 함께 준비해드려요.</p>
+            </div>
           </div>
-          <div style="border-top:1px solid #E6E0D1;">
-            <button class="faq-q" type="button" aria-expanded="false" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 4px; background:none; border:none; cursor:pointer; text-align:left; font-family:inherit; min-height:44px;">
-              <span style="font-size:16.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya); line-height:1.4;">이음과 새김 중 무엇을 골라야 할지 모르겠어요.</span>
-              <span class="chev" style="font-size:15px; color:#6A7789; flex-shrink:0; transition:transform .25s;">▾</span>
-            </button>
-            <p class="faq-a" hidden style="margin:0; padding:0 4px 24px; font-size:15px; line-height:1.7; color:#3F4D62; max-width:640px;">두 방식은 요금 차이가 없어요. 매주의 대화를 이어가는 데 무게를 둘지, 한 권으로 남기는 데 무게를 둘지의 차이입니다. 상담에서 가족 상황을 들어보고 함께 정해드립니다.</p>
+          <div style="display:grid; grid-template-columns:36px 1fr; gap:0 18px;">
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; font-size:14px; font-weight:700; flex-shrink:0; background:#FFFFFF; color:var(--simhae); box-shadow:inset 0 0 0 1.5px #D8D0BC;">3</span>
+              <span aria-hidden="true" style="flex:1; width:1.5px; background:#D8D0BC; min-height:24px;"></span>
+            </div>
+            <div style="padding:5px 0 26px;">
+              <h3 style="font-size:17px; font-weight:700; letter-spacing:-0.02em; margin:0 0 6px; color:var(--simya);">첫인사 꾸러미 발송 <span style="font-size:13.5px; font-weight:600; color:#2A7360;"></span></h3>
+              <p style="font-size:14.5px; line-height:1.75; color:#3F4D62; margin:0; max-width:520px;">부모님 댁으로 손편지와 담당자 소개가 담긴 꾸러미가 갑니다.</p>
+            </div>
           </div>
-          <div style="border-top:1px solid #E6E0D1;">
-            <button class="faq-q" type="button" aria-expanded="false" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 4px; background:none; border:none; cursor:pointer; text-align:left; font-family:inherit; min-height:44px;">
-              <span style="font-size:16.5px; font-weight:700; letter-spacing:-0.02em; color:var(--simya); line-height:1.4;">가족은 몇 명까지 함께할 수 있나요?</span>
-              <span class="chev" style="font-size:15px; color:#6A7789; flex-shrink:0; transition:transform .25s;">▾</span>
-            </button>
-            <p class="faq-a" hidden style="margin:0; padding:0 4px 24px; font-size:15px; line-height:1.7; color:#3F4D62; max-width:640px;">씨앗은 1인, 이야기는 3인, 평생은 무제한입니다. 초대된 가족만 편지를 읽고 답장을 남길 수 있어요.</p>
+          <div style="display:grid; grid-template-columns:36px 1fr; gap:0 18px;">
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; font-size:14px; font-weight:700; flex-shrink:0; background:#FFFFFF; color:var(--simhae); box-shadow:inset 0 0 0 1.5px #D8D0BC;">4</span>
+              <span aria-hidden="true" style="flex:1; width:1.5px; background:#D8D0BC; min-height:24px;"></span>
+            </div>
+            <div style="padding:5px 0 26px;">
+              <h3 style="font-size:17px; font-weight:700; letter-spacing:-0.02em; margin:0 0 6px; color:var(--simya);">부모님 첫 통화 <span style="font-size:13.5px; font-weight:600; color:#2A7360;">무료</span></h3>
+              <p style="font-size:14.5px; line-height:1.75; color:#3F4D62; margin:0; max-width:520px;">부모님이 직접 허락하시면 그때부터 이야기를 담기 시작합니다.</p>
+            </div>
           </div>
-        <div style="border-top:1px solid #E6E0D1;"></div>
+          <div style="display:grid; grid-template-columns:36px 1fr; gap:0 18px;">
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; font-size:14px; font-weight:700; flex-shrink:0; background:var(--cheongja); color:#FFFFFF;">5</span>
+              
+            </div>
+            <div style="padding:5px 0 26px;">
+              <h3 style="font-size:17px; font-weight:700; letter-spacing:-0.02em; margin:0 0 6px; color:var(--simya);">첫 금요편지 <span style="font-size:13.5px; font-weight:600; color:#2A7360;">무료</span></h3>
+              <p style="font-size:14.5px; line-height:1.75; color:#3F4D62; margin:0; max-width:520px;">첫 편지를 받아보신 뒤, 이어가실지 정하시면 됩니다. 이어가시는 경우에만 참여비를 안내드려요.</p>
+            </div>
+          </div>
       </div>
     </div>
   </section>
 
-  <!-- ── CTA ── -->
-  <section data-hide-consult="" style="border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); background:#22384F; color:#FFFFFF; text-align:center;">
-    <div style="width:100%; max-width:720px; margin:0 auto;">
-      <h2 style="font-size:clamp(26px,3.4vw,42px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:0; text-wrap:balance;">어떤 요금제가 맞을지 <br>모르겠다면.</h2>
-      <p style="font-size:clamp(15px,1.4vw,17px); line-height:1.7; color:rgba(255,255,255,0.7); margin:20px auto 34px; max-width:480px; text-wrap:pretty;">가족 상황을 들려주시면, 맞는 방식과 요금제를 함께 찾아드립니다.</p>
-      <a class="hv3" href="contact.html" style="display:inline-flex; align-items:center; gap:8px; padding:15px 32px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; transition:background .2s, box-shadow .2s;">무료 상담 신청 →</a>
+  <!-- P5 납부 방법 -->
+  <section id="p5" data-ev="payment_section_view" style="background:#FFFFFF; border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <div style="width:min(1000px,90%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:40px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">참여비는 이렇게 냅니다</div>
+        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
+        <h2 style="font-size:clamp(24px,3.4vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; color:var(--simya); text-wrap:balance;">이체 한 번이면 됩니다. <br>등록할 것이 없습니다.</h2>
+      </div>
+      <div class="ov-two" style="align-items:start;">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="display:grid; grid-template-columns:56px 1fr; gap:16px; background:var(--hanji); border-radius:16px; padding:22px 24px; align-items:start;">
+            <span style="font-size:38px; font-weight:200; line-height:1; color:var(--cheongja);">01</span>
+            <div>
+              <h3 style="font-size:16.5px; font-weight:700; letter-spacing:-0.02em; margin:0 0 7px; color:var(--simya);">첫 편지를 받아보신 뒤, 안내를 드려요</h3>
+              <p style="font-size:14.5px; line-height:1.7; color:#3F4D62; margin:0;">토요일 오전, 카카오톡으로 참여 안내를 보내드립니다. 이어가실 분만 확인하시면 됩니다.</p>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:56px 1fr; gap:16px; background:var(--hanji); border-radius:16px; padding:22px 24px; align-items:start;">
+            <span style="font-size:38px; font-weight:200; line-height:1; color:var(--cheongja);">02</span>
+            <div>
+              <h3 style="font-size:16.5px; font-weight:700; letter-spacing:-0.02em; margin:0 0 7px; color:var(--simya);">계좌이체로 한 번만</h3>
+              <p style="font-size:14.5px; line-height:1.7; color:#3F4D62; margin:0 0 10px;">3개월분 29,700원을 안내드린 계좌로 한 번 이체하시면 끝입니다. 자동이체·카드 등록·앱 설치가 없습니다.</p>
+              <p style="font-size:13.5px; line-height:1.7; color:#6A7789; margin:0;">입금 계좌: 안내 메시지에 기재 (예금주: 김태희 · 온비 대표) <br data-keep="">입금자명: 온비+신청자 성함 (예: 온비홍길동)</p>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:56px 1fr; gap:16px; background:var(--hanji); border-radius:16px; padding:22px 24px; align-items:start;">
+            <span style="font-size:38px; font-weight:200; line-height:1; color:var(--cheongja);">03</span>
+            <div>
+              <h3 style="font-size:16.5px; font-weight:700; letter-spacing:-0.02em; margin:0 0 7px; color:var(--simya);">확인서를 보내드립니다</h3>
+              <p style="font-size:14.5px; line-height:1.7; color:#3F4D62; margin:0;">입금 확인 후 1영업일 안에 참여 확인서를 보내드려요. 참여 기간·금액·환불 안내가 담겨 있습니다.</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:22px;">
+          <div aria-hidden="true" style="background:var(--hanji); border-radius:16px; padding:clamp(22px,3vw,34px); display:flex; justify-content:center;">
+            <div style="width:min(300px,100%); background:#FFFDF8; border:1px solid #E6E0D1; border-radius:6px; box-shadow:0 14px 34px -16px rgba(31,42,58,0.3); padding:26px 24px;">
+              <div style="width:26px; height:26px; border-radius:999px; border:1.5px solid var(--cheongja); display:flex; align-items:center; justify-content:center; font-size:12px; color:#2A7360; font-weight:700; margin-bottom:14px;">溫</div>
+              <div style="font-size:14px; font-weight:700; color:var(--simya); margin-bottom:4px;">참여 확인서</div>
+              <div style="font-size:11px; color:#6A7789; margin-bottom:16px;">On:Vi 시범 프로그램</div>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <span style="display:block; height:3px; background:#EDE7D6; width:88%;"></span>
+                <span style="display:block; height:3px; background:#EDE7D6;"></span>
+                <span style="display:block; height:3px; background:#EDE7D6; width:72%;"></span>
+                <span style="display:block; height:3px; background:#EDE7D6; width:81%;"></span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding-top:12px; border-top:1px solid #EFEAD9;">
+                <span style="font-size:10.5px; color:#6A7789;">참여 기간 · 금액 · 환불 안내</span>
+                <span style="width:22px; height:22px; border-radius:999px; background:rgba(217,184,140,0.4);"></span>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--hanji); border:1.5px solid var(--simhae); border-radius:16px; padding:24px 26px;">
+            <p style="font-size:14.5px; line-height:1.7; color:var(--simya); font-weight:600; margin:0 0 12px;">온비는 정식 출시 전 시범 운영 단계라, 카드 결제 대신 대표 실명 계좌로 참여비를 받고 있습니다. 그래서 약속드립니다.</p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <p style="margin:0; font-size:14px; line-height:1.65; color:#3F4D62;">· <strong style="color:var(--simya);">선불을 요구하지 않습니다</strong> — 첫 통화·첫 편지를 먼저 보내드립니다.</p>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:#3F4D62;">· <strong style="color:var(--simya);">전액 환불</strong> — 사유를 여쭙지 않고, 요청하신 날 남은 기간과 관계없이 전부 돌려드립니다.</p>
+              <p style="margin:0; font-size:14px; line-height:1.65; color:#3F4D62;">· <strong style="color:var(--simya);">자동 연장이 없습니다</strong> — 3개월 뒤, 이어가실지 다시 여쭙습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
-</div>
 
+  <!-- P6 신청 폼 -->
+  <section id="apply" style="background:#FFFFFF; border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <div style="width:min(620px,90%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:34px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">무료 첫 통화 신청</div>
+        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
+        <h2 style="font-size:clamp(24px,3.4vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; color:var(--simya); text-wrap:balance;">성함과 연락처면 <br>충분합니다.</h2>
+      </div>
+      
+      <form id="applyForm" novalidate data-endpoint="{{FORM_ENDPOINT}}" style="background:var(--hanji); border-radius:20px; padding:clamp(24px,4vw,36px); display:flex; flex-direction:column; gap:20px;">
+        <div>
+          <label for="f-name" style="display:block; font-size:14px; font-weight:700; color:var(--simya); margin-bottom:8px;">성함 <span style="color:#2A7360;">*</span></label>
+          <input id="f-name" name="name" type="text" required="required" autoComplete="name" class="ov-in" placeholder="신청하시는 분 성함">
+        </div>
+        <div>
+          <label for="f-tel" style="display:block; font-size:14px; font-weight:700; color:var(--simya); margin-bottom:8px;">연락처 <span style="color:#2A7360;">*</span></label>
+          <input id="f-tel" name="tel" type="tel" inputMode="tel" required="required" autoComplete="tel" class="ov-in" placeholder="010-0000-0000">
+        </div>
+        <div>
+          <label for="f-rel" style="display:block; font-size:14px; font-weight:700; color:var(--simya); margin-bottom:8px;">부모님 호칭 <span style="font-weight:500; color:#6A7789;">(선택)</span></label>
+          <select id="f-rel" name="rel" class="ov-in" style="appearance:auto;">
+            <option value="">선택해 주세요</option>
+            <option>어머니</option><option>아버지</option><option>두 분 다</option><option>제가 직접 이용해요</option>
+          </select>
+        </div>
+        <div>
+          <span style="display:block; font-size:14px; font-weight:700; color:var(--simya); margin-bottom:10px;">통화 편한 시간 <span style="font-weight:500; color:#6A7789;">(선택)</span></span>
+          <div style="display:flex; gap:9px; flex-wrap:wrap;">
+            <label class="ov-chip" style="position:relative;"><input type="radio" name="slot" value="오전"><span>오전</span></label>
+            <label class="ov-chip" style="position:relative;"><input type="radio" name="slot" value="오후"><span>오후</span></label>
+            <label class="ov-chip" style="position:relative;"><input type="radio" name="slot" value="저녁"><span>저녁</span></label>
+          </div>
+        </div>
+        <input type="text" name="company" tabIndex="-1" autoComplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+        <div style="display:flex; flex-direction:column; gap:12px; padding-top:4px; border-top:1px solid #E6E0D1;">
+          <label style="display:flex; gap:11px; align-items:flex-start; cursor:pointer; padding-top:14px;">
+            <input type="checkbox" name="privacy" required="required" style="width:19px; height:19px; margin:2px 0 0; accent-color:#4FB89E;">
+            <span style="font-size:14px; line-height:1.6; color:var(--simya);"><strong>(필수)</strong> 개인정보 수집·이용 동의 <button type="button" id="privacyToggle" style="background:none; border:none; padding:0 0 0 6px; font-family:inherit; font-size:13.5px; font-weight:700; color:#2A7360; cursor:pointer;">자세히 ▾</button></span>
+          </label>
+          
+            <div id="privacyBox" hidden style="background:#FFFFFF; border-radius:12px; padding:16px 18px; font-size:13px; line-height:1.75; color:#3F4D62;">
+              <strong style="color:var(--simya);">수집 항목</strong>: 성함, 연락처, 통화 가능 시간대<br><strong style="color:var(--simya);">수집 목적</strong>: 시범 프로그램 상담 연락 및 진행 안내<br><strong style="color:var(--simya);">보유 기간</strong>: 상담 종료 후 30일 (프로그램 참여 시 종료 후 90일)<br><strong style="color:var(--simya);">거부 권리</strong>: 동의하지 않으실 수 있으나, 이 경우 상담 연락을 드릴 수 없습니다<br><strong style="color:var(--simya);">파기 요청</strong>: 언제든 아래 연락처로 즉시 삭제를 요청하실 수 있습니다
+            </div>
+          
+          <label style="display:flex; gap:11px; align-items:flex-start; cursor:pointer;">
+            <input type="checkbox" name="news" style="width:19px; height:19px; margin:2px 0 0; accent-color:#4FB89E;">
+            <span style="font-size:14px; line-height:1.6; color:#3F4D62;">(선택) 온비 소식 받아보기</span>
+          </label>
+        </div>
+        <p id="applyFailed" hidden role="alert" style="margin:0; background:rgba(217,184,140,0.3); border-left:3px solid var(--noeul); border-radius:8px; padding:12px 16px; font-size:14px; line-height:1.65; color:var(--simya);">전송이 되지 않았어요. 잠시 후 다시 눌러주세요. 급하시면 문의 연락처로 문자 주세요.</p>
+        <button class="hv1" type="submit" data-ev="consult_submit" style="display:inline-flex; align-items:center; justify-content:center; gap:9px; height:56px; border-radius:999px; border:none; background:var(--cheongja); color:#FFFFFF; font-family:inherit; font-size:16.5px; font-weight:700; letter-spacing:-0.01em; cursor:pointer; transition:background .2s, box-shadow .2s;">무료 첫 통화 신청하기 <span aria-hidden="true">→</span></button>
+        <p style="margin:-6px 0 0; text-align:center; font-size:13px; color:#6A7789;">신청 1분 · 이 단계에서 내는 비용은 없습니다</p>
+      </form>
+      
+      <div id="applyDone" hidden>
+        <div style="background:var(--hanji); border-top:2px solid var(--cheongja); border-radius:20px; padding:clamp(28px,4vw,40px); text-align:center;">
+          <div style="width:44px; height:44px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; display:inline-flex; align-items:center; justify-content:center; font-size:19px; margin-bottom:16px;">✓</div>
+          <h3 style="font-size:clamp(20px,2.4vw,24px); font-weight:700; letter-spacing:-0.03em; margin:0 0 10px; color:var(--simya);">신청이 접수됐어요. 하루 안에 전화드릴게요.</h3>
+          <p style="font-size:15px; line-height:1.75; color:#3F4D62; margin:0 auto 22px; max-width:420px; text-wrap:pretty;">첫 통화와 첫 편지는 무료입니다. 그 뒤에 이어가신다면, 어느 쪽이 마음에 드세요? <br data-keep="">(지금 정하지 않으셔도 됩니다)</p>
+          <div style="display:flex; gap:9px; flex-wrap:wrap; justify-content:center;">
+                          <button type="button" data-intent="pilot" style="min-height:44px; padding:11px 20px; border-radius:999px; font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; transition:background .2s, color .2s, border-color .2s; background:#FFFFFF; border:1px solid #E0D9C6; color:#3F4D62;">시범 참여 3개월 29,700원</button>
+              <button type="button" data-intent="full_price" style="min-height:44px; padding:11px 20px; border-radius:999px; font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; transition:background .2s, color .2s, border-color .2s; background:#FFFFFF; border:1px solid #E0D9C6; color:#3F4D62;">정식 요금 월 19,900원이어도</button>
+              <button type="button" data-intent="unsure" style="min-height:44px; padding:11px 20px; border-radius:999px; font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; transition:background .2s, color .2s, border-color .2s; background:#FFFFFF; border:1px solid #E0D9C6; color:#3F4D62;">아직 모르겠어요</button>
+          </div>
+          <p style="font-size:13px; color:#6A7789; margin:18px 0 0;"><span id="intentCaption">답해주시면 준비에 큰 도움이 됩니다.</span></p>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- P7 FAQ -->
+  <section id="faq" style="background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius:28px; padding:clamp(48px,6.5vw,104px) clamp(20px,4vw,80px);">
+    <div style="width:min(760px,90%); margin:0 auto;">
+      <div style="text-align:center; margin-bottom:36px;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">자주 여쭤보시는 것</div>
+        <hr style="display:block; width:34px; height:2px; background:var(--cheongja); border:none; margin:20px auto 0;">
+        <h2 style="font-size:clamp(24px,3.4vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:22px 0 0; color:var(--simya); text-wrap:balance;">궁금하신 것부터, <br>먼저 답해드릴게요.</h2>
+      </div>
+      <div style="border-bottom:1px solid #E6E0D1;">
+                  <details class="ov-faq"><summary>지금 돈을 내야 하나요</summary><p>아니요. 첫 통화와 첫 편지까지 무료이고, 받아보신 뒤에 참여비를 안내드립니다.</p></details>
+          <details class="ov-faq"><summary>참여비는 왜 계좌이체인가요</summary><p>정식 출시 전 시범 운영 단계라 카드 결제 대신 대표 실명 계좌로 받고 있어요. 입금 확인서를 보내드리고, 전액 환불을 보장합니다.</p></details>
+          <details class="ov-faq"><summary>환불은 정말 되나요</summary><p>됩니다. 사유를 여쭙지 않고 요청하신 날 남은 기간과 관계없이 전액 돌려드립니다.</p></details>
+          <details class="ov-faq"><summary>3개월이 지나면요</summary><p>종료 2주 전에 미리 여쭙습니다. 자동으로 연장되지 않습니다.</p></details>
+          <details class="ov-faq"><summary>부모님이 싫어하시면요</summary><p>첫 통화에서 거절하시면 그대로 종료됩니다. 기록도, 참여비도 없습니다.</p></details>
+          <details class="ov-faq"><summary>가족 사진이나 영상은 어떻게 올리나요</summary><p>카카오톡 채널로 보내주시면 됩니다. 온비가 다음 통화의 이야깃거리로 부모님께 전해드려요.</p></details>
+          <details class="ov-faq"><summary>부모님이 스마트폰을 안 쓰시는데요</summary><p>일반 전화로 걸어드립니다. 카카오톡 안부도 전화와 문자로 대신하고, 가족이 보낸 사진은 통화에서 말로 그려드린 뒤 계절 종이 묶음에 인화해 함께 보내드려요.</p></details>
+          <details class="ov-faq"><summary>정식 출시되면 요금이 오르나요</summary><p>예정 요금은 월 9,900원~19,900원입니다. 시범 가정은 출시 후 6개월간 지금 기준을 유지해드립니다.</p></details>
+      </div>
+    </div>
+  </section>
 
   <footer class="site">
   <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
@@ -406,6 +548,14 @@
     </div>
   </div>
 </footer>
+
+  <div class="ov-bar" data-on="false">
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="#apply" data-ev="cta_click" data-ev-pos="mobile_bar" style="flex:1; display:inline-flex; align-items:center; justify-content:center; gap:8px; height:50px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; text-decoration:none;">무료 첫 통화 신청 <span aria-hidden="true">→</span></a>
+      <button type="button" aria-label="닫기" id="barClose" style="width:44px; height:44px; flex-shrink:0; border:none; border-radius:999px; background:rgba(255,255,255,0.12); color:#FFFFFF; font-size:16px; cursor:pointer;">✕</button>
+    </div>
+  </div>
+</div>
 </div>
 <script src="shared/reveal.js"></script>
 <script>
@@ -421,7 +571,7 @@
       burger.setAttribute('aria-expanded', v ? 'true' : 'false');
     }
     if (panel && burger) {
-      burger.addEventListener('click', function () { setOpen(!open); });
+      burger.addEventListener('click', function () { setOpen(!open); setMenu(false); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
       document.addEventListener('pointerdown', function (e) {
         if (!open) return;
@@ -433,17 +583,37 @@
     // 모바일: 아래로 스크롤하면 네비를 감추고, 위로 올리면 다시 보여준다
     var lastY = window.scrollY;
     window.addEventListener('scroll', function () {
-      if (!window.matchMedia('(max-width: 900px)').matches) {
-        root.classList.remove('onvi-nav-hidden');
-        return;
-      }
       var y = window.scrollY;
       var d = y - lastY;
       if (Math.abs(d) < 8) return;
       lastY = y;
-      if (d > 0 && y > 140 && !open) root.classList.add('onvi-nav-hidden');
+      if (d > 0 && y > 140 && !open && !menuOpen) root.classList.add('onvi-nav-hidden');
       else if (d < 0 || y <= 140) root.classList.remove('onvi-nav-hidden');
     }, { passive: true });
+
+    // 프로필 드롭다운
+    var menuOpen = false;
+    var userBtn = document.getElementById('navUserBtn');
+    var menu = document.getElementById('navMenu');
+    function setMenu(v) {
+      menuOpen = v;
+      if (menu) menu.hidden = !v;
+      if (userBtn) userBtn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    if (userBtn && menu) {
+      userBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!menuOpen); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menuOpen) setMenu(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (menuOpen && !root.contains(e.target)) setMenu(false);
+      });
+    }
+    var logoutBtn = document.getElementById('navLogout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function () {
+        try { localStorage.removeItem('onvi.user.name'); window.dispatchEvent(new Event('onvi-auth')); } catch (e) { /* 무시 */ }
+        window.location.href = 'index.html';
+      });
+    }
 
     // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
     function paint() {
@@ -457,7 +627,7 @@
         if (login) login.hidden = true;
         if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; }
         if (pLogin) pLogin.hidden = true;
-        if (pUser) { pUser.hidden = false; pUser.textContent = name + ' 님의 공간'; }
+        if (pUser) pUser.hidden = false;
       } else {
         if (login) login.hidden = false;
         if (user) user.hidden = true;
@@ -472,92 +642,74 @@
 </script>
 <script>
   (function () {
-    var fab = document.getElementById('consultFab');
-    var modal = document.getElementById('consultModal');
-    if (!fab || !modal) return;
-    var form = document.getElementById('consultForm');
-    var err = document.getElementById('consultError');
-    var formWrap = document.getElementById('consultFormWrap');
-    var sentPanel = document.getElementById('consultSent');
-    var sentName = document.getElementById('consultSentName');
-    var open = false;
-    var scrolled = false;
-    var visible = 0;   // 화면에 보이는 [data-hide-consult] 섹션 수
+    var form = document.getElementById('applyForm');
+    var donePanel = document.getElementById('applyDone');
+    var failed = document.getElementById('applyFailed');
+    var bar = document.querySelector('.ov-bar');
+    var t0 = Date.now();
 
-    function sync() {
-      fab.hidden = !(scrolled && visible === 0 && !open);
-    }
-    function setOpen(v) {
-      open = v;
-      modal.hidden = !v;
-      if (v) { formWrap.hidden = false; sentPanel.hidden = true; err.hidden = true; }
-      sync();
+    // 개인정보 안내 펼치기
+    var pv = document.getElementById('privacyToggle');
+    var pvBox = document.getElementById('privacyBox');
+    if (pv && pvBox) {
+      pv.addEventListener('click', function () {
+        var on = pvBox.hidden;
+        pvBox.hidden = !on;
+        pv.textContent = on ? '접기 ▴' : '자세히 ▾';
+      });
     }
 
-    document.getElementById('consultOpen').addEventListener('click', function () { setOpen(true); });
-    document.getElementById('consultBackdrop').addEventListener('click', function () { setOpen(false); });
-    document.querySelectorAll('.consult-close').forEach(function (b) {
-      b.addEventListener('click', function () { setOpen(false); });
+    // 신청 후 의향 선택
+    var caption = document.getElementById('intentCaption');
+    var ON = 'background:var(--cheongja); border:1px solid var(--cheongja); color:#FFFFFF;';
+    var OFF = 'background:#FFFFFF; border:1px solid #E0D9C6; color:#3F4D62;';
+    var BASE = 'min-height:44px; padding:11px 20px; border-radius:999px; font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; transition:background .2s, color .2s, border-color .2s; ';
+    var chips = document.querySelectorAll('[data-intent]');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        chips.forEach(function (o) { o.setAttribute('style', BASE + (o === c ? ON : OFF)); });
+        if (caption) caption.textContent = '고마워요. 준비에 큰 도움이 됩니다.';
+      });
     });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
 
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var fd = new FormData(form);
+        if (fd.get('company') || Date.now() - t0 < 3000) return;   // 봇·오조작 방지
+        var ep = form.getAttribute('data-endpoint') || '';
+        var send = (ep && ep.indexOf('{') !== 0)
+          ? fetch(ep, { method: 'POST', body: fd }).then(function (r) { if (!r.ok) throw 0; })
+          : Promise.resolve();
+        send.then(function () {
+          failed.hidden = true;
+          form.hidden = true;
+          donePanel.hidden = false;
+          if (bar) bar.setAttribute('data-on', 'false');
+          try { window.scrollTo({ top: donePanel.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); } catch (er) { /* 무시 */ }
+        }).catch(function () { failed.hidden = false; });
+      });
+    }
+
+    // 하단 고정 바 — 폼이 보이거나 닫았으면 감춘다
+    var closed = false;
+    try { closed = sessionStorage.getItem('onvi_bar_closed') === '1'; } catch (e) { /* 무시 */ }
+    var closeBtn = document.getElementById('barClose');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        closed = true;
+        try { sessionStorage.setItem('onvi_bar_closed', '1'); } catch (e) { /* 무시 */ }
+        if (bar) bar.setAttribute('data-on', 'false');
+      });
+    }
     window.addEventListener('scroll', function () {
-      var s = window.scrollY > 480;
-      if (s !== scrolled) { scrolled = s; sync(); }
+      if (!bar) return;
+      var apply = document.getElementById('apply');
+      var visible = false;
+      if (apply) { var r = apply.getBoundingClientRect(); visible = r.top < window.innerHeight && r.bottom > 0; }
+      var on = !closed && (form ? !form.hidden : true) && window.scrollY > 400 && !visible;
+      bar.setAttribute('data-on', on ? 'true' : 'false');
     }, { passive: true });
-
-    // CTA 섹션이 보이는 동안에는 플로팅 버튼을 감춘다
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { visible += e.isIntersecting ? 1 : -1; });
-      if (visible < 0) visible = 0;
-      sync();
-    }, { threshold: 0.08 });
-    setTimeout(function () {
-      document.querySelectorAll('[data-hide-consult]').forEach(function (el) { io.observe(el); });
-    }, 500);
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      function fail(m, f) { err.textContent = m; err.hidden = false; if (f) f.focus(); }
-      var name = (form.name.value || '').trim();
-      var phone = (form.phone.value || '').trim();
-      if (!name) { fail('성함을 다시 확인해 주세요.', form.name); return; }
-      if (!phone) { fail('연락처를 다시 확인해 주세요.', form.phone); return; }
-      if (!form.agree.checked) { fail('개인정보 수집·이용에 동의해 주세요.'); return; }
-      err.hidden = true;
-      sentName.textContent = name;
-      formWrap.hidden = true;
-      sentPanel.hidden = false;
-      var subject = '[상담 신청] ' + name + ' 님';
-      var lines = ['성함: ' + name, '연락처: ' + phone, '', '(플로팅 배너에서 신청)', '개인정보 수집·이용 동의: 동의함'];
-      window.location.href = 'mailto:contact@onvi.kr?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(lines.join('\n'));
-    });
-
-    sync();
-  })();
-</script>
-<script>
-  (function () {
-    function setOpen(btn, on) {
-      btn.setAttribute('aria-expanded', on ? 'true' : 'false');
-      var a = btn.nextElementSibling;
-      if (a) a.hidden = !on;
-      var c = btn.querySelector('.chev');
-      if (c) c.style.transform = on ? 'rotate(180deg)' : 'rotate(0deg)';
-    }
-    var btns = document.querySelectorAll('.faq-q');
-    btns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        setOpen(btn, btn.getAttribute('aria-expanded') !== 'true');
-      });
-    });
-    document.querySelectorAll('[data-faq-group]').forEach(function (card) {
-      card.addEventListener('click', function () {
-        var g = card.getAttribute('data-faq-group');
-        btns.forEach(function (btn) { setOpen(btn, btn.getAttribute('data-group') === g); });
-      });
-    });
   })();
 </script>
 </body>

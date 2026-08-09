@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="shared/ds/tokens/typography.css">
 <link rel="stylesheet" href="shared/ds/tokens/spacing.css">
 <link rel="stylesheet" href="shared/ds/styles.css">
+
 <style>
   *,*::before,*::after{ box-sizing:border-box; }
   body{ margin:0; background:var(--hanji,#F5F1E6); color:var(--simya,#1F2A3A); font-family:var(--font-ui),'Pretendard Variable',Pretendard,sans-serif; letter-spacing:-0.012em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
@@ -94,6 +95,26 @@
   .panel-foot{ margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .panel-foot a{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72); min-height:44px; }
   .panel-foot a:hover{ color:#FFF; background:none; }
+  .nav-user-wrap{ position:relative; flex-shrink:0; }
+  .nav-user{ cursor:pointer; font-family:inherit; padding:6px 14px 6px 6px; }
+  .nav-caret{ width:6px; height:6px; border-right:1.5px solid rgba(255,255,255,0.6); border-bottom:1.5px solid rgba(255,255,255,0.6); flex-shrink:0; margin-left:1px; transition:transform .22s; transform:rotate(45deg) translateY(-1px); }
+  .nav-user[aria-expanded="true"] .nav-caret{ transform:rotate(-135deg) translateY(1px); }
+  .nav-menu{ position:absolute; right:0; top:calc(100% + 10px); width:264px; display:flex; flex-direction:column; gap:2px; padding:8px; background:rgba(31,42,58,0.96); border:1px solid rgba(255,255,255,0.14); border-radius:20px; box-shadow:0 24px 54px -22px rgba(31,42,58,0.6); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  .nav-menu-main{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-radius:14px; background:rgba(79,184,158,0.16); min-height:44px; }
+  .nav-menu-main:hover{ background:rgba(79,184,158,0.28); }
+  .nav-menu-main > span:first-child{ display:flex; flex-direction:column; gap:2px; }
+  .nav-menu-main .t{ font-size:14.5px; font-weight:700; color:#FFFFFF; letter-spacing:-0.015em; }
+  .nav-menu-main .d{ font-size:12px; color:rgba(255,255,255,0.55); }
+  .nav-menu-main .arr{ font-size:13px; color:var(--cheongja,#4FB89E); flex-shrink:0; }
+  .nav-menu-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; border-radius:14px; font-size:14px; font-weight:600; color:rgba(255,255,255,0.9); min-height:44px; }
+  .nav-menu-row:hover{ background:rgba(255,255,255,0.12); }
+  .nav-menu-row .chev{ font-size:13px; color:rgba(255,255,255,0.4); flex-shrink:0; }
+  .nav-menu-out{ display:flex; width:100%; align-items:center; padding:13px 16px; border-radius:14px; background:none; border:none; font-family:inherit; font-size:14px; font-weight:600; color:rgba(255,255,255,0.55); cursor:pointer; text-align:left; min-height:44px; transition:color .2s; }
+  .nav-menu-out:hover{ color:#FFFFFF; background:rgba(255,255,255,0.12); }
+  .panel-user{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .panel-space{ background:rgba(79,184,158,0.2); font-weight:700 !important; color:#FFFFFF !important; padding:11px 16px !important; }
+  .panel-space:hover{ background:rgba(79,184,158,0.32) !important; }
+  .panel-my{ padding:11px 12px !important; }
   footer br[data-m]{ display:none; }
   @media (max-width: 760px){
     footer br[data-m]{ display:inline !important; }
@@ -141,7 +162,17 @@
       <a href="support.html">고객지원</a>
     </div>
     <div class="nav-cta">
-      <a class="nav-user" id="navUser" href="mypage.html" hidden><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span></a>
+      <div class="nav-user-wrap" id="navUser" hidden>
+        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
+        <div class="nav-menu" id="navMenu" role="menu" hidden>
+          <a href="https://my.onvi.kr" role="menuitem" class="nav-menu-main">
+            <span><span class="t">가족 공간 열기</span><span class="d">편지 / 답장 / 이야기 기록</span></span>
+            <span aria-hidden="true" class="arr">↗</span>
+          </a>
+          <a href="mypage.html" role="menuitem" class="nav-menu-row"><span>마이페이지</span><span aria-hidden="true" class="chev">›</span></a>
+          <button type="button" role="menuitem" class="nav-menu-out" id="navLogout">로그아웃</button>
+        </div>
+      </div>
       <a class="start" id="navLogin" href="login.html">로그인</a>
       <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" id="navBurger"><span><span></span><span></span><span></span></span></button>
     </div>
@@ -152,7 +183,10 @@
     <a href="brand.html">브랜드</a>
     <a href="support.html">고객지원</a>
     <div class="panel-foot">
-      <a href="mypage.html" id="panelUser" hidden></a>
+      <div class="panel-user" id="panelUser" hidden>
+        <a href="https://my.onvi.kr" class="panel-space">가족 공간 열기 <span aria-hidden="true">↗</span></a>
+        <a href="mypage.html" class="panel-my">마이페이지 ›</a>
+      </div>
       <a href="login.html" id="panelLogin">로그인 ›</a>
     </div>
   </div>
@@ -165,8 +199,7 @@
 </div>
 
   <!-- ── HERO ── -->
-  <div class="stack">
-<section style="padding:150px 0 0; text-align:center;">
+  <section style="padding:150px 0 0; text-align:center;">
     <div style="width:min(560px,92%); margin:0 auto;">
       <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">회원가입</div>
       
@@ -252,7 +285,6 @@
       </form>
     </div>
   </section>
-</div>
 
   </div>
 
@@ -303,7 +335,7 @@
       burger.setAttribute('aria-expanded', v ? 'true' : 'false');
     }
     if (panel && burger) {
-      burger.addEventListener('click', function () { setOpen(!open); });
+      burger.addEventListener('click', function () { setOpen(!open); setMenu(false); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
       document.addEventListener('pointerdown', function (e) {
         if (!open) return;
@@ -315,17 +347,37 @@
     // 모바일: 아래로 스크롤하면 네비를 감추고, 위로 올리면 다시 보여준다
     var lastY = window.scrollY;
     window.addEventListener('scroll', function () {
-      if (!window.matchMedia('(max-width: 900px)').matches) {
-        root.classList.remove('onvi-nav-hidden');
-        return;
-      }
       var y = window.scrollY;
       var d = y - lastY;
       if (Math.abs(d) < 8) return;
       lastY = y;
-      if (d > 0 && y > 140 && !open) root.classList.add('onvi-nav-hidden');
+      if (d > 0 && y > 140 && !open && !menuOpen) root.classList.add('onvi-nav-hidden');
       else if (d < 0 || y <= 140) root.classList.remove('onvi-nav-hidden');
     }, { passive: true });
+
+    // 프로필 드롭다운
+    var menuOpen = false;
+    var userBtn = document.getElementById('navUserBtn');
+    var menu = document.getElementById('navMenu');
+    function setMenu(v) {
+      menuOpen = v;
+      if (menu) menu.hidden = !v;
+      if (userBtn) userBtn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    if (userBtn && menu) {
+      userBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!menuOpen); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menuOpen) setMenu(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (menuOpen && !root.contains(e.target)) setMenu(false);
+      });
+    }
+    var logoutBtn = document.getElementById('navLogout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function () {
+        try { localStorage.removeItem('onvi.user.name'); window.dispatchEvent(new Event('onvi-auth')); } catch (e) { /* 무시 */ }
+        window.location.href = 'index.html';
+      });
+    }
 
     // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
     function paint() {
@@ -339,7 +391,7 @@
         if (login) login.hidden = true;
         if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; }
         if (pLogin) pLogin.hidden = true;
-        if (pUser) { pUser.hidden = false; pUser.textContent = name + ' 님의 공간'; }
+        if (pUser) pUser.hidden = false;
       } else {
         if (login) login.hidden = false;
         if (user) user.hidden = true;
