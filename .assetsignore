@@ -1,17 +1,17 @@
 # wrangler 배포 스캔/업로드 제외 목록
-# 목적: 루트의 대용량 아카이브/원본 소스 폴더(~1GB, 2000+파일)를 제외해
-#       배포가 "Building list of assets..."에서 멈추지 않게 한다.
+# 목적: 루트의 대용량 아카이브/원본 소스 폴더를 제외해 배포를 가볍게 유지.
 # 주의: assets/ · shared/ 는 라이브가 참조하므로 통째로 제외하지 않는다.
+# ⚠️ 한글 폴더명(온비_v3.4.x)은 macOS가 NFD로 저장 → 한글 리터럴 매칭이 실패한다.
+#     그래서 ASCII 글롭 *v3.4* 로 정규화와 무관하게 제외한다.
 
-# 버전 아카이브 (대용량)
+# 버전 아카이브 (도구 export 폴더 포함 — ASCII 글롭으로 확실히 제외)
+*v3.4*
+*v3.4*/
 v1/
 v3.0/
 v3.1/
 v3.2/
 v3.2.1/
-온비_v3.4/
-온비_v3.4.1/
-온비_v3.4.2/
 uploads/
 uploads 2/
 screenshots/
@@ -25,6 +25,7 @@ image-slot.js
 support.js
 _chrome.reference.html
 _ds_bundle.js
+.thumbnail
 
 # On:Gi 잔재 스타일 (shared/ 내부, 서빙 안 함)
 shared/landing.css
