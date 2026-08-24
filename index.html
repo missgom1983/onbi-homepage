@@ -350,14 +350,15 @@
   function play(v){ var p=v.play&&v.play(); if(p&&p.catch) p.catch(function(){}); }
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduce){ a.style.opacity='1'; b.style.opacity='0'; play(a); return; }  // 저감모션: 첫 컷 정지 노출
-  // 각 컷을 끝까지 재생한 뒤 다른 컷으로 크로스페이드 (뒷부분 잘림 없음)
+  // 시나리오 순서: 선물 도착·바라봄(cut1) → 편지 읽기(cut2) → 읽기 장면에서 끝(되돌아가지 않음)
+  var done=false;
   function toB(){ b.currentTime=0; play(b); b.style.opacity='1'; a.style.opacity='0'; }
-  function toA(){ a.currentTime=0; play(a); a.style.opacity='1'; b.style.opacity='0'; }
   a.addEventListener('ended', toB);
-  b.addEventListener('ended', toA);
-  // 오프스크린이면 정지 (성능)
+  b.addEventListener('ended', function(){ done=true; b.pause(); });  // 편지 읽기 마지막 프레임에서 정지
+  // 오프스크린이면 정지 (성능). 시퀀스가 끝났으면 다시 재생하지 않음.
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(done) return;
       var cur=a.style.opacity!=='0'?a:b;
       if(e.isIntersecting) play(cur); else { a.pause(); b.pause(); }
     }); },{threshold:0.05});
