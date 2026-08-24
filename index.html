@@ -36,6 +36,12 @@
   .num{ font-size:13px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja,#4FB89E); margin-bottom:12px; }
   .quote{ font-family:var(--font-letter),'Gowun Batang',serif; font-weight:700; text-wrap:balance; }
   .gen{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .ov-lcard{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); grid-template-rows:1fr auto; min-height:360px; }
+  .ov-lcard-img{ grid-row:1 / span 2; min-height:100%; }
+  .ov-lcard-body{ grid-column:2; }
+  .ov-lcard-cta{ grid-column:2; }
+  .ov-lcard:hover{ transform:translateY(-4px); box-shadow:0 16px 44px rgba(31,42,58,0.16); }
+  @media (max-width:860px){ .ov-lcard{ display:block; } .ov-lcard-img{ aspect-ratio:16/9; min-height:0; } .ov-lcard-cta{ justify-content:center; } }
   [hidden]{ display:none !important; }
   /* GNB */
   .onvi-nav-root{ position:fixed; top:16px; left:0; right:0; z-index:300; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none; }
@@ -150,35 +156,33 @@
 <div class="stack">
 
 <section style="background:color-mix(in srgb, var(--hanji,#F5F1E6) 72%, #FFFFFF);">
-  <div class="wrap split">
-    <div style="text-align:center;">
-      <div class="eyebrow">편지는 끝이 아니라, 대화의 시작</div>
+  <div style="max-width:900px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:34px;">
+      <div class="eyebrow">금요편지</div>
       <hr class="rule" style="margin:20px auto 0;">
-      <h2>매주 금요일, <br>부모님의 한 주가 도착해요.</h2>
-      <p class="lede" style="margin:0;">통화 한 통이 편지가 되어, 온 가족에게 닿아요.</p>
-      
+      <h2>편지 속에서 <br data-m>부모님을 만나요.</h2>
+      <p class="lede" style="margin:14px 0 0;">지난 금요일, 이 집에는 어떤 편지가 왔을까요.</p>
     </div>
-    <div style="background:#FFF; border:1px solid #E6E0D1; border-radius:24px; padding:22px; box-shadow:0 30px 60px -34px rgba(31,42,58,0.18);">
-      <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:16px;">
-        <span style="font-size:13.5px; font-weight:700; color:var(--simya,#1F2A3A);">금요편지 · 어머니의 한 주</span>
-        <span style="font-size:12px; color:#6A7789; white-space:nowrap;">3월 15일 금</span>
-      </div>
-      <div class="photo" style="border-radius:16px; aspect-ratio:16/10; margin-bottom:16px; box-shadow:none;"><img src="assets/photos/beach-1997.jpg" alt="1997년 여름, 바닷가에서 모래성을 쌓는 어머니와 어린 딸" style="object-position:center 30%;"></div>
-      <p class="quote" style="font-size:16px; line-height:1.7; color:var(--simya,#1F2A3A); margin:0 0 18px; font-weight:400;">"97년 여름, 그 바닷가에서 너랑 쌓던 모래성이 생각나는구나…"</p>
-      <div style="display:flex; flex-direction:column; gap:10px; padding-top:16px; border-top:1px solid #F0EBDD;">
-        <div style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="flex-shrink:0; width:28px; height:28px; border-radius:999px; background:var(--angae,#C8E5DB); display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#2A7360;">딸</span>
-          <span style="font-size:14px; line-height:1.55; color:#3F4D62;">엄마 나도 기억나! 이번 여름에 다시 가요</span>
-        </div>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <span style="flex-shrink:0; width:28px; height:28px; border-radius:999px; background:var(--morae,#EBD9C5); display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#8C6433;">손주</span>
-          <span style="display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px; background:var(--saebyeok,#E9F3EE); font-size:13px; font-weight:600; color:#2A7360;">▶ 할머니, 사랑해요 · 음성 0:14</span>
-        </div>
-      </div>
+    <a href="service.html#letter=B&act=1" class="ov-lcard" style="max-width:1160px; margin:0 auto; background:#FFFFFF; border-radius:20px; box-shadow:0 8px 32px rgba(31,42,58,0.10); text-decoration:none; color:inherit; overflow:hidden; transition:transform .2s, box-shadow .2s;">
+      <span class="ov-lcard-img" style="position:relative; display:block; overflow:hidden;">
+        <img src="assets/photos/founder-shoes.jpg" alt="오래된 운동화" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 60%; display:block;">
+        <span aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.05) 30%, rgba(31,42,58,0.62) 100%);"></span>
+        <span style="position:absolute; left:20px; right:20px; bottom:16px; display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;">
+          <span style="font-size:13px; font-weight:700; letter-spacing:0.04em; color:#FFFFFF; text-shadow:0 1px 6px rgba(31,42,58,0.6);">열세 번째 금요편지</span>
+          <span style="font-size:12.5px; color:rgba(255,255,255,0.85); text-shadow:0 1px 6px rgba(31,42,58,0.6);">11월 넷째 주 금요일</span>
+        </span>
+      </span>
+      <span class="ov-lcard-body" style="display:flex; flex-direction:column; align-items:flex-start; padding:clamp(22px,3.5vw,32px) clamp(24px,4vw,36px) 0;">
+        <span style="display:inline-flex; align-items:center; gap:8px; background:var(--hanji,#F5F1E6); border-radius:999px; padding:7px 15px; font-size:12.5px; font-weight:600; color:var(--simhae,#2C4A6B); line-height:1.5; margin-bottom:14px;"><span aria-hidden="true" style="color:#2A7360;">⌒</span>지난주 따님의 답장에서 이어진 이야기예요.</span>
+        <h3 style="font-family:var(--font-letter),'Gowun Batang',serif; font-size:clamp(20px,2.4vw,24px); line-height:1.5; font-weight:700; letter-spacing:-0.01em; color:var(--simya,#1F2A3A); margin:0 0 14px; text-wrap:balance;">아버지가 처음으로 <br data-keep>약도를 그려두고 기다리셨어요</h3>
+        <blockquote style="margin:0; padding:4px 0 4px 16px; border-left:3px solid var(--noeul,#D9B88C); font-family:var(--font-letter),'Gowun Batang',serif; font-size:clamp(16px,1.8vw,19px); line-height:1.65; font-weight:700; color:var(--simya,#1F2A3A);">"기억이란 게, 물어봐 주는 사람이 <br data-keep>있어야 나오는 거더라."</blockquote>
+        <p style="font-family:var(--font-letter),'Gowun Batang',serif; font-size:clamp(15.5px,1.6vw,17px); line-height:1.85; color:#2A3646; margin:18px 0 0;">지난주 편지에 따님이 댓글을 남기셨어요. "아빠가 일하던 그 운동화 골목, 어디예요? 나도 가보고 싶은데." 화요일 통화에서 그 질문을 그대로 전해드렸더니, 아버지는 이면지에 약도를 그려 전화기 옆에 두고 계셨습니다.</p>
+      </span>
+      <span class="ov-lcard-cta" style="display:flex; padding:4px clamp(24px,4vw,36px) 28px;"></span>
+    </a>
+    <div style="display:flex; justify-content:center; margin-top:30px;">
+      <a class="btn" href="service.html#letter=B&act=1" style="padding:13px 28px; font-size:15px;">편지 전문 읽기 →</a>
     </div>
-  </div>
-  <div style="display:flex; justify-content:center; margin-top:40px;">
-    <a class="btn" href="service.html#sample" style="padding:13px 26px; font-size:14.5px;">금요편지 더 보기 →</a>
   </div>
 </section>
 
