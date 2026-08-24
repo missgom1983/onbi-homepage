@@ -93,6 +93,8 @@
     h1 br, h2 br, h3 br, blockquote br, p br{ display:none; }
     br[data-m], br[data-keep]{ display:inline !important; }
     section:first-of-type{ padding-top:118px !important; }
+    [data-kv-hero]{ height:82svh !important; min-height:540px !important; max-height:720px !important; padding-top:0 !important; }
+    [data-kv-video]{ object-position:64% 40% !important; }
     #how-cards, #review-cards{ display:flex !important; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px !important; margin:0 -24px; padding:0 24px 10px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
     #how-cards::-webkit-scrollbar, #review-cards::-webkit-scrollbar{ display:none; }
     #how-cards > div, #review-cards > div{ flex:0 0 82%; scroll-snap-align:center; }
@@ -130,8 +132,8 @@
 </div>
 <section data-kv-hero style="position:relative; overflow:hidden; height:100svh; min-height:620px; max-height:1040px; display:flex; align-items:flex-end; text-align:left;">
   <div aria-hidden="true" style="position:absolute; inset:0; background:#2B2F35;"></div>
-  <video id="kvV1" data-kv-video src="assets/video/kv-cut1-arrival.mp4" poster="assets/video/kv-cut1-poster.jpg" muted playsinline autoplay loop preload="metadata" disablepictureinpicture aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 46%; opacity:1; transition:opacity 1.1s linear; will-change:opacity;"></video>
-  <video id="kvV2" data-kv-video src="assets/video/kv-cut2-reading.mp4" poster="assets/video/kv-cut1-poster.jpg" muted playsinline loop preload="none" disablepictureinpicture aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 40%; opacity:0; transition:opacity 1.1s linear; will-change:opacity;"></video>
+  <video id="kvV1" data-kv-video src="assets/video/kv-cut1-arrival.mp4" poster="assets/video/kv-cut1-poster.jpg" muted playsinline autoplay preload="auto" disablepictureinpicture aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 46%; opacity:1; transition:opacity 1.1s linear; will-change:opacity;"></video>
+  <video id="kvV2" data-kv-video src="assets/video/kv-cut2-reading.mp4" poster="assets/video/kv-cut1-poster.jpg" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 40%; opacity:0; transition:opacity 1.1s linear; will-change:opacity;"></video>
   <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,42,58,0.46) 0%, rgba(31,42,58,0.14) 22%, rgba(31,42,58,0.06) 42%, rgba(31,42,58,0.44) 70%, rgba(31,42,58,0.82) 100%);"></div>
   <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(100deg, rgba(31,42,58,0.52) 0%, rgba(31,42,58,0.24) 34%, rgba(31,42,58,0) 62%);"></div>
   <div style="position:relative; width:min(1160px,90%); margin:0 auto; padding:0 0 clamp(56px,9vh,112px);">
@@ -342,19 +344,27 @@
 </script>
 <script data-x="kv-hero-script">
 (function(){
-  var v1=document.getElementById('kvV1'), v2=document.getElementById('kvV2');
-  if(!v1||!v2) return;
-  function play(v){ v.muted=true; var p=v.play&&v.play(); if(p&&p.catch) p.catch(function(){}); }
-  play(v1);
+  var a=document.getElementById('kvV1'), b=document.getElementById('kvV2');
+  if(!a||!b) return;
+  a.muted=true; b.muted=true;
+  function play(v){ var p=v.play&&v.play(); if(p&&p.catch) p.catch(function(){}); }
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce) return;            // 저감 모션: 첫 영상만, 크로스페이드 없음
-  play(v2);
-  var showing=1;
-  setInterval(function(){
-    showing = showing===1 ? 2 : 1;
-    v1.style.opacity = showing===1 ? '1' : '0';
-    v2.style.opacity = showing===2 ? '1' : '0';
-  }, 6500);
+  if(reduce){ a.style.opacity='1'; b.style.opacity='0'; play(a); return; }  // 저감모션: 첫 컷 정지 노출
+  // 각 컷을 끝까지 재생한 뒤 다른 컷으로 크로스페이드 (뒷부분 잘림 없음)
+  function toB(){ b.currentTime=0; play(b); b.style.opacity='1'; a.style.opacity='0'; }
+  function toA(){ a.currentTime=0; play(a); a.style.opacity='1'; b.style.opacity='0'; }
+  a.addEventListener('ended', toB);
+  b.addEventListener('ended', toA);
+  // 오프스크린이면 정지 (성능)
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+      var cur=a.style.opacity!=='0'?a:b;
+      if(e.isIntersecting) play(cur); else { a.pause(); b.pause(); }
+    }); },{threshold:0.05});
+    io.observe(a.parentElement);
+  }
+  a.style.opacity='1'; b.style.opacity='0';
+  play(a);
 })();
 </script>
 <script data-x="nav-hide-script">
