@@ -36,6 +36,11 @@
 
     h += '<h3 style="' + F_LETTER + ' font-size:clamp(20px,2.4vw,24px); line-height:1.5; font-weight:700; letter-spacing:-0.01em; margin:0 0 18px; color:var(--simya); text-wrap:balance;">' + esc(L.title) + '</h3>';
 
+    if (L.greeting) {
+      if (ann) h += '<span style="display:block; font-size:11px; font-weight:700; letter-spacing:0.12em; color:var(--simhae); margin-bottom:6px;">편지를 여는 인사</span>';
+      h += '<p style="' + F_LETTER + ' font-size:clamp(15.5px,1.6vw,17px); line-height:1.85; color:#3F4D62; margin:0 0 18px; text-wrap:pretty;">' + esc(L.greeting) + '</p>';
+    }
+
     function paras(list) {
       return (list || []).map(function (p) {
         return '<p style="' + F_LETTER + ' font-size:clamp(17px,1.8vw,20px); line-height:1.85; color:#2A3646; margin:0;">' + esc(p) + '</p>';
@@ -59,6 +64,14 @@
       h += '</div><figcaption style="font-size:13px; line-height:1.6; color:#6A7789; margin-top:11px;">' + esc(L.media.caption) + '</figcaption></figure>';
     }
     if (L.paras2) h += '<div style="display:flex; flex-direction:column; gap:1em; margin-top:4px;">' + paras(L.paras2) + '</div>';
+
+    if (L.ps) {
+      h += '<section style="margin-top:30px; padding-top:18px; border-top:1px solid rgba(31,42,58,0.13);">';
+      if (ann) h += '<span style="display:block; font-size:11px; font-weight:700; letter-spacing:0.12em; color:var(--simhae); margin-bottom:6px;">담당자가 덧붙이는 한 줄</span>';
+      h += '<p style="' + F_LETTER + ' font-size:clamp(15.5px,1.6vw,17px); line-height:1.85; color:#3F4D62; margin:0; text-wrap:pretty;"><span style="font-weight:700; color:var(--simhae); letter-spacing:0.02em;">추신.</span> ' + esc(L.ps) + '</p>';
+      if (L.psFrom) h += '<p style="margin:12px 0 0; font-size:12.5px; letter-spacing:0.03em; color:#8A93A0;">' + esc(L.psFrom) + '</p>';
+      h += '</section>';
+    }
 
     h += '<div style="margin-top:26px;">';
     if (ann) h += '<div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin-bottom:10px;">' +

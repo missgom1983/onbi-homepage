@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 160" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+
+  <defs>
+    <linearGradient id="cardbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EFF8F5"></stop>
+      <stop offset="100%" stop-color="#DDF0E7"></stop>
+    </linearGradient>
+    <clipPath id="cardclip"><rect x="0" y="0" width="220" height="160" rx="14"></rect></clipPath>
+  </defs>
+  <rect x="0" y="0" width="220" height="160" rx="14" fill="url(#cardbg)"></rect>
+  <g clip-path="url(#cardclip)">
+            <defs>
+              <linearGradient id="vp3body" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FBF8EF"></stop>
+                <stop offset="60%" stop-color="#E6F0EC"></stop>
+                <stop offset="100%" stop-color="#9FC4B5"></stop>
+              </linearGradient>
+              <linearGradient id="vp3metal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#D4DCE3"></stop>
+                <stop offset="100%" stop-color="#7C9CB8"></stop>
+              </linearGradient>
+              <linearGradient id="vp3screen" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0E141C"></stop>
+                <stop offset="100%" stop-color="#1E3450"></stop>
+              </linearGradient>
+              <radialGradient id="vp3glow" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0%" stop-color="#A6D5C2" stop-opacity="0.7"></stop>
+                <stop offset="100%" stop-color="#4FB89E" stop-opacity="0"></stop>
+              </radialGradient>
+            </defs>
+
+            
+            <g stroke="#4FB89E" stroke-width="0.4" fill="none" opacity="0.2">
+              <line x1="20" y1="150" x2="200" y2="150"></line>
+              <line x1="50" y1="138" x2="170" y2="138"></line>
+              <line x1="74" y1="128" x2="146" y2="128"></line>
+              <line x1="92" y1="120" x2="128" y2="120"></line>
+            </g>
+
+            
+            <g transform-origin="110 110">
+              
+              
+              
+
+              
+
+            
+            <ellipse cx="110" cy="78" rx="76" ry="68" fill="url(#vp3glow)"></ellipse>
+            
+            <ellipse cx="110" cy="150" rx="48" ry="3" fill="#1F2A3A" opacity="0.18"></ellipse>
+
+            
+            <g>
+              <ellipse cx="86" cy="146" rx="9" ry="3" fill="#1F2A3A" opacity="0.4"></ellipse>
+              <ellipse cx="86" cy="144" rx="9" ry="3" fill="url(#vp3metal)"></ellipse>
+              
+              <g transform-origin="86 144">
+                
+                <line x1="80" y1="144" x2="92" y2="144" stroke="#4FB89E" stroke-width="0.6" opacity="0.8"></line>
+                <line x1="83" y1="142" x2="89" y2="146" stroke="#4FB89E" stroke-width="0.5" opacity="0.6"></line>
+                <line x1="89" y1="142" x2="83" y2="146" stroke="#4FB89E" stroke-width="0.5" opacity="0.6"></line>
+              </g>
+              <circle cx="86" cy="144" r="1.2" fill="#4FB89E"></circle>
+
+              <ellipse cx="134" cy="146" rx="9" ry="3" fill="#1F2A3A" opacity="0.4"></ellipse>
+              <ellipse cx="134" cy="144" rx="9" ry="3" fill="url(#vp3metal)"></ellipse>
+              <g transform-origin="134 144">
+                
+                <line x1="128" y1="144" x2="140" y2="144" stroke="#4FB89E" stroke-width="0.6" opacity="0.8"></line>
+                <line x1="131" y1="142" x2="137" y2="146" stroke="#4FB89E" stroke-width="0.5" opacity="0.6"></line>
+                <line x1="137" y1="142" x2="131" y2="146" stroke="#4FB89E" stroke-width="0.5" opacity="0.6"></line>
+              </g>
+              <circle cx="134" cy="144" r="1.2" fill="#4FB89E"></circle>
+
+              
+              <g stroke="#4FB89E" stroke-width="0.8" stroke-linecap="round" opacity="0.45">
+                <line x1="40" y1="130" x2="56" y2="130">
+                  
+                </line>
+                <line x1="44" y1="138" x2="58" y2="138">
+                  
+                </line>
+                <line x1="36" y1="146" x2="52" y2="146">
+                  
+                </line>
+              </g>
+            </g>
+
+            
+            <ellipse cx="110" cy="142" rx="32" ry="4" fill="none" stroke="#4FB89E" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.5"></ellipse>
+
+            
+            <path d="M 70 92 Q 70 60 110 60 Q 150 60 150 92 L 150 128 Q 150 140 110 140 Q 70 140 70 128 Z" fill="url(#vp3body)" stroke="rgba(124,156,184,0.4)" stroke-width="0.8"></path>
+            
+            <ellipse cx="100" cy="78" rx="22" ry="8" fill="#fff" opacity="0.55"></ellipse>
+
+            
+            <g>
+              
+              
+              
+              <g transform-origin="62 96">
+                
+                <path d="M 62 96 Q 52 100 50 116" stroke="url(#vp3metal)" stroke-width="5" fill="none" stroke-linecap="round"></path>
+                <circle cx="50" cy="118" r="4" fill="url(#vp3body)" stroke="rgba(124,156,184,0.4)" stroke-width="0.6"></circle>
+                
+                <line x1="46" y1="117" x2="42" y2="118" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"></line>
+                
+                <line x1="50" y1="121" x2="48" y2="125" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"></line>
+                <line x1="50" y1="122" x2="50" y2="126" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"></line>
+                <line x1="50" y1="121" x2="52" y2="125" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"></line>
+              </g>
+              
+              <g transform-origin="158 96">
+                
+                <path d="M 158 96 Q 168 98 172 110" stroke="url(#vp3metal)" stroke-width="5" fill="none" stroke-linecap="round"></path>
+                <circle cx="172" cy="112" r="4" fill="url(#vp3body)" stroke="rgba(124,156,184,0.4)" stroke-width="0.6"></circle>
+                
+                <line x1="176" y1="111" x2="180" y2="112" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"></line>
+                
+                <line x1="172" y1="115" x2="170" y2="119" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"></line>
+                <line x1="172" y1="116" x2="172" y2="120" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"></line>
+                <line x1="172" y1="115" x2="174" y2="119" stroke="url(#vp3metal)" stroke-width="1.4" stroke-linecap="round"></line>
+              </g>
+
+              
+              <g transform="translate(170, 40)">
+                
+                <path d="M 0 0 L 22 0 Q 26 0 26 4 L 26 16 Q 26 20 22 20 L 8 20 L 4 24 L 5 20 L 0 20 Q -4 20 -4 16 L -4 4 Q -4 0 0 0 Z" fill="#fff" stroke="#4FB89E" stroke-width="0.6"></path>
+                <circle cx="6" cy="10" r="1.4" fill="#4FB89E">
+                  
+                </circle>
+                <circle cx="11" cy="10" r="1.4" fill="#4FB89E">
+                  
+                </circle>
+                <circle cx="16" cy="10" r="1.4" fill="#4FB89E">
+                  
+                </circle>
+              </g>
+            </g>
+
+            
+            <path d="M 94 46 Q 94 56 100 60 L 120 60 Q 126 56 126 46 Z" fill="url(#vp3metal)"></path>
+            <ellipse cx="110" cy="50" rx="14" ry="3" fill="#fff" opacity="0.3"></ellipse>
+            <line x1="100" y1="54" x2="120" y2="54" stroke="#fff" stroke-width="0.5" opacity="0.4"></line>
+
+            
+            <ellipse cx="110" cy="32" rx="36" ry="24" fill="url(#vp3body)" stroke="rgba(124,156,184,0.4)" stroke-width="0.8"></ellipse>
+            
+            <ellipse cx="100" cy="24" rx="16" ry="5" fill="#fff" opacity="0.65"></ellipse>
+
+            
+            <rect x="84" y="20" width="52" height="22" rx="11" fill="url(#vp3screen)"></rect>
+            
+            <ellipse cx="98" cy="24" rx="11" ry="2" fill="#fff" opacity="0.18"></ellipse>
+
+            
+            <ellipse cx="98" cy="30" rx="5" ry="5" fill="#4FB89E"></ellipse>
+            <ellipse cx="122" cy="30" rx="5" ry="5" fill="#4FB89E"></ellipse>
+            
+            <circle cx="100" cy="29" r="1.6" fill="#fff"></circle>
+            <circle cx="124" cy="29" r="1.6" fill="#fff"></circle>
+            
+            <rect x="93" y="33" width="10" height="2" fill="url(#vp3screen)"></rect>
+            <rect x="117" y="33" width="10" height="2" fill="url(#vp3screen)"></rect>
+
+            
+            <path d="M 100 40 Q 110 44 120 40" stroke="#4FB89E" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.85"></path>
+
+            
+            <circle cx="86" cy="38" r="3" fill="#F4B8B8" opacity="0.3"></circle>
+            <circle cx="134" cy="38" r="3" fill="#F4B8B8" opacity="0.3"></circle>
+
+            
+            <g fill="rgba(124,156,184,0.5)">
+              <circle cx="78" cy="30" r="0.9"></circle>
+              <circle cx="78" cy="34" r="0.9"></circle>
+              <circle cx="78" cy="38" r="0.9"></circle>
+              <circle cx="142" cy="30" r="0.9"></circle>
+              <circle cx="142" cy="34" r="0.9"></circle>
+              <circle cx="142" cy="38" r="0.9"></circle>
+            </g>
+
+            
+            <line x1="110" y1="10" x2="110" y2="6" stroke="#4FB89E" stroke-width="1" stroke-linecap="round" opacity="0.5"></line>
+            <circle cx="110" cy="4" r="2.5" fill="#4FB89E">
+              
+            </circle>
+
+            
+            <circle cx="110" cy="98" r="9" fill="#0E141C" stroke="rgba(124,156,184,0.5)" stroke-width="0.5"></circle>
+            <path d="M 104 97 a 3 3 0 0 1 6 0 a 3 3 0 0 1 6 0 c 0 4 -6 8 -6 8 c 0 0 -6 -4 -6 -8 z" transform="translate(0, -2)" fill="#D94B4B">
+              
+            </path>
+
+            
+            <rect x="72" y="108" width="2" height="20" rx="1" fill="#4FB89E"></rect>
+            <rect x="146" y="108" width="2" height="20" rx="1" fill="#4FB89E"></rect>
+
+            
+            <g fill="#4FB89E">
+              <circle cx="102" cy="118" r="1.4">
+                
+              </circle>
+              <circle cx="110" cy="118" r="1.4">
+                
+              </circle>
+              <circle cx="118" cy="118" r="1.4">
+                
+              </circle>
+            </g>
+            </g>
+          </g>
+</svg>

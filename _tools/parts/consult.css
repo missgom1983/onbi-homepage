@@ -1,0 +1,16 @@
+  @keyframes onviConsultIn{ 0%{ opacity:0; transform:translateY(14px); } 100%{ opacity:1; transform:translateY(0); } }
+  @keyframes onviModalIn{ 0%{ opacity:0; transform:translateY(16px) scale(0.98); } 100%{ opacity:1; transform:translateY(0) scale(1); } }
+  @keyframes onviFadeIn{ 0%{ opacity:0; } 100%{ opacity:1; } }
+  @media (prefers-reduced-motion: reduce){
+    [data-onvi-consult], [data-onvi-consult] *, [data-onvi-modal], [data-onvi-modal] *{ animation:none !important; }
+  }
+  [data-onvi-modal] input::placeholder{ color:#6A7789; }
+  [data-onvi-modal] input:focus{ outline:none; background:#FFFFFF; border-color:#4FB89E !important; box-shadow:0 0 0 4px #EAF4EF; }
+  br[data-keep]{ display:inline !important; }
+  [data-onvi-consult] [data-m-only]{ display:none; }
+  @media (max-width: 760px){
+    [data-onvi-consult]{ right:20px !important; bottom:20px !important; }
+    [data-onvi-consult] > button{ width:56px !important; height:56px !important; padding:0 !important; flex-direction:column !important; gap:1px !important; }
+    [data-onvi-consult] [data-pc-only]{ display:none !important; }
+    [data-onvi-consult] [data-m-only]{ display:block !important; }
+  }
