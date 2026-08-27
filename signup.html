@@ -191,105 +191,231 @@
     </div>
   </div>
 </div>
-<div style="width:min(760px,92%); margin:100px auto 0;">
-  <div style="display:flex; align-items:flex-start; gap:11px; padding:15px 20px; background:var(--morae,#EBD9C5); border-radius:16px;">
-    <span aria-hidden="true" style="flex-shrink:0; width:8px; height:8px; border-radius:999px; background:var(--noeul,#D9B88C); margin-top:7px;"></span>
-    <p style="margin:0; font-size:14px; line-height:1.65; color:#6B4E2E; letter-spacing:-0.01em;"><b style="font-weight:700;">미리 보기 화면이에요.</b> 실제 가입은 아직 준비 중이라, 남겨주신 내용은 저장되지 않아요.</p>
+<style>
+  body.onvi-signup{ min-height:100vh; display:flex; flex-direction:column; }
+  .su-wrap{ flex:1 1 auto; display:flex; flex-direction:column; align-items:center; padding:clamp(96px,13vh,132px) 20px clamp(48px,8vh,88px); }
+  .su-card{ width:min(560px, 100%); }
+  .su-dots{ display:flex; gap:7px; justify-content:center; margin-bottom:26px; }
+  .su-dots > i{ width:7px; height:7px; border-radius:999px; background:#DAD2BE; transition:width .25s, background .25s; }
+  .su-dots > i.on{ width:22px; background:var(--cheongja); }
+  .su-screen[hidden]{ display:none; }
+  .su-eyebrow{ font-size:12.5px; font-weight:700; letter-spacing:0.12em; color:#2A7360; text-align:center; margin-bottom:12px; }
+  .su-h{ font-size:clamp(24px,3.2vw,30px); line-height:1.35; letter-spacing:-0.035em; font-weight:700; margin:0 0 10px; text-align:center; text-wrap:balance; color:var(--simya); }
+  .su-sub{ font-size:15px; line-height:1.7; color:#5A6678; text-align:center; margin:0 auto 26px; max-width:420px; text-wrap:pretty; }
+  .su-field{ display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+  .su-field > label{ font-size:13.5px; font-weight:700; color:var(--simya); letter-spacing:-0.01em; }
+  .su-field > label .opt{ font-weight:600; color:#9AA3B0; font-size:12.5px; margin-left:5px; }
+  .su-input{ width:100%; box-sizing:border-box; font-family:inherit; font-size:16px; padding:14px 16px; border:1px solid #E0D9C6; border-radius:14px; background:#FFFFFF; color:var(--simya); letter-spacing:-0.01em; min-height:52px; transition:border-color .18s, box-shadow .18s; }
+  .su-input:focus{ outline:none; border-color:var(--cheongja); box-shadow:0 0 0 3px #EAF4EF; }
+  .su-hint{ font-size:12.5px; line-height:1.6; color:#8A93A0; margin:6px 0 0; }
+  .su-oauth{ width:100%; display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 20px; border-radius:999px; font-family:inherit; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; min-height:54px; cursor:pointer; border:none; transition:filter .15s; }
+  .su-oauth:hover{ filter:brightness(0.96); }
+  .su-kakao{ background:#FEE500; color:#191919; }
+  .su-kbadge{ display:inline-flex; width:22px; height:22px; border-radius:6px; background:#191919; color:#FEE500; align-items:center; justify-content:center; font-size:12px; font-weight:800; }
+  .su-btn{ width:100%; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; border-radius:999px; font-family:inherit; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; min-height:54px; cursor:pointer; border:none; background:var(--cheongja); color:#FFFFFF; transition:background .18s, opacity .18s; }
+  .su-btn:hover{ background:#3FA98E; }
+  .su-btn:disabled{ opacity:0.45; cursor:not-allowed; }
+  .su-btn.ghost{ background:transparent; color:#5A6678; min-height:44px; font-weight:600; }
+  .su-agree{ display:flex; align-items:flex-start; gap:11px; padding:15px 16px; border:1px solid #E6E0D1; border-radius:14px; background:#FBF8EF; cursor:pointer; margin-bottom:10px; }
+  .su-agree input{ width:20px; height:20px; margin:1px 0 0; accent-color:var(--cheongja); flex-shrink:0; }
+  .su-agree .t{ font-size:14.5px; line-height:1.5; color:var(--simya); font-weight:600; }
+  .su-agree .req{ color:#2A7360; font-weight:700; font-size:12.5px; }
+  .su-agree .opt{ color:#9AA3B0; font-weight:600; font-size:12.5px; }
+  .su-agree.all{ background:#EAF4EF; border-color:var(--cheongja); }
+  .su-pick{ display:flex; gap:10px; }
+  .su-pick button{ flex:1; padding:14px; border-radius:14px; border:1px solid #E0D9C6; background:#FFFFFF; font-family:inherit; font-size:15px; font-weight:600; color:#3F4D62; cursor:pointer; min-height:52px; transition:all .16s; }
+  .su-pick button[aria-pressed="true"]{ background:#EAF4EF; border-color:var(--cheongja); color:#2A7360; font-weight:700; box-shadow:0 0 0 3px #EAF4EF; }
+  .su-slot{ display:flex; flex-direction:column; gap:10px; }
+  .su-slot button{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-radius:14px; border:1px solid #E0D9C6; background:#FFFFFF; font-family:inherit; cursor:pointer; min-height:56px; transition:all .16s; }
+  .su-slot button[aria-pressed="true"]{ background:#EAF4EF; border-color:var(--cheongja); box-shadow:0 0 0 3px #EAF4EF; }
+  .su-slot .st{ font-size:16px; font-weight:700; color:var(--simya); letter-spacing:-0.01em; }
+  .su-slot .sr{ font-size:13.5px; color:#8A93A0; }
+  .su-note{ background:#FBF8EF; border:1px solid #E6E0D1; border-radius:16px; padding:18px 20px; margin:6px 0 22px; }
+  .su-note .nt{ font-size:12px; font-weight:700; letter-spacing:0.1em; color:#2A7360; margin-bottom:12px; }
+  .su-note p{ font-size:14px; line-height:1.65; color:#3F4D62; margin:0 0 8px; }
+  .su-note p:last-child{ margin-bottom:0; }
+  .su-err{ margin:0 0 16px; background:rgba(217,184,140,0.28); border-left:3px solid var(--noeul); border-radius:8px; padding:11px 15px; font-size:14px; line-height:1.6; color:var(--simya); }
+  .su-big{ width:64px; height:64px; border-radius:999px; background:#EAF4EF; display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-size:30px; color:#2A7360; }
+  .su-quote{ background:#FBF8EF; border:1px solid #E6E0D1; border-radius:16px; padding:20px 22px; margin:0 0 22px; font-family:var(--font-letter); font-size:17px; line-height:1.7; color:var(--simya); text-align:center; }
+  @media (max-width:760px){ .su-h br, .su-sub br{ display:none; } }
+</style>
+
+<div class="stack" style="flex:1 1 auto; display:flex; flex-direction:column; max-width:none; width:100%; margin:0; padding:0;">
+<section class="su-wrap">
+  <div class="su-card">
+    <div class="su-dots" id="suDots" aria-hidden="true"></div>
+    <p class="su-err" id="suErr" hidden role="alert"></p>
+
+    <!-- login -->
+    <div class="su-screen" data-screen="login">
+      <div style="text-align:center; margin-bottom:22px;">
+        <div style="font-size:30px; font-weight:700; letter-spacing:-0.02em; color:var(--cheongja); line-height:1;"><span>on</span><span style="color:var(--noeul);">:</span><span>vi</span></div>
+        <p style="margin:8px 0 0; font-size:13.5px; font-weight:600; color:#5A6678;">멀리 있어도, 매일 곁에</p>
+      </div>
+      <h1 class="su-h">먼저 로그인해 주세요</h1>
+      <p class="su-sub">쓰시던 계정으로 바로 시작하세요. <br>비밀번호는 만들지 않아요.</p>
+      <button type="button" class="su-oauth su-kakao" data-provider="kakao"><span class="su-kbadge">K</span>카카오로 시작하기</button>
+      <p class="su-hint" style="text-align:center; margin-top:14px;">계정이 바뀌셨다면 <a href="support.html" style="color:#2A7360; font-weight:700;">복구를 도와드려요</a>.</p>
+    </div>
+
+    <!-- terms -->
+    <div class="su-screen" data-screen="terms" hidden>
+      <p class="su-eyebrow">약관 동의</p>
+      <h1 class="su-h">시작 전에 확인해 주세요</h1>
+      <p class="su-sub">필수 세 가지에 동의가 필요해요. <br>소식 받기는 선택이에요.</p>
+      <label class="su-agree all" id="suAll"><input type="checkbox" id="agAll"><span class="t">모두 동의합니다</span></label>
+      <div style="height:1px; background:#EAE4D6; margin:6px 2px 14px;"></div>
+      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="age14"><span class="t">만 14세 이상입니다 <span class="req">(필수)</span></span></label>
+      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="tos"><span class="t">이용약관에 동의합니다 <span class="req">(필수)</span></span></label>
+      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="privacy"><span class="t">개인정보 수집·이용에 동의합니다 <span class="req">(필수)</span></span></label>
+      <label class="su-agree"><input type="checkbox" id="agMkt"><span class="t">온비의 좋은 소식 먼저 받아보기 <span class="opt">(선택)</span></span></label>
+      <button type="button" class="su-btn" data-next style="margin-top:16px;">동의하고 계속하기</button>
+    </div>
+
+    <!-- family -->
+    <div class="su-screen" data-screen="family" hidden>
+      <p class="su-eyebrow">우리 가족 공간</p>
+      <h1 class="su-h">가족 이름을 정해주세요</h1>
+      <p class="su-sub">매주 이 이름으로 편지가 도착해요. <br>언제든 바꾸실 수 있어요.</p>
+      <div class="su-field"><label for="fName">성함</label><input class="su-input" id="fName" name="name" placeholder="예) 김온비" autocomplete="name"><p class="su-hint">부르실 이름으로 적어주세요.</p></div>
+      <div class="su-field"><label for="fFamily">가족 이름</label><input class="su-input" id="fFamily" name="family" placeholder="예) 온비님의 가족"></div>
+      <div class="su-field"><label for="fPhone">연락받으실 번호</label><input class="su-input" id="fPhone" name="phone" type="tel" placeholder="010-0000-0000" inputmode="numeric"><p class="su-hint">부모님 소식과 결제 안내를 이 번호로 보내드려요. 1기는 문자 인증 없이 시작해요.</p></div>
+      <div class="su-field"><label for="fEmail">소식 받으실 이메일 <span class="opt">(선택)</span></label><input class="su-input" id="fEmail" name="email" type="email" placeholder="onvi@example.com" autocomplete="email"></div>
+      <button type="button" class="su-btn" data-next>다음</button>
+    </div>
+
+    <!-- parent -->
+    <div class="su-screen" data-screen="parent" hidden>
+      <p class="su-eyebrow">부모님</p>
+      <h1 class="su-h">누구의 안부를 받으실 건가요</h1>
+      <p class="su-sub">부르시는 호칭 그대로 적어주세요.</p>
+      <div class="su-field"><label>호칭</label>
+        <div class="su-pick" id="honorPick">
+          <button type="button" data-honor="어머니" aria-pressed="true">어머니</button>
+          <button type="button" data-honor="아버지" aria-pressed="false">아버지</button>
+        </div>
+      </div>
+      <div class="su-field"><label for="pPhone">전화번호</label><input class="su-input" id="pPhone" name="pphone" type="tel" placeholder="010-0000-0000" inputmode="numeric"></div>
+      <div class="su-field"><label for="pYear">태어나신 해 <span class="opt">(선택)</span></label><input class="su-input" id="pYear" name="year" inputmode="numeric" placeholder="예: 1948"></div>
+      <div class="su-note"><div class="nt">약속</div><p>지금 적어주신 번호는 첫 통화를 드리는 데에만 써요. 그 뒤로는 부모님이 직접 허락하셔야 이어져요.</p></div>
+      <button type="button" class="su-btn" data-next>다음</button>
+    </div>
+
+    <!-- confirm -->
+    <div class="su-screen" data-screen="confirm" hidden>
+      <p class="su-eyebrow">번호 확인</p>
+      <h1 class="su-h">이 번호가 맞을까요</h1>
+      <p class="su-sub">이 번호로 온비가 <span id="cfHonor">어머니</span>께 전화를 드려요.</p>
+      <div class="su-quote" id="cfPhone" style="font-family:inherit; font-size:22px; font-weight:700; letter-spacing:-0.01em;">010-0000-0000</div>
+      <div class="su-note"><div class="nt">첫 통화</div><p>첫 통화 첫 문장은 늘 이렇게 시작해요. “안녕하세요, 따님/아드님이 마음을 전해달라 하셨어요.”</p><p>아니라고 하시면 바로 통화를 마쳐요.</p></div>
+      <button type="button" class="su-btn" data-next>네, 맞아요</button>
+      <button type="button" class="su-btn ghost" data-back>번호를 고칠게요</button>
+    </div>
+
+    <!-- consent -->
+    <div class="su-screen" data-screen="consent" hidden>
+      <p class="su-eyebrow">부모님 동의</p>
+      <h1 class="su-h">부모님께 먼저 여쭤봐 주세요</h1>
+      <p class="su-sub">부모님이 직접 동의하셔야 시작돼요. <br>부모님의 정보는 부모님의 것이니까요.</p>
+      <div class="su-note"><p>부모님도 같은 화면을 보실 수 있어요. 몰래 보는 서비스가 아니에요.</p></div>
+      <label class="su-agree"><input type="checkbox" id="agConsent"><span class="t">첫 통화 날, 온비가 직접 여쭤볼게요</span></label>
+      <button type="button" class="su-btn" data-next style="margin-top:16px;">이해했어요</button>
+    </div>
+
+    <!-- schedule -->
+    <div class="su-screen" data-screen="schedule" hidden>
+      <p class="su-eyebrow">첫 통화</p>
+      <h1 class="su-h">언제 첫 통화를 드릴까요</h1>
+      <p class="su-sub">부모님이 편하신 시간으로 정해주세요.</p>
+      <div class="su-note" style="text-align:center;"><div class="nt" style="margin-bottom:6px;">매주 금요일</div><p>첫 통화도, 그 뒤 금요편지도 금요일에 드려요.</p></div>
+      <div class="su-field"><label>시간대</label>
+        <div class="su-slot" id="slotPick">
+          <button type="button" data-slot="오전" aria-pressed="false"><span class="st">오전</span><span class="sr">9시 ~ 12시</span></button>
+          <button type="button" data-slot="오후" aria-pressed="true"><span class="st">오후</span><span class="sr">12시 ~ 5시</span></button>
+          <button type="button" data-slot="저녁" aria-pressed="false"><span class="st">저녁</span><span class="sr">5시 ~ 7시</span></button>
+        </div>
+      </div>
+      <button type="button" class="su-btn" data-next>이 시간으로 할게요</button>
+    </div>
+
+    <!-- done -->
+    <div class="su-screen" data-screen="done" hidden>
+      <div class="su-big">✓</div>
+      <h1 class="su-h">준비됐어요</h1>
+      <p class="su-sub"><span id="dnName">가족</span>의 공간이 열렸어요. <br>통화가 끝나면 어떻게 됐는지 바로 알려드릴게요.</p>
+      <a class="su-btn" href="mypage.html" style="text-decoration:none;">내 공간으로 가기</a>
+      <a class="su-btn ghost" href="index.html" style="text-decoration:none;">홈으로</a>
+    </div>
+
   </div>
+</section>
 </div>
 
-  <!-- ── HERO ── -->
-  <section style="padding:150px 0 0; text-align:center;">
-    <div style="width:min(560px,92%); margin:0 auto;">
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">회원가입</div>
-      
-        <div id="signupHead">
-          <h1 style="font-size:clamp(28px,3.6vw,40px); line-height:1.2; letter-spacing:-0.035em; font-weight:700; margin:16px 0 14px; text-wrap:balance;">우리 가족의 공간을 <br>만들어볼까요?</h1>
-          <p style="font-size:15.5px; line-height:1.7; color:#3F4D62; margin:0; text-wrap:pretty;">가입은 자녀분이 해요. 부모님은 나중에 전화 한 통만 받으시면 됩니다.</p>
-        </div>
-      
-    </div>
-  </section>
-
-  <!-- ── 카드 스택 ── -->
-  <div style="width:calc(100% - 40px); max-width:860px; margin:26px auto 0; display:flex; flex-direction:column; gap:20px; padding-bottom:20px;">
-
-  <!-- ── 완료 ── -->
-  <!-- 가입 완료 -->
-    <div class="stack">
-<section id="donePanel" hidden style="border-radius:28px; background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); padding:clamp(32px,6vw,64px) clamp(20px,4vw,56px);">
-      <div style="width:min(560px,100%); margin:0 auto; background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:clamp(30px,5vw,50px); box-shadow:0 34px 70px -40px rgba(31,42,58,0.28); text-align:center;">
-        <div style="width:56px; height:56px; border-radius:999px; background:var(--saebyeok); display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-size:24px; color:#2A7360;">✓</div>
-        <h1 style="font-size:clamp(24px,3vw,32px); font-weight:700; letter-spacing:-0.03em; margin:0 0 14px; text-wrap:balance;"><span id="doneName"></span> 님, <br>우리 가족의 공간이 열렸어요.</h1>
-        <p style="font-size:15.5px; line-height:1.7; color:#3F4D62; margin:0 0 30px; text-wrap:pretty;">이제 부모님을 모시고, 가족을 초대할 차례예요. 첫 통화 전에 부모님께 첫인사꾸러미를 보내드립니다.</p>
-        <a class="hv1" href="mypage.html" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:16px 30px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; min-height:44px; transition:background .2s;">내 공간으로 가기</a>
-      </div>
-    </section>
-
-  <!-- ── 가입 폼 ── -->
-  <section id="signupSection" style="border-radius:28px; background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); padding:clamp(32px,6vw,64px) clamp(20px,4vw,56px);">
-    <div style="width:min(560px,100%); margin:0 auto;">
-      <div style="display:flex; align-items:center; gap:8px; justify-content:center; margin-bottom:26px;">
-        <span id="dot1" style="width:26px; height:6px; border-radius:999px; background:var(--cheongja); transition:background .2s;"></span><span id="dot2" style="width:26px; height:6px; border-radius:999px; background:#E6E0D1; transition:background .2s;"></span>
-      </div>
-
-      <form id="signupForm" novalidate style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:clamp(26px,4vw,42px); box-shadow:0 34px 70px -40px rgba(31,42,58,0.28); display:flex; flex-direction:column; gap:20px;">
-
-        <div id="step1" style="display:flex; flex-direction:column; gap:20px;">
-            <div style="font-size:13px; font-weight:700; letter-spacing:0.1em; color:#2A7360;">1 · 내 정보</div>
-            <div>
-              <label for="s-name" style="display:block; font-size:13.5px; font-weight:700; margin-bottom:9px;">성함<span style="color:#2A7360; margin-left:3px;">*</span></label>
-              <input id="s-name" name="name" type="text" placeholder="예) 김온비" style="width:100%; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px; padding:14px 16px; font-family:inherit; font-size:15px; color:var(--simya); transition:border-color .2s, box-shadow .2s, background .2s;">
-            </div>
-            <div>
-              <label for="s-phone" style="display:block; font-size:13.5px; font-weight:700; margin-bottom:9px;">연락처<span style="color:#2A7360; margin-left:3px;">*</span></label>
-              <input id="s-phone" name="phone" type="text" inputMode="tel" placeholder="예) 010-1234-5678" style="width:100%; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px; padding:14px 16px; font-family:inherit; font-size:15px; color:var(--simya); transition:border-color .2s, box-shadow .2s, background .2s;">
-              <p style="font-size:12.5px; color:#6A7789; margin:8px 0 0; line-height:1.55;">가족 초대와 금요편지 알림을 이 번호로 보내드려요.</p>
-            </div>
-            <div>
-              <span style="display:block; font-size:13.5px; font-weight:700; margin-bottom:9px;">부모님과의 관계</span>
-              <div style="display:flex; flex-wrap:wrap; gap:10px;">
-                                  <button class="hv2" type="button" data-relation="딸" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; letter-spacing:-0.01em; transition:all .18s; min-height:44px; background:#EAF4EF; border:1px solid #4FB89E; color:#2A7360; font-weight:700; box-shadow:0 0 0 3px #EAF4EF;">딸</button>
-                  <button class="hv2" type="button" data-relation="아들" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; letter-spacing:-0.01em; transition:all .18s; min-height:44px; background:#FBF8EF; border:1px solid #E6E0D1; color:#3F4D62;">아들</button>
-                  <button class="hv2" type="button" data-relation="며느리" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; letter-spacing:-0.01em; transition:all .18s; min-height:44px; background:#FBF8EF; border:1px solid #E6E0D1; color:#3F4D62;">며느리</button>
-                  <button class="hv2" type="button" data-relation="사위" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; letter-spacing:-0.01em; transition:all .18s; min-height:44px; background:#FBF8EF; border:1px solid #E6E0D1; color:#3F4D62;">사위</button>
-                  <button class="hv2" type="button" data-relation="손주" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; letter-spacing:-0.01em; transition:all .18s; min-height:44px; background:#FBF8EF; border:1px solid #E6E0D1; color:#3F4D62;">손주</button>
-                  <button class="hv2" type="button" data-relation="기타" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; letter-spacing:-0.01em; transition:all .18s; min-height:44px; background:#FBF8EF; border:1px solid #E6E0D1; color:#3F4D62;">기타</button>
-              </div>
-            </div>
-          </div>
-
-        <div id="step2" hidden style="display:flex; flex-direction:column; gap:20px;">
-            <div style="font-size:13px; font-weight:700; letter-spacing:0.1em; color:#2A7360;">2 · 부모님 정보 <span style="font-weight:600; color:#6A7789;">(선택 · 나중에 해도 돼요)</span></div>
-            <div>
-              <label for="s-pname" style="display:block; font-size:13.5px; font-weight:700; margin-bottom:9px;">부모님 성함</label>
-              <input id="s-pname" name="pname" type="text" placeholder="예) 김순자" style="width:100%; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px; padding:14px 16px; font-family:inherit; font-size:15px; color:var(--simya); transition:border-color .2s, box-shadow .2s, background .2s;">
-            </div>
-            <div>
-              <label for="s-pphone" style="display:block; font-size:13.5px; font-weight:700; margin-bottom:9px;">부모님 연락처</label>
-              <input id="s-pphone" name="pphone" type="text" inputMode="tel" placeholder="예) 010-9876-5432" style="width:100%; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px; padding:14px 16px; font-family:inherit; font-size:15px; color:var(--simya); transition:border-color .2s, box-shadow .2s, background .2s;">
-              <p style="font-size:12.5px; color:#6A7789; margin:8px 0 0; line-height:1.55;">바로 전화드리지 않아요. 첫인사꾸러미가 먼저 도착한 뒤, 정해진 시간에만 연락드립니다.</p>
-            </div>
-            <div style="display:flex; align-items:flex-start; gap:11px; padding:16px 18px; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px;">
-              <input id="s-agree" name="agree" type="checkbox" style="width:20px; height:20px; margin:1px 0 0; accent-color:#4FB89E; flex-shrink:0; cursor:pointer;">
-              <label for="s-agree" style="font-size:13.5px; color:#3F4D62; line-height:1.6; cursor:pointer;">개인정보 수집·이용에 동의합니다. 통화 기록은 부모님 본인의 동의 후에만 시작됩니다. <span style="color:#2A7360; font-weight:700;">(필수)</span></label>
-            </div>
-          </div>
-
-        <p id="signupError" hidden style="margin:0; font-size:13.5px; font-weight:600; color:#A2652A;"></p>
-
-        <div style="display:flex; gap:10px;">
-          <button class="hv3" id="backBtn" type="button" hidden style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; padding:15px 24px; border-radius:999px; background:transparent; border:1px solid #E6E0D1; color:var(--simya); font-size:15px; font-weight:600; cursor:pointer; font-family:inherit; min-height:44px; transition:border-color .2s;">이전</button>
-          <button class="hv4" id="submitBtn" type="submit" style="flex:1; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:16px 30px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; border:none; cursor:pointer; font-family:inherit; min-height:44px; transition:background .2s, box-shadow .2s;">다음 →</button>
-        </div>
-        <p style="font-size:12.5px; color:#6A7789; margin:0; line-height:1.6; text-align:center;">아직 고민 중이시라면 <a href="contact.html" style="color:#2A7360; font-weight:600;">무료 상담</a>부터 시작하셔도 좋아요.</p>
-      </form>
-    </div>
-  </section>
-
-  </div>
-
-  </div>
+<script>
+(function(){
+  var FLOW = ['login','terms','family','parent','confirm','consent','schedule','done'];
+  var st = { step:0, provider:'', name:'', family:'', phone:'', pphone:'', honor:'어머니', slot:'오후', mkt:false };
+  var scr = document.querySelectorAll('.su-screen');
+  var dots = document.getElementById('suDots');
+  var errBox = document.getElementById('suErr');
+  // dots (exclude login + done from progress)
+  var prog = FLOW.slice(1,-1);
+  dots.innerHTML = prog.map(function(){return '<i></i>';}).join('');
+  function paintDots(){
+    var idx = prog.indexOf(FLOW[st.step]);
+    Array.prototype.forEach.call(dots.children,function(d,i){ d.classList.toggle('on', i===idx); });
+    dots.style.visibility = (idx<0)?'hidden':'visible';
+  }
+  function show(){
+    var name = FLOW[st.step];
+    scr.forEach(function(s){ s.hidden = (s.getAttribute('data-screen')!==name); });
+    paintDots(); errBox.hidden = true;
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(name==='confirm'){ document.getElementById('cfHonor').textContent=st.honor; document.getElementById('cfPhone').textContent=st.pphone||'010-0000-0000'; }
+    if(name==='done'){ finish(); document.getElementById('dnName').textContent = st.family || st.name || '가족'; }
+  }
+  function fail(msg){ errBox.textContent=msg; errBox.hidden=false; window.scrollTo({top:0,behavior:'smooth'}); }
+  function val(id){ var e=document.getElementById(id); return e?(e.value||'').trim():''; }
+  function validate(name){
+    if(name==='terms'){ var reqs=document.querySelectorAll('.ag-req'); for(var i=0;i<reqs.length;i++){ if(!reqs[i].checked){ fail('필수 항목에 동의해 주세요.'); return false; } } st.mkt=document.getElementById('agMkt').checked; return true; }
+    if(name==='family'){ st.name=val('fName'); st.family=val('fFamily')||(st.name?st.name+'님의 가족':''); st.phone=val('fPhone');
+      if(!st.name){ fail('성함을 다시 확인해 주세요.'); return false; }
+      if(!st.phone){ fail('연락처를 다시 확인해 주세요.'); return false; } return true; }
+    if(name==='parent'){ st.pphone=val('pPhone'); if(!st.pphone){ fail('부모님 연락처를 다시 확인해 주세요.'); return false; } return true; }
+    if(name==='consent'){ if(!document.getElementById('agConsent').checked){ fail('부모님께 여쭤보겠다고 확인해 주세요.'); return false; } return true; }
+    return true;
+  }
+  function next(){ var name=FLOW[st.step]; if(!validate(name)) return; if(st.step<FLOW.length-1){ st.step++; show(); } }
+  function back(){ if(st.step>0){ st.step--; show(); } }
+  function finish(){
+    try{
+      localStorage.setItem('onvi.onboarded','1');
+      localStorage.setItem('onvi.user.name', st.name || st.family || '');
+      if(st.provider) localStorage.setItem('onvi.user.provider', st.provider);
+      localStorage.setItem('onvi.marketing', st.mkt ? 'email,sms,kakao' : '');
+      localStorage.setItem('onvi.terms.agreed','age14,tos,privacy@v1.0');
+      window.dispatchEvent(new Event('onvi-auth'));
+    }catch(e){/* 무시 */}
+  }
+  // oauth
+  document.querySelectorAll('[data-provider]').forEach(function(b){
+    b.addEventListener('click',function(){ st.provider=b.getAttribute('data-provider'); st.step=1; show(); });
+  });
+  document.querySelectorAll('[data-next]').forEach(function(b){ b.addEventListener('click',next); });
+  document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click',back); });
+  // terms: all toggle
+  var agAll=document.getElementById('agAll'); var allRow=document.getElementById('suAll');
+  function syncAll(){ var reqs=document.querySelectorAll('.ag-req'), mkt=document.getElementById('agMkt'); var every=true; reqs.forEach(function(r){ if(!r.checked) every=false; }); if(!mkt.checked) every=false; agAll.checked=every; allRow.classList.toggle('all',every); }
+  if(agAll){ agAll.addEventListener('change',function(){ document.querySelectorAll('.ag-req').forEach(function(r){ r.checked=agAll.checked; }); document.getElementById('agMkt').checked=agAll.checked; allRow.classList.toggle('all',agAll.checked); }); }
+  document.querySelectorAll('.ag-req, #agMkt').forEach(function(r){ r.addEventListener('change',syncAll); });
+  // honor pick
+  document.querySelectorAll('#honorPick button').forEach(function(b){ b.addEventListener('click',function(){ st.honor=b.getAttribute('data-honor'); document.querySelectorAll('#honorPick button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); }); });
+  // slot pick
+  document.querySelectorAll('#slotPick button').forEach(function(b){ b.addEventListener('click',function(){ st.slot=b.getAttribute('data-slot'); document.querySelectorAll('#slotPick button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); }); });
+  document.body.classList.add('onvi-signup');
+  show();
+})();
+</script>
 <footer class="site">
   <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
@@ -311,7 +437,7 @@
         <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--noeul,#D9B88C) 75%, #FFFFFF); white-space:nowrap;">도움을 주는 사람들</span>
         <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">정준교</b> 고문</span>
         <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">원민재</b> 한국엔젤투자협회</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">원민재</b> 자문</span>
       </div>
     </div>
     <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
@@ -384,7 +510,7 @@
     // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
     function paint() {
       var name = '';
-      try { name = localStorage.getItem('onvi.user.name') || ''; } catch (e) { /* 무시 */ }
+      try { name = localStorage.getItem('onvi.user.name') || ''; if(!localStorage.getItem('onvi.onboarded'))name=''; } catch (e) { /* 무시 */ }
       var login = document.getElementById('navLogin');
       var user = document.getElementById('navUser');
       var pLogin = document.getElementById('panelLogin');
@@ -406,74 +532,6 @@
     window.addEventListener('onvi-auth', paint);
   })();
 </script>
-<script>
-  (function () {
-    var form = document.getElementById('signupForm');
-    var err = document.getElementById('signupError');
-    var step1 = document.getElementById('step1');
-    var step2 = document.getElementById('step2');
-    var backBtn = document.getElementById('backBtn');
-    var submitBtn = document.getElementById('submitBtn');
-    var dot1 = document.getElementById('dot1');
-    var dot2 = document.getElementById('dot2');
-    var donePanel = document.getElementById('donePanel');
-    var formSection = document.getElementById('signupSection');
-    var doneName = document.getElementById('doneName');
-    var DOT_ON = 'width:26px; height:6px; border-radius:999px; background:var(--cheongja); transition:background .2s;';
-    var DOT_OFF = 'width:26px; height:6px; border-radius:999px; background:#E6E0D1; transition:background .2s;';
-    var step = 1;
 
-    var CHIP = 'display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; letter-spacing:-0.01em; transition:all .18s; min-height:44px;';
-    var ON = ' background:#EAF4EF; border:1px solid #4FB89E; color:#2A7360; font-weight:700; box-shadow:0 0 0 3px #EAF4EF;';
-    var OFF = ' background:#FBF8EF; border:1px solid #E6E0D1; color:#3F4D62;';
-    var relation = '딸';
-    var chips = document.querySelectorAll('[data-relation]');
-    function paintChips() {
-      chips.forEach(function (c) {
-        c.setAttribute('style', CHIP + (c.getAttribute('data-relation') === relation ? ON : OFF));
-      });
-    }
-    chips.forEach(function (c) {
-      c.addEventListener('click', function () { relation = c.getAttribute('data-relation'); paintChips(); });
-    });
-    paintChips();
-
-    function render() {
-      step1.hidden = step !== 1;
-      step2.hidden = step !== 2;
-      backBtn.hidden = step !== 2;
-      submitBtn.textContent = step === 1 ? '다음 →' : '가족 공간 만들기';
-      dot1.setAttribute('style', step === 1 ? DOT_ON : DOT_OFF);
-      dot2.setAttribute('style', step === 2 ? DOT_ON : DOT_OFF);
-    }
-    render();
-
-    backBtn.addEventListener('click', function () { step = 1; err.hidden = true; render(); });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      function fail(m, f) { err.textContent = m; err.hidden = false; if (f) f.focus(); }
-      if (step === 1) {
-        if (!(form.name.value || '').trim()) { fail('성함을 다시 확인해 주세요.', form.name); return; }
-        if (!(form.phone.value || '').trim()) { fail('연락처를 다시 확인해 주세요.', form.phone); return; }
-        step = 2; err.hidden = true; render();
-        return;
-      }
-      if (!form.agree.checked) { fail('개인정보 수집·이용에 동의해 주세요.'); return; }
-      err.hidden = true;
-      var name = (form.name.value || '').trim();
-      doneName.textContent = name || '온비';
-      formSection.hidden = true;
-      donePanel.hidden = false;
-      var head = document.getElementById('signupHead');
-      if (head) head.hidden = true;
-      try {
-        localStorage.setItem('onvi.user.name', name);
-        window.dispatchEvent(new Event('onvi-auth'));
-      } catch (er) { /* 무시 */ }
-      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (er) { /* 무시 */ }
-    });
-  })();
-</script>
 </body>
 </html>

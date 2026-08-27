@@ -362,7 +362,7 @@
         <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--noeul,#D9B88C) 75%, #FFFFFF); white-space:nowrap;">도움을 주는 사람들</span>
         <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">정준교</b> 고문</span>
         <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">원민재</b> 한국엔젤투자협회</span>
+        <span style="color:rgba(255,255,255,0.82);"><b style="color:#FFF; font-weight:600;">원민재</b> 자문</span>
       </div>
     </div>
     <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
@@ -500,7 +500,7 @@ function onviSubmitConsult(f){
 </script>
 <script data-x="nav-auth-script">
 (function(){
-  var n=''; try{ n=localStorage.getItem('onvi.user.name')||''; }catch(e){}
+  var n=''; try{ n=localStorage.getItem('onvi.user.name')||''; if(!localStorage.getItem('onvi.onboarded'))n=''; }catch(e){}
   if(!n) return;
   var l=document.getElementById('navLogin'), u=document.getElementById('navUser');
   if(!l||!u) return;

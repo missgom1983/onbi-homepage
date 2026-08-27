@@ -373,7 +373,7 @@
         <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--noeul,#D9B88C) 75%, #FFFFFF); white-space:nowrap;">도움을 주는 사람들</span>
         <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">정준교</b> 고문</span>
         <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
-        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">원민재</b> 한국엔젤투자협회</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">원민재</b> 자문</span>
       </div>
     </div>
     <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
@@ -446,7 +446,7 @@
     // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
     function paint() {
       var name = '';
-      try { name = localStorage.getItem('onvi.user.name') || ''; } catch (e) { /* 무시 */ }
+      try { name = localStorage.getItem('onvi.user.name') || ''; if(!localStorage.getItem('onvi.onboarded'))name=''; } catch (e) { /* 무시 */ }
       var login = document.getElementById('navLogin');
       var user = document.getElementById('navUser');
       var pLogin = document.getElementById('panelLogin');
@@ -471,7 +471,7 @@
 <script>
   (function () {
     var name = '';
-    try { name = localStorage.getItem('onvi.user.name') || ''; } catch (e) { /* 무시 */ }
+    try { name = localStorage.getItem('onvi.user.name') || ''; if(!localStorage.getItem('onvi.onboarded'))name=''; } catch (e) { /* 무시 */ }
     var g = document.getElementById('greetName');
     if (g) g.textContent = name || '지현';
 
