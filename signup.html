@@ -399,7 +399,7 @@
   }
   // oauth
   document.querySelectorAll('[data-provider]').forEach(function(b){
-    b.addEventListener('click',function(){ st.provider=b.getAttribute('data-provider'); st.step=1; show(); });
+    b.addEventListener('click',function(){ if(window.OnViAuth){ OnViAuth.signInKakao(); return; } st.provider=b.getAttribute('data-provider'); st.step=1; show(); });
   });
   document.querySelectorAll('[data-next]').forEach(function(b){ b.addEventListener('click',next); });
   document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click',back); });
@@ -533,5 +533,7 @@
   })();
 </script>
 
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="shared/onvi-auth.js"></script>
 </body>
 </html>
