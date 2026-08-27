@@ -84,3 +84,11 @@ python3 _tools/verify.py --live   # 라이브 재검증
 ```
 - `.assetsignore`: 한글 아카이브는 ASCII 글롭 `*v3.4*`로 제외(NFD 이슈).
 - **운영 push는 되돌리기 어려움 → 사용자에게 최종 확인 후 진행.**
+
+## ⚠️ 브랜드 비전 영상 경로 (재발 주의)
+Brand 페이지 "우리의 비전" 3개 영상은 툴 export가 `uploads/*.mp4`로 넣지만 **`uploads/`는 배포 제외** → 404.
+배포되는 최적화본 `assets/videos/vision-{app,device,robot}.mp4`(git추적·라이브 200)로 **경로 치환 필수**:
+- `uploads/app-video-latest.mp4` → `assets/videos/vision-app.mp4`
+- `uploads/A_single_smart_home_care_devic.mp4` → `assets/videos/vision-device.mp4`
+- `uploads/A_single_friendly_companion_ho.mp4` → `assets/videos/vision-robot.mp4`
+brand.html은 툴 컴파일본이라 promotion 시 수동 치환. (2026-08-27 수정 완료)
