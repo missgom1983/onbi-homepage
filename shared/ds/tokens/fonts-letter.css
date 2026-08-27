@@ -1,0 +1,6 @@
+/* On:Vi (온비) — Webfont (감성 톤 스위치 전용)
+ * Gowun Batang — 인용·편지·가격 숫자. SIL OFL, 상업적 사용 가능.
+ * --font-letter를 실제로 쓰는 페이지에서만 링크하세요. 링크하지 않은 페이지는
+ * 시스템 명조(Batang / Nanum Myeongjo)로 대체되고 Export 용량이 크게 줄어듭니다.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap");

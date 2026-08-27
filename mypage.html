@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="shared/ds/tokens/typography.css">
 <link rel="stylesheet" href="shared/ds/tokens/spacing.css">
 <link rel="stylesheet" href="shared/ds/styles.css">
+<link rel="stylesheet" href="shared/ds/tokens/fonts-letter.css">
 
 <style>
   *,*::before,*::after{ box-sizing:border-box; }
@@ -164,12 +165,9 @@
     </div>
     <div class="nav-cta">
       <div class="nav-user-wrap" id="navUser" hidden>
-        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
+        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><span data-avatar-initial="" style="width:100%; height:100%; display:grid; place-items:center; background:rgba(79,184,158,0.42); color:#FFFFFF; font-size:14px; font-weight:700; letter-spacing:0;"></span></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
         <div class="nav-menu" id="navMenu" role="menu" hidden>
-          <a href="https://my.onvi.kr" role="menuitem" class="nav-menu-main">
-            <span><span class="t">가족 공간 열기</span><span class="d">편지 / 답장 / 이야기 기록</span></span>
-            <span aria-hidden="true" class="arr">↗</span>
-          </a>
+          <div role="menuitem" aria-disabled="true" class="nav-menu-main" style="background:rgba(255,255,255,0.05) !important; border:1px dashed rgba(255,255,255,0.16); cursor:default;"><span><span class="t" style="color:rgba(255,255,255,0.5);">가족 공간</span><span class="d">편지 / 답장 / 이야기 기록</span></span><span style="flex-shrink:0; font-size:10.5px; font-weight:700; letter-spacing:0.08em; padding:4px 9px; border-radius:999px; background:rgba(217,184,140,0.2); color:#E4C49C;">준비 중</span></div>
           <a href="mypage.html" role="menuitem" class="nav-menu-row"><span>마이페이지</span><span aria-hidden="true" class="chev">›</span></a>
           <button type="button" role="menuitem" class="nav-menu-out" id="navLogout">로그아웃</button>
         </div>
@@ -185,7 +183,8 @@
     <a href="support.html">고객지원</a>
     <div class="panel-foot">
       <div class="panel-user" id="panelUser" hidden>
-        <a href="https://my.onvi.kr" class="panel-space">가족 공간 열기 <span aria-hidden="true">↗</span></a>
+        <span aria-disabled="true" class="panel-space" style="background:rgba(255,255,255,0.05); border:1px dashed rgba(255,255,255,0.16); color:rgba(255,255,255,0.5); cursor:default;">가족 공간 <span style="font-size:10.5px; font-weight:700; letter-spacing:0.08em; padding:3px 8px; border-radius:999px; background:rgba(217,184,140,0.2); color:#E4C49C;">준비 중</span></span>
+        <button type="button" id="panelLogout" class="panel-my" style="background:none; border:none; font-family:inherit; text-align:left; cursor:pointer; color:rgba(255,255,255,0.7);">로그아웃</button>
         <a href="mypage.html" class="panel-my">마이페이지 ›</a>
       </div>
       <a href="login.html" id="panelLogin">로그인 ›</a>
@@ -229,7 +228,7 @@
           <p style="font-size:14.5px; line-height:1.7; color:rgba(255,255,255,0.66); margin:0; text-wrap:pretty;">지난 편지, 가족 답장, 부모님 목소리 기록을 한자리에서 보실 수 있어요. 여기 정보와 늘 같은 내용입니다.</p>
         </div>
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:9px; flex-shrink:0;">
-          <a class="hv1" href="https://my.onvi.kr" style="display:inline-flex; align-items:center; gap:9px; padding:15px 30px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; min-height:48px; transition:background .2s;">가족 공간 열기 <span aria-hidden="true" style="opacity:0.8;">↗</span></a>
+          <span aria-disabled="true" style="display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px; background:rgba(31,42,58,0.04); border:1px dashed #CDC6B4; color:#8A93A0; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; min-height:48px; cursor:default;">가족 공간 <span style="font-size:11px; font-weight:700; letter-spacing:0.08em; padding:4px 10px; border-radius:999px; background:rgba(217,184,140,0.24); color:#A9803F;">준비 중</span></span>
           <span style="font-size:12.5px; color:rgba(255,255,255,0.5);">my.onvi.kr · 같은 계정으로 이어집니다</span>
         </div>
       </div>
@@ -251,7 +250,7 @@
           <p style="font-family:var(--font-letter); font-size:clamp(20px,2.4vw,26px); line-height:1.55; font-weight:700; letter-spacing:-0.02em; margin:0; text-wrap:balance;">봄비가 한 번 지나가고, <br>어머니는 앨범을 꺼내셨습니다.</p>
           <p style="font-size:15px; line-height:1.7; color:#3F4D62; margin:0;">오래 미뤄두셨던 앨범 정리를 하셨어요. 아버지와 처음 바다에 갔던 날의 사진 이야기, 앞집 어르신과 다녀온 봄나물 시장 이야기가 담겨 있어요.</p>
           <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:auto; padding-top:8px;">
-            <a class="hv1" href="https://my.onvi.kr" style="display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15px; font-weight:700; letter-spacing:-0.01em; text-decoration:none; min-height:44px; transition:background .2s;">이번 주 편지 읽기 <span aria-hidden="true" style="opacity:0.8;">↗</span></a>
+            <span aria-disabled="true" style="display:inline-flex; align-items:center; gap:10px; padding:14px 24px; border-radius:999px; background:rgba(31,42,58,0.04); border:1px dashed #CDC6B4; color:#8A93A0; font-size:15px; font-weight:700; letter-spacing:-0.01em; min-height:44px; cursor:default;">이번 주 편지 <span style="font-size:10.5px; font-weight:700; letter-spacing:0.08em; padding:3px 9px; border-radius:999px; background:rgba(217,184,140,0.24); color:#A9803F;">준비 중</span></span>
             <span style="font-size:13.5px; color:#6A7789;">가족 답장 2 · 아직 답장 전이에요</span>
           </div>
         </div>
@@ -343,6 +342,7 @@
             <a class="hv3" href="support.html#faq" style="display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border-top:1px solid #F0EBDD; font-size:14.5px; font-weight:600; color:var(--simya); text-decoration:none; min-height:44px;">도움이 필요해요 <span style="color:#6A7789; font-weight:500; font-size:13px;">고객지원 ›</span></a>
           </div>
           <button class="hv3" type="button" id="logoutBtn" style="display:flex; width:100%; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border:none; border-top:1px solid #F0EBDD; background:none; font-size:14.5px; font-weight:600; color:#6A7789; cursor:pointer; font-family:inherit; text-align:left; min-height:44px; transition:color .2s;">로그아웃</button>
+          <button class="hv3" type="button" id="leaveBtn" style="display:flex; width:100%; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border:none; border-top:1px solid #F0EBDD; background:none; font-size:13.5px; font-weight:500; color:#8A93A0; cursor:pointer; font-family:inherit; text-align:left; min-height:44px;">회원 탈퇴 <span aria-hidden="true" style="color:#B4BCC7;">›</span></button>
           <p style="font-size:12px; color:#6A7789; line-height:1.6; margin:14px 0 0;">통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
         </div>
       </div>
@@ -356,7 +356,7 @@
   <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
-        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center; flex-shrink:0;"></span></a>
+        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center; flex-shrink:0;"></span></a>
         <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<span data-ft-tag=""> <br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</span></p>
       </div>
     </div>
@@ -453,7 +453,7 @@
       var pUser = document.getElementById('panelUser');
       if (name) {
         if (login) login.hidden = true;
-        if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; }
+        if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; var _av=document.querySelector('[data-avatar-initial]'); if(_av)_av.textContent=(name.trim().charAt(0)||''); }
         if (pLogin) pLogin.hidden = true;
         if (pUser) pUser.hidden = false;
       } else {
@@ -464,6 +464,7 @@
       }
     }
     paint();
+    (function(){var pl=document.getElementById('panelLogout'); if(pl) pl.addEventListener('click',function(){ if(window.OnViAuth){OnViAuth.signOut();return;} try{localStorage.removeItem('onvi.user.name');localStorage.removeItem('onvi.onboarded');window.dispatchEvent(new Event('onvi-auth'));}catch(e){} location.href='index.html'; });})();
     window.addEventListener('storage', paint);
     window.addEventListener('onvi-auth', paint);
   })();
@@ -491,6 +492,38 @@
       });
     }
   })();
+</script>
+
+<div id="leaveModal" hidden role="dialog" aria-modal="true" aria-label="회원 탈퇴" style="position:fixed; inset:0; z-index:700; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(31,42,58,0.5); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);"><div style="width:min(520px,100%); max-height:90vh; overflow-y:auto; background:#FFFFFF; border-radius:24px; padding:clamp(26px,4vw,40px); box-shadow:0 40px 80px -30px rgba(31,42,58,0.5); position:relative;"><button type="button" id="leaveClose" aria-label="닫기" style="position:absolute; top:14px; right:14px; width:36px; height:36px; border-radius:999px; border:none; background:rgba(31,42,58,0.06); color:#5A6678; font-size:16px; cursor:pointer; line-height:1;">✕</button><div id="leaveStep1"><div style="font-size:12.5px; font-weight:700; letter-spacing:0.1em; color:#2A7360; margin-bottom:10px;">회원 탈퇴</div><h2 style="font-size:clamp(22px,3vw,28px); line-height:1.3; letter-spacing:-0.03em; font-weight:700; margin:0 0 10px; color:var(--simya); text-wrap:balance;">떠나시는 이유를 <br>알려주세요</h2><p style="font-size:14.5px; line-height:1.7; color:#5A6678; margin:0 0 20px;">쌓인 이야기가 있어요. <br>한 가지만 골라주시면 온비가 나아집니다.</p><div id="leaveReasons" style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;"></div><div style="margin-bottom:18px;"><label for="mp-leave-note" style="display:block; font-size:13.5px; font-weight:700; color:var(--simya); margin-bottom:7px;">더 남기실 말씀 <span id="noteReq" style="font-weight:600; color:#9AA3B0; font-size:12.5px;">(선택)</span></label><p id="noteHint" hidden style="margin:0 0 7px; font-size:12.5px; color:#8A93A0; line-height:1.5;">어떤 이유였는지 한 줄만 적어주세요.</p><textarea id="mp-leave-note" rows="3" placeholder="아쉬우셨던 점을 적어주세요" style="width:100%; box-sizing:border-box; font-family:inherit; font-size:15px; padding:12px 14px; border:1px solid #E0D9C6; border-radius:12px; background:#FFFFFF; color:var(--simya); resize:vertical; line-height:1.6;"></textarea></div><div style="display:flex; flex-direction:column; gap:10px; margin:4px 0 18px;"><div style="background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px; padding:15px 17px;"><div style="font-size:14.5px; font-weight:700; color:var(--simya); margin-bottom:4px;">금요일 통화가 멈춥니다</div><p style="margin:0; font-size:13.5px; line-height:1.6; color:#3F4D62;">마지막 통화에서 인사를 드리고 마칩니다.</p></div><div style="background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px; padding:15px 17px;"><div style="font-size:14.5px; font-weight:700; color:var(--simya); margin-bottom:4px;">이야기는 1년 동안 보관합니다</div><p style="margin:0; font-size:13.5px; line-height:1.6; color:#3F4D62;">그 전에 오시면 그대로 이어갑니다. 1년이 지나면 지워집니다.</p></div></div><label style="display:flex; align-items:flex-start; gap:11px; padding:14px 15px; border:1px solid #E6E0D1; border-radius:12px; background:#FBF8EF; cursor:pointer; margin-bottom:14px;"><input type="checkbox" id="leaveAck" style="width:20px; height:20px; margin:1px 0 0; accent-color:var(--cheongja); flex-shrink:0;"><span style="font-size:14px; line-height:1.5; color:var(--simya); font-weight:600;">위 안내를 확인했어요</span></label><p id="leaveErr" hidden role="alert" style="margin:0 0 14px; background:rgba(217,184,140,0.28); border-left:3px solid var(--noeul); border-radius:8px; padding:11px 15px; font-size:14px; line-height:1.6; color:var(--simya);"></p><button type="button" id="leaveSubmit" style="width:100%; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; padding:15px 20px; border-radius:999px; font-family:inherit; font-size:15.5px; font-weight:700; min-height:54px; cursor:pointer; border:none; background:var(--simya); color:#FFFFFF;">탈퇴합니다</button></div><div id="leaveDone" hidden style="text-align:center;"><div aria-hidden="true" style="width:64px; height:64px; border-radius:999px; background:#EAF4EF; display:flex; align-items:center; justify-content:center; margin:6px auto 22px; font-size:30px; color:#2A7360;">✓</div><h2 style="font-size:clamp(22px,3vw,28px); font-weight:700; letter-spacing:-0.03em; margin:0 0 12px; color:var(--simya);">탈퇴하셨습니다</h2><p style="font-size:15px; line-height:1.7; color:#3F4D62; margin:0 0 20px;">이야기를 맡겨주셔서 고마웠습니다. <br><span id="leaveKeepUntil" style="font-weight:700; color:var(--simya);"></span>까지 기다릴게요.</p><div style="background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px; padding:15px 17px; margin-bottom:22px;"><p style="margin:0; font-size:13.5px; line-height:1.6; color:#3F4D62;">같은 카카오 계정으로 로그인하시면 그대로 이어갑니다.</p></div><a href="index.html" style="display:inline-flex; align-items:center; justify-content:center; width:100%; box-sizing:border-box; padding:15px 20px; border-radius:999px; font-size:15.5px; font-weight:700; min-height:54px; background:var(--cheongja); color:#FFFFFF; text-decoration:none;">홈으로</a></div></div></div>
+<script>
+(function(){
+  var reasons=["부모님이 통화를 부담스러워하셨어요", "편지 내용이 기대와 달랐어요", "비용이 부담됐어요", "가족 사정이 생겼어요", "생각했던 서비스가 아니었어요", "다른 이유예요"];
+  var st={reason:-1};
+  var wrap=document.getElementById("leaveReasons"), note=document.getElementById("mp-leave-note");
+  var noteReq=document.getElementById("noteReq"), noteHint=document.getElementById("noteHint");
+  var errB=document.getElementById("leaveErr");
+  reasons.forEach(function(label,idx){ var b=document.createElement("button"); b.type="button"; b.textContent=label; b.setAttribute("aria-pressed","false"); b.style.cssText="text-align:left; padding:14px 16px; border-radius:12px; border:1px solid #E0D9C6; background:#FFFFFF; font-family:inherit; font-size:14.5px; font-weight:600; color:#3F4D62; cursor:pointer; min-height:48px; transition:all .15s;"; b.addEventListener("click",function(){ st.reason=idx; paint(); updateNote(); }); wrap.appendChild(b); });
+  function paint(){ Array.prototype.forEach.call(wrap.children,function(b,i){ var on=i===st.reason; b.setAttribute("aria-pressed",on?"true":"false"); b.style.background=on?"#EAF4EF":"#FFFFFF"; b.style.borderColor=on?"var(--cheongja)":"#E0D9C6"; b.style.color=on?"#2A7360":"#3F4D62"; b.style.fontWeight=on?"700":"600"; b.style.boxShadow=on?"0 0 0 3px #EAF4EF":"none"; }); }
+  function isOther(){ return st.reason===5; }
+  function updateNote(){ if(isOther()){ noteReq.textContent="(필수)"; noteReq.style.color="#2A7360"; noteHint.hidden=false; note.style.borderColor="var(--cheongja)"; try{note.focus();}catch(e){} } else { noteReq.textContent="(선택)"; noteReq.style.color="#9AA3B0"; noteHint.hidden=true; note.style.borderColor="#E0D9C6"; } }
+  function fail(m){ errB.textContent=m; errB.hidden=false; }
+  document.getElementById("leaveSubmit").addEventListener("click",function(){
+    if(st.reason<0){ fail("떠나시는 이유를 하나 골라주세요."); return; }
+    if(isOther() && !(note.value||"").trim()){ fail("메모를 적어주세요."); try{note.focus();}catch(e){} return; }
+    if(!document.getElementById("leaveAck").checked){ fail("안내를 확인하고 체크해 주세요."); return; }
+    var d=new Date(); d.setFullYear(d.getFullYear()+1);
+    document.getElementById("leaveKeepUntil").textContent=d.getFullYear()+"년 "+(d.getMonth()+1)+"월 "+d.getDate()+"일";
+    document.getElementById("leaveStep1").hidden=true; document.getElementById("leaveDone").hidden=false;
+  });
+  var modal=document.getElementById("leaveModal");
+  function openM(){ modal.hidden=false; document.body.style.overflow="hidden"; }
+  function closeM(){ modal.hidden=true; document.body.style.overflow=""; }
+  var lb=document.getElementById("leaveBtn"); if(lb) lb.addEventListener("click",openM);
+  document.getElementById("leaveClose").addEventListener("click",closeM);
+  modal.addEventListener("click",function(e){ if(e.target===modal) closeM(); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape" && !modal.hidden) closeM(); });
+  var lo=document.getElementById("logoutBtn"); if(lo){ var c=lo.cloneNode(true); lo.parentNode.replaceChild(c,lo); c.addEventListener("click",function(){ if(window.OnViAuth){ OnViAuth.signOut(); return; } location.href="index.html"; }); }
+})();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script defer src="shared/onvi-auth.js"></script>

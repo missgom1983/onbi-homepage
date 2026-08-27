@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="shared/ds/tokens/typography.css">
 <link rel="stylesheet" href="shared/ds/tokens/spacing.css">
 <link rel="stylesheet" href="shared/ds/styles.css">
+<link rel="stylesheet" href="shared/ds/tokens/fonts-letter.css">
 
 <style>
   *,*::before,*::after{ box-sizing:border-box; }
@@ -173,12 +174,9 @@
     </div>
     <div class="nav-cta">
       <div class="nav-user-wrap" id="navUser" hidden>
-        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
+        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><span data-avatar-initial="" style="width:100%; height:100%; display:grid; place-items:center; background:rgba(79,184,158,0.42); color:#FFFFFF; font-size:14px; font-weight:700; letter-spacing:0;"></span></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
         <div class="nav-menu" id="navMenu" role="menu" hidden>
-          <a href="https://my.onvi.kr" role="menuitem" class="nav-menu-main">
-            <span><span class="t">가족 공간 열기</span><span class="d">편지 / 답장 / 이야기 기록</span></span>
-            <span aria-hidden="true" class="arr">↗</span>
-          </a>
+          <div role="menuitem" aria-disabled="true" class="nav-menu-main" style="background:rgba(255,255,255,0.05) !important; border:1px dashed rgba(255,255,255,0.16); cursor:default;"><span><span class="t" style="color:rgba(255,255,255,0.5);">가족 공간</span><span class="d">편지 / 답장 / 이야기 기록</span></span><span style="flex-shrink:0; font-size:10.5px; font-weight:700; letter-spacing:0.08em; padding:4px 9px; border-radius:999px; background:rgba(217,184,140,0.2); color:#E4C49C;">준비 중</span></div>
           <a href="mypage.html" role="menuitem" class="nav-menu-row"><span>마이페이지</span><span aria-hidden="true" class="chev">›</span></a>
           <button type="button" role="menuitem" class="nav-menu-out" id="navLogout">로그아웃</button>
         </div>
@@ -194,7 +192,8 @@
     <a href="support.html">고객지원</a>
     <div class="panel-foot">
       <div class="panel-user" id="panelUser" hidden>
-        <a href="https://my.onvi.kr" class="panel-space">가족 공간 열기 <span aria-hidden="true">↗</span></a>
+        <span aria-disabled="true" class="panel-space" style="background:rgba(255,255,255,0.05); border:1px dashed rgba(255,255,255,0.16); color:rgba(255,255,255,0.5); cursor:default;">가족 공간 <span style="font-size:10.5px; font-weight:700; letter-spacing:0.08em; padding:3px 8px; border-radius:999px; background:rgba(217,184,140,0.2); color:#E4C49C;">준비 중</span></span>
+        <button type="button" id="panelLogout" class="panel-my" style="background:none; border:none; font-family:inherit; text-align:left; cursor:pointer; color:rgba(255,255,255,0.7);">로그아웃</button>
         <a href="mypage.html" class="panel-my">마이페이지 ›</a>
       </div>
       <a href="login.html" id="panelLogin">로그인 ›</a>
@@ -356,7 +355,7 @@
   <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
-        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center; flex-shrink:0;"></span></a>
+        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center; flex-shrink:0;"></span></a>
         <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<span data-ft-tag=""> <br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</span></p>
       </div>
     </div>
@@ -453,7 +452,7 @@
       var pUser = document.getElementById('panelUser');
       if (name) {
         if (login) login.hidden = true;
-        if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; }
+        if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; var _av=document.querySelector('[data-avatar-initial]'); if(_av)_av.textContent=(name.trim().charAt(0)||''); }
         if (pLogin) pLogin.hidden = true;
         if (pUser) pUser.hidden = false;
       } else {
@@ -464,6 +463,7 @@
       }
     }
     paint();
+    (function(){var pl=document.getElementById('panelLogout'); if(pl) pl.addEventListener('click',function(){ if(window.OnViAuth){OnViAuth.signOut();return;} try{localStorage.removeItem('onvi.user.name');localStorage.removeItem('onvi.onboarded');window.dispatchEvent(new Event('onvi-auth'));}catch(e){} location.href='index.html'; });})();
     window.addEventListener('storage', paint);
     window.addEventListener('onvi-auth', paint);
   })();

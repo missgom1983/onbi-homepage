@@ -1,9 +1,12 @@
-/* On:Vi (온비) — Webfonts
- * Pretendard (UI/body) and Gowun Batang (letters) — both SIL OFL, commercial use OK.
- * Loaded via CDN. Pretendard: cdn.jsdelivr.net/gh/orioncactus/pretendard.
- * Gowun Batang: Google Fonts.
- * NOTE: no local binaries copied — served from CDN. If offline/self-hosting is
- * required, download the OFL binaries and swap these @import/link URLs.
+/* On:Vi (온비) — Webfonts (본문·UI 전용)
+ * Pretendard — UI/body. SIL OFL, 상업적 사용 가능.
+ *
+ * 용량 규칙: 정적 다중 웨이트 CSS(pretendard.min.css)를 쓰면 9종 웨이트의 한글 전체
+ * woff2가 모두 딸려와 오프라인 Export가 20MB를 넘습니다. 가변 폰트 + 동적 서브셋으로
+ * 같은 웨이트 범위를 훨씬 작게 씁니다. 이 파일을 정적 CSS로 되돌리지 마세요.
+ * 가족명은 "Pretendard Variable" — typography.css의 --font-ui 스택에 이미 포함.
+ *
+ * 감성 서체(Gowun Batang)는 tokens/fonts-letter.css로 분리했습니다.
+ * --font-letter를 쓰는 페이지(인용·편지·가격 숫자)만 그 파일을 함께 링크하세요.
  */
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");

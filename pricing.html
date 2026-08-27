@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="shared/ds/tokens/typography.css">
 <link rel="stylesheet" href="shared/ds/tokens/spacing.css">
 <link rel="stylesheet" href="shared/ds/styles.css">
+<link rel="stylesheet" href="shared/ds/tokens/fonts-letter.css">
 <style>
   *,*::before,*::after{ box-sizing:border-box; }
   body{ word-break: keep-all; overflow-wrap: break-word; margin:0; background:var(--hanji,#F5F1E6); color:var(--simya,#1F2A3A); font-family:var(--font-ui),'Pretendard Variable',Pretendard,sans-serif; letter-spacing:-0.012em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
@@ -190,7 +191,7 @@
     </div>
     <div class="nav-cta">
       <a class="start" id="navLogin" href="login.html">로그인</a>
-      <a class="start authed" id="navUser" href="mypage.html" hidden><span class="nav-avatar"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span data-name style="font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em;"></span></a>
+      <a class="start authed" id="navUser" href="mypage.html" hidden><span class="nav-avatar"><span data-avatar-initial="" style="width:100%; height:100%; display:grid; place-items:center; background:rgba(79,184,158,0.42); color:#FFFFFF; font-size:14px; font-weight:700; letter-spacing:0;"></span></span><span data-name style="font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em;"></span></a>
       <button class="burger" type="button" aria-label="메뉴" aria-expanded="false" onclick="var p=document.getElementById('navPanel');var o=p.classList.toggle('open');this.setAttribute('aria-expanded',o);"><span><span></span><span></span><span></span></span></button>
     </div>
   </div>
@@ -589,7 +590,7 @@
   <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
-        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center;"></span></a>
+        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center;"></span></a>
         <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">매주의 안부가 온 가족의 기억이 되는 곳.</p>
       </div>
       
@@ -747,7 +748,7 @@ function onviSubmitConsult(f){
   var l=document.getElementById('navLogin'), u=document.getElementById('navUser');
   if(!l||!u) return;
   l.hidden=true; u.hidden=false;
-  var s=u.querySelector('[data-name]'); if(s) s.textContent=n+' 님';
+  var s=u.querySelector('[data-name]'); if(s) s.textContent=n+' 님'; var av=u.querySelector('[data-avatar-initial]'); if(av) av.textContent=(n.trim().charAt(0)||'');
   var p=document.querySelector('#navPanel a[href="login.html"]');
   if(p){ p.href='mypage.html'; p.textContent=n+' 님의 공간'; }
 })();
