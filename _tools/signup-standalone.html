@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회원가입 · On:Vi — 우리 가족의 공간 만들기</title>
+
+
+<style>
+/* shared/ds/tokens/fonts.css */
+/* On:Vi (온비) — Webfonts
+ * Pretendard (UI/body) and Gowun Batang (letters) — both SIL OFL, commercial use OK.
+ * Loaded via CDN. Pretendard: cdn.jsdelivr.net/gh/orioncactus/pretendard.
+ * Gowun Batang: Google Fonts.
+ * NOTE: no local binaries copied — served from CDN. If offline/self-hosting is
+ * required, download the OFL binaries and swap these @import/link URLs.
+ */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap");
+
+/* shared/ds/tokens/colors.css */
+/* On:Vi (온비) — Color tokens
+ * CORE 6 (불변, immutable): the ONLY colors functional UI may use.
+ * EXTENSION 4 (+ apricot/deep-rose derivatives): DECORATIVE background-pattern layers ONLY.
+ *   Never used for buttons, alerts, charts, or status. ('빨간색 UI 금지' — no red UI.)
+ */
+:root {
+  /* ---- CORE PALETTE (immutable) ---- */
+  --hanji:    #F5F1E6; /* 한지 · paper where stories are written · ~60% of every screen */
+  --simya:    #1F2A3A; /* 심야 · midnight ink · text + dark UI */
+  --cheongja: #4FB89E; /* 청자 · celadon · preservation · PRIMARY action */
+  --simhae:   #2C4A6B; /* 심해 · deep sea · secondary / trust */
+  --noeul:    #D9B88C; /* 노을 · dusk · warm accent */
+  --angae:    #C8E5DB; /* 안개 · morning mist · soft mint surface */
+
+  /* ---- EXTENSION PALETTE (decorative pattern layers ONLY — never functional UI) ---- */
+  --saebyeok: #E9F3EE; /* 새벽 · dawn · mist at lowest intensity · Whisper bg, long body/legal */
+  --haneul:   #C3DCEF; /* 하늘 · sky · deep-sea pastelized · 이음 family colorway */
+  --morae:    #EBD9C5; /* 모래 · sand · dusk desaturated */
+  --beotkkot: #F5C6D2; /* 벚꽃 · cherry blossom · only truly-new hue · HSL S≤65 L≥85 */
+  --salgu:    #F0C9A8; /* 살구 · apricot · noeul-gyeol partner */
+  --diprose:  #E59CB4; /* 딥로즈 · deep rose · 봄결 LINE color only (never a pastel fill) */
+
+  /* ---- SEMANTIC ALIASES (functional UI → core only) ---- */
+  --bg-base:        var(--hanji);        /* L0 canvas */
+  --surface-card:   #FFFFFF;             /* white scrim — body text always sits on this */
+  --surface-mist:   var(--angae);        /* soft mint surface */
+  --surface-dawn:   var(--saebyeok);     /* whisper background */
+
+  --text-strong:    var(--simya);        /* headings, high-contrast titles on bg */
+  --text-body:      #2A3646;             /* body copy (simya softened) */
+  --text-muted:     #5C6675;             /* secondary text */
+  --text-on-dark:   var(--hanji);        /* text on 심야 surfaces */
+  --text-on-accent: #FFFFFF;             /* text on 청자/심해 fills */
+
+  --action-primary:        var(--cheongja);
+  --action-primary-hover:  #45A88F;      /* 청자 one step darker */
+  --action-primary-press:  #3B9880;
+  --action-secondary:      var(--simhae);
+  --action-secondary-hover:#25405C;
+  --action-secondary-press:#1E344D;
+
+  --border-hairline: #E4DECF;            /* on hanji */
+  --border-card:     #ECE7DA;
+  --border-strong:   var(--simya);
+
+  --focus-ring:      var(--cheongja);
+
+  /* ---- CARE SIGNAL (평안·살핌·확인 — the ONLY status system; never red/danger) ---- */
+  --care-peace:   var(--cheongja); /* 평안 · at peace */
+  --care-watch:   var(--noeul);    /* 살핌 · looking after */
+  --care-confirm: var(--simhae);   /* 확인 · please confirm */
+}
+
+/* shared/ds/tokens/colorways.css */
+/* On:Vi (온비) — Colorway tokens (콜로웨이)
+ * A colorway is a decorative pairing bound to a service context.
+ * ONE colorway + ONE pattern grammar per page. Pattern fills only — never functional UI.
+ *   봄결 Bom-gyeol   : 새김(self-directed) · 인생책(life book) · emotional campaigns · OG
+ *   하늘결 Haneul-gyeol: 이음(family) · weekly call · home hero
+ *   노을결 Noeul-gyeol : 금요편지(Friday letter) · retrospective · gratitude
+ */
+:root {
+  /* 봄결 — mist × cherry blossom (line: deep rose) */
+  --cw-bom-a:    var(--angae);
+  --cw-bom-b:    var(--beotkkot);
+  --cw-bom-line: var(--diprose);
+
+  /* 하늘결 — sky × sand */
+  --cw-haneul-a: var(--haneul);
+  --cw-haneul-b: var(--morae);
+
+  /* 노을결 — sand × apricot */
+  --cw-noeul-a:  var(--morae);
+  --cw-noeul-b:  var(--salgu);
+}
+
+/* shared/ds/tokens/typography.css */
+/* On:Vi (온비) — Typography tokens (불변 / immutable)
+ * Pretendard  — body + UI (Latin & Hangul)
+ * Gowun Batang — letters + memory quotes (편지·기억 인용), a warm serif Batang
+ * Senior screens: body min 16px. Global letter-spacing -0.02em.
+ */
+:root {
+  --font-ui:     "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-letter: "Gowun Batang", "Batang", "Nanum Myeongjo", serif;
+
+  /* weights */
+  --fw-body:    400; /* @kind font */
+  --fw-medium:  500; /* @kind font */
+  --fw-bold:    700; /* @kind font */
+
+  /* type scale (Display 28–40 / Headline 19–24 / Body 14–16) */
+  --fs-display-lg: 40px;
+  --fs-display:    32px;
+  --fs-display-sm: 28px;
+  --fs-headline:   24px;
+  --fs-headline-sm:19px;
+  --fs-body-lg:    16px;  /* senior-safe default */
+  --fs-body:       16px;
+  --fs-body-sm:    14px;
+  --fs-caption:    13px;
+
+  /* line-heights */
+  --lh-display: 1.18; /* @kind font */
+  --lh-heading: 1.3; /* @kind font */
+  --lh-body:    1.65; /* @kind font */
+  --lh-letter:  1.9;    /* Gowun Batang letters breathe */
+
+  --tracking: -0.02em;
+  --tracking-letter: 0em; /* serif letters set natural */
+}
+
+/* shared/ds/tokens/spacing.css */
+/* On:Vi (온비) — Spacing, radius, shadow, layer & layout tokens */
+:root {
+  /* spacing — 4px base, generous rhythm */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* corner radii — soft, letter-paper feel */
+  --radius-sm:   8px;
+  --radius-md:   14px;   /* buttons, inputs */
+  --radius-lg:   20px;   /* cards */
+  --radius-xl:   28px;   /* hero cards / glass panels */
+  --radius-pill: 999px;  /* care chips, tags */
+
+  /* shadows — soft, warm, low; never harsh. Scrim cards float gently over hanji. */
+  --shadow-card:  0 1px 2px rgba(31,42,58,.04), 0 8px 24px rgba(31,42,58,.06);
+  --shadow-float: 0 2px 6px rgba(31,42,58,.06), 0 18px 48px rgba(31,42,58,.10);
+  --shadow-glass: 0 1px 0 rgba(255,255,255,.6) inset, 0 12px 40px rgba(31,42,58,.10);
+
+  /* white scrim / glass over pattern (L3 rule: body text always on scrim) */
+  --scrim-glass-bg:     rgba(255,255,255,.78);
+  --scrim-glass-blur:   16px;
+  --scrim-glass-border: rgba(255,255,255,.6);
+
+  /* dosage note (governance): 70% hanji solid / 25% Whisper / 5% Hero */
+  --dose-solid: 70; /* @kind other */
+  --dose-whisper: 25; /* @kind other */
+  --dose-hero: 5; /* @kind other */
+
+  /* layout */
+  --container: 1200px;
+  --canvas-hero-w: 1440px;
+  --canvas-hero-h: 900px;
+  --canvas-wide-h: 430px;
+}
+
+/* shared/ds/styles.css */
+/* On:Vi (온비) Design System — global entry point.
+ * Consumers link THIS file only. @import list only; no rules here.
+ */
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/colorways.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+
+</style>
+<style>
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--hanji,#F5F1E6); color:var(--simya,#1F2A3A); font-family:var(--font-ui),'Pretendard Variable',Pretendard,sans-serif; letter-spacing:-0.012em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  a{ color:#2A7360; } a:hover{ color:#1F5D4D; }
+  .ov-rv{ opacity:0; transform:translateY(18px); transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
+  .ov-rv.ov-on{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .ov-rv{ opacity:1 !important; transform:none !important; transition:none !important; } }
+  .stack{ width:calc(100% - 40px); max-width:1880px; margin:20px auto 0; display:flex; flex-direction:column; gap:20px; padding-bottom:20px; }
+  .stack > section{ border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); }
+  .stack > section > .wrap{ width:100%; max-width:1160px; }
+  .wrap{ width:min(1160px,90%); margin:0 auto; }
+  .eyebrow{ font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360; }
+  .rule{ display:block; width:34px; height:2px; background:var(--cheongja,#4FB89E); border:none; margin:20px 0 0; }
+  h1{ font-size:clamp(34px,5.2vw,64px); line-height:1.14; letter-spacing:-0.035em; font-weight:700; margin:22px 0 24px; text-wrap:balance; }
+  h2{ font-size:clamp(26px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 20px; text-wrap:balance; }
+  h3{ font-size:21px; font-weight:700; letter-spacing:-0.025em; margin:0 0 10px; }
+  .lede{ font-size:clamp(15.5px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; text-wrap:pretty; }
+  .split{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(40px,6vw,80px); align-items:center; }
+  .photo{ border-radius:18px; overflow:hidden; box-shadow:0 30px 60px -34px rgba(31,42,58,0.34); }
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:15px 30px; border-radius:999px; background:var(--cheongja,#4FB89E); color:#FFF; font-size:15.5px; font-weight:700; text-decoration:none; transition:background .2s, box-shadow .2s, transform .2s; }
+  .btn:hover{ background:var(--action-primary-hover,#45A88F); color:#FFF; box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); transform:translateY(-1px); }
+  .btn-ghost{ display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:14px 28px; border-radius:999px; background:rgba(255,255,255,0.7); border:1px solid #E6E0D1; color:var(--simya,#1F2A3A); font-size:15px; font-weight:600; text-decoration:none; transition:border-color .2s, background .2s; }
+  .btn-ghost:hover{ border-color:var(--cheongja,#4FB89E); background:#FFF; color:var(--simya,#1F2A3A); }
+  .btn-ghost-dark{ background:transparent; border-color:rgba(255,255,255,0.28); color:#FFF; }
+  .btn-ghost-dark:hover{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.6); color:#FFF; }
+  .card{ background:#FFF; border:1px solid #E6E0D1; border-radius:20px; padding:16px 16px 30px; }
+  .card p{ margin:0; font-size:15px; color:#3F4D62; line-height:1.65; }
+  .num{ font-size:13px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja,#4FB89E); margin-bottom:12px; }
+  .quote{ font-family:var(--font-letter),'Gowun Batang',serif; font-weight:700; text-wrap:balance; }
+  .gen{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  /* GNB */
+    .onvi-nav-root > .bar{ pointer-events:auto; width:min(1120px,94%); display:flex; align-items:center; justify-content:space-between; gap:16px; background:rgba(31,42,58,0.55); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:9px 9px 9px 24px; box-shadow:0 18px 44px -20px rgba(31,42,58,0.45); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); }
+    .onvi-nav-root a{ text-decoration:none; }
+  .burger:focus-visible, .onvi-nav-root a:focus-visible{ outline:2px solid #FFF; outline-offset:2px; }
+  .nav-logo{ display:inline-flex; align-items:center; font-size:19px; font-weight:700; letter-spacing:-0.03em; color:color-mix(in srgb, var(--cheongja,#4FB89E) 55%, #FFFFFF); flex-shrink:0; }
+  .nav-logo:hover{ color:color-mix(in srgb, var(--cheongja,#4FB89E) 70%, #FFFFFF); }
+  .nav-links{ display:flex; align-items:center; gap:2px; flex-wrap:wrap; justify-content:center; }
+  .nav-links a{ font-size:14px; display:inline-flex; align-items:center; min-height:44px; padding:10px 16px; border-radius:999px; color:rgba(255,255,255,0.82); font-weight:600; transition:color .2s, background .2s; }
+  .nav-links a:hover{ color:#FFF; background:rgba(255,255,255,0.14); }
+  .nav-links a.active{ color:#FFF; font-weight:700; background:rgba(255,255,255,0.16); }
+  .nav-cta{ display:flex; align-items:center; gap:6px; flex-shrink:0; }
+  .nav-cta a.start{ display:inline-flex; align-items:center; background:var(--cheongja,#4FB89E); color:#FFF; font-size:14px; font-weight:700; padding:11px 22px; border-radius:999px; }
+  .nav-cta a.start:hover{ background:var(--action-primary-hover,#45A88F); color:#FFF; }
+  .burger{ display:none; align-items:center; justify-content:center; width:42px; height:42px; margin-left:2px; background:transparent; border:none; border-radius:999px; cursor:pointer; padding:0; }
+  .burger span{ display:block; width:22px; height:2px; border-radius:2px; background:#FFF; }
+  .burger > span{ display:flex; flex-direction:column; gap:5px; align-items:center; width:auto; height:auto; background:none; }
+  .panel{ pointer-events:auto; display:none; width:min(1120px,94%); flex-direction:column; gap:2px; padding:10px; background:rgba(31,42,58,0.86); border:1px solid rgba(255,255,255,0.14); border-radius:22px; box-shadow:0 22px 50px -22px rgba(31,42,58,0.5); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  .panel.open{ display:flex; }
+  .panel a{ min-height:44px; padding:14px 16px; border-radius:14px; font-size:15.5px; font-weight:600; color:rgba(255,255,255,0.9); }
+  .panel a:hover{ background:rgba(255,255,255,0.12); color:#FFF; }
+  footer.site{ background:#26282A; color:rgba(255,255,255,0.55); font-size:13px; padding:56px 0 34px; }
+  footer.site a{ text-decoration:none; }
+  footer.site .flinks a{ font-size:13.5px; color:rgba(255,255,255,0.7); }
+  footer.site .flinks a:hover{ color:var(--cheongja,#4FB89E); }
+  .dark-cta{ padding:112px 0; background:#22384F; color:#FFF; text-align:center; }
+  .dark-cta h2{ margin:0; }
+  @media (max-width: 900px){
+    .nav-links{ display:none !important; }
+    .burger{ display:inline-flex; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+  @media (max-width: 760px){
+    h1 br, h2 br, h3 br, blockquote br, p br{ display:none; }
+    section{ padding-top:72px !important; padding-bottom:72px !important; }
+    section:first-of-type{ padding-top:118px !important; }
+    .gen{ grid-template-columns:1fr; }
+    .gen figure{ margin:0 !important; }
+    [style*="aspect-ratio:21/9"]{ aspect-ratio:4/3 !important; }
+  }
+  [hidden]{ display:none !important; }
+  body, footer, nav, [data-onvi-consult], [data-onvi-modal]{ word-break:keep-all; overflow-wrap:break-word; }
+  .onvi-nav-root{ position:fixed; top:16px; left:0; right:0; z-index:300; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none; transition:transform .38s cubic-bezier(.22,.61,.36,1); will-change:transform; }
+  .onvi-nav-root.onvi-nav-hidden{ transform:translateY(calc(-100% - 24px)); }
+  @media (prefers-reduced-motion: reduce){ .onvi-nav-root{ transition:none !important; } }
+  .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
+  .nav-user:hover{ background:rgba(255,255,255,0.18); }
+  .nav-user-badge{ width:32px; height:32px; border-radius:999px; overflow:hidden; flex-shrink:0; border:1.5px solid rgba(255,255,255,0.4); display:inline-block; }
+  .nav-user-badge img{ width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block; }
+  .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
+  .panel-foot{ margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .panel-foot a{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72); min-height:44px; }
+  .panel-foot a:hover{ color:#FFF; background:none; }
+  .nav-user-wrap{ position:relative; flex-shrink:0; }
+  .nav-user{ cursor:pointer; font-family:inherit; padding:6px 14px 6px 6px; }
+  .nav-caret{ width:6px; height:6px; border-right:1.5px solid rgba(255,255,255,0.6); border-bottom:1.5px solid rgba(255,255,255,0.6); flex-shrink:0; margin-left:1px; transition:transform .22s; transform:rotate(45deg) translateY(-1px); }
+  .nav-user[aria-expanded="true"] .nav-caret{ transform:rotate(-135deg) translateY(1px); }
+  .nav-menu{ position:absolute; right:0; top:calc(100% + 10px); width:264px; display:flex; flex-direction:column; gap:2px; padding:8px; background:rgba(31,42,58,0.96); border:1px solid rgba(255,255,255,0.14); border-radius:20px; box-shadow:0 24px 54px -22px rgba(31,42,58,0.6); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  .nav-menu-main{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-radius:14px; background:rgba(79,184,158,0.16); min-height:44px; }
+  .nav-menu-main:hover{ background:rgba(79,184,158,0.28); }
+  .nav-menu-main > span:first-child{ display:flex; flex-direction:column; gap:2px; }
+  .nav-menu-main .t{ font-size:14.5px; font-weight:700; color:#FFFFFF; letter-spacing:-0.015em; }
+  .nav-menu-main .d{ font-size:12px; color:rgba(255,255,255,0.55); }
+  .nav-menu-main .arr{ font-size:13px; color:var(--cheongja,#4FB89E); flex-shrink:0; }
+  .nav-menu-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; border-radius:14px; font-size:14px; font-weight:600; color:rgba(255,255,255,0.9); min-height:44px; }
+  .nav-menu-row:hover{ background:rgba(255,255,255,0.12); }
+  .nav-menu-row .chev{ font-size:13px; color:rgba(255,255,255,0.4); flex-shrink:0; }
+  .nav-menu-out{ display:flex; width:100%; align-items:center; padding:13px 16px; border-radius:14px; background:none; border:none; font-family:inherit; font-size:14px; font-weight:600; color:rgba(255,255,255,0.55); cursor:pointer; text-align:left; min-height:44px; transition:color .2s; }
+  .nav-menu-out:hover{ color:#FFFFFF; background:rgba(255,255,255,0.12); }
+  .panel-user{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .panel-space{ background:rgba(79,184,158,0.2); font-weight:700 !important; color:#FFFFFF !important; padding:11px 16px !important; }
+  .panel-space:hover{ background:rgba(79,184,158,0.32) !important; }
+  .panel-my{ padding:11px 12px !important; }
+  footer br[data-m]{ display:none; }
+  @media (max-width: 760px){
+    footer br[data-m]{ display:inline !important; }
+    [data-ft-tag]{ display:none; }
+    [data-ft-row]{ flex-direction:column; gap:22px !important; }
+    [data-ft-people]{ flex-wrap:wrap; align-items:baseline !important; gap:7px 9px !important; }
+    [data-ft-people] > span{ white-space:nowrap; font-size:12.5px !important; }
+    [data-ft-people] > span[data-ft-label]{ width:100%; font-size:10.5px !important; }
+  }
+  /* 페이지 고유 */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { word-break: keep-all; overflow-wrap: break-word; margin: 0; background: #F5F1E6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    a { color: #2A7360; } a:hover { color: #1F5D4D; }
+    .ov-rv { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
+    .ov-rv.ov-on { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; } }
+    input::placeholder { color: #6A7789; }
+    input:focus { outline: none; background: #FFFFFF; border-color: #4FB89E !important; box-shadow: 0 0 0 4px #EAF4EF; }
+    @media (max-width: 760px) {
+      [data-cta] { flex-wrap: nowrap !important; gap: 10px !important; }
+      [data-cta] > a, [data-cta] > button { flex: 1 1 0; justify-content: center !important; padding: 13px 10px !important; font-size: 13.5px !important; white-space: nowrap; }
+      h1 br, h2 br, h3 br, blockquote br, p br { display:none; }
+      section { padding-top:72px !important; padding-bottom:72px !important; }
+      section:first-of-type { padding-top:118px !important; }
+    }
+  
+  /* 디자인 툴 hover */
+  .hv1:hover{ background:var(--action-primary-hover); }
+  .hv2:hover{ border-color:#A6D5C2; }
+  .hv3:hover{ border-color:var(--cheongja); }
+  .hv4:hover{ background:var(--action-primary-hover); box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); }
+</style>
+</head>
+<body>
+
+<div style="font-family:var(--font-ui); background:var(--hanji); color:var(--simya); letter-spacing:-0.012em; min-height:100vh;">
+
+  <div class="onvi-nav-root" id="navRoot">
+  <div class="bar">
+    <a class="nav-logo" href="index.html"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center;"></span></a>
+    <div class="nav-links">
+      <a href="service.html">서비스</a>
+      <a href="pricing.html">요금제</a>
+      <a href="brand.html">브랜드</a>
+      <a href="support.html">고객지원</a>
+    </div>
+    <div class="nav-cta">
+      <div class="nav-user-wrap" id="navUser" hidden>
+        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><img src="assets/photos/quote-daughter.jpg" alt="프로필 사진"></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
+        <div class="nav-menu" id="navMenu" role="menu" hidden>
+          <a href="https://my.onvi.kr" role="menuitem" class="nav-menu-main">
+            <span><span class="t">가족 공간 열기</span><span class="d">편지 / 답장 / 이야기 기록</span></span>
+            <span aria-hidden="true" class="arr">↗</span>
+          </a>
+          <a href="mypage.html" role="menuitem" class="nav-menu-row"><span>마이페이지</span><span aria-hidden="true" class="chev">›</span></a>
+          <button type="button" role="menuitem" class="nav-menu-out" id="navLogout">로그아웃</button>
+        </div>
+      </div>
+      <a class="start" id="navLogin" href="login.html">로그인</a>
+      <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" id="navBurger"><span><span></span><span></span><span></span></span></button>
+    </div>
+  </div>
+  <div class="panel" id="navPanel">
+    <a href="service.html">서비스</a>
+    <a href="pricing.html">요금제</a>
+    <a href="brand.html">브랜드</a>
+    <a href="support.html">고객지원</a>
+    <div class="panel-foot">
+      <div class="panel-user" id="panelUser" hidden>
+        <a href="https://my.onvi.kr" class="panel-space">가족 공간 열기 <span aria-hidden="true">↗</span></a>
+        <a href="mypage.html" class="panel-my">마이페이지 ›</a>
+      </div>
+      <a href="login.html" id="panelLogin">로그인 ›</a>
+    </div>
+  </div>
+</div>
+<style>
+  body.onvi-signup{ min-height:100vh; display:flex; flex-direction:column; }
+  .su-wrap{ flex:1 1 auto; display:flex; flex-direction:column; align-items:center; padding:clamp(96px,13vh,132px) 20px clamp(48px,8vh,88px); }
+  .su-card{ width:min(560px, 100%); }
+  .su-dots{ display:flex; gap:7px; justify-content:center; margin-bottom:26px; }
+  .su-dots > i{ width:7px; height:7px; border-radius:999px; background:#DAD2BE; transition:width .25s, background .25s; }
+  .su-dots > i.on{ width:22px; background:var(--cheongja); }
+  .su-screen[hidden]{ display:none; }
+  .su-eyebrow{ font-size:12.5px; font-weight:700; letter-spacing:0.12em; color:#2A7360; text-align:center; margin-bottom:12px; }
+  .su-h{ font-size:clamp(24px,3.2vw,30px); line-height:1.35; letter-spacing:-0.035em; font-weight:700; margin:0 0 10px; text-align:center; text-wrap:balance; color:var(--simya); }
+  .su-sub{ font-size:15px; line-height:1.7; color:#5A6678; text-align:center; margin:0 auto 26px; max-width:420px; text-wrap:pretty; }
+  .su-field{ display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+  .su-field > label{ font-size:13.5px; font-weight:700; color:var(--simya); letter-spacing:-0.01em; }
+  .su-field > label .opt{ font-weight:600; color:#9AA3B0; font-size:12.5px; margin-left:5px; }
+  .su-input{ width:100%; box-sizing:border-box; font-family:inherit; font-size:16px; padding:14px 16px; border:1px solid #E0D9C6; border-radius:14px; background:#FFFFFF; color:var(--simya); letter-spacing:-0.01em; min-height:52px; transition:border-color .18s, box-shadow .18s; }
+  .su-input:focus{ outline:none; border-color:var(--cheongja); box-shadow:0 0 0 3px #EAF4EF; }
+  .su-hint{ font-size:12.5px; line-height:1.6; color:#8A93A0; margin:6px 0 0; }
+  .su-oauth{ width:100%; display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 20px; border-radius:999px; font-family:inherit; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; min-height:54px; cursor:pointer; border:none; transition:filter .15s; }
+  .su-oauth:hover{ filter:brightness(0.96); }
+  .su-kakao{ background:#FEE500; color:#191919; }
+  .su-kbadge{ display:inline-flex; width:22px; height:22px; border-radius:6px; background:#191919; color:#FEE500; align-items:center; justify-content:center; font-size:12px; font-weight:800; }
+  .su-btn{ width:100%; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:15px 20px; border-radius:999px; font-family:inherit; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; min-height:54px; cursor:pointer; border:none; background:var(--cheongja); color:#FFFFFF; transition:background .18s, opacity .18s; }
+  .su-btn:hover{ background:#3FA98E; }
+  .su-btn:disabled{ opacity:0.45; cursor:not-allowed; }
+  .su-btn.ghost{ background:transparent; color:#5A6678; min-height:44px; font-weight:600; }
+  .su-agree{ display:flex; align-items:flex-start; gap:11px; padding:15px 16px; border:1px solid #E6E0D1; border-radius:14px; background:#FBF8EF; cursor:pointer; margin-bottom:10px; }
+  .su-agree input{ width:20px; height:20px; margin:1px 0 0; accent-color:var(--cheongja); flex-shrink:0; }
+  .su-agree .t{ font-size:14.5px; line-height:1.5; color:var(--simya); font-weight:600; }
+  .su-agree .req{ color:#2A7360; font-weight:700; font-size:12.5px; }
+  .su-agree .opt{ color:#9AA3B0; font-weight:600; font-size:12.5px; }
+  .su-agree.all{ background:#EAF4EF; border-color:var(--cheongja); }
+  .su-pick{ display:flex; gap:10px; }
+  .su-pick button{ flex:1; padding:14px; border-radius:14px; border:1px solid #E0D9C6; background:#FFFFFF; font-family:inherit; font-size:15px; font-weight:600; color:#3F4D62; cursor:pointer; min-height:52px; transition:all .16s; }
+  .su-pick button[aria-pressed="true"]{ background:#EAF4EF; border-color:var(--cheongja); color:#2A7360; font-weight:700; box-shadow:0 0 0 3px #EAF4EF; }
+  .su-slot{ display:flex; flex-direction:column; gap:10px; }
+  .su-slot button{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-radius:14px; border:1px solid #E0D9C6; background:#FFFFFF; font-family:inherit; cursor:pointer; min-height:56px; transition:all .16s; }
+  .su-slot button[aria-pressed="true"]{ background:#EAF4EF; border-color:var(--cheongja); box-shadow:0 0 0 3px #EAF4EF; }
+  .su-slot .st{ font-size:16px; font-weight:700; color:var(--simya); letter-spacing:-0.01em; }
+  .su-slot .sr{ font-size:13.5px; color:#8A93A0; }
+  .su-note{ background:#FBF8EF; border:1px solid #E6E0D1; border-radius:16px; padding:18px 20px; margin:6px 0 22px; }
+  .su-note .nt{ font-size:12px; font-weight:700; letter-spacing:0.1em; color:#2A7360; margin-bottom:12px; }
+  .su-note p{ font-size:14px; line-height:1.65; color:#3F4D62; margin:0 0 8px; }
+  .su-note p:last-child{ margin-bottom:0; }
+  .su-err{ margin:0 0 16px; background:rgba(217,184,140,0.28); border-left:3px solid var(--noeul); border-radius:8px; padding:11px 15px; font-size:14px; line-height:1.6; color:var(--simya); }
+  .su-big{ width:64px; height:64px; border-radius:999px; background:#EAF4EF; display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-size:30px; color:#2A7360; }
+  .su-quote{ background:#FBF8EF; border:1px solid #E6E0D1; border-radius:16px; padding:20px 22px; margin:0 0 22px; font-family:var(--font-letter); font-size:17px; line-height:1.7; color:var(--simya); text-align:center; }
+  @media (max-width:760px){ .su-h br, .su-sub br{ display:none; } }
+</style>
+
+<div class="stack" style="flex:1 1 auto; display:flex; flex-direction:column; max-width:none; width:100%; margin:0; padding:0;">
+<section class="su-wrap">
+  <div class="su-card">
+    <div class="su-dots" id="suDots" aria-hidden="true"></div>
+    <p class="su-err" id="suErr" hidden role="alert"></p>
+
+    <!-- login -->
+    <div class="su-screen" data-screen="login">
+      <div style="text-align:center; margin-bottom:22px;">
+        <div style="font-size:30px; font-weight:700; letter-spacing:-0.02em; color:var(--cheongja); line-height:1;"><span>on</span><span style="color:var(--noeul);">:</span><span>vi</span></div>
+        <p style="margin:8px 0 0; font-size:13.5px; font-weight:600; color:#5A6678;">멀리 있어도, 매일 곁에</p>
+      </div>
+      <h1 class="su-h">먼저 로그인해 주세요</h1>
+      <p class="su-sub">쓰시던 계정으로 바로 시작하세요. <br>비밀번호는 만들지 않아요.</p>
+      <button type="button" class="su-oauth su-kakao" data-provider="kakao"><span class="su-kbadge">K</span>카카오로 시작하기</button>
+      <p class="su-hint" style="text-align:center; margin-top:14px;">계정이 바뀌셨다면 <a href="support.html" style="color:#2A7360; font-weight:700;">복구를 도와드려요</a>.</p>
+    </div>
+
+    <!-- terms -->
+    <div class="su-screen" data-screen="terms" hidden>
+      <p class="su-eyebrow">약관 동의</p>
+      <h1 class="su-h">시작 전에 확인해 주세요</h1>
+      <p class="su-sub">필수 세 가지에 동의가 필요해요. <br>소식 받기는 선택이에요.</p>
+      <label class="su-agree all" id="suAll"><input type="checkbox" id="agAll"><span class="t">모두 동의합니다</span></label>
+      <div style="height:1px; background:#EAE4D6; margin:6px 2px 14px;"></div>
+      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="age14"><span class="t">만 14세 이상입니다 <span class="req">(필수)</span></span></label>
+      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="tos"><span class="t">이용약관에 동의합니다 <span class="req">(필수)</span></span></label>
+      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="privacy"><span class="t">개인정보 수집·이용에 동의합니다 <span class="req">(필수)</span></span></label>
+      <label class="su-agree"><input type="checkbox" id="agMkt"><span class="t">온비의 좋은 소식 먼저 받아보기 <span class="opt">(선택)</span></span></label>
+      <button type="button" class="su-btn" data-next style="margin-top:16px;">동의하고 계속하기</button>
+    </div>
+
+    <!-- family -->
+    <div class="su-screen" data-screen="family" hidden>
+      <p class="su-eyebrow">우리 가족 공간</p>
+      <h1 class="su-h">가족 이름을 정해주세요</h1>
+      <p class="su-sub">매주 이 이름으로 편지가 도착해요. <br>언제든 바꾸실 수 있어요.</p>
+      <div class="su-field"><label for="fName">성함</label><input class="su-input" id="fName" name="name" placeholder="예) 김온비" autocomplete="name"><p class="su-hint">부르실 이름으로 적어주세요.</p></div>
+      <div class="su-field"><label for="fFamily">가족 이름</label><input class="su-input" id="fFamily" name="family" placeholder="예) 온비님의 가족"></div>
+      <div class="su-field"><label for="fPhone">연락받으실 번호</label><input class="su-input" id="fPhone" name="phone" type="tel" placeholder="010-0000-0000" inputmode="numeric"><p class="su-hint">부모님 소식과 결제 안내를 이 번호로 보내드려요. 1기는 문자 인증 없이 시작해요.</p></div>
+      <div class="su-field"><label for="fEmail">소식 받으실 이메일 <span class="opt">(선택)</span></label><input class="su-input" id="fEmail" name="email" type="email" placeholder="onvi@example.com" autocomplete="email"></div>
+      <button type="button" class="su-btn" data-next>다음</button>
+    </div>
+
+    <!-- parent -->
+    <div class="su-screen" data-screen="parent" hidden>
+      <p class="su-eyebrow">부모님</p>
+      <h1 class="su-h">누구의 안부를 받으실 건가요</h1>
+      <p class="su-sub">부르시는 호칭 그대로 적어주세요.</p>
+      <div class="su-field"><label>호칭</label>
+        <div class="su-pick" id="honorPick">
+          <button type="button" data-honor="어머니" aria-pressed="true">어머니</button>
+          <button type="button" data-honor="아버지" aria-pressed="false">아버지</button>
+        </div>
+      </div>
+      <div class="su-field"><label for="pPhone">전화번호</label><input class="su-input" id="pPhone" name="pphone" type="tel" placeholder="010-0000-0000" inputmode="numeric"></div>
+      <div class="su-field"><label for="pYear">태어나신 해 <span class="opt">(선택)</span></label><input class="su-input" id="pYear" name="year" inputmode="numeric" placeholder="예: 1948"></div>
+      <div class="su-note"><div class="nt">약속</div><p>지금 적어주신 번호는 첫 통화를 드리는 데에만 써요. 그 뒤로는 부모님이 직접 허락하셔야 이어져요.</p></div>
+      <button type="button" class="su-btn" data-next>다음</button>
+    </div>
+
+    <!-- confirm -->
+    <div class="su-screen" data-screen="confirm" hidden>
+      <p class="su-eyebrow">번호 확인</p>
+      <h1 class="su-h">이 번호가 맞을까요</h1>
+      <p class="su-sub">이 번호로 온비가 <span id="cfHonor">어머니</span>께 전화를 드려요.</p>
+      <div class="su-quote" id="cfPhone" style="font-family:inherit; font-size:22px; font-weight:700; letter-spacing:-0.01em;">010-0000-0000</div>
+      <div class="su-note"><div class="nt">첫 통화</div><p>첫 통화 첫 문장은 늘 이렇게 시작해요. “안녕하세요, 따님/아드님이 마음을 전해달라 하셨어요.”</p><p>아니라고 하시면 바로 통화를 마쳐요.</p></div>
+      <button type="button" class="su-btn" data-next>네, 맞아요</button>
+      <button type="button" class="su-btn ghost" data-back>번호를 고칠게요</button>
+    </div>
+
+    <!-- consent -->
+    <div class="su-screen" data-screen="consent" hidden>
+      <p class="su-eyebrow">부모님 동의</p>
+      <h1 class="su-h">부모님께 먼저 여쭤봐 주세요</h1>
+      <p class="su-sub">부모님이 직접 동의하셔야 시작돼요. <br>부모님의 정보는 부모님의 것이니까요.</p>
+      <div class="su-note"><p>부모님도 같은 화면을 보실 수 있어요. 몰래 보는 서비스가 아니에요.</p></div>
+      <label class="su-agree"><input type="checkbox" id="agConsent"><span class="t">첫 통화 날, 온비가 직접 여쭤볼게요</span></label>
+      <button type="button" class="su-btn" data-next style="margin-top:16px;">이해했어요</button>
+    </div>
+
+    <!-- schedule -->
+    <div class="su-screen" data-screen="schedule" hidden>
+      <p class="su-eyebrow">첫 통화</p>
+      <h1 class="su-h">언제 첫 통화를 드릴까요</h1>
+      <p class="su-sub">부모님이 편하신 시간으로 정해주세요.</p>
+      <div class="su-note" style="text-align:center;"><div class="nt" style="margin-bottom:6px;">매주 금요일</div><p>첫 통화도, 그 뒤 금요편지도 금요일에 드려요.</p></div>
+      <div class="su-field"><label>시간대</label>
+        <div class="su-slot" id="slotPick">
+          <button type="button" data-slot="오전" aria-pressed="false"><span class="st">오전</span><span class="sr">9시 ~ 12시</span></button>
+          <button type="button" data-slot="오후" aria-pressed="true"><span class="st">오후</span><span class="sr">12시 ~ 5시</span></button>
+          <button type="button" data-slot="저녁" aria-pressed="false"><span class="st">저녁</span><span class="sr">5시 ~ 7시</span></button>
+        </div>
+      </div>
+      <button type="button" class="su-btn" data-next>이 시간으로 할게요</button>
+    </div>
+
+    <!-- done -->
+    <div class="su-screen" data-screen="done" hidden>
+      <div class="su-big">✓</div>
+      <h1 class="su-h">준비됐어요</h1>
+      <p class="su-sub"><span id="dnName">가족</span>의 공간이 열렸어요. <br>통화가 끝나면 어떻게 됐는지 바로 알려드릴게요.</p>
+      <a class="su-btn" href="mypage.html" style="text-decoration:none;">내 공간으로 가기</a>
+      <a class="su-btn ghost" href="index.html" style="text-decoration:none;">홈으로</a>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  var FLOW = ['login','terms','family','parent','confirm','consent','schedule','done'];
+  var st = { step:0, provider:'', name:'', family:'', phone:'', pphone:'', honor:'어머니', slot:'오후', mkt:false };
+  var scr = document.querySelectorAll('.su-screen');
+  var dots = document.getElementById('suDots');
+  var errBox = document.getElementById('suErr');
+  // dots (exclude login + done from progress)
+  var prog = FLOW.slice(1,-1);
+  dots.innerHTML = prog.map(function(){return '<i></i>';}).join('');
+  function paintDots(){
+    var idx = prog.indexOf(FLOW[st.step]);
+    Array.prototype.forEach.call(dots.children,function(d,i){ d.classList.toggle('on', i===idx); });
+    dots.style.visibility = (idx<0)?'hidden':'visible';
+  }
+  function show(){
+    var name = FLOW[st.step];
+    scr.forEach(function(s){ s.hidden = (s.getAttribute('data-screen')!==name); });
+    paintDots(); errBox.hidden = true;
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(name==='confirm'){ document.getElementById('cfHonor').textContent=st.honor; document.getElementById('cfPhone').textContent=st.pphone||'010-0000-0000'; }
+    if(name==='done'){ finish(); document.getElementById('dnName').textContent = st.family || st.name || '가족'; }
+  }
+  function fail(msg){ errBox.textContent=msg; errBox.hidden=false; window.scrollTo({top:0,behavior:'smooth'}); }
+  function val(id){ var e=document.getElementById(id); return e?(e.value||'').trim():''; }
+  function validate(name){
+    if(name==='terms'){ var reqs=document.querySelectorAll('.ag-req'); for(var i=0;i<reqs.length;i++){ if(!reqs[i].checked){ fail('필수 항목에 동의해 주세요.'); return false; } } st.mkt=document.getElementById('agMkt').checked; return true; }
+    if(name==='family'){ st.name=val('fName'); st.family=val('fFamily')||(st.name?st.name+'님의 가족':''); st.phone=val('fPhone');
+      if(!st.name){ fail('성함을 다시 확인해 주세요.'); return false; }
+      if(!st.phone){ fail('연락처를 다시 확인해 주세요.'); return false; } return true; }
+    if(name==='parent'){ st.pphone=val('pPhone'); if(!st.pphone){ fail('부모님 연락처를 다시 확인해 주세요.'); return false; } return true; }
+    if(name==='consent'){ if(!document.getElementById('agConsent').checked){ fail('부모님께 여쭤보겠다고 확인해 주세요.'); return false; } return true; }
+    return true;
+  }
+  function next(){ var name=FLOW[st.step]; if(!validate(name)) return; if(st.step<FLOW.length-1){ st.step++; show(); } }
+  function back(){ if(st.step>0){ st.step--; show(); } }
+  function finish(){
+    try{
+      localStorage.setItem('onvi.onboarded','1');
+      localStorage.setItem('onvi.user.name', st.name || st.family || '');
+      if(st.provider) localStorage.setItem('onvi.user.provider', st.provider);
+      localStorage.setItem('onvi.marketing', st.mkt ? 'email,sms,kakao' : '');
+      localStorage.setItem('onvi.terms.agreed','age14,tos,privacy@v1.0');
+      window.dispatchEvent(new Event('onvi-auth'));
+    }catch(e){/* 무시 */}
+  }
+  // oauth
+  document.querySelectorAll('[data-provider]').forEach(function(b){
+    b.addEventListener('click',function(){ st.provider=b.getAttribute('data-provider'); st.step=1; show(); });
+  });
+  document.querySelectorAll('[data-next]').forEach(function(b){ b.addEventListener('click',next); });
+  document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click',back); });
+  // terms: all toggle
+  var agAll=document.getElementById('agAll'); var allRow=document.getElementById('suAll');
+  function syncAll(){ var reqs=document.querySelectorAll('.ag-req'), mkt=document.getElementById('agMkt'); var every=true; reqs.forEach(function(r){ if(!r.checked) every=false; }); if(!mkt.checked) every=false; agAll.checked=every; allRow.classList.toggle('all',every); }
+  if(agAll){ agAll.addEventListener('change',function(){ document.querySelectorAll('.ag-req').forEach(function(r){ r.checked=agAll.checked; }); document.getElementById('agMkt').checked=agAll.checked; allRow.classList.toggle('all',agAll.checked); }); }
+  document.querySelectorAll('.ag-req, #agMkt').forEach(function(r){ r.addEventListener('change',syncAll); });
+  // honor pick
+  document.querySelectorAll('#honorPick button').forEach(function(b){ b.addEventListener('click',function(){ st.honor=b.getAttribute('data-honor'); document.querySelectorAll('#honorPick button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); }); });
+  // slot pick
+  document.querySelectorAll('#slotPick button').forEach(function(b){ b.addEventListener('click',function(){ st.slot=b.getAttribute('data-slot'); document.querySelectorAll('#slotPick button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); }); });
+  document.body.classList.add('onvi-signup');
+  show();
+})();
+</script>
+<footer class="site">
+  <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
+        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:var(--noeul,#D9B88C); margin-left:7px; align-self:center; flex-shrink:0;"></span></a>
+        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<span data-ft-tag=""> <br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</span></p>
+      </div>
+    </div>
+    <div data-ft-row="" style="display:flex; flex-wrap:wrap; gap:14px 40px; align-items:baseline; padding-top:26px; border-top:1px solid rgba(255,255,255,0.09);">
+      <div data-ft-people="" style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
+        <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--cheongja,#4FB89E) 50%, #FFFFFF); white-space:nowrap;">만드는 사람들</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">김태희</b> 대표</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">이민섭</b> COO</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">김세연</b> CTO</span>
+      </div>
+      <div data-ft-people="" style="display:flex; align-items:baseline; gap:14px;">
+        <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--noeul,#D9B88C) 75%, #FFFFFF); white-space:nowrap;">도움을 주는 사람들</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">정준교</b> 고문</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">원민재</b> 자문</span>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
+      <p style="margin:0; font-size:11.5px; line-height:1.65; color:rgba(255,255,255,0.38); max-width:560px;">온비는 정보 제공 서비스이며, 의료 진단, 응급 대응 서비스가 아닙니다. <br data-m="">통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
+      <div style="display:flex; align-items:center; gap:14px; font-size:11.5px; color:rgba(255,255,255,0.4); white-space:nowrap;">
+        <span style="color:#7C9CB8;">onvi.kr</span><span style="color:rgba(255,255,255,0.2);">·</span><span>© 2026 On:Vi</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+<script>
+// 온비 공통 스크롤 리빌 (섹션 진입 opacity+18px, 카드 스태거)
+(function () {
+  function init() {
+    var secs = document.querySelectorAll('section');
+    if (!secs.length) { setTimeout(init, 300); return; }
+    var targets = [];
+    secs.forEach(function (sec, i) {
+      if (i === 0) return; // 첫 섹션(히어로)은 즉시 노출
+      if (sec.querySelector('[data-ov-cards]')) return; // 카드 스태거 섹션은 카드만
+      targets.push(sec);
+    });
+    document.querySelectorAll('[data-ov-cards] > div, [data-ov-cards] > a').forEach(function (el, i) {
+      el.style.transitionDelay = (i % 3) * 90 + 'ms';
+      targets.push(el);
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('ov-on'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (el) {
+      if (el.classList.contains('ov-rv')) return;
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) return;
+      el.classList.add('ov-rv');
+      io.observe(el);
+    });
+  }
+  if (document.readyState === 'complete') setTimeout(init, 400);
+  else window.addEventListener('load', function () { setTimeout(init, 400); });
+})();
+
+</script>
+<script>
+  (function () {
+    var root = document.getElementById('navRoot');
+    var panel = document.getElementById('navPanel');
+    var burger = document.getElementById('navBurger');
+    var open = false;
+
+    function setOpen(v) {
+      open = v;
+      panel.classList.toggle('open', v);
+      burger.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    if (panel && burger) {
+      burger.addEventListener('click', function () { setOpen(!open); setMenu(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (!open) return;
+        if (!root.contains(e.target)) setOpen(false);
+      });
+      panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
+    }
+
+    // 모바일: 아래로 스크롤하면 네비를 감추고, 위로 올리면 다시 보여준다
+    var lastY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      var d = y - lastY;
+      if (Math.abs(d) < 8) return;
+      lastY = y;
+      if (d > 0 && y > 140 && !open && !menuOpen) root.classList.add('onvi-nav-hidden');
+      else if (d < 0 || y <= 140) root.classList.remove('onvi-nav-hidden');
+    }, { passive: true });
+
+    // 프로필 드롭다운
+    var menuOpen = false;
+    var userBtn = document.getElementById('navUserBtn');
+    var menu = document.getElementById('navMenu');
+    function setMenu(v) {
+      menuOpen = v;
+      if (menu) menu.hidden = !v;
+      if (userBtn) userBtn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    if (userBtn && menu) {
+      userBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!menuOpen); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menuOpen) setMenu(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (menuOpen && !root.contains(e.target)) setMenu(false);
+      });
+    }
+    var logoutBtn = document.getElementById('navLogout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function () {
+        try { localStorage.removeItem('onvi.user.name'); window.dispatchEvent(new Event('onvi-auth')); } catch (e) { /* 무시 */ }
+        window.location.href = 'index.html';
+      });
+    }
+
+    // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
+    function paint() {
+      var name = '';
+      try { name = localStorage.getItem('onvi.user.name') || ''; if(!localStorage.getItem('onvi.onboarded'))name=''; } catch (e) { /* 무시 */ }
+      var login = document.getElementById('navLogin');
+      var user = document.getElementById('navUser');
+      var pLogin = document.getElementById('panelLogin');
+      var pUser = document.getElementById('panelUser');
+      if (name) {
+        if (login) login.hidden = true;
+        if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; }
+        if (pLogin) pLogin.hidden = true;
+        if (pUser) pUser.hidden = false;
+      } else {
+        if (login) login.hidden = false;
+        if (user) user.hidden = true;
+        if (pLogin) pLogin.hidden = false;
+        if (pUser) pUser.hidden = true;
+      }
+    }
+    paint();
+    window.addEventListener('storage', paint);
+    window.addEventListener('onvi-auth', paint);
+  })();
+</script>
+
+</body>
+</html>
