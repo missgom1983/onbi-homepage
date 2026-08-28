@@ -32,6 +32,7 @@ _tools/shots/
 # 문서 (배포 제외)
 *.docx
 CLAUDE.md
+AGENTS.md
 
 # assets 폴더에 실수로 들어간 스크린샷 제외
 assets/Screenshot*
@@ -60,3 +61,7 @@ v3.4/
 온비_v3.4.3/
 온비_v3.4.4/
 온비_v3.4.5/
+
+# 디자인툴 export 아카이브 (소스/ 아래) — 버전 무관 ASCII 글롭
+# 한글 폴더명은 NFD로 저장돼 리터럴 매칭이 불안정하므로 이 글롭이 실질 방어선이다.
+*_v[0-9]*
