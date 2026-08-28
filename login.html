@@ -77,8 +77,10 @@
   @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
   @media (max-width: 760px){
     h1 br, h2 br, h3 br, blockquote br, p br{ display:none; }
+    br[data-m], br[data-keep]{ display:inline !important; }
     section{ padding-top:72px !important; padding-bottom:72px !important; }
     section:first-of-type{ padding-top:118px !important; }
+    [data-login-main]{ padding-top:132px !important; padding-bottom:56px !important; }
     .gen{ grid-template-columns:1fr; }
     .gen figure{ margin:0 !important; }
     [style*="aspect-ratio:21/9"]{ aspect-ratio:4/3 !important; }
@@ -191,13 +193,11 @@
 </div>
 <style>body.onvi-login{min-height:100vh; display:flex; flex-direction:column;}</style>
 <div class="stack" style="flex:1 1 auto; display:flex; flex-direction:column; max-width:none; width:100%; margin:0; padding:0;">
-  <section data-login-main="" style="flex: 1 1 0%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(96px, 14vh, 140px) 20px clamp(48px, 9vh, 96px);">
+  <section data-login-main="" style="flex: 1 1 0%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(150px, 20vh, 208px) 20px clamp(48px, 9vh, 96px);">
     <div style="width: min(400px, 100%);">
       <div style="text-align: center;">
-        <div style="font-size: 34px; font-weight: 700; letter-spacing: -0.02em; color: var(--cheongja); line-height: 1;"><span>on</span><span style="color: var(--noeul);">:</span><span>vi</span></div>
-        <p style="margin: 8px 0px 0px; font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; color: rgb(92, 102, 117);">멀리 있어도, 매일 곁에</p>
-        <h1 style="font-size: clamp(24px, 3.2vw, 30px); line-height: 1.35; letter-spacing: -0.035em; font-weight: 700; margin: 34px 0px 10px; text-wrap: balance;">부모님의 오늘을 <br>매주 받아보세요</h1>
-        <p style="font-size: 15px; line-height: 1.7; color: rgb(92, 102, 117); margin: 0px;">로그인하시면 <br>우리 가족의 공간이 열려요.</p>
+        <p style="margin: 0px 0px 14px; font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: rgb(42, 115, 96);">멀리 있어도, 매일 곁에</p>
+        <h1 style="font-size: clamp(24px, 3.2vw, 30px); line-height: 1.35; letter-spacing: -0.035em; font-weight: 700; margin: 0px; text-wrap: balance;">부모님의 오늘을 <br>매주 받아보세요</h1>
       </div>
 
       <div style="margin-top: 26px; background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 24px; padding: clamp(22px, 3.2vw, 28px); box-shadow: rgba(31, 42, 58, 0.28) 0px 34px 70px -40px;">
@@ -205,7 +205,11 @@
         <p style="margin: 14px 0px 0px; font-size: 13px; line-height: 1.65; color: rgb(138, 147, 160); text-align: center;">처음이신 분은 1분 간편가입으로 이어져요.</p>
       </div>
 
-      <p style="margin: 18px 0px 0px; font-size: 13px; line-height: 1.75; color: rgb(106, 119, 137); text-align: center;">카카오 계정이 바뀌셨나요? <a href="support.html" style="font-weight: 600;">복구를 도와드려요</a>.</p>
+      <div id="loginRecovery" role="alert" hidden style="margin-top: 16px; padding: 18px 20px; border-radius: 18px; background: rgba(217, 184, 140, 0.2); border: 1px solid rgba(217, 184, 140, 0.55);">
+        <p style="margin: 0px; font-size: 14px; line-height: 1.7; color: var(--simya); font-weight: 600;">로그인이 되지 않았어요.</p>
+        <p style="margin: 8px 0px 0px; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117);">다시 한 번 눌러보시고, 계정을 바꾸셨다면 저희가 이어드릴게요.</p>
+        <a href="support.html#account-recovery" style="display: inline-flex; align-items: center; margin-top: 12px; font-size: 13.5px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px;">계정 복구를 도와드려요</a>
+      </div>
     </div>
   </section>
 
@@ -327,6 +331,21 @@
   })();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // 로그인이 실패하거나 취소된 뒤에만 복구 안내를 보여준다.
+  // Supabase 는 실패를 쿼리(?error=…)나 해시(#error=…) 어느 쪽으로도 돌려줄 수 있다.
+  (function () {
+    var box = document.getElementById('loginRecovery');
+    if (!box) return;
+    var failed = false;
+    try {
+      var q = new URLSearchParams(window.location.search);
+      var h = new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+      failed = !!(q.get('error') || h.get('error') || q.get('auth') === 'failed');
+    } catch (e) { /* 무시 */ }
+    if (failed) box.hidden = false;
+  })();
+</script>
 <script defer src="shared/onvi-nav-auth.js"></script>
 <script defer src="shared/onvi-auth.js"></script>
 </body>
