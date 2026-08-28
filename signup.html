@@ -221,6 +221,31 @@
   .su-agree .req{ color:#2A7360; font-weight:700; font-size:12.5px; }
   .su-agree .opt{ color:#9AA3B0; font-weight:600; font-size:12.5px; }
   .su-agree.all{ background:#EAF4EF; border-color:var(--cheongja); }
+  /* 필수 항목은 '모두 동의' 아래로 들여써 부차적으로 보이게 한다 */
+  .su-subagree{ margin-top:4px; padding-left:26px; border-left:2px solid #EFE9DA; }
+  .su-subrow{ display:flex; align-items:center; gap:8px; padding:0 4px; }
+  .su-subrow label{ display:flex; align-items:flex-start; gap:10px; flex:1; min-width:0; cursor:pointer; padding:3px 0; min-height:38px; }
+  .su-subrow input{ width:17px; height:17px; margin:2px 0 0; accent-color:var(--cheongja); flex-shrink:0; }
+  .su-subrow .t{ font-size:12.5px; line-height:1.5; color:#6A7789; font-weight:500; }
+  .su-subrow .t b{ color:#8A93A0; font-weight:600; }
+  .su-see{ flex-shrink:0; min-height:38px; padding:0 6px; background:none; border:none; font-family:inherit; font-size:11.5px; font-weight:600; color:#A3ABB6; text-decoration:underline; text-underline-offset:3px; cursor:pointer; }
+  /* 환영 단계 */
+  .su-chips{ display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+  .su-chip{ display:inline-flex; align-items:center; gap:8px; padding:11px 17px; border-radius:999px; background:#FFFFFF; border:1px solid #E6E0D1; }
+  .su-chip i{ font-style:normal; font-size:11.5px; font-weight:700; color:#A3ABB6; }
+  .su-chip b{ font-size:14px; font-weight:700; color:var(--simya); letter-spacing:-0.015em; }
+  .su-mark{ width:58px; height:58px; margin:0 auto 20px; border-radius:999px; background:var(--angae,#EAF4EF); display:grid; place-items:center; font-size:22px; font-weight:700; color:#2A7360; }
+  /* 약관 전문 모달 */
+  .su-docwrap{ position:fixed; inset:0; z-index:400; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(31,42,58,0.55); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); }
+  .su-doc{ width:min(560px,100%); max-height:82vh; display:flex; flex-direction:column; background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; box-shadow:0 40px 90px -40px rgba(31,42,58,0.5); overflow:hidden; }
+  .su-doc-hd{ display:flex; align-items:center; justify-content:space-between; gap:14px; padding:22px 24px 16px; border-bottom:1px solid #F0EBDD; }
+  .su-doc-hd .ti{ font-size:17px; font-weight:700; letter-spacing:-0.025em; color:var(--simya); }
+  .su-doc-hd .ve{ font-size:12px; font-weight:600; color:#8A93A0; }
+  .su-doc-x{ flex-shrink:0; width:44px; height:44px; border-radius:999px; background:#FBF8EF; border:1px solid #E6E0D1; font-family:inherit; font-size:16px; color:#5C6675; cursor:pointer; }
+  .su-doc-bd{ padding:22px 24px 26px; overflow-y:auto; }
+  .su-doc-bd p{ margin:0 0 14px; font-size:14.5px; line-height:1.8; color:#3F4D62; text-wrap:pretty; }
+  .su-doc-ft{ padding:16px 24px 22px; border-top:1px solid #F0EBDD; }
+  .su-doc-ok{ width:100%; min-height:48px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; border:none; font-family:inherit; font-size:15px; font-weight:700; letter-spacing:-0.01em; cursor:pointer; }
   .su-pick{ display:flex; gap:10px; }
   .su-pick button{ flex:1; padding:14px; border-radius:14px; border:1px solid #E0D9C6; background:#FFFFFF; font-family:inherit; font-size:15px; font-weight:600; color:#3F4D62; cursor:pointer; min-height:52px; transition:all .16s; }
   .su-pick button[aria-pressed="true"]{ background:#EAF4EF; border-color:var(--cheongja); color:#2A7360; font-weight:700; box-shadow:0 0 0 3px #EAF4EF; }
@@ -254,21 +279,47 @@
       <h1 class="su-h">먼저 로그인해 주세요</h1>
       <p class="su-sub">쓰시던 계정으로 바로 시작하세요. <br>비밀번호는 만들지 않아요.</p>
       <button type="button" class="su-oauth su-kakao" data-provider="kakao"><span class="su-kbadge">K</span>카카오로 시작하기</button>
-      <p class="su-hint" style="text-align:center; margin-top:14px;">계정이 바뀌셨다면 <a href="support.html" style="color:#2A7360; font-weight:700;">복구를 도와드려요</a>.</p>
+      <p class="su-hint" style="text-align:center; margin-top:14px;">처음이신 분은 1분 간편가입으로 이어져요.</p>
     </div>
 
     <!-- terms -->
     <div class="su-screen" data-screen="terms" hidden>
       <p class="su-eyebrow">약관 동의</p>
-      <h1 class="su-h">시작 전에 확인해 주세요</h1>
-      <p class="su-sub">필수 세 가지에 동의가 필요해요. <br>소식 받기는 선택이에요.</p>
-      <label class="su-agree all" id="suAll"><input type="checkbox" id="agAll"><span class="t">모두 동의합니다</span></label>
-      <div style="height:1px; background:#EAE4D6; margin:6px 2px 14px;"></div>
-      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="age14"><span class="t">만 14세 이상입니다 <span class="req">(필수)</span></span></label>
-      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="tos"><span class="t">이용약관에 동의합니다 <span class="req">(필수)</span></span></label>
-      <label class="su-agree"><input type="checkbox" class="ag-req" data-key="privacy"><span class="t">개인정보 수집·이용에 동의합니다 <span class="req">(필수)</span></span></label>
-      <label class="su-agree"><input type="checkbox" id="agMkt"><span class="t">온비의 좋은 소식 먼저 받아보기 <span class="opt">(선택)</span></span></label>
+      <h1 class="su-h" style="margin-bottom:26px;">시작 전에 확인해 주세요</h1>
+      <label class="su-agree all" id="suAll"><input type="checkbox" id="agAll"><span class="t" style="font-size:16px; line-height:1.4; letter-spacing:-0.02em;">네, 모두 동의해요</span></label>
+      <div class="su-subagree">
+        <div class="su-subrow">
+          <label><input type="checkbox" class="ag-req" data-key="age14"><span class="t"><b>[필수]</b> 만 14세 이상입니다</span></label>
+          <button type="button" class="su-see" data-doc="age">보기</button>
+        </div>
+        <div class="su-subrow">
+          <label><input type="checkbox" class="ag-req" data-key="tos"><span class="t"><b>[필수]</b> 이용약관에 동의합니다</span></label>
+          <button type="button" class="su-see" data-doc="tos">보기</button>
+        </div>
+        <div class="su-subrow">
+          <label><input type="checkbox" class="ag-req" data-key="privacy"><span class="t"><b>[필수]</b> 개인정보 수집과 이용에 동의합니다</span></label>
+          <button type="button" class="su-see" data-doc="priv">보기</button>
+        </div>
+        <div class="su-subrow">
+          <label><input type="checkbox" id="agMkt"><span class="t"><b style="color:#9AA3B0;">[선택]</b> 온비의 좋은 소식 먼저 받아보기</span></label>
+          <button type="button" class="su-see" data-doc="mkt">보기</button>
+        </div>
+      </div>
       <button type="button" class="su-btn" data-next style="margin-top:16px;">동의하고 계속하기</button>
+    </div>
+
+    <!-- welcome -->
+    <div class="su-screen" data-screen="welcome" hidden>
+      <div class="su-mark" aria-hidden="true">온</div>
+      <h1 class="su-h">잘 오셨어요</h1>
+      <p class="su-sub">세 가지만 여쭤볼게요. 1분이면 끝나요.</p>
+      <div class="su-chips">
+        <span class="su-chip"><i>1</i><b>가족 이름</b></span>
+        <span class="su-chip"><i>2</i><b>부모님</b></span>
+        <span class="su-chip"><i>3</i><b>첫 통화</b></span>
+      </div>
+      <p style="margin:22px 0 0; font-size:14.5px; line-height:1.7; color:#5A6678; text-align:center; text-wrap:pretty;"><b style="color:var(--simya);">부모님이 허락하셔야 시작돼요.</b> <br data-m>첫 통화에서 직접 여쭤봅니다.</p>
+      <button type="button" class="su-btn" data-next style="margin-top:20px;">시작할게요</button>
     </div>
 
     <!-- family -->
@@ -352,7 +403,7 @@
 
 <script>
 (function(){
-  var FLOW = ['login','terms','family','parent','confirm','consent','schedule','done'];
+  var FLOW = ['login','terms','welcome','family','parent','confirm','consent','schedule','done'];
   var st = { step:0, provider:'', name:'', family:'', phone:'', pphone:'', honor:'어머니', slot:'오후', mkt:false };
   var scr = document.querySelectorAll('.su-screen');
   var dots = document.getElementById('suDots');
@@ -407,6 +458,79 @@
   function syncAll(){ var reqs=document.querySelectorAll('.ag-req'), mkt=document.getElementById('agMkt'); var every=true; reqs.forEach(function(r){ if(!r.checked) every=false; }); if(!mkt.checked) every=false; agAll.checked=every; allRow.classList.toggle('all',every); }
   if(agAll){ agAll.addEventListener('change',function(){ document.querySelectorAll('.ag-req').forEach(function(r){ r.checked=agAll.checked; }); document.getElementById('agMkt').checked=agAll.checked; allRow.classList.toggle('all',agAll.checked); }); }
   document.querySelectorAll('.ag-req, #agMkt').forEach(function(r){ r.addEventListener('change',syncAll); });
+  // 약관 전문 — '보기'로 열어 보고 닫는다. 동의는 체크박스로만 이뤄진다.
+  var DOCS = {
+    age: { title: '만 14세 이상 확인', version: '기준 v1.0', body: [
+      '온비는 만 14세 이상인 분만 가입하실 수 있어요. 만 14세 미만은 법정대리인의 동의 없이 개인정보를 처리할 수 없기 때문이에요.',
+      '가족 중 만 14세 미만인 분이 편지를 함께 읽고 싶다면, 가입하신 보호자의 계정으로 함께 보시면 됩니다.'
+    ]},
+    tos: { title: '이용약관', version: 'v1.0 · 2026년 8월 28일', body: [
+      '온비는 부모님과의 통화를 편지로 정리해 가족에게 전해드리는 서비스예요. 매주 한 통의 통화와 한 통의 편지가 기본 단위입니다.',
+      '온비는 의료 진단이나 응급 대응 서비스가 아니에요. 부모님의 건강 상태를 판단하거나 위급 상황에 개입하지 않습니다.',
+      '참여비는 미리 안내한 금액대로만 청구해요. 약정과 위약금은 없고, 언제든 그만하실 수 있어요.',
+      '부모님이 통화를 원하지 않으시면 그 주의 통화는 진행하지 않아요. 부모님의 뜻이 언제나 먼저입니다.',
+      '약관이 바뀌면 적용 7일 전에 알려드려요. 바뀐 내용에 동의하지 않으시면 그만하실 수 있어요.'
+    ]},
+    priv: { title: '개인정보 수집과 이용', version: 'v1.0 · 2026년 8월 28일', body: [
+      '무엇을 받아두나요 — 가입하신 분의 이름과 연락처, 가족 이름, 부모님의 호칭과 전화번호. 이메일은 선택이에요.',
+      '왜 필요한가요 — 부모님께 전화를 드리고, 편지를 보내드리고, 참여비를 안내하기 위해서예요. 그 밖의 용도로는 쓰지 않아요.',
+      '부모님 정보는 어떻게 다루나요 — 처음 적어주신 번호는 첫 통화를 드리는 데에만 씁니다. 그 뒤로는 부모님이 직접 허락하셔야 이어져요. 통화 내용은 부모님 본인의 동의 후에만 기록됩니다.',
+      '얼마나 보관하나요 — 함께하시는 동안 보관하고, 그만하신 뒤에는 1년 동안 보관해요. 그 전에 다시 오시면 그대로 이어갑니다. 1년이 지나면 지웁니다.',
+      '누구에게 넘기나요 — 팔거나 넘기지 않아요. 편지 인쇄와 문자 발송처럼 꼭 필요한 곳에만 최소한으로 맡기고, 맡긴 곳은 고객지원에서 확인하실 수 있어요.',
+      '동의하지 않으실 수 있나요 — 그럴 수 있어요. 다만 이 항목은 서비스를 드리는 데 반드시 필요해서, 동의하지 않으시면 가입을 진행할 수 없어요.'
+    ]},
+    mkt: { title: '소식 받기 (선택)', version: 'v1.0 · 2026년 8월 28일', body: [
+      '무엇을 보내드리나요 — 1기 우선 초대, 인생책 소식, 새로 생긴 함께하는 방법을 알려드려요.',
+      '어떻게 보내드리나요 — 이메일, 문자, 카카오톡 가운데 연락처가 있는 곳으로 보내드려요.',
+      '동의하지 않으셔도 가입과 서비스에는 아무 영향이 없어요. 통화와 편지 안내는 소식 받기와 별개로 보내드립니다.',
+      '언제든 그만 받으실 수 있어요. 마이페이지 내 정보에서 한 번에 끄실 수 있고, 끄시면 바로 반영됩니다.'
+    ]}
+  };
+  var docWrap = null, docPrevFocus = null;
+  function closeDoc(){
+    if(!docWrap) return;
+    docWrap.remove(); docWrap = null;
+    document.removeEventListener('keydown', docKey);
+    if(docPrevFocus && docPrevFocus.focus) docPrevFocus.focus();
+  }
+  function docKey(e){ if(e.key === 'Escape') closeDoc(); }
+  function openDoc(key){
+    var d = DOCS[key]; if(!d) return;
+    closeDoc();
+    docPrevFocus = document.activeElement;
+    docWrap = document.createElement('div');
+    docWrap.className = 'su-docwrap';
+    docWrap.setAttribute('role','dialog');
+    docWrap.setAttribute('aria-modal','true');
+    docWrap.setAttribute('aria-label', d.title);
+    var box = document.createElement('div'); box.className = 'su-doc';
+    var hd = document.createElement('div'); hd.className = 'su-doc-hd';
+    var meta = document.createElement('span');
+    meta.style.cssText = 'display:flex; flex-direction:column; gap:5px; min-width:0;';
+    var ti = document.createElement('span'); ti.className = 'ti'; ti.textContent = d.title;
+    var ve = document.createElement('span'); ve.className = 've'; ve.textContent = d.version;
+    meta.appendChild(ti); meta.appendChild(ve);
+    var x = document.createElement('button');
+    x.type = 'button'; x.className = 'su-doc-x'; x.setAttribute('aria-label','닫기'); x.textContent = '✕';
+    hd.appendChild(meta); hd.appendChild(x);
+    var bd = document.createElement('div'); bd.className = 'su-doc-bd';
+    d.body.forEach(function(t){ var q = document.createElement('p'); q.textContent = t; bd.appendChild(q); });
+    var ft = document.createElement('div'); ft.className = 'su-doc-ft';
+    var ok = document.createElement('button');
+    ok.type = 'button'; ok.className = 'su-doc-ok'; ok.textContent = '읽었어요';
+    ft.appendChild(ok);
+    box.appendChild(hd); box.appendChild(bd); box.appendChild(ft);
+    docWrap.appendChild(box);
+    document.body.appendChild(docWrap);
+    x.addEventListener('click', closeDoc);
+    ok.addEventListener('click', closeDoc);
+    docWrap.addEventListener('click', function(e){ if(e.target === docWrap) closeDoc(); });
+    document.addEventListener('keydown', docKey);
+    ok.focus();
+  }
+  document.querySelectorAll('.su-see').forEach(function(b){
+    b.addEventListener('click', function(){ openDoc(b.getAttribute('data-doc')); });
+  });
   // honor pick
   document.querySelectorAll('#honorPick button').forEach(function(b){ b.addEventListener('click',function(){ st.honor=b.getAttribute('data-honor'); document.querySelectorAll('#honorPick button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); }); });
   // slot pick
