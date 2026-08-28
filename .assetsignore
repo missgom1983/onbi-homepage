@@ -52,6 +52,10 @@ assets 2/
 # DB 스키마 (서버에서만 실행 — 웹에 노출할 이유가 없다)
 supabase/
 
+# wrangler 가 배포 중 assets 디렉터리 안에 만드는 임시 산출물.
+# 제외하지 않으면 no-op-worker.js.map 이 그대로 서빙되고 로컬 절대경로가 드러난다.
+.wrangler/
+
 # 문서/설정/메타 (서빙 안 함)
 *.docx
 CLAUDE.md
