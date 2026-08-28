@@ -199,157 +199,228 @@
 </div>
 
   <!-- ── 인사 + 이번 주 ── -->
-  <section style="padding:34px 0 0;">
-    <div style="width:min(1080px,92%); margin:0 auto;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap;">
-        <div>
-          <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">우리 가족의 공간</div>
-          <h1 style="font-size:clamp(26px,3.4vw,38px); line-height:1.22; letter-spacing:-0.035em; font-weight:700; margin:12px 0 0; text-wrap:balance;"><span id="greetName">지현</span> 님, 이번 주에도 <br>어머니의 이야기가 도착했어요.</h1>
+  <section style="padding: 140px 0px 0px;">
+    <div style="width: min(1080px, 92%); margin: 0px auto;">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">마이페이지</span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 999px; background: rgba(217, 184, 140, 0.22); border: 1px solid rgba(217, 184, 140, 0.5); font-size: 11.5px; font-weight: 700; letter-spacing: -0.01em; color: rgb(138, 106, 60);"><span aria-hidden="true" style="width: 5px; height: 5px; border-radius: 999px; background: var(--noeul);"></span>미리 보기 화면 · 예시 데이터입니다</span>
+      </div>
+      <div id="mpAuthed">
+
+      
+        <div style="margin-top: 18px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <span role="img" aria-label="프로필" id="mpAvatar" style="width: 60px; height: 60px; border-radius: 999px; flex-shrink: 0; display: grid; place-items: center; font-size: 22px; font-weight: 700; color: rgb(42, 115, 96); border: 1.5px solid rgb(166, 213, 194); background: var(--angae);">박</span>
+          <div style="min-width: 0px;">
+            <h1 style="font-size: clamp(24px, 3vw, 32px); line-height: 1.24; letter-spacing: -0.035em; font-weight: 700; margin: 0px;"><span id="greetName">지현</span> 님</h1>
+            <div style="margin-top: 9px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <span style="font-size: 11.5px; font-weight: 700; padding: 5px 12px; border-radius: 999px; background: var(--saebyeok); color: rgb(42, 115, 96);">공간 관리</span>
+              <span style="font-size: 13px; color: rgb(106, 119, 137);" id="mpFamily">우리 가족</span>
+            </div>
+          </div>
         </div>
-        <div style="display:flex; align-items:center; gap:9px; padding:11px 18px; background:#FFFFFF; border:1px solid #E6E0D1; border-radius:999px;">
-          <span style="width:9px; height:9px; border-radius:999px; background:var(--cheongja); flex-shrink:0;"></span>
-          <span style="font-size:14px; font-weight:700; color:var(--simya);">이번 주 신호 · 평안</span>
+        <p style="margin: 20px 0px 0px; font-size: 15px; line-height: 1.75; color: rgb(90, 102, 120); max-width: 520px; text-wrap: pretty;">계정과 함께하는 방법을 여기서 관리해요. <br data-keep="">편지와 이야기는 가족 공간에 모여 있어요.</p>
+      </div>
+      <div id="mpGuest" hidden>
+        <h1 style="font-size: clamp(24px, 3vw, 32px); line-height: 1.24; letter-spacing: -0.035em; font-weight: 700; margin: 18px 0px 0px; text-wrap: balance;">로그인하시면 <br>내 정보가 보여요.</h1>
+        <a href="login.html" class="scp0" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 13px 26px; border-radius: 999px; background: var(--cheongja); color: rgb(255, 255, 255); font-size: 14.5px; font-weight: 700; text-decoration: none; min-height: 44px; transition: background 0.2s;">로그인</a>
+      </div>
+      
+
+      
+    </div>
+  </section>
+
+  
+  <section style="padding: 26px 0px 0px;">
+    <div style="width: min(1080px, 92%); margin: 0px auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: clamp(18px, 3vw, 40px); flex-wrap: wrap; background: var(--simya); border-radius: 24px; padding: clamp(24px, 3.5vw, 36px) clamp(24px, 3.5vw, 40px);">
+        <div style="flex: 1 1 320px; min-width: 0px;">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 12px;">
+            <span style="width: 7px; height: 7px; border-radius: 999px; background: var(--cheongja); flex-shrink: 0;"></span>
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: var(--cheongja);">가족 공간</span>
+          </div>
+          <h2 style="font-size: clamp(20px, 2.4vw, 27px); line-height: 1.35; letter-spacing: -0.03em; font-weight: 700; margin: 0px 0px 10px; color: rgb(255, 255, 255); text-wrap: balance;">온 가족이 모이는 곳은 <br data-keep="">여기가 아니라 가족 공간이에요.</h2>
+          <p style="font-size: 14.5px; line-height: 1.7; color: rgba(255, 255, 255, 0.66); margin: 0px 0px 16px; text-wrap: pretty;">금요편지와 답장, 부모님 목소리, 인생책 진행, 가족 초대까지 한자리에 모여 있어요.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px;">
+            
+              <span style="display: inline-flex; align-items: center; padding: 7px 13px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); font-size: 12.5px; font-weight: 600; color: rgba(255, 255, 255, 0.78);">금요편지</span>
+            
+              <span style="display: inline-flex; align-items: center; padding: 7px 13px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); font-size: 12.5px; font-weight: 600; color: rgba(255, 255, 255, 0.78);">가족 답장</span>
+            
+              <span style="display: inline-flex; align-items: center; padding: 7px 13px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); font-size: 12.5px; font-weight: 600; color: rgba(255, 255, 255, 0.78);">부모님 목소리</span>
+            
+              <span style="display: inline-flex; align-items: center; padding: 7px 13px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); font-size: 12.5px; font-weight: 600; color: rgba(255, 255, 255, 0.78);">인생책</span>
+            
+              <span style="display: inline-flex; align-items: center; padding: 7px 13px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.14); font-size: 12.5px; font-weight: 600; color: rgba(255, 255, 255, 0.78);">가족 초대</span>
+            
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 9px; flex-shrink: 0;">
+          <span aria-disabled="true" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 999px; background: rgba(255, 255, 255, 0.07); border: 1px dashed rgba(255, 255, 255, 0.22); color: rgba(255, 255, 255, 0.55); font-size: 15.5px; font-weight: 700; letter-spacing: -0.01em; min-height: 48px;">가족 공간 열기 <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 999px; background: rgba(217, 184, 140, 0.22); color: rgb(228, 196, 156);">준비 중</span></span>
+          <span style="font-size: 12.5px; color: rgba(255, 255, 255, 0.5);">곧 열립니다. 열리면 문자로 알려드려요.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── my.onvi.kr 진입 ── -->
-  <div class="stack">
-<section style="padding:26px 0 0;">
-    <div style="width:min(1080px,92%); margin:0 auto;">
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:clamp(18px,3vw,40px); flex-wrap:wrap; background:var(--simya); border-radius:24px; padding:clamp(24px,3.5vw,36px) clamp(24px,3.5vw,40px);">
-        <div style="flex:1 1 320px; min-width:0;">
-          <div style="display:flex; align-items:center; gap:9px; margin-bottom:12px;">
-            <span style="width:7px; height:7px; border-radius:999px; background:var(--cheongja); flex-shrink:0;"></span>
-            <span style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja);">가족 공간</span>
-          </div>
-          <h2 style="font-size:clamp(20px,2.4vw,27px); line-height:1.35; letter-spacing:-0.03em; font-weight:700; margin:0 0 10px; color:#FFFFFF; text-wrap:balance;">편지와 이야기는 <br data-keep="">가족 공간에 모두 모여 있어요.</h2>
-          <p style="font-size:14.5px; line-height:1.7; color:rgba(255,255,255,0.66); margin:0; text-wrap:pretty;">지난 편지, 가족 답장, 부모님 목소리 기록을 한자리에서 보실 수 있어요. 여기 정보와 늘 같은 내용입니다.</p>
+  
+  <div class="stack" style="width: calc(100% - 40px); max-width: 1880px; margin: 20px auto 0px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px;">
+
+  
+  
+  <section id="mpOwner" style="border-radius: 28px; background: color-mix(in srgb, var(--hanji) 72%, #FFFFFF); padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 64px);">
+    <div class="mp-grid" style="width: 100%; max-width: 1080px; margin: 0px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start;">
+
+      <div style="background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 24px; padding: clamp(24px, 3.5vw, 34px);">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px;">
+          <h2 style="font-size: 19px; font-weight: 700; letter-spacing: -0.025em; margin: 0px;">함께하는 방법</h2>
+          <span style="font-size: 11.5px; font-weight: 700; padding: 5px 11px; border-radius: 999px; background: rgba(217, 184, 140, 0.22); color: rgb(138, 106, 60);">예시 · 공간 관리자만</span>
         </div>
-        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:9px; flex-shrink:0;">
-          <span aria-disabled="true" style="display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px; background:rgba(31,42,58,0.04); border:1px dashed #CDC6B4; color:#8A93A0; font-size:15.5px; font-weight:700; letter-spacing:-0.01em; min-height:48px; cursor:default;">가족 공간 <span style="font-size:11px; font-weight:700; letter-spacing:0.08em; padding:4px 10px; border-radius:999px; background:rgba(217,184,140,0.24); color:#A9803F;">준비 중</span></span>
-          <span style="font-size:12.5px; color:rgba(255,255,255,0.5);">my.onvi.kr · 같은 계정으로 이어집니다</span>
+        <div style="padding: 18px 20px; background: rgb(251, 248, 239); border: 1px solid rgb(230, 224, 209); border-radius: 16px;">
+          <div style="font-size: 16px; font-weight: 700; letter-spacing: -0.02em;">이야기 · 파일럿 참여 중</div>
+          <div style="margin-top: 8px; font-size: 13.5px; color: rgb(92, 102, 117); line-height: 1.7;">다음 안내 11월 2일</div>
+        </div>
+        <p style="font-size: 13.5px; color: rgb(92, 102, 117); line-height: 1.7; margin: 14px 0px 0px;">약정과 위약금 없이 언제든 바꿀 수 있어요. 파일럿 기간에는 직접 바꾸는 대신 저희가 확인 후 도와드려요.</p>
+        <a href="contact.html" class="scp1" style="display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; padding: 12px 22px; border-radius: 999px; background: transparent; border: 1.5px solid var(--simhae); color: var(--simhae); font-size: 13.5px; font-weight: 700; text-decoration: none; min-height: 44px; transition: background 0.2s, color 0.2s;">변경 문의</a>
+      </div>
+
+      <div style="background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 24px; padding: clamp(24px, 3.5vw, 34px);">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px;">
+          <h2 style="font-size: 19px; font-weight: 700; letter-spacing: -0.025em; margin: 0px;">입금과 영수증</h2>
+          <span style="font-size: 11.5px; font-weight: 700; padding: 5px 11px; border-radius: 999px; background: rgba(217, 184, 140, 0.22); color: rgb(138, 106, 60);">예시 내역</span>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 15px 0px; border-top: 1px solid rgb(240, 235, 221);">
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0px;">
+                <span style="font-size: 14.5px; font-weight: 700;">10월 2일 입금이 확인됐어요</span>
+                <span style="font-size: 12.5px; color: rgb(106, 119, 137);">이야기 · 세 달 참여비</span>
+              </span>
+              <span style="font-size: 11.5px; font-weight: 700; padding: 5px 12px; border-radius: 999px; background: var(--saebyeok); color: rgb(42, 115, 96);">영수증 발급 완료</span>
+            </div>
+          
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 15px 0px; border-top: 1px solid rgb(240, 235, 221);">
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0px;">
+                <span style="font-size: 14.5px; font-weight: 700;">7월 2일 입금이 확인됐어요</span>
+                <span style="font-size: 12.5px; color: rgb(106, 119, 137);">이야기 · 세 달 참여비</span>
+              </span>
+              <span style="font-size: 11.5px; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: rgb(251, 248, 239); border: 1px solid rgb(230, 224, 209); color: rgb(106, 119, 137);">영수증 발급 완료</span>
+            </div>
+          
+        </div>
+        <p style="font-size: 12.5px; color: rgb(106, 119, 137); line-height: 1.7; margin: 16px 0px 0px;">현금영수증은 입금하신 번호로 발급해 드려요. 다른 번호가 필요하시면 알려주세요.</p>
+      </div>
+
+      <div style="background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 24px; padding: clamp(24px, 3.5vw, 34px);">
+        <h2 style="font-size: 19px; font-weight: 700; letter-spacing: -0.025em; margin: 0px 0px 18px;">통화 설정</h2>
+        <div style="padding: 18px 20px; background: rgb(251, 248, 239); border: 1px solid rgb(230, 224, 209); border-radius: 16px;">
+          <p style="margin: 0px; font-size: 15px; line-height: 1.7; color: var(--simya); font-weight: 700;">매주 수요일 오전에 전화드려요</p>
+        </div>
+        <p style="font-size: 13.5px; color: rgb(92, 102, 117); line-height: 1.7; margin: 14px 0px 0px;">변경을 원하시면 알려주세요. 확인 후 문자로 안내드려요.</p>
+
+        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 9px;">
+          <span style="font-size: 13px; font-weight: 700; color: var(--simya);">희망 시간대</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            
+              <button type="button" aria-pressed="true" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(234, 244, 239); border: 1px solid var(--cheongja); color: rgb(42, 115, 96); font-weight: 700;">오전</button>
+            
+              <button type="button" aria-pressed="false" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(251, 248, 239); border: 1px solid rgb(224, 217, 198); color: rgb(63, 77, 98); font-weight: 600;">오후</button>
+            
+              <button type="button" aria-pressed="false" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(251, 248, 239); border: 1px solid rgb(224, 217, 198); color: rgb(63, 77, 98); font-weight: 600;">저녁</button>
+            
+          </div>
+          <button type="button" class="scp1" style="margin-top: 6px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 13px 22px; border-radius: 999px; background: transparent; border: 1.5px solid var(--simhae); color: var(--simhae); font-family: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; min-height: 44px; transition: background 0.2s, color 0.2s;">변경 요청하기</button>
         </div>
       </div>
+
+      <div style="background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 24px; padding: clamp(24px, 3.5vw, 34px);">
+        <h2 style="font-size: 19px; font-weight: 700; letter-spacing: -0.025em; margin: 0px 0px 6px;">알림 설정</h2>
+        <p style="margin: 0px 0px 16px; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117);">새 편지가 오면 알려드릴까요? 가족마다 따로 정하실 수 있어요.</p>
+        <div style="display: flex; flex-direction: column;">
+          
+            <label style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 15px 0px; border-top: 1px solid rgb(240, 235, 221); cursor: pointer; min-height: 44px;">
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0px;">
+                <span style="font-size: 14.5px; font-weight: 600; color: var(--simya);">편지가 도착하면</span>
+                <span style="font-size: 12.5px; color: rgb(106, 119, 137);">금요일마다 한 통</span>
+              </span>
+              <span style="position: relative; flex-shrink: 0; width: 50px; height: 30px; border-radius: 999px; transition: background 0.2s; background: var(--cheongja);"><span style="position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 999px; background: rgb(255, 255, 255); box-shadow: rgba(31, 42, 58, 0.2) 0px 2px 6px; transition: transform 0.2s; transform: translateX(20px);"></span><input type="checkbox" checked="" style="position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0px; cursor: pointer;"></span>
+            </label>
+          
+            <label style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 15px 0px; border-top: 1px solid rgb(240, 235, 221); cursor: pointer; min-height: 44px;">
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0px;">
+                <span style="font-size: 14.5px; font-weight: 600; color: var(--simya);">가족이 답장을 남기면</span>
+                <span style="font-size: 12.5px; color: rgb(106, 119, 137);">하루에 한 번 모아서</span>
+              </span>
+              <span style="position: relative; flex-shrink: 0; width: 50px; height: 30px; border-radius: 999px; transition: background 0.2s; background: var(--cheongja);"><span style="position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 999px; background: rgb(255, 255, 255); box-shadow: rgba(31, 42, 58, 0.2) 0px 2px 6px; transition: transform 0.2s; transform: translateX(20px);"></span><input type="checkbox" checked="" style="position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0px; cursor: pointer;"></span>
+            </label>
+          
+            <label style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 15px 0px; border-top: 1px solid rgb(240, 235, 221); cursor: pointer; min-height: 44px;">
+              <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0px;">
+                <span style="font-size: 14.5px; font-weight: 600; color: var(--simya);">내 질문에서 이어진 이야기가 오면</span>
+                <span style="font-size: 12.5px; color: rgb(106, 119, 137);">질문을 남기신 분에게만</span>
+              </span>
+              <span style="position: relative; flex-shrink: 0; width: 50px; height: 30px; border-radius: 999px; transition: background 0.2s; background: rgb(218, 210, 190);"><span style="position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 999px; background: rgb(255, 255, 255); box-shadow: rgba(31, 42, 58, 0.2) 0px 2px 6px; transition: transform 0.2s; transform: translateX(0px);"></span><input type="checkbox" style="position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0px; cursor: pointer;"></span>
+            </label>
+          
+        </div>
+        <p style="font-size: 12.5px; color: rgb(106, 119, 137); line-height: 1.7; margin: 16px 0px 0px;">지금은 문자로 보내드려요. 알림톡은 준비 중이에요.</p>
+      </div>
+
     </div>
   </section>
+  
 
-  <!-- ── 카드 스택 ── -->
-  <div style="width:calc(100% - 40px); max-width:1880px; margin:20px auto 0; display:flex; flex-direction:column; gap:20px; padding-bottom:20px;">
+  
+  <section style="border-radius: 28px; background: color-mix(in srgb, var(--hanji) 72%, #FFFFFF); padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 64px);">
+    <div class="mp-grid" style="width: 100%; max-width: 1080px; margin: 0px auto; display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; align-items: start;">
 
-  <section style="border-radius:28px; background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); padding:clamp(32px,5vw,64px) clamp(20px,4vw,64px);">
-    <div style="width:100%; max-width:1080px; margin:0 auto;">
-      <div class="mp-grid" style="display:grid; grid-template-columns:1.6fr 1fr; gap:16px; align-items:stretch;">
-        <!-- 이번 주 편지 카드 -->
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:clamp(24px,3.5vw,38px); box-shadow:0 30px 60px -36px rgba(31,42,58,0.3); display:flex; flex-direction:column; gap:18px;">
-          <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;">
-            <span style="font-size:13px; font-weight:700; letter-spacing:0.12em; color:#2A7360;">금요편지 · 열두 번째</span>
-            <span style="font-size:12.5px; color:#6A7789;">3월 13일 금요일 도착</span>
+      <div style="background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 24px; padding: clamp(24px, 3.5vw, 34px);">
+        <h2 style="font-size: 19px; font-weight: 700; letter-spacing: -0.025em; margin: 0px 0px 18px;">내 정보</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="mp-phone" style="font-size: 13.5px; font-weight: 700; color: var(--simya);">연락받으실 번호</label>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <input id="mp-phone" type="tel" placeholder="010-0000-0000" value="010-2345-6789" inputmode="numeric" style="flex: 1 1 200px; min-width: 0px; padding: 14px 16px; border-radius: 14px; border: 1px solid rgb(224, 217, 198); background: rgb(251, 248, 239); font-family: inherit; font-size: 16px; color: var(--simya); min-height: 52px; transition: border-color 0.18s, box-shadow 0.18s;">
+            <button type="button" class="scp2" style="flex-shrink: 0; padding: 14px 22px; border-radius: 14px; background: var(--cheongja); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: rgb(255, 255, 255); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; min-height: 52px; transition: background 0.2s;">저장</button>
           </div>
-          <p style="font-family:var(--font-letter); font-size:clamp(20px,2.4vw,26px); line-height:1.55; font-weight:700; letter-spacing:-0.02em; margin:0; text-wrap:balance;">봄비가 한 번 지나가고, <br>어머니는 앨범을 꺼내셨습니다.</p>
-          <p style="font-size:15px; line-height:1.7; color:#3F4D62; margin:0;">오래 미뤄두셨던 앨범 정리를 하셨어요. 아버지와 처음 바다에 갔던 날의 사진 이야기, 앞집 어르신과 다녀온 봄나물 시장 이야기가 담겨 있어요.</p>
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:auto; padding-top:8px;">
-            <span aria-disabled="true" style="display:inline-flex; align-items:center; gap:10px; padding:14px 24px; border-radius:999px; background:rgba(31,42,58,0.04); border:1px dashed #CDC6B4; color:#8A93A0; font-size:15px; font-weight:700; letter-spacing:-0.01em; min-height:44px; cursor:default;">이번 주 편지 <span style="font-size:10.5px; font-weight:700; letter-spacing:0.08em; padding:3px 9px; border-radius:999px; background:rgba(217,184,140,0.24); color:#A9803F;">준비 중</span></span>
-            <span style="font-size:13.5px; color:#6A7789;">가족 답장 2 · 아직 답장 전이에요</span>
-          </div>
+          <p style="margin: 6px 0px 0px; font-size: 12.5px; line-height: 1.65; color: rgb(138, 147, 160);">편지 도착과 입금 안내를 이 번호로 보내드려요.</p>
         </div>
 
-        <!-- 인생책 진행 -->
-        <div style="background:var(--saebyeok); border-radius:24px; padding:clamp(24px,3.5vw,34px); display:flex; flex-direction:column; gap:16px;">
-          <div style="font-size:13px; font-weight:700; letter-spacing:0.12em; color:#2A7360;">인생책 · 첫 번째 시즌</div>
-          <p style="font-family:var(--font-letter); font-size:19px; line-height:1.55; font-weight:700; margin:0; text-wrap:balance;">어머니의 이야기가 <br>12주째 쌓이고 있어요.</p>
-          <div>
-            <div style="display:flex; justify-content:space-between; font-size:12.5px; color:#3F4D62; margin-bottom:8px;">
-              <span>12주 / 52주</span><span>23%</span>
-            </div>
-            <div style="height:8px; border-radius:999px; background:rgba(255,255,255,0.75); overflow:hidden;">
-              <div style="height:100%; width:23%; border-radius:999px; background:var(--cheongja); transition:width .4s;"></div>
-            </div>
-          </div>
-          <p style="font-size:13.5px; line-height:1.6; color:#3F4D62; margin:0;">한 해가 차오르면 편지와 답장을 엮어 한 권으로 보내드려요. 완성은 끝이 아니라 다음 시즌의 시작이에요.</p>
-          <a href="pricing.html" style="font-size:13.5px; font-weight:700; color:#2A7360; text-decoration:none; margin-top:auto;">인쇄본 만들기 알아보기 ›</a>
+        <div style="margin-top: 22px; padding-top: 20px; border-top: 1px solid rgb(240, 235, 221);">
+          <label style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; cursor: pointer; min-height: 44px;">
+            <span style="min-width: 0px;">
+              <span style="display: block; font-size: 14.5px; font-weight: 600; color: var(--simya);">온비의 새 소식과 혜택 받기 <span style="color: rgb(154, 163, 176); font-weight: 600; font-size: 12.5px;">(선택)</span></span>
+              <span style="display: block; margin-top: 6px; font-size: 13px; line-height: 1.7; color: rgb(106, 119, 137);">지금은 받지 않고 있어요. 통화와 편지 안내는 그대로 보내드려요.</span>
+            </span>
+            <span><span></span><input type="checkbox" style="position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0px; cursor: pointer;"></span>
+          </label>
+        </div>
+
+        <div style="margin-top: 20px; padding: 15px 18px; border-radius: 14px; background: rgb(251, 248, 239); border: 1px solid rgb(230, 224, 209);">
+          <p style="margin: 0px; font-size: 13px; line-height: 1.7; color: rgb(92, 102, 117);">온비는 의료 진단이나 응급 대응 서비스가 아니에요. 통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
         </div>
       </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 24px; padding: clamp(24px, 3.5vw, 34px);">
+          <h2 style="font-size: 19px; font-weight: 700; letter-spacing: -0.025em; margin: 0px 0px 8px;">도움</h2>
+          <div style="display: flex; flex-direction: column;">
+            <a href="support.html#account-recovery" class="scp3" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0px; border-top: 1px solid rgb(240, 235, 221); font-size: 14.5px; font-weight: 600; color: var(--simya); text-decoration: none; min-height: 44px;">카카오 계정이 바뀌셨나요? <span style="color: rgb(106, 119, 137); font-weight: 500; font-size: 13px; flex-shrink: 0;">복구 ›</span></a>
+            <a href="support.html#faq" class="scp3" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0px; border-top: 1px solid rgb(240, 235, 221); font-size: 14.5px; font-weight: 600; color: var(--simya); text-decoration: none; min-height: 44px;">자주 묻는 질문 <span style="color: rgb(106, 119, 137); font-weight: 500; font-size: 13px; flex-shrink: 0;">고객지원 ›</span></a>
+            <a href="contact.html" class="scp3" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0px; border-top: 1px solid rgb(240, 235, 221); font-size: 14.5px; font-weight: 600; color: var(--simya); text-decoration: none; min-height: 44px;">직접 문의하기 <span style="color: rgb(106, 119, 137); font-weight: 500; font-size: 13px; flex-shrink: 0;">문의 ›</span></a>
+          </div>
+        </div>
+
+        <div style="background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 24px; padding: clamp(24px, 3.5vw, 34px);">
+          <h2 style="font-size: 19px; font-weight: 700; letter-spacing: -0.025em; margin: 0px 0px 8px;">계정</h2>
+          <button type="button" id="logoutBtn" class="scp3" style="display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0px; border-width: 1px medium medium; border-style: solid none none; border-color: rgb(240, 235, 221) currentcolor currentcolor; border-image: none; background: none; font-size: 14.5px; font-weight: 600; color: rgb(106, 119, 137); cursor: pointer; font-family: inherit; text-align: left; min-height: 44px; transition: color 0.2s;">로그아웃</button>
+          <button type="button" id="leaveBtn" class="scp4" style="display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0px; border-width: 1px medium medium; border-style: solid none none; border-color: rgb(240, 235, 221) currentcolor currentcolor; border-image: none; background: none; font-size: 13.5px; font-weight: 500; color: rgb(138, 147, 160); cursor: pointer; font-family: inherit; text-align: left; min-height: 44px; transition: color 0.2s;">회원 탈퇴 <span style="color: rgb(180, 186, 195); font-weight: 500; font-size: 13px;">›</span></button>
+          <p style="font-size: 12px; color: rgb(106, 119, 137); line-height: 1.7; margin: 14px 0px 0px;">탈퇴하시면 이야기는 1년 동안 보관합니다. 그 전에 오시면 그대로 이어갑니다.</p>
+        </div>
+      </div>
+
     </div>
   </section>
-
-  <!-- ── 가족 + 계정 ── -->
-  <section style="border-radius:28px; background:color-mix(in srgb, var(--hanji) 72%, #FFFFFF); padding:clamp(32px,5vw,64px) clamp(20px,4vw,64px);">
-    <div class="mp-grid" style="width:100%; max-width:1080px; margin:0 auto; display:grid; grid-template-columns:1.6fr 1fr; gap:16px; align-items:start;">
-
-      <!-- 가족 구성원 -->
-      <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:clamp(24px,3.5vw,34px);">
-        <div style="display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:20px;">
-          <h2 style="font-size:19px; font-weight:700; letter-spacing:-0.025em; margin:0;">함께하는 가족</h2>
-          <button class="hv2" type="button" id="inviteBtn" style="display:inline-flex; align-items:center; gap:7px; padding:10px 18px; border-radius:999px; background:transparent; border:1.5px solid var(--cheongja); color:#2A7360; font-size:13.5px; font-weight:700; cursor:pointer; font-family:inherit; min-height:44px; transition:background .2s, color .2s;">+ 가족 초대</button>
-        </div>
-        <div style="display:flex; flex-direction:column;">
-                      <div style="display:flex; align-items:center; gap:14px; padding:15px 0; border-top:1px solid #F0EBDD;">
-              <span style="flex-shrink:0; width:40px; height:40px; border-radius:999px; background:var(--morae); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#7A5526;">母</span>
-              <div style="display:flex; flex-direction:column; gap:2px; flex:1;">
-                <span style="font-size:15px; font-weight:700;">김순자</span>
-                <span style="font-size:12.5px; color:#6A7789;">어머니 · 이야기의 주인공</span>
-              </div>
-              <span style="font-size:11.5px; font-weight:700; padding:5px 11px; border-radius:999px; background:var(--saebyeok); color:#2A7360;">주인공</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:14px; padding:15px 0; border-top:1px solid #F0EBDD;">
-              <span style="flex-shrink:0; width:40px; height:40px; border-radius:999px; background:var(--angae); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#2A7360;">딸</span>
-              <div style="display:flex; flex-direction:column; gap:2px; flex:1;">
-                <span style="font-size:15px; font-weight:700;">박지현</span>
-                <span style="font-size:12.5px; color:#6A7789;">딸 · 공간 관리</span>
-              </div>
-              <span style="font-size:11.5px; font-weight:700; padding:5px 11px; border-radius:999px; background:var(--saebyeok); color:#2A7360;">나</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:14px; padding:15px 0; border-top:1px solid #F0EBDD;">
-              <span style="flex-shrink:0; width:40px; height:40px; border-radius:999px; background:var(--saebyeok); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#2A7360;">아</span>
-              <div style="display:flex; flex-direction:column; gap:2px; flex:1;">
-                <span style="font-size:15px; font-weight:700;">박민준</span>
-                <span style="font-size:12.5px; color:#6A7789;">아들</span>
-              </div>
-              <span style="font-size:11.5px; font-weight:600; padding:5px 11px; border-radius:999px; background:#FBF8EF; border:1px solid #E6E0D1; color:#6A7789;">함께</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:14px; padding:15px 0; border-top:1px solid #F0EBDD;">
-              <span style="flex-shrink:0; width:40px; height:40px; border-radius:999px; background:var(--angae); display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#2A7360;">손</span>
-              <div style="display:flex; flex-direction:column; gap:2px; flex:1;">
-                <span style="font-size:15px; font-weight:700;">이서연</span>
-                <span style="font-size:12.5px; color:#6A7789;">손녀</span>
-              </div>
-              <span style="font-size:11.5px; font-weight:600; padding:5px 11px; border-radius:999px; background:#FBF8EF; border:1px solid #E6E0D1; color:#6A7789;">함께</span>
-            </div>
-        </div>
-        <div id="invitedNote" hidden style="display:flex; align-items:center; gap:10px; margin-top:14px; padding:13px 16px; background:var(--saebyeok); border-radius:12px;"><span style="width:7px; height:7px; border-radius:999px; background:var(--cheongja); flex-shrink:0;"></span><span style="font-size:13.5px; font-weight:600; color:#2A7360;">초대 링크를 보냈어요. 가족이 수락하면 여기에 나타나요.</span></div>
-      </div>
-
-      <!-- 계정 · 설정 -->
-      <div style="display:flex; flex-direction:column; gap:16px;">
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:clamp(24px,3.5vw,34px);">
-          <h2 style="font-size:19px; font-weight:700; letter-spacing:-0.025em; margin:0 0 16px;">함께하는 방법</h2>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; background:#FBF8EF; border:1px solid #E6E0D1; border-radius:14px;">
-            <div style="display:flex; flex-direction:column; gap:3px;">
-              <span style="font-size:15px; font-weight:700;">이야기 · 이음</span>
-              <span style="font-size:12.5px; color:#6A7789;">19,900원/월 · 다음 결제 4월 2일</span>
-            </div>
-            <a href="pricing.html" style="font-size:13.5px; font-weight:700; color:#2A7360; text-decoration:none; white-space:nowrap;">변경 ›</a>
-          </div>
-          <p style="font-size:12.5px; color:#6A7789; line-height:1.6; margin:12px 0 0;">약정과 위약금 없이 언제든 바꿀 수 있어요.</p>
-        </div>
-        <div style="background:#FFFFFF; border:1px solid #E6E0D1; border-radius:24px; padding:clamp(24px,3.5vw,34px);">
-          <h2 style="font-size:19px; font-weight:700; letter-spacing:-0.025em; margin:0 0 8px;">설정</h2>
-          <div style="display:flex; flex-direction:column;">
-            <a class="hv3" href="#" style="display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border-top:1px solid #F0EBDD; font-size:14.5px; font-weight:600; color:var(--simya); text-decoration:none; min-height:44px;">통화 요일·시간 <span style="color:#6A7789; font-weight:500; font-size:13px;">매주 수 오전 10시 ›</span></a>
-            <a class="hv3" href="#" style="display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border-top:1px solid #F0EBDD; font-size:14.5px; font-weight:600; color:var(--simya); text-decoration:none; min-height:44px;">알림 <span style="color:#6A7789; font-weight:500; font-size:13px;">편지 도착 시 ›</span></a>
-            <a class="hv3" href="support.html#faq" style="display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border-top:1px solid #F0EBDD; font-size:14.5px; font-weight:600; color:var(--simya); text-decoration:none; min-height:44px;">도움이 필요해요 <span style="color:#6A7789; font-weight:500; font-size:13px;">고객지원 ›</span></a>
-          </div>
-          <button class="hv3" type="button" id="logoutBtn" style="display:flex; width:100%; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border:none; border-top:1px solid #F0EBDD; background:none; font-size:14.5px; font-weight:600; color:#6A7789; cursor:pointer; font-family:inherit; text-align:left; min-height:44px; transition:color .2s;">로그아웃</button>
-          <button class="hv3" type="button" id="leaveBtn" style="display:flex; width:100%; justify-content:space-between; align-items:center; gap:12px; padding:14px 0; border:none; border-top:1px solid #F0EBDD; background:none; font-size:13.5px; font-weight:500; color:#8A93A0; cursor:pointer; font-family:inherit; text-align:left; min-height:44px;">회원 탈퇴 <span aria-hidden="true" style="color:#B4BCC7;">›</span></button>
-          <p style="font-size:12px; color:#6A7789; line-height:1.6; margin:14px 0 0;">통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  </div>
 
   </div>
 <footer class="site">
@@ -439,24 +510,81 @@
   })();
 </script>
 <script>
+  // 마이페이지 본문 — 로그인 판정은 Nav와 같은 규칙(이름·계정연결·온보딩)을 따른다.
+  // 화면에 보이는 가족·편지·내역은 예시 데이터이고, 아래 상호작용은 이 브라우저에만 저장된다.
   (function () {
-    var name = '';
-    try { name = localStorage.getItem('onvi.user.name') || ''; if(!localStorage.getItem('onvi.onboarded'))name=''; } catch (e) { /* 무시 */ }
-    var g = document.getElementById('greetName');
-    if (g) g.textContent = name || '지현';
+    function get(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+    function set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* 무시 */ } }
 
-    var inviteBtn = document.getElementById('inviteBtn');
-    var invited = document.getElementById('invitedNote');
-    if (inviteBtn && invited) {
-      inviteBtn.addEventListener('click', function () { invited.hidden = false; });
+    function authedName() {
+      var n = get('onvi.user.name'), pv = get('onvi.user.provider'), d = get('onvi.onboarded');
+      return (n && pv && d) ? n : '';
     }
+
+    function paint() {
+      var name = authedName();
+      var authed = document.getElementById('mpAuthed');
+      var guest = document.getElementById('mpGuest');
+      var owner = document.getElementById('mpOwner');
+      if (authed) authed.hidden = !name;
+      if (guest) guest.hidden = !!name;
+      if (owner) owner.hidden = !name;
+      var g = document.getElementById('greetName');
+      if (g) g.textContent = name || '지현';
+      var av = document.getElementById('mpAvatar');
+      if (av) av.textContent = (name || '지현').trim().charAt(0);
+      var fam = document.getElementById('mpFamily');
+      if (fam) fam.textContent = get('onvi.family.name') || ((name || '지현') + '님의 가족');
+    }
+    paint();
+    window.addEventListener('onvi-auth', paint);
+    window.addEventListener('pageshow', paint);
+
+    // 연락처 저장 — 지금은 이 브라우저에만 남는다
+    var phone = document.getElementById('mp-phone');
+    if (phone) {
+      var saved = get('onvi.user.phone');
+      if (saved) phone.value = saved;
+      var saveBtn = phone.parentNode.querySelector('button');
+      if (saveBtn) {
+        saveBtn.addEventListener('click', function () {
+          set('onvi.user.phone', (phone.value || '').trim());
+          var t = saveBtn.textContent;
+          saveBtn.textContent = '저장했어요';
+          setTimeout(function () { saveBtn.textContent = t; }, 1600);
+        });
+      }
+    }
+
+    // 토글(소식 받기·알림) — aria 와 저장값을 함께 맞춘다
+    var stack = document.querySelector('.stack');
+    (stack ? stack.querySelectorAll('label input[type="checkbox"]') : []).forEach(function (cb, idx) {
+      var key = 'onvi.mp.toggle.' + idx;
+      var stored = get(key);
+      if (stored) cb.checked = (stored === '1');
+      cb.addEventListener('change', function () { set(key, cb.checked ? '1' : '0'); });
+    });
+
+    // 희망 시간대 — 하나만 눌린 상태로 유지
+    var slots = stack ? stack.querySelectorAll('button[aria-pressed]') : [];
+    if (slots.length) {
+      var pick = get('onvi.firstcall.slot');
+      slots.forEach(function (b) {
+        if (pick && b.textContent.trim() === pick) {
+          slots.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        }
+        b.addEventListener('click', function () {
+          slots.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          set('onvi.firstcall.slot', b.textContent.trim());
+        });
+      });
+    }
+
+    // 로그아웃은 공용 모듈(Supabase 세션까지 종료)에 맡긴다
     var out = document.getElementById('logoutBtn');
     if (out) {
       out.addEventListener('click', function () {
-        try {
-          localStorage.removeItem('onvi.user.name');
-          window.dispatchEvent(new Event('onvi-auth'));
-        } catch (e) { /* 무시 */ }
+        if (window.OnViNavAuth) { OnViNavAuth.signOut(); return; }
         window.location.href = 'index.html';
       });
     }
