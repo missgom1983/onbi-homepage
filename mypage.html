@@ -435,38 +435,7 @@
         if (menuOpen && !root.contains(e.target)) setMenu(false);
       });
     }
-    var logoutBtn = document.getElementById('navLogout');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', function () {
-        try { localStorage.removeItem('onvi.user.name'); window.dispatchEvent(new Event('onvi-auth')); } catch (e) { /* 무시 */ }
-        window.location.href = 'index.html';
-      });
-    }
-
-    // 로그인 상태에 따라 GNB 우측을 로그인 버튼 ↔ 내 공간으로 전환
-    function paint() {
-      var name = '';
-      try { name = localStorage.getItem('onvi.user.name') || ''; if(!localStorage.getItem('onvi.onboarded'))name=''; } catch (e) { /* 무시 */ }
-      var login = document.getElementById('navLogin');
-      var user = document.getElementById('navUser');
-      var pLogin = document.getElementById('panelLogin');
-      var pUser = document.getElementById('panelUser');
-      if (name) {
-        if (login) login.hidden = true;
-        if (user) { user.hidden = false; document.getElementById('navUserName').textContent = name + ' 님'; var _av=document.querySelector('[data-avatar-initial]'); if(_av)_av.textContent=(name.trim().charAt(0)||''); }
-        if (pLogin) pLogin.hidden = true;
-        if (pUser) pUser.hidden = false;
-      } else {
-        if (login) login.hidden = false;
-        if (user) user.hidden = true;
-        if (pLogin) pLogin.hidden = false;
-        if (pUser) pUser.hidden = true;
-      }
-    }
-    paint();
-    (function(){var pl=document.getElementById('panelLogout'); if(pl) pl.addEventListener('click',function(){ if(window.OnViAuth){OnViAuth.signOut();return;} try{localStorage.removeItem('onvi.user.name');localStorage.removeItem('onvi.onboarded');window.dispatchEvent(new Event('onvi-auth'));}catch(e){} location.href='index.html'; });})();
-    window.addEventListener('storage', paint);
-    window.addEventListener('onvi-auth', paint);
+    // 로그인 상태 판정·다시 읽기·로그아웃은 공용 모듈이 맡는다
   })();
 </script>
 <script>
@@ -526,6 +495,7 @@
 })();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="shared/onvi-nav-auth.js"></script>
 <script defer src="shared/onvi-auth.js"></script>
 </body>
 </html>

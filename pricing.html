@@ -741,18 +741,7 @@ function onviSubmitConsult(f){
 })();
 </script>
 
-<script data-x="nav-auth-script">
-(function(){
-  var n=''; try{ n=localStorage.getItem('onvi.user.name')||''; if(!localStorage.getItem('onvi.onboarded'))n=''; }catch(e){}
-  if(!n) return;
-  var l=document.getElementById('navLogin'), u=document.getElementById('navUser');
-  if(!l||!u) return;
-  l.hidden=true; u.hidden=false;
-  var s=u.querySelector('[data-name]'); if(s) s.textContent=n+' 님'; var av=u.querySelector('[data-avatar-initial]'); if(av) av.textContent=(n.trim().charAt(0)||'');
-  var p=document.querySelector('#navPanel a[href="login.html"]');
-  if(p){ p.href='mypage.html'; p.textContent=n+' 님의 공간'; }
-})();
-</script>
+<script defer src="shared/onvi-nav-auth.js"></script>
 
 <script data-x="pricing-apply-script">
 (function(){
