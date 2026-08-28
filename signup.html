@@ -327,10 +327,10 @@
       <p class="su-eyebrow">우리 가족 공간</p>
       <h1 class="su-h">가족 이름을 정해주세요</h1>
       <p class="su-sub">매주 이 이름으로 편지가 도착해요. <br>언제든 바꾸실 수 있어요.</p>
-      <div class="su-field"><label for="fName">성함</label><input class="su-input" id="fName" name="name" placeholder="예) 김온비" autocomplete="name"><p class="su-hint">부르실 이름으로 적어주세요.</p></div>
+      <div class="su-field"><label for="fName">성함 <span class="su-prefill" id="fNameBadge" hidden style="font-weight:600; color:#2A7360; font-size:12px; margin-left:5px;">카카오 계정에서 불러왔어요</span></label><input class="su-input" id="fName" name="name" placeholder="예) 김온비" autocomplete="name"><p class="su-hint">부르실 이름으로 적어주세요.</p></div>
       <div class="su-field"><label for="fFamily">가족 이름</label><input class="su-input" id="fFamily" name="family" placeholder="예) 온비님의 가족"></div>
       <div class="su-field"><label for="fPhone">연락받으실 번호</label><input class="su-input" id="fPhone" name="phone" type="tel" placeholder="010-0000-0000" inputmode="numeric"><p class="su-hint">부모님 소식과 결제 안내를 이 번호로 보내드려요. 1기는 문자 인증 없이 시작해요.</p></div>
-      <div class="su-field"><label for="fEmail">소식 받으실 이메일 <span class="opt">(선택)</span></label><input class="su-input" id="fEmail" name="email" type="email" placeholder="onvi@example.com" autocomplete="email"></div>
+      <div class="su-field"><label for="fEmail">소식 받으실 이메일 <span class="opt">(선택)</span></label><p class="su-hint" id="fEmailHint" hidden style="margin:0 0 7px;">카카오 계정 이메일이에요. 다른 주소로 받으시려면 고쳐주세요.</p><input class="su-input" id="fEmail" name="email" type="email" placeholder="onvi@example.com" autocomplete="email" aria-describedby="fEmailHint"></div>
       <button type="button" class="su-btn" data-next>다음</button>
     </div>
 
@@ -428,14 +428,21 @@
       if (dn) dn.textContent = st.family || st.name || '가족';
       // 가입을 마치면 축하 화면으로 넘어간다 (v3.5.0에서 완료 화면이 별도 페이지가 됐다)
       try { if (st.family) localStorage.setItem('onvi.family.name', st.family); } catch (e) { /* 무시 */ }
-      window.location.href = 'welcome.html';
+      // 상담 신청 등 가입 전에 하던 일이 있으면 그 화면으로 돌려보낸다
+      var back = '';
+      try {
+        back = new URLSearchParams(window.location.search).get('next') || sessionStorage.getItem('onvi.after_login') || '';
+      } catch (e) { /* 무시 */ }
+      if (back) { try { sessionStorage.removeItem('onvi.after_login'); } catch (e) {} }
+      // 같은 출처의 경로만 받는다 (열린 리다이렉트 방지)
+      window.location.href = (back && /^\/(?!\/)/.test(back)) ? back : 'welcome.html';
     }
   }
   function fail(msg){ errBox.textContent=msg; errBox.hidden=false; window.scrollTo({top:0,behavior:'smooth'}); }
   function val(id){ var e=document.getElementById(id); return e?(e.value||'').trim():''; }
   function validate(name){
     if(name==='terms'){ var reqs=document.querySelectorAll('.ag-req'); for(var i=0;i<reqs.length;i++){ if(!reqs[i].checked){ fail('필수 항목에 동의해 주세요.'); return false; } } st.mkt=document.getElementById('agMkt').checked; return true; }
-    if(name==='family'){ st.name=val('fName'); st.family=val('fFamily')||(st.name?st.name+'님의 가족':''); st.phone=val('fPhone');
+    if(name==='family'){ st.name=val('fName'); st.family=val('fFamily')||(st.name?st.name+'님의 가족':''); st.phone=val('fPhone'); st.email=val('fEmail');
       if(!st.name){ fail('성함을 다시 확인해 주세요.'); return false; }
       if(!st.phone){ fail('연락처를 다시 확인해 주세요.'); return false; } return true; }
     if(name==='parent'){ st.pphone=val('pPhone'); if(!st.pphone){ fail('부모님 연락처를 다시 확인해 주세요.'); return false; } return true; }
@@ -451,8 +458,20 @@
       if(st.provider) localStorage.setItem('onvi.user.provider', st.provider);
       localStorage.setItem('onvi.marketing', st.mkt ? 'email,sms,kakao' : '');
       localStorage.setItem('onvi.terms.agreed','age14,tos,privacy@v1.0');
+      if(st.family) localStorage.setItem('onvi.family.name', st.family);
+      if(st.email) localStorage.setItem('onvi.user.email', st.email);
+      if(st.phone) localStorage.setItem('onvi.user.phone', st.phone);
       window.dispatchEvent(new Event('onvi-auth'));
     }catch(e){/* 무시 */}
+    // Supabase 적재 — 설정이 비어 있으면 건너뛴다(데모 모드). 화면 흐름은 막지 않는다.
+    if(window.OnViDB && window.OnViDB.ready()){
+      window.OnViDB.saveSignup({
+        name: st.name || st.family || '',
+        phone: st.phone || '',
+        email: st.email || '',
+        marketing: !!st.mkt
+      }).catch(function(){ /* 무시 */ });
+    }
   }
   // oauth
   document.querySelectorAll('[data-provider]').forEach(function(b){
@@ -538,6 +557,44 @@
   document.querySelectorAll('.su-see').forEach(function(b){
     b.addEventListener('click', function(){ openDoc(b.getAttribute('data-doc')); });
   });
+  // 카카오 계정에서 가져올 수 있는 값은 미리 채워 둔다.
+  // 값이 실제로 들어간 칸에만 '불러왔어요' 배지를 켠다 — 비어 있는데 배지만 뜨면 거짓말이 된다.
+  (function () {
+    function setIfEmpty(id, v) {
+      if (!v) return false;
+      var el = document.getElementById(id);
+      if (!el || (el.value || '').trim()) return false;
+      el.value = v; return true;
+    }
+    function apply(meta, email) {
+      var name = meta.name || meta.full_name || meta.nickname || meta.preferred_username || '';
+      var filledName = setIfEmpty('fName', name);
+      var filledMail = setIfEmpty('fEmail', email || meta.email || '');
+      setIfEmpty('fPhone', meta.phone_number || '');
+      var badge = document.getElementById('fNameBadge');
+      if (badge && filledName) badge.hidden = false;
+      var hint = document.getElementById('fEmailHint');
+      if (hint && filledMail) hint.hidden = false;
+      if (filledName) { st.name = st.name || name; }
+    }
+    function fromSession() {
+      if (!(window.OnViAuth && window.OnViAuth.client)) return false;
+      window.OnViAuth.client.auth.getUser().then(function (r) {
+        var u = r && r.data && r.data.user;
+        if (u) apply(u.user_metadata || {}, u.email || '');
+      }, function () { /* 무시 */ });
+      return true;
+    }
+    // 저장해 둔 값이 있으면 먼저 쓰고, 세션이 준비되면 덮어쓴다
+    try {
+      apply({
+        name: localStorage.getItem('onvi.user.name') || '',
+        phone_number: localStorage.getItem('onvi.user.phone') || ''
+      }, localStorage.getItem('onvi.user.email') || '');
+    } catch (e) { /* 무시 */ }
+    if (!fromSession()) { var t = setInterval(function () { if (fromSession()) clearInterval(t); }, 200); setTimeout(function () { clearInterval(t); }, 6000); }
+  })();
+
   // honor pick
   document.querySelectorAll('#honorPick button').forEach(function(b){ b.addEventListener('click',function(){ st.honor=b.getAttribute('data-honor'); document.querySelectorAll('#honorPick button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); }); }); });
   // slot pick
@@ -551,7 +608,8 @@
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
         <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center; flex-shrink:0;"></span></a>
-        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<span data-ft-tag=""> <br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</span></p>
+        <p style="margin:2px 0 0; color:rgba(255,255,255,0.78); line-height:1.6; font-size:14px; font-weight:600; letter-spacing:-0.015em;">멀리 있어도, 매일 곁에</p>
+        <p style="margin:0; color:rgba(255,255,255,0.55); line-height:1.6; font-size:13px;">매주의 안부가 온 가족의 기억이 되는 곳.</p>
       </div>
     </div>
     <div data-ft-row="" style="display:flex; flex-wrap:wrap; gap:14px 40px; align-items:baseline; padding-top:26px; border-top:1px solid rgba(255,255,255,0.09);">
@@ -634,6 +692,8 @@
 </script>
 
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="shared/onvi-config.js"></script>
+<script defer src="shared/onvi-supabase.js"></script>
 <script defer src="shared/onvi-nav-auth.js"></script>
 <script defer src="shared/onvi-auth.js"></script>
 </body>

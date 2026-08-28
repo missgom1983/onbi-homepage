@@ -122,9 +122,16 @@
     .ov-faq > p { margin: 0; padding: 0 4px 24px; font-size: 15.5px; line-height: 1.75; color: #3F4D62; max-width: 660px; text-wrap: pretty; }
     .ov-in { width: 100%; background: #FFFFFF; border: 1px solid #E6E0D1; border-radius: 12px; padding: 14px 16px; font-family: inherit; font-size: 16px; color: #1F2A3A; min-height: 52px; }
     .ov-in:focus { outline: 2px solid #4FB89E; outline-offset: 1px; }
-    .ov-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 480; padding: 0 20px calc(14px + env(safe-area-inset-bottom)); display: flex; justify-content: center; align-items: center; gap: 10px; transform: translateY(150%); transition: transform .38s cubic-bezier(.22,.61,.36,1); pointer-events: none; }
-    .ov-bar[data-on="true"] { transform: none; }
-    .ov-barin { pointer-events: auto; display: inline-flex; align-items: center; justify-content: center; max-width: min(680px, 100%); padding: 6px 24px; border-radius: 999px; background: rgba(31,42,58,0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 18px 44px -16px rgba(31,42,58,0.75); }
+    .ov-bar { position: fixed; right: 28px; bottom: calc(28px + env(safe-area-inset-bottom)); z-index: 480; opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .28s ease, transform .38s cubic-bezier(.22,.61,.36,1); }
+    .ov-bar[data-on="true"] { opacity: 1; transform: none; }
+    .ov-barin { pointer-events: auto; display: inline-flex; }
+    .ov-fabm { display: none; }
+    @media (max-width: 760px) {
+      .ov-bar { right: 20px; bottom: calc(20px + env(safe-area-inset-bottom)); }
+      .ov-fab { width: 56px; height: 56px; padding: 0 !important; flex-direction: column !important; gap: 1px !important; }
+      .ov-fabpc { display: none !important; }
+      .ov-fabm { display: inline-flex !important; }
+    }
     .ov-needslider::-webkit-scrollbar { display: none; }
     .ov-needwrap { margin: 0 -4px; }
     @media (min-width: 1081px) { .ov-needslider { justify-content: center; } }
@@ -133,12 +140,47 @@
       .ov-needslider { padding: 8px 20px 16px !important; -webkit-mask-image: linear-gradient(90deg, #000 0 84%, rgba(0,0,0,0.15) 97%, transparent 100%); mask-image: linear-gradient(90deg, #000 0 84%, rgba(0,0,0,0.15) 97%, transparent 100%); }
       .ov-needcard { width: 250px !important; aspect-ratio: 4/5 !important; scroll-snap-align: start; }
     }
-    @media (max-width: 1080px) { .ov-two { grid-template-columns: 1fr !important; gap: 34px !important; } }
+    @media (max-width: 1080px) { .ov-two { grid-template-columns: 1fr !important; gap: 34px !important; } .ov-plead { max-width: none !important; } }
+    @media (max-width: 640px) { .ov-inc { grid-template-columns: 1fr !important; } }
+    @media (max-width: 900px) { .ov-pdp { grid-template-columns: 1fr !important; } .ov-pdp > div:last-child { border-left: none !important; border-top: 1px solid #F0EBDD !important; } }
+    @media (max-width: 760px) { .ov-f3 { grid-template-columns: 1fr !important; } }
+    @media (max-width: 900px) { .ov-apx { grid-template-columns: 1fr !important; } }
+    .ov-stepslider { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .ov-stepslider::-webkit-scrollbar { display: none; }
+    @media (max-width: 760px) {
+      .ov-stepslider { margin: 0 -20px; padding: 0 20px 8px !important; -webkit-mask-image: linear-gradient(90deg, #000 0 86%, rgba(0,0,0,0.2) 97%, transparent 100%); mask-image: linear-gradient(90deg, #000 0 86%, rgba(0,0,0,0.2) 97%, transparent 100%); }
+      .ov-stepcard { flex: 0 0 auto !important; min-width: 152px !important; }
+    }
+    @media (max-width: 900px) { .ov-f5 { grid-template-columns: repeat(3, 1fr) !important; } }
+    @media (max-width: 560px) { .ov-f5 { grid-template-columns: repeat(2, 1fr) !important; } }
+    @media (max-width: 760px) {
+      .ov-mhide { display: none !important; }
+      .ov-pflist { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+      .ov-pfd { display: none !important; }
+      .ov-assure { flex-direction: row !important; flex-wrap: wrap !important; gap: 8px 14px !important; }
+      .ov-p2x2 { grid-template-columns: 1fr !important; }
+      .ov-two { gap: 20px !important; }
+      .ov-pdp > div { padding: 20px !important; }
+      .ov-f3 > div { padding: 13px 15px !important; }
+      .ov-kvbody { padding-top: 96px !important; }
+    }
+    @media (max-width: 760px) {
+      .ov-prow { flex-direction: column !important; gap: 4px !important; padding: 13px 16px !important; }
+      .ov-prow > span:first-child { width: auto !important; }
+      .ov-pcap { display: none !important; }
+      .ov-mcap { display: block !important; }
+      .ov-scrim { align-items: flex-end !important; padding: 0 !important; }
+      .ov-sheet { max-width: none !important; border-radius: 22px 22px 0 0 !important; }
+      .ov-formsheet { max-height: 92vh !important; padding: 22px 18px 26px !important; }
+      .ov-pimg { aspect-ratio: 4/3 !important; border-radius: 16px !important; }
+      .ov-pcta { width: 100%; justify-content: center !important; background: color-mix(in srgb, var(--cheongja) 14%, #FFFFFF); border-radius: 999px; padding: 0 18px; }
+    }
+    @media (min-width: 1081px) and (max-width: 1240px) { .ov-two { gap: 34px !important; } }
 
     @media (max-width: 760px) {
       h1 br, h2 br, h3 br, blockquote br, p br { display: none; }
       br[data-m], br[data-keep] { display: inline !important; }
-      section { padding-top: 52px !important; padding-bottom: 52px !important; }
+      section { padding-top: 38px !important; padding-bottom: 38px !important; }
       .ov-kv { min-height: 88svh !important; align-items: flex-start !important; }
       .ov-kvpc { display: none !important; }
       .ov-kvmo { display: block !important; }
@@ -215,7 +257,6 @@
         <h1 style="margin: clamp(18px, 2.2vw, 26px) 0px 0px; font-family: var(--font-letter); font-size: clamp(30px, 4.4vw, 54px); line-height: 1.32; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">듣지 못한 이야기는 <br data-keep="">돌아오지 않습니다.</h1>
 
         <p style="margin: clamp(16px, 2vw, 24px) 0px 0px; max-width: 430px; font-size: clamp(15px, 1.6vw, 18px); line-height: 1.8; color: rgb(63, 77, 98); text-wrap: pretty;">오늘 여쭙지 않으면, 내일도 여쭙지 못합니다.</p>
-
       </div>
     </div>
 
@@ -231,14 +272,14 @@
     <div style="width: min(1100px, 94%); margin: 0px auto;">
       <div style="text-align: center; margin-bottom: clamp(30px, 3.6vw, 44px);">
         <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">이런 가족에게 필요합니다</div>
-        <h2 style="margin: 16px 0px 0px; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.22; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">혹시 이런 고민, <br data-keep="">있으신가요?</h2>
+        <h2 style="margin: 16px 0px 0px; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.22; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">이런 고민이신가요?</h2>
       </div>
 
       <div class="ov-needwrap" style="position: relative;">
         <div class="ov-needslider" style="display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 4px 18px; scrollbar-width: none;">
           
             <div class="ov-needcard scp1" style="position: relative; flex: 0 0 auto; width: 300px; aspect-ratio: 3 / 4; border-radius: 24px; overflow: hidden; scroll-snap-align: center; box-shadow: rgba(31, 42, 58, 0.16) 0px 10px 34px; transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);">
-              <img src="assets/photos/need-missed-call.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center 24%; display: block;">
+              <span aria-hidden="true" style="position: absolute; inset: 0px; display: block; background-image: url(&quot;assets/photos/need-missed-call.jpg&quot;); background-size: cover; background-position: center 24%; background-repeat: no-repeat;"></span>
               <span aria-hidden="true" style="position: absolute; inset: 0px; background: linear-gradient(rgba(31, 42, 58, 0.34) 0%, rgba(31, 42, 58, 0.02) 34%, rgba(31, 42, 58, 0.52) 66%, rgba(31, 42, 58, 0.88) 100%);"></span>
               <span aria-hidden="true" style="position: absolute; left: 22px; top: 20px; font-family: var(--font-letter); font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: rgba(255, 255, 255, 0.72);">01</span>
               <div style="position: absolute; left: 22px; right: 22px; bottom: 22px;">
@@ -249,7 +290,7 @@
             </div>
           
             <div class="ov-needcard scp1" style="position: relative; flex: 0 0 auto; width: 300px; aspect-ratio: 3 / 4; border-radius: 24px; overflow: hidden; scroll-snap-align: center; box-shadow: rgba(31, 42, 58, 0.16) 0px 10px 34px; transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);">
-              <img src="assets/photos/need-album.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center 28%; display: block;">
+              <span aria-hidden="true" style="position: absolute; inset: 0px; display: block; background-image: url(&quot;assets/photos/need-album.jpg&quot;); background-size: cover; background-position: center 28%; background-repeat: no-repeat;"></span>
               <span aria-hidden="true" style="position: absolute; inset: 0px; background: linear-gradient(rgba(31, 42, 58, 0.34) 0%, rgba(31, 42, 58, 0.02) 34%, rgba(31, 42, 58, 0.52) 66%, rgba(31, 42, 58, 0.88) 100%);"></span>
               <span aria-hidden="true" style="position: absolute; left: 22px; top: 20px; font-family: var(--font-letter); font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: rgba(255, 255, 255, 0.72);">02</span>
               <div style="position: absolute; left: 22px; right: 22px; bottom: 22px;">
@@ -260,7 +301,7 @@
             </div>
           
             <div class="ov-needcard scp1" style="position: relative; flex: 0 0 auto; width: 300px; aspect-ratio: 3 / 4; border-radius: 24px; overflow: hidden; scroll-snap-align: center; box-shadow: rgba(31, 42, 58, 0.16) 0px 10px 34px; transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);">
-              <img src="assets/photos/need-app-burden.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center 26%; display: block;">
+              <span aria-hidden="true" style="position: absolute; inset: 0px; display: block; background-image: url(&quot;assets/photos/need-app-burden.jpg&quot;); background-size: cover; background-position: center 26%; background-repeat: no-repeat;"></span>
               <span aria-hidden="true" style="position: absolute; inset: 0px; background: linear-gradient(rgba(31, 42, 58, 0.34) 0%, rgba(31, 42, 58, 0.02) 34%, rgba(31, 42, 58, 0.52) 66%, rgba(31, 42, 58, 0.88) 100%);"></span>
               <span aria-hidden="true" style="position: absolute; left: 22px; top: 20px; font-family: var(--font-letter); font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: rgba(255, 255, 255, 0.72);">03</span>
               <div style="position: absolute; left: 22px; right: 22px; bottom: 22px;">
@@ -273,437 +314,276 @@
         </div>
       </div>
 
-      <p style="margin: clamp(26px, 3vw, 34px) auto 0px; max-width: 560px; text-align: center; font-size: clamp(15.5px, 1.7vw, 18px); line-height: 1.75; font-weight: 600; letter-spacing: -0.02em; color: var(--simhae); text-wrap: pretty;">매주 한 통의 전화가, 부모님의 이야기로 남습니다.</p>
+      <p style="margin: clamp(26px, 3vw, 34px) auto 0px; max-width: 560px; text-align: center; font-size: clamp(15.5px, 1.7vw, 18px); line-height: 1.75; font-weight: 600; letter-spacing: -0.02em; color: var(--simhae); text-wrap: pretty;">매주 한 통의 전화가 이야기로 남습니다.</p>
     </div>
   </section>
 
   
-  <section id="core" data-ev="service_detail_view" style="background: rgb(255, 255, 255); border-radius: 28px; padding: clamp(48px, 6vw, 92px) clamp(20px, 4vw, 80px);">
-    <div style="width: min(1140px, 94%); margin: 0px auto;">
-      <div style="text-align: center; margin-bottom: clamp(30px, 3.6vw, 44px);">
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">온비가 해드리는 일</div>
-        <h2 style="margin: 16px 0px 0px; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.22; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">네 가지가 <br data-keep="">이렇게 도착합니다</h2>
-        <p style="margin: 14px auto 0px; max-width: 400px; font-size: 14.5px; line-height: 1.75; color: rgb(92, 102, 117); text-wrap: pretty;">눌러보시면 실제로 받으실 모습을 보여드려요.</p>
+  <section id="join" style="background: rgb(255, 255, 255); border-radius: 28px; padding: clamp(48px, 6vw, 92px) clamp(20px, 4vw, 80px);">
+    <div style="width: min(1060px, 94%); margin: 0px auto;">
+
+      <div style="text-align: center; margin-bottom: clamp(24px, 3vw, 34px);">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">온비 가족 구독</div>
+        <h2 style="margin: 16px 0px 0px; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.24; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); white-space: nowrap;">매주 곁에 남는 편지</h2>
+        <p class="ov-mhide" style="margin: 14px auto 0px; max-width: 480px; font-size: 15px; line-height: 1.75; color: rgb(92, 102, 117); text-wrap: pretty;">매주 나눈 이야기를 금요편지로 정리해 가족 모두에게 전합니다.</p>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        
-          <div style="border-radius: 18px; overflow: hidden; transition: border-color 0.18s, box-shadow 0.18s; background: rgb(255, 255, 255); border: 1px solid var(--cheongja); box-shadow: rgba(79, 184, 158, 0.7) 0px 10px 28px -18px;">
-            <button type="button" aria-expanded="true" data-ev="service_detail_open" style="display: flex; align-items: center; gap: 15px; width: 100%; padding: 18px 20px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: transparent; font-family: inherit; cursor: pointer; text-align: left;">
-              <span aria-hidden="true" style="display: block; width: 3px; border-radius: 3px; align-self: stretch; flex-shrink: 0; background: var(--cheongja);"></span>
-              <span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 5px; min-width: 0px;">
-                <span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; color: rgb(42, 115, 96);">01</span>
-                <span style="font-size: clamp(16px, 1.7vw, 18px); font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">매주 같은 담당자의 이야기 통화</span>
-                <span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em; color: rgb(138, 106, 60);">주 1회 · 약 30분</span>
-              </span>
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 24px; height: 24px; color: rgb(42, 115, 96); transition: transform 0.18s; transform: rotate(180deg);">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              </span>
-            </button>
-
-            
-              <div style="padding: 0px 20px 24px;">
-                <p style="margin: 0px; font-size: clamp(15px, 1.6vw, 17px); line-height: 1.8; color: rgb(63, 77, 98); text-wrap: pretty;">한 분의 이야기벗이 계속 맡습니다. 지난주 이야기를 기억한 채로 전화드리니, 매번 처음부터 설명하지 않으셔도 됩니다.</p>
-
-                <div style="margin-top: 18px;">
-                  
-                  
-                    <div style="background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); border-radius: 18px; padding: 20px 22px;">
-                      <div style="display: flex; align-items: center; gap: 13px;">
-                        <span aria-hidden="true" style="flex-shrink: 0; width: 42px; height: 42px; border-radius: 999px; background: var(--angae); display: grid; place-items: center; font-size: 15px; font-weight: 700; color: rgb(42, 115, 96);">온</span>
-                        <span style="min-width: 0px;">
-                          <span style="display: block; font-size: 15px; font-weight: 700; color: var(--simya);">이야기벗 김수현</span>
-                          <span style="display: block; margin-top: 3px; font-size: 13px; color: rgb(92, 102, 117);">금요일 오후 3시 · 32분 통화</span>
-                        </span>
-                      </div>
-                      <div style="display: flex; align-items: center; gap: 8px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgb(240, 235, 221);">
-                        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 106, 60);">지난주 이야기</span>
-                        <span style="font-size: 13px; color: rgb(63, 77, 98);">첫 월급으로 사드린 운동화</span>
-                      </div>
-                    </div>
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                </div>
-
-                <div style="margin-top: 18px; padding-top: 18px; border-top: 1px solid rgb(239, 233, 218);">
-                  <div style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; color: rgb(138, 147, 160); margin-bottom: 13px;">이 안에 포함돼요</div>
-                  <div style="display: flex; flex-direction: column; gap: 10px;">
-                    
-                      <div style="display: flex; gap: 10px; align-items: baseline;">
-                        <span aria-hidden="true" style="flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 999px; background: color-mix(in srgb, var(--cheongja) 20%, #FFFFFF); color: rgb(42, 115, 96); font-size: 9px; font-weight: 700; transform: translateY(2px);">✓</span>
-                        <span style="min-width: 0px;">
-                          <span style="display: block; font-size: 14.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--simya);">이야기 통화</span>
-                          <span style="display: block; margin-top: 3px; font-size: 13px; line-height: 1.6; color: rgb(92, 102, 117);">매주 1회 30분, 같은 담당자</span>
-                        </span>
-                      </div>
-                    
-                      <div style="display: flex; gap: 10px; align-items: baseline;">
-                        <span aria-hidden="true" style="flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 999px; background: color-mix(in srgb, var(--cheongja) 20%, #FFFFFF); color: rgb(42, 115, 96); font-size: 9px; font-weight: 700; transform: translateY(2px);">✓</span>
-                        <span style="min-width: 0px;">
-                          <span style="display: block; font-size: 14.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--simya);">주중 안부</span>
-                          <span style="display: block; margin-top: 3px; font-size: 13px; line-height: 1.6; color: rgb(92, 102, 117);">씨앗 배달과 가벼운 안부</span>
-                        </span>
-                      </div>
-                    
-                      <div style="display: flex; gap: 10px; align-items: baseline;">
-                        <span aria-hidden="true" style="flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 999px; background: color-mix(in srgb, var(--cheongja) 20%, #FFFFFF); color: rgb(42, 115, 96); font-size: 9px; font-weight: 700; transform: translateY(2px);">✓</span>
-                        <span style="min-width: 0px;">
-                          <span style="display: block; font-size: 14.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--simya);">곁을 살피는 신호</span>
-                          <span style="display: block; margin-top: 3px; font-size: 13px; line-height: 1.6; color: rgb(92, 102, 117);">평안, 살핌, 확인 세 단계</span>
-                        </span>
-                      </div>
-                    
-                  </div>
-                </div>
-              </div>
-            
-          </div>
-        
-          <div style="border-radius: 18px; overflow: hidden; transition: border-color 0.18s, box-shadow 0.18s; background: rgb(251, 248, 239); border: 1px solid rgb(239, 233, 218);">
-            <button type="button" aria-expanded="false" data-ev="service_detail_open" style="display: flex; align-items: center; gap: 15px; width: 100%; padding: 18px 20px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: transparent; font-family: inherit; cursor: pointer; text-align: left;">
-              <span aria-hidden="true" style="display: block; width: 3px; border-radius: 3px; align-self: stretch; flex-shrink: 0; background: rgba(140, 122, 94, 0.24);"></span>
-              <span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 5px; min-width: 0px;">
-                <span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; color: rgb(138, 147, 160);">02</span>
-                <span style="font-size: clamp(16px, 1.7vw, 18px); font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">매주 금요일 가족 편지</span>
-                <span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em; color: rgb(138, 106, 60);">월 4통 · 가족 여러 명 수신</span>
-              </span>
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 24px; height: 24px; color: rgb(138, 147, 160); transition: transform 0.18s; transform: rotate(0deg);">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              </span>
-            </button>
-
-            
-          </div>
-        
-          <div style="border-radius: 18px; overflow: hidden; transition: border-color 0.18s, box-shadow 0.18s; background: rgb(251, 248, 239); border: 1px solid rgb(239, 233, 218);">
-            <button type="button" aria-expanded="false" data-ev="service_detail_open" style="display: flex; align-items: center; gap: 15px; width: 100%; padding: 18px 20px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: transparent; font-family: inherit; cursor: pointer; text-align: left;">
-              <span aria-hidden="true" style="display: block; width: 3px; border-radius: 3px; align-self: stretch; flex-shrink: 0; background: rgba(140, 122, 94, 0.24);"></span>
-              <span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 5px; min-width: 0px;">
-                <span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; color: rgb(138, 147, 160);">03</span>
-                <span style="font-size: clamp(16px, 1.7vw, 18px); font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">가족 공간과 기록 보관</span>
-                <span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em; color: rgb(138, 106, 60);">인원 제한 없음</span>
-              </span>
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 24px; height: 24px; color: rgb(138, 147, 160); transition: transform 0.18s; transform: rotate(0deg);">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              </span>
-            </button>
-
-            
-          </div>
-        
-          <div style="border-radius: 18px; overflow: hidden; transition: border-color 0.18s, box-shadow 0.18s; background: rgb(251, 248, 239); border: 1px solid rgb(239, 233, 218);">
-            <button type="button" aria-expanded="false" data-ev="service_detail_open" style="display: flex; align-items: center; gap: 15px; width: 100%; padding: 18px 20px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: transparent; font-family: inherit; cursor: pointer; text-align: left;">
-              <span aria-hidden="true" style="display: block; width: 3px; border-radius: 3px; align-self: stretch; flex-shrink: 0; background: rgba(140, 122, 94, 0.24);"></span>
-              <span style="flex: 1 1 0%; display: flex; flex-direction: column; gap: 5px; min-width: 0px;">
-                <span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; color: rgb(138, 147, 160);">04</span>
-                <span style="font-size: clamp(16px, 1.7vw, 18px); font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">부모님 수신본과 특별 기록</span>
-                <span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em; color: rgb(138, 106, 60);">생신 · 명절 포함</span>
-              </span>
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 24px; height: 24px; color: rgb(138, 147, 160); transition: transform 0.18s; transform: rotate(0deg);">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              </span>
-            </button>
-
-            
-          </div>
-        
-      </div>
-
-      <p style="margin: clamp(20px, 2.4vw, 28px) auto 0px; text-align: center; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117);">네 가지를 합쳐 모두 12가지가 포함됩니다. 요금은 하나뿐이에요.</p>
-    </div>
-  </section>
-
-  
-  <section id="join" style="background: color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius: 28px; padding: clamp(48px, 6vw, 92px) clamp(20px, 4vw, 80px);">
-    <div style="width: min(860px, 94%); margin: 0px auto;">
-      <div style="text-align: center; margin-bottom: clamp(28px, 3.4vw, 40px);">
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">요금제</div>
-        <h2 style="margin: 16px 0px 0px; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.22; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">하루 300원으로 <br data-keep="">매주 곁에 남습니다</h2>
-      </div>
-
-      <div style="position: relative; background: rgb(255, 255, 255); border: 1.5px solid var(--cheongja); border-radius: 24px; box-shadow: rgba(31, 42, 58, 0.3) 0px 14px 44px -30px; overflow: hidden;">
-        <span aria-hidden="true" style="position: absolute; top: 0px; right: 0px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: rgb(255, 255, 255); background: var(--cheongja); padding: 8px 18px; border-radius: 0px 0px 0px 14px;">온비 유일 요금제</span>
-
-        <div style="padding: clamp(28px, 3.4vw, 40px) clamp(28px, 3.4vw, 40px) clamp(24px, 3vw, 30px); border-bottom: 1px solid rgb(240, 235, 221);">
-          <div style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; color: rgb(138, 106, 60);">온비 가족 요금제</div>
-          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-top: 14px;">
-            <span style="font-family: var(--font-letter); font-size: clamp(34px, 4.4vw, 52px); font-weight: 700; letter-spacing: -0.045em; line-height: 1; color: var(--simya);">9,900원</span>
-            <span style="font-size: 15px; font-weight: 700; color: rgb(92, 102, 117);">/ 월 · 부가세 포함</span>
-          </div>
-          <p style="margin: 14px 0px 0px; font-size: 15px; line-height: 1.75; color: rgb(63, 77, 98); text-wrap: pretty;">가족이 몇 분이든, 요금은 이 한 가지뿐입니다.</p>
-
-          <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 11px;">
-            
-              <div style="display: flex; gap: 10px; align-items: baseline;">
-                <span aria-hidden="true" style="flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 999px; background: color-mix(in srgb, var(--cheongja) 20%, #FFFFFF); color: rgb(42, 115, 96); font-size: 9px; font-weight: 700; transform: translateY(2px);">✓</span>
-                <span style="font-size: 14.5px; font-weight: 600; line-height: 1.6; color: var(--simya);">주 1회 이야기 통화 (약 30분)</span>
-              </div>
-            
-              <div style="display: flex; gap: 10px; align-items: baseline;">
-                <span aria-hidden="true" style="flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 999px; background: color-mix(in srgb, var(--cheongja) 20%, #FFFFFF); color: rgb(42, 115, 96); font-size: 9px; font-weight: 700; transform: translateY(2px);">✓</span>
-                <span style="font-size: 14.5px; font-weight: 600; line-height: 1.6; color: var(--simya);">월 4회 금요편지, 가족 여러 명 수신</span>
-              </div>
-            
-              <div style="display: flex; gap: 10px; align-items: baseline;">
-                <span aria-hidden="true" style="flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 999px; background: color-mix(in srgb, var(--cheongja) 20%, #FFFFFF); color: rgb(42, 115, 96); font-size: 9px; font-weight: 700; transform: translateY(2px);">✓</span>
-                <span style="font-size: 14.5px; font-weight: 600; line-height: 1.6; color: var(--simya);">가족 공간 인원 제한 없음</span>
-              </div>
-            
-              <div style="display: flex; gap: 10px; align-items: baseline;">
-                <span aria-hidden="true" style="flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 999px; background: color-mix(in srgb, var(--cheongja) 20%, #FFFFFF); color: rgb(42, 115, 96); font-size: 9px; font-weight: 700; transform: translateY(2px);">✓</span>
-                <span style="font-size: 14.5px; font-weight: 600; line-height: 1.6; color: var(--simya);">통화·편지 기록 평생 보관</span>
-              </div>
-            
-          </div>
+      <div style="background: rgb(255, 255, 255); border: 1px solid rgb(236, 230, 216); border-radius: 24px; box-shadow: rgba(31, 42, 58, 0.28) 0px 14px 44px -34px; padding: clamp(26px, 3.2vw, 40px); text-align: center;">
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 147, 160);">정상 이용료</div>
+        <div style="display: flex; align-items: baseline; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+          <span style="font-family: var(--font-letter); font-size: clamp(38px, 4.8vw, 56px); font-weight: 700; letter-spacing: -0.045em; line-height: 1; color: var(--simya);">9,900원</span>
+          <span style="font-size: 14.5px; font-weight: 700; color: rgb(92, 102, 117);">/ 월</span>
+          <span style="font-size: 11.5px; font-weight: 500; color: rgb(180, 186, 195);">부가세 포함</span>
         </div>
 
-        <div>
+        <div style="margin-top: 16px; display: flex; gap: 8px 16px; justify-content: center; flex-wrap: wrap;">
           
-            <div style="display: flex; align-items: flex-start; gap: 18px; padding: 18px clamp(28px, 3.4vw, 40px); border-bottom: 1px solid rgb(245, 241, 230);">
-              <span style="flex-shrink: 0; width: 88px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 147, 160); padding-top: 2px;">계약 조건</span>
-              <span style="min-width: 0px; font-size: 14.5px; line-height: 1.75; color: rgb(63, 77, 98); text-wrap: pretty;">월 단위, 약정 없음</span>
+            <span style="display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: rgb(63, 77, 98);"><span aria-hidden="true" style="flex-shrink: 0; width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja);"></span>약정 없음</span>
+          
+            <span style="display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: rgb(63, 77, 98);"><span aria-hidden="true" style="flex-shrink: 0; width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja);"></span>가족 추가 비용 없음</span>
+          
+            <span style="display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: rgb(63, 77, 98);"><span aria-hidden="true" style="flex-shrink: 0; width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja);"></span>원할 때 이용 종료</span>
+          
+        </div>
+
+        <div class="ov-pflist" style="margin-top: clamp(22px, 2.6vw, 28px); padding-top: clamp(20px, 2.4vw, 26px); border-top: 1px solid rgb(240, 235, 221); display: grid; grid-template-columns: repeat(4, minmax(0px, 1fr)); gap: 10px;">
+          
+            <div style="background: rgb(251, 250, 246); border-radius: 14px; padding: 14px 10px; text-align: center;">
+              <span style="display: block; font-size: 13.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--simya); white-space: nowrap;">매주 이야기 통화</span>
+              <span style="display: block; margin-top: 5px; font-size: 12px; line-height: 1.45; color: rgb(138, 147, 160); white-space: nowrap;">주 1회 · 약 30분</span>
             </div>
           
-            <div style="display: flex; align-items: flex-start; gap: 18px; padding: 18px clamp(28px, 3.4vw, 40px); border-bottom: 1px solid rgb(245, 241, 230);">
-              <span style="flex-shrink: 0; width: 88px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 147, 160); padding-top: 2px;">결제</span>
-              <span style="min-width: 0px; font-size: 14.5px; line-height: 1.75; color: rgb(63, 77, 98); text-wrap: pretty;">3개월 무료가 끝난 뒤, 계속 이용에 동의하신 경우에만 안내드립니다. 동의 없이 결제되지 않습니다.</span>
+            <div style="background: rgb(251, 250, 246); border-radius: 14px; padding: 14px 10px; text-align: center;">
+              <span style="display: block; font-size: 13.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--simya); white-space: nowrap;">매주 금요편지</span>
+              <span style="display: block; margin-top: 5px; font-size: 12px; line-height: 1.45; color: rgb(138, 147, 160); white-space: nowrap;">월 4통 · 가족 수신</span>
             </div>
           
-            <div style="display: flex; align-items: flex-start; gap: 18px; padding: 18px clamp(28px, 3.4vw, 40px); border-bottom: 1px solid rgb(245, 241, 230);">
-              <span style="flex-shrink: 0; width: 88px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 147, 160); padding-top: 2px;">해지</span>
-              <span style="min-width: 0px; font-size: 14.5px; line-height: 1.75; color: rgb(63, 77, 98); text-wrap: pretty;">언제든 다음 달 이용 시작 전에 말씀해 주시면 그 달로 종료됩니다. 위약금은 없습니다.</span>
+            <div style="background: rgb(251, 250, 246); border-radius: 14px; padding: 14px 10px; text-align: center;">
+              <span style="display: block; font-size: 13.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--simya); white-space: nowrap;">가족 공간</span>
+              <span style="display: block; margin-top: 5px; font-size: 12px; line-height: 1.45; color: rgb(138, 147, 160); white-space: nowrap;">인원 제한 없음</span>
             </div>
           
-            <div style="display: flex; align-items: flex-start; gap: 18px; padding: 18px clamp(28px, 3.4vw, 40px); border-bottom: 1px solid rgb(245, 241, 230);">
-              <span style="flex-shrink: 0; width: 88px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 147, 160); padding-top: 2px;">환불</span>
-              <span style="min-width: 0px; font-size: 14.5px; line-height: 1.75; color: rgb(63, 77, 98); text-wrap: pretty;">유료 이용 중 해지하시면 남은 기간을 일할 계산해 돌려드립니다. 무료 기간에는 결제 자체가 없어 환불 대상이 아닙니다.</span>
+            <div style="background: rgb(251, 250, 246); border-radius: 14px; padding: 14px 10px; text-align: center;">
+              <span style="display: block; font-size: 13.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--simya); white-space: nowrap;">기록 보관</span>
+              <span style="display: block; margin-top: 5px; font-size: 12px; line-height: 1.45; color: rgb(138, 147, 160); white-space: nowrap;">언제든 다시 보기</span>
             </div>
           
         </div>
 
-        <div style="display: flex; gap: 20px; flex-wrap: wrap; padding: 16px clamp(28px, 3.4vw, 40px); background: rgb(251, 248, 239);">
-          
-            <span style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: rgb(92, 102, 117);"><span aria-hidden="true" style="width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja); flex-shrink: 0;"></span>약정 없음</span>
-          
-            <span style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: rgb(92, 102, 117);"><span aria-hidden="true" style="width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja); flex-shrink: 0;"></span>위약금 없음</span>
-          
-            <span style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: rgb(92, 102, 117);"><span aria-hidden="true" style="width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja); flex-shrink: 0;"></span>현금영수증 발급 가능</span>
-          
-        </div>
+        <a href="#pilot" aria-label="아래로 내려 3개월 무료 혜택 보기" class="scp2" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-top: clamp(16px, 2vw, 22px); border-radius: 999px; color: rgb(138, 147, 160); text-decoration: none; transition: color 0.2s, background 0.2s;">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+        </a>
       </div>
-
-      <p style="margin: 18px 0px 0px; font-size: 13px; line-height: 1.75; color: rgb(92, 102, 117); text-align: center; text-wrap: pretty;">결제 증빙은 이메일로 보내드립니다. 현금영수증은 요청하시면 발급해 드려요.</p>
     </div>
   </section>
 
   
   <section id="pilot" style="background: rgb(255, 255, 255); border-radius: 28px; padding: clamp(48px, 6vw, 92px) clamp(20px, 4vw, 80px);">
-    <div class="ov-two" style="width: min(1100px, 94%); margin: 0px auto; display: grid; grid-template-columns: minmax(0px, 0.95fr) minmax(0px, 1.05fr); gap: clamp(28px, 4vw, 56px); align-items: center;">
+    <div style="width: min(1000px, 94%); margin: 0px auto;">
 
-      <div>
+      <div style="text-align: center; margin-bottom: clamp(22px, 2.6vw, 30px);">
         <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">1기 시범 서비스</div>
-        <h2 style="margin: 16px 0px 0px; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.22; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">아직 다 갖추지 못했지만, <br data-keep="">진심은 다 담았습니다.</h2>
-        <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 22px; padding: 16px 20px; border-radius: 16px; background: color-mix(in srgb, var(--cheongja) 9%, #FFFFFF);">
-          <span style="font-size: 13.5px; font-weight: 600; color: rgb(92, 102, 117);">3개월 이용료 29,700원</span>
-          <span aria-hidden="true" style="font-size: 13px; color: rgb(138, 147, 160);">→</span>
-          <span style="font-family: var(--font-letter); font-size: clamp(24px, 2.8vw, 32px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: rgb(42, 115, 96);">0원</span>
-        </div>
-        <p style="margin: 18px 0px 0px; font-size: 14.5px; line-height: 1.8; color: rgb(92, 102, 117); text-wrap: pretty;">정식 출시 전, 서른 가족과 함께 부족한 점을 고쳐가고 싶어요. 참여비 대신 한 달에 한 번, 솔직한 의견만 여쭙습니다.</p>
+        <h2 style="margin: 16px 0px 0px; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.24; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); white-space: nowrap;">첫 서른 가족을 모십니다</h2>
+        <p style="margin: 14px 0px 0px; font-size: 15px; line-height: 1.7; font-weight: 600; color: rgb(63, 77, 98);">첫 3개월, 이용료 없이 함께합니다.</p>
       </div>
 
-      <div>
-        <div style="position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 16 / 9; box-shadow: rgba(31, 42, 58, 0.45) 0px 20px 48px -28px;">
-          <img src="assets/photos/service-first-parcel.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center 46%;">
-          <span aria-hidden="true" style="position: absolute; inset: 0px; background: linear-gradient(rgba(31, 42, 58, 0) 46%, rgba(31, 42, 58, 0.62) 100%);"></span>
-          <span style="position: absolute; left: 20px; bottom: 16px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; color: rgb(255, 255, 255); text-shadow: rgba(31, 42, 58, 0.7) 0px 1px 10px;">첫인사꾸러미가 먼저 갑니다</span>
+      <div class="ov-two" style="display: grid; grid-template-columns: minmax(0px, 0.9fr) minmax(0px, 1.1fr); gap: clamp(20px, 2.6vw, 36px); align-items: center;">
+        <div style="padding: 22px 24px; border-radius: 18px; background: color-mix(in srgb, var(--cheongja) 8%, #FFFFFF); text-align: center;">
+          <span style="display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: rgb(42, 115, 96); background: var(--angae); border-radius: 999px; padding: 5px 12px;">1기 시범 가족 한정</span>
+          <div style="margin-top: 12px; font-size: 13px; font-weight: 600; color: rgb(92, 102, 117);">정식 이용가 29,700원 상당</div>
+          <div style="margin-top: 3px; font-size: 12px; color: rgb(138, 147, 160);">월 9,900원 × 3개월</div>
+          <div style="margin-top: 10px; font-family: var(--font-letter); font-size: clamp(30px, 3.6vw, 42px); font-weight: 700; letter-spacing: -0.042em; line-height: 1.05; color: rgb(42, 115, 96);">3개월 무료</div>
+
+          <span id="apply"></span>
+          <button type="button" id="applyBtn" data-ev="consult_start" class="scp3" style="margin-top: 18px; width: 100%; min-height: 56px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: var(--cheongja); color: rgb(255, 255, 255); font-family: inherit; font-size: 16px; font-weight: 700; letter-spacing: -0.015em; cursor: pointer; transition: background 0.2s;">3개월 무료 상담 신청하기</button>
+          <p style="margin: 10px 0px 0px; font-size: 12.5px; line-height: 1.6; color: rgb(92, 102, 117); white-space: nowrap;">신청만으로 결제되지 않아요.</p>
         </div>
-        <div style="margin-top: 14px; background: rgb(251, 248, 239); border: 1px solid rgb(239, 233, 218); border-radius: 20px; overflow: hidden;">
-          
-            <div style="display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; border-top: 1px solid rgb(240, 235, 221);">
-              <span style="flex-shrink: 0; width: 74px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 106, 60); padding-top: 2px;">무료 기간</span>
-              <span style="min-width: 0px; font-size: 14px; line-height: 1.7; color: rgb(63, 77, 98); text-wrap: pretty;">첫 통화를 시작한 날부터 3개월, 금요편지 12통을 모두 받으신 날까지입니다. 시작할 때 종료 날짜를 문자로 알려드립니다.</span>
-            </div>
-          
-            <div style="display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; border-top: 1px solid rgb(240, 235, 221);">
-              <span style="flex-shrink: 0; width: 74px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 106, 60); padding-top: 2px;">참여 조건</span>
-              <span style="min-width: 0px; font-size: 14px; line-height: 1.7; color: rgb(63, 77, 98); text-wrap: pretty;">한 달에 한 번, 10분 정도 전화로 의견을 여쭙습니다. 어렵다고 하시면 문자로 대신할 수 있어요.</span>
-            </div>
-          
-            <div style="display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; border-top: 1px solid rgb(240, 235, 221);">
-              <span style="flex-shrink: 0; width: 74px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 106, 60); padding-top: 2px;">종료 안내</span>
-              <span style="min-width: 0px; font-size: 14px; line-height: 1.7; color: rgb(63, 77, 98); text-wrap: pretty;">무료 기간이 끝나기 2주 전에 계속 이용 여부를 먼저 여쭙습니다. 동의하지 않으시면 자동으로 종료되며 결제되지 않습니다.</span>
-            </div>
-          
-            <div style="display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; border-top: 1px solid rgb(240, 235, 221);">
-              <span style="flex-shrink: 0; width: 74px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: rgb(138, 106, 60); padding-top: 2px;">모집</span>
-              <span style="min-width: 0px; font-size: 14px; line-height: 1.7; color: rgb(63, 77, 98); text-wrap: pretty;">선착순 30가족까지 받습니다. 마감되면 이 페이지에 바로 안내드립니다.</span>
-            </div>
-          
+
+        <div>
+          <div class="ov-pimg ov-mhide" style="position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 16 / 9; box-shadow: rgba(31, 42, 58, 0.45) 0px 20px 48px -28px;">
+            <img src="assets/photos/service-first-parcel.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center 46%;">
+            <span aria-hidden="true" style="position: absolute; inset: 0px; background: linear-gradient(rgba(31, 42, 58, 0) 40%, rgba(31, 42, 58, 0.74) 100%);"></span>
+            <span class="ov-pcap" style="position: absolute; left: 26px; right: 26px; bottom: 24px; font-size: 13px; font-weight: 700; letter-spacing: 0.01em; line-height: 1.5; color: rgb(255, 255, 255); text-shadow: rgba(31, 42, 58, 0.85) 0px 1px 12px;">첫인사꾸러미부터 정성껏 보내드려요</span>
+          </div>
         </div>
       </div>
 
     </div>
+
+    
+    
+
+    
+    
+
   </section>
 
   
-  <section id="flow" style="background: color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius: 28px; padding: clamp(48px, 6vw, 92px) clamp(20px, 4vw, 80px);">
-    <div style="width: min(1180px, 94%); margin: 0px auto;">
-      <div style="text-align: center; margin-bottom: clamp(28px, 3.4vw, 40px);">
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">이용 과정</div>
-        <h2 style="margin: 16px 0px 0px; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.22; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">오늘 신청하시면, <br data-keep="">이렇게 시작됩니다</h2>
-      </div>
+  <section id="guide" style="background: color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius: 28px; padding: clamp(34px, 4vw, 64px) clamp(20px, 4vw, 80px);">
+    <div style="width: min(1060px, 94%); margin: 0px auto;">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96); text-align: center;">신청 전 확인 사항</div>
 
-      <div style="display: flex; flex-direction: column; max-width: 640px; margin: 0px auto;">
+      <div style="margin-top: clamp(16px, 2vw, 22px); display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
         
-          <div style="display: flex; gap: 20px;">
-            <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; background: var(--angae); color: rgb(42, 115, 96);">01</span>
-              <span aria-hidden="true" style="width: 2px; flex: 1 1 0%; min-height: 28px; background: rgb(230, 224, 209); margin-top: 4px;"></span>
-            </div>
-            <div style="flex: 1 1 0%; min-width: 0px; padding-bottom: clamp(24px, 3vw, 32px);">
-              <h3 style="margin: 6px 0px 0px; font-size: 16px; font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">카카오 로그인</h3>
-              <p style="margin: 8px 0px 0px; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117); text-wrap: pretty;">1분이면 됩니다. 비밀번호는 만들지 않아요.</p>
-            </div>
-          </div>
+          <button type="button" data-apx="0" aria-pressed="true" style="min-height: 44px; padding: 0px 15px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; font-family: inherit; font-size: 13.5px; letter-spacing: -0.01em; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s; background: rgb(230, 243, 238); border: 1px solid var(--cheongja); color: rgb(42, 115, 96); font-weight: 700;">1기 시범 안내</button>
         
-          <div style="display: flex; gap: 20px;">
-            <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; background: var(--angae); color: rgb(42, 115, 96);">02</span>
-              <span aria-hidden="true" style="width: 2px; flex: 1 1 0%; min-height: 28px; background: rgb(230, 224, 209); margin-top: 4px;"></span>
-            </div>
-            <div style="flex: 1 1 0%; min-width: 0px; padding-bottom: clamp(24px, 3vw, 32px);">
-              <h3 style="margin: 6px 0px 0px; font-size: 16px; font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">상담 접수</h3>
-              <p style="margin: 8px 0px 0px; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117); text-wrap: pretty;">연락처와 편하신 시간만 남겨주세요.</p>
-            </div>
-          </div>
-        
-          <div style="display: flex; gap: 20px;">
-            <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; background: var(--angae); color: rgb(42, 115, 96);">03</span>
-              <span aria-hidden="true" style="width: 2px; flex: 1 1 0%; min-height: 28px; background: rgb(230, 224, 209); margin-top: 4px;"></span>
-            </div>
-            <div style="flex: 1 1 0%; min-width: 0px; padding-bottom: clamp(24px, 3vw, 32px);">
-              <h3 style="margin: 6px 0px 0px; font-size: 16px; font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">안내 전화</h3>
-              <p style="margin: 8px 0px 0px; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117); text-wrap: pretty;">영업일 기준 하루 안에 전화드려 궁금한 점을 답해드립니다.</p>
-            </div>
-          </div>
-        
-          <div style="display: flex; gap: 20px;">
-            <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; background: var(--angae); color: rgb(42, 115, 96);">04</span>
-              <span aria-hidden="true" style="width: 2px; flex: 1 1 0%; min-height: 28px; background: rgb(230, 224, 209); margin-top: 4px;"></span>
-            </div>
-            <div style="flex: 1 1 0%; min-width: 0px; padding-bottom: clamp(24px, 3vw, 32px);">
-              <h3 style="margin: 6px 0px 0px; font-size: 16px; font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">부모님 동의와 일정</h3>
-              <p style="margin: 8px 0px 0px; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117); text-wrap: pretty;">참여를 결정하시면 부모님께 여쭙고 첫 통화 날짜를 정합니다.</p>
-            </div>
-          </div>
-        
-          <div style="display: flex; gap: 20px;">
-            <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
-              <span aria-hidden="true" style="flex-shrink: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; background: var(--cheongja); color: rgb(255, 255, 255);">05</span>
-              
-            </div>
-            <div style="flex: 1 1 0%; min-width: 0px; padding-bottom: clamp(24px, 3vw, 32px);">
-              <h3 style="margin: 6px 0px 0px; font-size: 16px; font-weight: 700; letter-spacing: -0.028em; line-height: 1.4; color: var(--simya); text-wrap: balance;">첫 통화와 첫 편지</h3>
-              <p style="margin: 8px 0px 0px; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117); text-wrap: pretty;">부모님이 허락하시면 그 주 금요일에 첫 편지가 도착합니다.</p>
-            </div>
-          </div>
+          <button type="button" data-apx="1" aria-pressed="false" style="min-height: 44px; padding: 0px 15px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; font-family: inherit; font-size: 13.5px; letter-spacing: -0.01em; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s; background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); color: rgb(63, 77, 98); font-weight: 600;">결제와 이용 조건</button>
         
       </div>
 
-      <p style="margin: clamp(22px, 2.6vw, 30px) auto 0px; max-width: 560px; text-align: center; font-size: 14px; line-height: 1.75; color: rgb(92, 102, 117); text-wrap: pretty;">상담 접수는 참여 확정이 아닙니다. 안내 전화에서 이야기 나눈 뒤에 결정하시면 됩니다.</p>
+      <div id="apxBody" style="margin-top: clamp(14px, 1.8vw, 20px);"></div>
+
+      <p style="margin: clamp(18px, 2.2vw, 24px) 0px 0px; text-align: center; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117);">더 궁금한 점은 <a href="support.html" style="font-weight: 700; text-decoration: none;">고객지원에서 확인하세요 →</a></p>
     </div>
   </section>
 
-  
-  <section id="apply" data-ev="form_view" style="background: rgb(255, 255, 255); border-radius: 28px; padding: clamp(48px, 6vw, 92px) clamp(20px, 4vw, 80px);">
-    <div style="width: min(600px, 94%); margin: 0px auto;">
-
-      
-      
-        <div style="text-align: center;">
-          <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">상담 신청</div>
-          <h2 style="margin: 16px 0px 0px; font-size: clamp(23px, 3vw, 36px); line-height: 1.24; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">3개월 무료 참여 상담을 <br data-keep="">신청해 보세요.</h2>
-          <p style="margin: 14px auto 0px; max-width: 420px; font-size: 15px; line-height: 1.75; color: rgb(92, 102, 117); text-wrap: pretty;">카카오 로그인 후 연락 가능한 시간만 남기면, 담당자가 하루 안에 안내드려요.</p>
-
-          <div style="margin-top: clamp(24px, 3vw, 32px); background: rgb(251, 248, 239); border: 1px solid rgb(239, 233, 218); border-radius: 22px; padding: clamp(24px, 3vw, 32px);">
-            <button type="button" data-ev="login_start" class="scp2" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; border-radius: 999px; background: rgb(254, 229, 0); color: rgb(25, 25, 25); font-family: inherit; font-size: 15.5px; font-weight: 700; letter-spacing: -0.015em; min-height: 56px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; transition: filter 0.15s;"><span aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 999px; background: rgb(25, 25, 25); color: rgb(254, 229, 0); font-size: 11px; font-weight: 800;">K</span>카카오로 로그인하고 상담 신청하기</button>
-            <p style="margin: 14px 0px 0px; font-size: 13.5px; line-height: 1.7; color: rgb(92, 102, 117);">로그인은 신청 내역 확인과 가족 공간 생성을 위해 필요합니다.</p>
-          </div>
-        </div>
-      
-
-      
-      
-
-      
-      
-
+  </div><div class="ov-bar" data-on="false">
+    <div class="ov-barin">
+      <a class="ov-fab scpa" href="#apply" data-ev="cta_click" data-ev-pos="sticky" aria-label="3개월 무료 상담 신청" style="display: inline-flex; align-items: center; justify-content: center; gap: 9px; height: 56px; padding: 0px 26px; border-radius: 999px; background: linear-gradient(120deg, rgb(95, 211, 180) 0%, rgb(134, 227, 196) 42%, rgb(255, 215, 154) 100%); border: 1px solid rgba(255, 255, 255, 0.55); text-decoration: none; box-shadow: rgba(79, 184, 158, 0.7) 0px 18px 40px -14px, rgba(255, 255, 255, 0.45) 0px 1px 0px inset; transition: box-shadow 0.25s, transform 0.25s, filter 0.25s;">
+        <span class="ov-fabpc" aria-hidden="true" style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 999px; background: rgb(255, 255, 255); color: rgb(42, 115, 96); font-size: 12px; line-height: 1; box-shadow: rgba(18, 51, 43, 0.18) 0px 2px 6px;"><svg viewBox="0 0 24 24" width="13" height="13" fill="#E8749B" aria-hidden="true"><path d="M12 20.5 C6.5 16.8 3.5 13.6 3.5 10.2 3.5 7.6 5.5 5.8 7.9 5.8 c1.6 0 3.1 0.8 4.1 2.2 1-1.4 2.5-2.2 4.1-2.2 2.4 0 4.4 1.8 4.4 4.4 0 3.4-3 6.6-8.5 10.3 z"></path></svg></span>
+        <span class="ov-fabpc" style="display: flex; flex-direction: column; gap: 1px;">
+          <span style="font-size: 15px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; color: rgb(255, 255, 255); text-shadow: rgba(18, 51, 43, 0.35) 0px 1px 6px;">3개월 무료 상담 신청</span>
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.01em; line-height: 1.2; color: rgba(18, 51, 43, 0.72);">1기 시범 가족 선착순 30가족</span>
+        </span>
+        <span class="ov-fabm" style="font-size: 14px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: rgb(18, 51, 43);">3개월</span>
+        <span class="ov-fabm" aria-hidden="true" style="font-size: 10.5px; font-weight: 700; line-height: 1.1; color: rgb(18, 51, 43);">무료</span>
+      </a>
     </div>
-  </section>
-
-  
-  <section id="faq" style="background: color-mix(in srgb, var(--hanji) 72%, #FFFFFF); border-radius: 28px; padding: clamp(48px, 6vw, 92px) clamp(20px, 4vw, 80px);">
-    <div style="width: min(760px, 94%); margin: 0px auto;">
-      <div style="text-align: center; margin-bottom: clamp(26px, 3.2vw, 36px);">
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: rgb(42, 115, 96);">남은 질문</div>
-        <h2 style="margin: 16px 0px 0px; font-size: clamp(23px, 3vw, 36px); line-height: 1.22; letter-spacing: -0.038em; font-weight: 700; color: var(--simya); text-wrap: balance;">망설여지는 것부터 <br data-keep="">답해드릴게요</h2>
-      </div>
-      <div style="border-bottom: 1px solid rgb(230, 224, 209);">
-        
-          <details class="ov-faq" data-ev="faq_open"><summary>상담을 신청하면 바로 참여가 확정되나요</summary><p>아니요. 상담 접수는 안내 전화를 요청하시는 단계입니다. 통화에서 이야기 나눈 뒤 참여 여부를 정하시면 되고, 그 전에는 아무것도 시작되지 않습니다.</p></details>
-        
-          <details class="ov-faq" data-ev="faq_open"><summary>정말 무료인가요? 나중에 청구되지 않나요</summary><p>1기 3개월 동안 이용료를 받지 않습니다. 결제 정보를 아예 받지 않으므로 청구될 방법 자체가 없습니다.</p></details>
-        
-          <details class="ov-faq" data-ev="faq_open"><summary>3개월이 지나면 어떻게 되나요</summary><p>끝나기 2주 전에 계속 이용하실지 먼저 여쭙습니다. 동의하신 가족만 월 9,900원으로 이어가고, 동의하지 않으시면 자동으로 종료됩니다. 그동안 쌓인 편지는 그대로 남습니다.</p></details>
-        
-          <details class="ov-faq" data-ev="faq_open"><summary>부모님 동의는 어떻게 받나요</summary><p>첫 통화에서 담당자가 부모님께 직접 여쭙습니다. “댁 맞으실까요? 자녀분께서 부탁하셔서 연락드렸어요”로 시작하고, 아니라고 하시면 그 자리에서 통화를 마칩니다.</p></details>
-        
-          <details class="ov-faq" data-ev="faq_open"><summary>담당자가 바뀌기도 하나요</summary><p>한 가족에 한 분이 계속 맡습니다. 부득이하게 바뀌어야 할 때는 미리 알려드리고, 그동안의 이야기를 인계한 뒤에 연결해 드립니다.</p></details>
-        
-          <details class="ov-faq" data-ev="faq_open"><summary>부모님이 통화가 어려운 주가 있으면요</summary><p>건너뛰셔도 됩니다. 다음 주에 다시 전화드리고, 통화가 없던 주는 이용 기간에서 빼드립니다.</p></details>
-        
-          <details class="ov-faq" data-ev="faq_open"><summary>기록을 내려받거나 지울 수 있나요</summary><p>가족 공간에서 편지 전체를 언제든 내려받으실 수 있습니다. 삭제를 요청하시면 30일 안에 지워드리고, 지운 뒤에는 복구되지 않습니다.</p></details>
-        
-          <details class="ov-faq" data-ev="faq_open"><summary>중간에 그만둘 수 있나요</summary><p>언제든 연락 한 번이면 됩니다. 위약금도, 붙잡는 절차도 없습니다.</p></details>
-        
-      </div>
-      <p style="margin: 26px 0px 0px; text-align: center; font-size: 14px; line-height: 1.7; color: rgb(92, 102, 117);">그 밖의 궁금함은 <a href="support.html" style="font-weight: 700; text-decoration: none;">고객지원에서 확인하실 수 있어요 →</a></p>
-    </div>
-  </section>
-
-  
-  <section style="padding: clamp(30px, 4vw, 48px) clamp(20px, 4vw, 80px) clamp(8px, 1vw, 16px);">
-    <div style="width: min(860px, 94%); margin: 0px auto;">
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        
-          <p style="margin: 0px; font-size: 13px; line-height: 1.8; color: rgb(92, 102, 117); text-wrap: pretty;">온비는 정보 제공 서비스이며 의료 진단이나 응급 대응 서비스가 아닙니다.</p>
-        
-          <p style="margin: 0px; font-size: 13px; line-height: 1.8; color: rgb(92, 102, 117); text-wrap: pretty;">통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
-        
-          <p style="margin: 0px; font-size: 13px; line-height: 1.8; color: rgb(92, 102, 117); text-wrap: pretty;">이 페이지의 편지와 화면은 예시입니다.</p>
-        
-      </div>
-      <div style="display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px;">
-        <a href="support.html" style="font-size: 13px; font-weight: 600; color: rgb(92, 102, 117); text-decoration: underline; text-underline-offset: 3px;">개인정보 처리방침</a>
-        <a href="support.html" style="font-size: 13px; font-weight: 600; color: rgb(92, 102, 117); text-decoration: underline; text-underline-offset: 3px;">이용약관</a>
-      </div>
-    </div>
-  </section>
-
   </div>
+
+<!-- 상담 신청 모달 -->
+<div class="ov-scrim" id="apModal" hidden style="position:fixed; inset:0; z-index:610; background:rgba(31,42,58,0.5); display:flex; align-items:center; justify-content:center; padding:20px;">
+  <div class="ov-sheet ov-formsheet" role="dialog" aria-modal="true" aria-labelledby="ap-title" style="position:relative; width:100%; max-width:540px; max-height:90vh; overflow-y:auto; background:#FFFFFF; border-radius:24px; padding:clamp(24px,3vw,34px); box-shadow:0 30px 70px -30px rgba(31,42,58,0.55);">
+    <button type="button" data-ap-close aria-label="닫기" style="position:absolute; right:14px; top:14px; width:36px; height:36px; display:grid; place-items:center; border-radius:999px; border:none; background:#F5F1E6; color:#5C6675; font-family:inherit; font-size:15px; cursor:pointer;">✕</button>
+
+    <!-- 상담 신청서 -->
+    <div id="apForm">
+      <div style="text-align:center;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360;">상담 신청서</div>
+        <h2 id="ap-title" style="margin:16px 0 0; font-size:clamp(23px,3vw,34px); line-height:1.24; letter-spacing:-0.038em; font-weight:700; color:var(--simya); text-wrap:balance;">연락처만 확인해 주세요</h2>
+      </div>
+
+      <form id="apFormEl" data-ev="form_start" style="margin-top:clamp(24px,3vw,32px); display:flex; flex-direction:column; gap:26px;">
+        <div>
+          <label for="a-name" style="display:block; font-size:13.5px; font-weight:700; color:var(--simya); margin-bottom:9px;">신청자 이름 <span style="color:#2A7360;">*</span></label>
+          <input id="a-name" name="name" type="text" autocomplete="name" class="ov-in" placeholder="성함을 적어주세요">
+          <p id="errName" role="alert" hidden style="margin:8px 0 0; font-size:13px; font-weight:600; color:#8A6A3C;"></p>
+        </div>
+
+        <div>
+          <label for="a-tel" style="display:block; font-size:13.5px; font-weight:700; color:var(--simya); margin-bottom:9px;">연락받을 휴대전화 번호 <span style="color:#2A7360;">*</span></label>
+          <input id="a-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" class="ov-in" placeholder="010-0000-0000">
+          <p id="errTel" role="alert" hidden style="margin:8px 0 0; font-size:13px; font-weight:600; color:#8A6A3C;"></p>
+        </div>
+
+        <div>
+          <span style="display:block; font-size:13.5px; font-weight:700; color:var(--simya); margin-bottom:4px;">통화가 편하신 시간대 <span style="font-weight:500; color:#5C6675;">(선택)</span></span>
+          <span style="display:block; font-size:12.5px; line-height:1.6; color:#8A93A0; margin-bottom:9px;">오전 9–12시 · 점심 12–3시 · 오후 3–6시</span>
+          <div id="apSlots" style="display:flex; gap:9px; flex-wrap:wrap;"></div>
+        </div>
+
+        <div>
+          <span style="display:block; font-size:13.5px; font-weight:700; color:var(--simya); margin-bottom:9px;">부모님과의 관계 <span style="font-weight:500; color:#5C6675;">(선택)</span></span>
+          <div id="apRels" style="display:flex; gap:9px; flex-wrap:wrap;"></div>
+          <input id="apRelEtc" name="rel_etc" type="text" class="ov-in" hidden style="margin-top:10px;" placeholder="어떤 관계인지 적어주세요">
+        </div>
+
+        <div>
+          <label for="a-memo" style="display:block; font-size:13.5px; font-weight:700; color:var(--simya); margin-bottom:9px;">상담 전에 전하고 싶은 내용 <span style="font-weight:500; color:#5C6675;">(선택)</span></label>
+          <textarea id="a-memo" name="memo" rows="3" class="ov-in" style="resize:vertical; line-height:1.7;" placeholder="편하게 적어주세요"></textarea>
+        </div>
+
+        <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+
+        <div style="padding-top:18px; border-top:1px solid #F0EBDD; display:flex; flex-direction:column; gap:11px;">
+          <label id="apAllRow" style="display:flex; gap:11px; align-items:center; cursor:pointer; padding:13px 14px; border-radius:14px; background:#FFFFFF; border:1.5px solid #E6E0D1; transition:background .18s, border-color .18s;">
+            <input type="checkbox" id="apAll" style="width:19px; height:19px; margin:0; accent-color:#4FB89E;">
+            <span style="font-size:14.5px; font-weight:700; color:var(--simya);">약관에 모두 동의합니다</span>
+          </label>
+
+          <label style="display:flex; gap:9px; align-items:center; cursor:pointer; padding-left:28px;">
+            <input type="checkbox" id="apPrivacy" name="privacy" style="width:15px; height:15px; margin:0; accent-color:#4FB89E;">
+            <span style="flex:1; min-width:0; font-size:12.5px; line-height:1.55; color:#5C6675;"><span style="color:#A6ADB7;">(필수)</span> 개인정보 수집·이용 동의</span>
+            <button type="button" id="apPrivacyToggle" style="flex-shrink:0; background:none; border:none; padding:0 2px; font-family:inherit; font-size:11.5px; font-weight:600; color:#A6ADB7; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">보기</button>
+          </label>
+
+          <label style="display:flex; gap:9px; align-items:center; cursor:pointer; padding-left:28px;">
+            <input type="checkbox" id="apMkt" name="optin" style="width:15px; height:15px; margin:0; accent-color:#4FB89E;">
+            <span style="flex:1; min-width:0; font-size:12.5px; line-height:1.55; color:#5C6675;"><span style="color:#A6ADB7;">(선택)</span> 온비 소식 문자 수신</span>
+          </label>
+
+          <p id="errAgree" role="alert" hidden style="margin:0; font-size:13px; font-weight:600; color:#8A6A3C;"></p>
+          <div id="apPrivacyBody" hidden style="margin-left:28px; background:#FBFAF6; border-radius:12px; padding:13px 15px; font-size:12px; line-height:1.7; color:#5C6675;">
+            <b style="color:#3F4D62; font-weight:600;">수집 항목</b> 성함, 휴대전화 번호, 통화 희망 시간, 부모님 호칭, 전달 내용<br><b style="color:#3F4D62; font-weight:600;">수집 목적</b> 상담 연락과 이용 안내<br><b style="color:#3F4D62; font-weight:600;">보유 기간</b> 상담 종료 후 30일, 참여 시 이용 종료 후 90일<br><b style="color:#3F4D62; font-weight:600;">거부 권리</b> 동의하지 않으실 수 있고, 이 경우 연락을 드릴 수 없어요<br><a href="support.html" style="font-size:12.5px; font-weight:600;">개인정보 처리방침 전문</a>
+          </div>
+        </div>
+
+        <p id="apFail" role="alert" hidden style="margin:0; background:rgba(217,184,140,0.3); border-left:3px solid var(--noeul); border-radius:8px; padding:12px 16px; font-size:14px; line-height:1.65; color:var(--simya);"></p>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+          <button type="submit" id="apSubmit" data-ev="consult_submit" style="width:100%; max-width:400px; display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:56px; border-radius:999px; border:none; font-family:inherit; font-size:16.5px; font-weight:700; letter-spacing:-0.015em; transition:background .2s; background:var(--cheongja); color:#FFFFFF; cursor:pointer;">상담 신청 완료하기</button>
+          <p style="margin:0; font-size:13px; line-height:1.7; color:#5C6675; text-align:center; text-wrap:pretty;">신청은 무료이며, 결제나 서비스 이용이 바로 시작되지 않아요.</p>
+        </div>
+      </form>
+    </div>
+
+    <!-- 신청 완료 -->
+    <div id="apDone" hidden style="text-align:center;">
+      <div aria-hidden="true" style="width:52px; height:52px; border-radius:999px; background:var(--angae); color:#2A7360; display:inline-flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:18px;">✓</div>
+      <h2 style="margin:0 0 12px; font-size:clamp(22px,2.8vw,30px); font-weight:700; letter-spacing:-0.035em; line-height:1.3; color:var(--simya); text-wrap:balance;">상담 신청이 완료됐어요</h2>
+      <p style="margin:0 auto 24px; max-width:420px; font-size:15px; line-height:1.75; color:#5C6675; text-wrap:pretty;">담당자가 확인한 뒤 영업일 기준 하루 안에 연락드릴게요.</p>
+
+      <div style="text-align:left; background:#FBF8EF; border-radius:18px; padding:20px 22px; margin-bottom:22px;">
+        <div class="ov-prow" style="display:flex; align-items:flex-start; gap:14px; padding:9px 0;"><span style="flex-shrink:0; width:96px; font-size:12.5px; font-weight:700; color:#8A93A0;">연락받을 번호</span><span id="dnTel" style="min-width:0; font-size:14px; line-height:1.65; color:var(--simya); font-weight:600;">-</span></div>
+        <div class="ov-prow" style="display:flex; align-items:flex-start; gap:14px; padding:9px 0;"><span style="flex-shrink:0; width:96px; font-size:12.5px; font-weight:700; color:#8A93A0;">상담 가능 시간</span><span id="dnSlot" style="min-width:0; font-size:14px; line-height:1.65; color:var(--simya); font-weight:600;">언제든</span></div>
+        <div class="ov-prow" style="display:flex; align-items:flex-start; gap:14px; padding:9px 0;"><span style="flex-shrink:0; width:96px; font-size:12.5px; font-weight:700; color:#8A93A0;">신청일</span><span id="dnDate" style="min-width:0; font-size:14px; line-height:1.65; color:var(--simya); font-weight:600;">-</span></div>
+      </div>
+
+      <p id="dupNote" hidden style="margin:-10px auto 18px; max-width:420px; font-size:13.5px; line-height:1.7; color:#8A93A0;">이미 상담을 신청하셨어요. 다시 신청하시려면 아래에서 새로 작성하실 수 있어요.</p>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+        <button type="button" id="apReset" hidden style="display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 24px; border-radius:999px; background:#FFFFFF; border:1.5px solid #E0D9C6; color:var(--simhae); font-family:inherit; font-size:15px; font-weight:700; cursor:pointer;">새로 상담 신청하기</button>
+        <a href="mypage.html" style="display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 26px; border-radius:999px; background:var(--cheongja); color:#FFFFFF; font-size:15px; font-weight:700; text-decoration:none;">신청 내역 확인하기</a>
+        <a href="index.html" style="display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 24px; border-radius:999px; background:#FFFFFF; border:1.5px solid #E0D9C6; color:var(--simhae); font-size:15px; font-weight:700; text-decoration:none;">홈으로 돌아가기</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 로그인 안내 -->
+<div class="ov-scrim" id="apSheet" hidden style="position:fixed; inset:0; z-index:620; background:rgba(31,42,58,0.5); display:flex; align-items:center; justify-content:center; padding:20px;">
+  <div class="ov-sheet" role="dialog" aria-modal="true" aria-labelledby="lg-title" style="position:relative; width:100%; max-width:400px; background:#FFFFFF; border-radius:22px; padding:26px 24px 20px; box-shadow:0 30px 70px -30px rgba(31,42,58,0.5); text-align:left;">
+    <button type="button" data-sheet-close aria-label="닫기" style="position:absolute; right:12px; top:12px; width:34px; height:34px; display:grid; place-items:center; border-radius:999px; border:none; background:#F5F1E6; color:#5C6675; font-family:inherit; font-size:14px; cursor:pointer;">✕</button>
+
+    <div style="font-size:11.5px; font-weight:700; letter-spacing:0.12em; color:#2A7360;">1기 시범 서비스 신청</div>
+    <h3 id="lg-title" style="margin:10px 0 0; font-size:19px; font-weight:700; letter-spacing:-0.03em; line-height:1.4; color:var(--simya); white-space:nowrap;">로그인하고 신청하기</h3>
+
+    <div style="margin-top:14px; padding:13px 15px; border-radius:14px; background:color-mix(in srgb, var(--cheongja) 8%, #FFFFFF); display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;">
+      <span style="font-size:14px; font-weight:700; color:#2A7360;">3개월 무료</span>
+      <span style="font-size:12.5px; color:#3F4D62;">선착순 30가족</span>
+    </div>
+
+    <div style="margin-top:16px; display:flex; flex-direction:column; gap:9px;">
+      <span style="display:flex; align-items:flex-start; gap:8px; font-size:13.5px; line-height:1.6; color:#3F4D62;"><span aria-hidden="true" style="flex-shrink:0; margin-top:7px; width:4px; height:4px; border-radius:999px; background:var(--cheongja);"></span>신청 내역과 진행 상황을 확인하실 수 있어요.</span>
+      <span style="display:flex; align-items:flex-start; gap:8px; font-size:13.5px; line-height:1.6; color:#3F4D62;"><span aria-hidden="true" style="flex-shrink:0; margin-top:7px; width:4px; height:4px; border-radius:999px; background:var(--cheongja);"></span>가족 공간을 만들 때 그대로 이어집니다.</span>
+    </div>
+
+    <button id="lg-kakao" type="button" data-ev="login_start" style="margin-top:20px; width:100%; min-height:54px; display:inline-flex; align-items:center; justify-content:center; gap:9px; border-radius:14px; background:#FEE500; color:#191919; border:none; font-family:inherit; font-size:15px; font-weight:700; letter-spacing:-0.015em; cursor:pointer; transition:filter .15s;"><span aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px; border-radius:999px; background:#191919; color:#FEE500; font-size:10.5px; font-weight:800;">K</span>카카오로 계속하기</button>
+
+    <p style="margin:10px 0 0; font-size:12px; line-height:1.6; color:#8A93A0; text-align:center; white-space:nowrap;">처음이시면 로그인과 함께 가입돼요.</p>
+
+    <div style="margin-top:14px; padding-top:12px; border-top:1px solid #F0EBDD;">
+      <button type="button" data-sheet-close style="width:100%; min-height:44px; background:none; border:none; font-family:inherit; font-size:13.5px; font-weight:600; color:#8A93A0; cursor:pointer; border-radius:999px;">다음에 할게요</button>
+    </div>
+  </div>
+</div>
 <footer class="site">
   <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
         <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center;"></span></a>
-        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">매주의 안부가 온 가족의 기억이 되는 곳.</p>
+        <p style="margin:2px 0 0; color:rgba(255,255,255,0.78); line-height:1.6; font-size:14px; font-weight:600; letter-spacing:-0.015em;">멀리 있어도, 매일 곁에</p>
+        <p style="margin:0; color:rgba(255,255,255,0.55); line-height:1.6; font-size:13px;">매주의 안부가 온 가족의 기억이 되는 곳.</p>
       </div>
       
     </div>
@@ -853,7 +733,378 @@ function onviSubmitConsult(f){
 })();
 </script>
 
+<script defer src="shared/onvi-config.js"></script>
+<script defer src="shared/onvi-supabase.js"></script>
 <script defer src="shared/onvi-nav-auth.js"></script>
+<script>
+/* 요금제 페이지 — 상담 신청 흐름 · 안내 아코디언 · 플로팅 배너
+   상태는 네 가지뿐이다: intro(닫힘) · form(신청서) · done(완료) · already(이미 신청함).
+   Supabase 설정이 비어 있으면 화면 흐름만 돌고 데이터는 쌓이지 않는다(데모 모드). */
+(function () {
+  var REC = 'onvi.consult.v2.at';
+  var T0 = Date.now();
+  var st = { step: 'intro', slot: '언제든', rel: '', sending: false, authed: false, barClosed: false, dir: '', lastY: 0 };
+
+  function $(id) { return document.getElementById(id); }
+  function get(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+  function sget(k) { try { return sessionStorage.getItem(k) || ''; } catch (e) { return ''; } }
+  function sset(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* 무시 */ } }
+  function sdel(k) { try { sessionStorage.removeItem(k); } catch (e) { /* 무시 */ } }
+
+  function chip(on) {
+    return 'min-height:44px; padding:0 15px; display:inline-flex; align-items:center; justify-content:center; border-radius:999px; font-family:inherit; font-size:13.5px; letter-spacing:-0.01em; cursor:pointer; transition:background .18s, color .18s, border-color .18s; '
+      + (on ? 'background:#E6F3EE; border:1px solid var(--cheongja); color:#2A7360; font-weight:700;'
+            : 'background:#FFFFFF; border:1px solid #E6E0D1; color:#3F4D62; font-weight:600;');
+  }
+
+  /* ── 로그인 상태: Nav와 같은 규칙(이름·계정연결) ── */
+  function readAuth() { st.authed = !!(get('onvi.user.name') && get('onvi.user.provider')); }
+
+  /* ── 칩 목록 ── */
+  function buildChips(host, labels, current, onPick) {
+    host.innerHTML = '';
+    labels.forEach(function (label) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.setAttribute('aria-pressed', current() === label ? 'true' : 'false');
+      b.style.cssText = chip(current() === label);
+      b.addEventListener('click', function () {
+        onPick(label);
+        Array.prototype.forEach.call(host.children, function (x) {
+          var on = x.textContent === current();
+          x.setAttribute('aria-pressed', on ? 'true' : 'false');
+          x.style.cssText = chip(on);
+        });
+      });
+      host.appendChild(b);
+    });
+  }
+
+  /* ── 안내 아코디언 ── */
+  var PT = [
+    { k: '이용료를 받지 않는 이유', s1: '첫 서른 가족과 함께 다듬는 기간이라, 이용료 대신 ', b1: '한 달에 한 번 의견', s2: '을 부탁드려요. 정식 출시 뒤에는 월 9,900원입니다.', b2: '', s3: '' },
+    { k: '무료 이용 기간', s1: '첫 이야기 통화일부터 ', b1: '금요편지 12회 발송 완료일', s2: '까지예요. 시작할 때 종료일을 문자로 알려드려요.', b2: '', s3: '' },
+    { k: '참여 방법', s1: '', b1: '월 1회, 약 10분', s2: ' 전화로 경험을 들려주세요. 어려우시면 문자로도 괜찮아요.', b2: '', s3: '' },
+    { k: '이용 종료 안내', s1: '', b1: '종료 2주 전', s2: '에 계속 이용하실지 여쭤봅니다. 원하지 않으시면 ', b2: '요금이 자동으로 결제되지 않아요', s3: '.' },
+    { k: '모집 안내', s1: '온비와 처음 함께할 ', b1: '선착순 30가족', s2: '을 모십니다. 마감되면 이 페이지에서 알려드려요.', b2: '', s3: '' }
+  ];
+  var BILL = [
+    { k: '결제 주기', v: '월 단위로 이용하며 별도의 약정 기간은 없습니다.' },
+    { k: '유료 이용 시작', v: '3개월 무료 이용이 끝나기 전에 계속 이용하실지 먼저 확인합니다. 동의하신 경우에만 결제를 안내하며, 동의 없이 자동으로 결제되지 않습니다.' },
+    { k: '이용 종료 방법', v: '다음 이용 기간이 시작되기 전에 알려주시면 이후 이용과 결제가 종료됩니다. 별도의 위약금은 없습니다.' },
+    { k: '환불 기준', v: '유료 이용 중 종료하시면 실제 이용 기간과 서비스 제공 내역에 따라 환불 금액을 안내드립니다.', link: true },
+    { k: '영수증과 결제 증빙', v: '결제 증빙은 이메일로 보내드립니다. 현금영수증은 고객지원으로 요청해 주세요.' }
+  ];
+
+  function accordion(items, prefix, small) {
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'border:1px solid #ECE6D8; border-radius:' + (small ? '16px' : '18px') + '; overflow:hidden; background:#FFFFFF;';
+    items.forEach(function (it, i) {
+      var last = i === items.length - 1;
+      var row = document.createElement('div');
+      row.style.cssText = 'background:transparent;' + (last ? '' : ' border-bottom:1px solid #F0EBDD;');
+      var h = document.createElement('h3'); h.style.margin = '0';
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.id = prefix + '-h' + i;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-controls', prefix + '-p' + i);
+      btn.style.cssText = 'display:flex; align-items:center; gap:12px; width:100%; padding:' + (small ? '13px 18px' : '15px 20px') + '; border:none; background:transparent; font-family:inherit; cursor:pointer; text-align:left; transition:background .15s;';
+      var label = document.createElement('span');
+      label.style.cssText = 'flex:1; min-width:0; font-size:' + (small ? '13.5px' : '14.5px') + '; font-weight:700; letter-spacing:-0.02em; color:var(--simya);';
+      label.textContent = it.k;
+      var chev = document.createElement('span');
+      chev.setAttribute('aria-hidden', 'true');
+      var sz = small ? 20 : 22;
+      function chevStyle(on) {
+        return 'flex-shrink:0; display:grid; place-items:center; width:' + sz + 'px; height:' + sz + 'px; color:' + (on ? '#2A7360' : '#8A93A0') + '; transition:transform .18s, color .18s; transform:rotate(' + (on ? '180deg' : '0deg') + ');';
+      }
+      chev.style.cssText = chevStyle(false);
+      chev.innerHTML = '<svg width="' + (small ? 12 : 13) + '" height="' + (small ? 12 : 13) + '" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+      btn.appendChild(label); btn.appendChild(chev); h.appendChild(btn);
+
+      var panel = document.createElement('div');
+      panel.id = prefix + '-p' + i; panel.hidden = true;
+      panel.setAttribute('role', 'region');
+      panel.setAttribute('aria-labelledby', btn.id);
+      panel.style.cssText = 'padding:0 ' + (small ? '18px 16px' : '20px 18px') + ';';
+      var para = document.createElement('p');
+      para.style.cssText = 'margin:0; max-width:' + (small ? '560px' : '620px') + '; font-size:' + (small ? '13.5px' : '14px') + '; line-height:' + (small ? '1.75' : '1.8') + '; color:#3F4D62; text-wrap:pretty;';
+      if (it.v) {
+        para.textContent = it.v;
+      } else {
+        [[it.s1, 0], [it.b1, 1], [it.s2, 0], [it.b2, 1], [it.s3, 0]].forEach(function (pair) {
+          if (!pair[0]) return;
+          if (pair[1]) { var b = document.createElement('b'); b.style.cssText = 'color:var(--simya); font-weight:700;'; b.textContent = pair[0]; para.appendChild(b); }
+          else para.appendChild(document.createTextNode(pair[0]));
+        });
+      }
+      panel.appendChild(para);
+      if (it.link) {
+        var a = document.createElement('a');
+        a.href = 'support.html'; a.textContent = '이용약관에서 자세히 보기 →';
+        a.style.cssText = 'display:inline-block; margin-top:8px; font-size:13.5px; font-weight:700; text-decoration:none;';
+        panel.appendChild(a);
+      }
+      btn.addEventListener('click', function () {
+        var on = panel.hidden;
+        Array.prototype.forEach.call(wrap.children, function (r) {
+          var p = r.querySelector('[role="region"]'), bb = r.querySelector('button');
+          if (p) p.hidden = true;
+          if (bb) { bb.setAttribute('aria-expanded', 'false'); bb.querySelector('span:last-child').style.cssText = chevStyle(false); }
+          r.style.background = 'transparent';
+        });
+        if (on) {
+          panel.hidden = false;
+          btn.setAttribute('aria-expanded', 'true');
+          chev.style.cssText = chevStyle(true);
+          row.style.background = '#FBFAF6';
+        }
+      });
+      row.appendChild(h); row.appendChild(panel);
+      wrap.appendChild(row);
+    });
+    return wrap;
+  }
+
+  function paintApx(idx) {
+    var host = $('apxBody');
+    if (!host) return;
+    host.innerHTML = '';
+    host.appendChild(idx === 0 ? accordion(PT, 'pt', true) : accordion(BILL, 'bill', false));
+    document.querySelectorAll('[data-apx]').forEach(function (b) {
+      var on = Number(b.getAttribute('data-apx')) === idx;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.style.cssText = chip(on);
+    });
+  }
+
+  /* ── 모달 ── */
+  var lastFocus = null;
+  function setStep(next) {
+    st.step = next;
+    var modal = $('apModal'), form = $('apForm'), done = $('apDone');
+    if (!modal) return;
+    modal.hidden = !(next === 'form' || next === 'done');
+    if (form) form.hidden = next !== 'form';
+    if (done) done.hidden = next !== 'done';
+    syncBar();
+  }
+  function closeModal() {
+    setStep(st.step === 'done' ? 'already' : 'intro');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function openSheet() {
+    lastFocus = document.activeElement;
+    var s = $('apSheet'); if (s) s.hidden = false;
+    setTimeout(function () { var b = $('lg-kakao'); if (b) b.focus(); }, 40);
+  }
+  function closeSheet() {
+    var s = $('apSheet'); if (s) s.hidden = true;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function showDupUI(on) {
+    var note = $('dupNote'), btn = $('apReset');
+    if (note) note.hidden = !on;
+    if (btn) btn.hidden = !on;
+  }
+
+  function resetApply() {
+    try { localStorage.removeItem(REC); } catch (e) { /* 무시 */ }
+    st.slot = '언제든'; st.rel = '';
+    var f = $('apFormEl'); if (f) f.reset();
+    ['errName', 'errTel', 'errAgree', 'apFail'].forEach(function (i) { showErr(i, ''); });
+    showDupUI(false);
+    setStep('form');
+    prefill();
+  }
+
+  function startApply() {
+    if (st.step === 'already') { showDupUI(true); setStep('done'); return; }
+    showDupUI(false);
+    readAuth();
+    if (!st.authed) { openSheet(); return; }
+    lastFocus = document.activeElement;
+    prefill();
+    setStep('form');
+    setTimeout(function () { var f = $('a-name'); if (f) f.focus(); }, 60);
+  }
+
+  function prefill() {
+    var n = $('a-name'), t = $('a-tel');
+    if (n && !n.value) n.value = get('onvi.user.name');
+    if (t && !t.value) t.value = get('onvi.user.phone');
+  }
+
+  /* ── 플로팅 배너 ── */
+  function syncBar() {
+    var bar = document.querySelector('.ov-bar');
+    if (!bar) return;
+    var apply = $('apply');
+    var reached = apply ? apply.getBoundingClientRect().top < window.innerHeight * 0.95 : false;
+    var on = !st.barClosed && st.dir === 'down' && (window.scrollY || 0) > 400 && !reached && st.step === 'intro';
+    bar.setAttribute('data-on', on ? 'true' : 'false');
+  }
+
+  /* ── 제출 ── */
+  function showErr(id, msg) {
+    var el = $(id); if (!el) return;
+    el.textContent = msg || ''; el.hidden = !msg;
+  }
+
+  function submit(ev) {
+    ev.preventDefault();
+    var form = ev.currentTarget;
+    var fd = new FormData(form);
+    if (fd.get('company') || Date.now() - T0 < 3000) return;   // 봇·오조작 방지
+    if (st.sending) return;
+
+    var name = String(fd.get('name') || '').trim();
+    var tel = String(fd.get('tel') || '').trim();
+    var agreed = $('apPrivacy') && $('apPrivacy').checked;
+    var errName = name ? '' : '성함을 적어주세요.';
+    var errTel = /^01[016-9][-\s]?\d{3,4}[-\s]?\d{4}$/.test(tel.replace(/\s/g, '')) ? '' : '휴대전화 번호를 다시 확인해 주세요.';
+    var errAgree = agreed ? '' : '상담을 위해 개인정보 수집·이용 동의가 필요해요.';
+    showErr('errName', errName); showErr('errTel', errTel); showErr('errAgree', errAgree);
+    showErr('apFail', '');
+    if (errName || errTel || errAgree) return;
+
+    st.sending = true;
+    var btn = $('apSubmit');
+    if (btn) { btn.disabled = true; btn.textContent = '신청하고 있어요'; btn.style.background = '#B9D8CE'; btn.style.cursor = 'default'; }
+
+    var now = new Date();
+    var stamp = now.getFullYear() + '년 ' + (now.getMonth() + 1) + '월 ' + now.getDate() + '일';
+
+    function ok() {
+      sdel('onvi.after_login'); sdel('onvi.consult_intent');
+      try { localStorage.setItem(REC, stamp); } catch (e) { /* 무시 */ }
+      if ($('dnTel')) $('dnTel').textContent = tel;
+      if ($('dnSlot')) $('dnSlot').textContent = st.slot || '언제든';
+      if ($('dnDate')) $('dnDate').textContent = stamp;
+      resetSubmit();
+      setStep('done');
+    }
+    function bad(msg) {
+      resetSubmit();
+      showErr('apFail', msg);
+    }
+    function resetSubmit() {
+      st.sending = false;
+      if (btn) { btn.disabled = false; btn.textContent = '상담 신청 완료하기'; btn.style.background = 'var(--cheongja)'; btn.style.cursor = 'pointer'; }
+    }
+
+    if (window.OnViDB && window.OnViDB.ready()) {
+      window.OnViDB.saveConsult({
+        name: name, phone: tel, email: get('onvi.user.email'),
+        parentHonor: st.rel === '기타' ? ('기타: ' + (($('apRelEtc') || {}).value || '')) : st.rel,
+        slot: st.slot,
+        memo: String(fd.get('memo') || ''),
+        marketing: !!($('apMkt') && $('apMkt').checked),
+        source: 'pricing_page'
+      }).then(ok, function () { bad('신청이 접수되지 않았어요. 잠시 후 다시 눌러주세요.'); });
+      return;
+    }
+    setTimeout(ok, 500);   // 데모 — Supabase 설정 전
+  }
+
+  /* ── 초기화 ── */
+  function init() {
+    readAuth();
+    st.barClosed = sget('onvi_bar_closed') === '1';
+    st.lastY = window.scrollY || 0;
+
+    paintApx(0);
+    document.querySelectorAll('[data-apx]').forEach(function (b) {
+      b.addEventListener('click', function () { paintApx(Number(b.getAttribute('data-apx'))); });
+    });
+
+    var slotHost = $('apSlots');
+    if (slotHost) buildChips(slotHost, ['오전', '점심', '오후', '언제든'], function () { return st.slot; }, function (l) { st.slot = l; });
+    var relHost = $('apRels');
+    if (relHost) buildChips(relHost, ['어머니', '아버지', '부모님', '기타'], function () { return st.rel; }, function (l) {
+      st.rel = (st.rel === l) ? '' : l;
+      var etc = $('apRelEtc');
+      if (etc) { etc.hidden = st.rel !== '기타'; if (st.rel !== '기타') etc.value = ''; }
+    });
+
+    // 이미 신청한 기록이 있으면 완료 상태로 둔다
+    if (get(REC)) st.step = 'already';
+
+    // 로그인하고 돌아왔다면 신청서를 바로 연다
+    if (sget('onvi.consult_intent') === '1' && get('onvi.user.name')) {
+      sdel('onvi.consult_intent'); sdel('onvi.after_login');
+      if (!get(REC)) { readAuth(); prefill(); setStep('form'); }
+    }
+
+    var apply = $('applyBtn');
+    if (apply) apply.addEventListener('click', startApply);
+    var reset = $('apReset');
+    if (reset) reset.addEventListener('click', resetApply);
+
+    document.querySelectorAll('[data-ap-close]').forEach(function (b) { b.addEventListener('click', closeModal); });
+    document.querySelectorAll('[data-sheet-close]').forEach(function (b) { b.addEventListener('click', closeSheet); });
+    var modal = $('apModal');
+    if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    var sheet = $('apSheet');
+    if (sheet) sheet.addEventListener('click', function (e) { if (e.target === sheet) closeSheet(); });
+
+    window.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (sheet && !sheet.hidden) { closeSheet(); return; }
+      if (modal && !modal.hidden) closeModal();
+    });
+
+    var kakao = $('lg-kakao');
+    if (kakao) kakao.addEventListener('click', function () {
+      sset('onvi.after_login', '/pricing.html#apply');
+      sset('onvi.consult_intent', '1');
+      if (window.OnViAuth) { window.OnViAuth.signInKakao(); return; }
+      window.location.href = 'login.html';
+    });
+
+    var all = $('apAll'), priv = $('apPrivacy'), mkt = $('apMkt'), allRow = $('apAllRow');
+    function syncAll() {
+      var on = !!(priv && priv.checked && mkt && mkt.checked);
+      if (all) all.checked = on;
+      if (allRow) {
+        allRow.style.background = on ? 'color-mix(in srgb, var(--cheongja) 9%, #FFFFFF)' : '#FFFFFF';
+        allRow.style.borderColor = on ? 'var(--cheongja)' : '#E6E0D1';
+      }
+    }
+    if (all) all.addEventListener('change', function () {
+      if (priv) priv.checked = all.checked;
+      if (mkt) mkt.checked = all.checked;
+      showErr('errAgree', '');
+      syncAll();
+    });
+    [priv, mkt].forEach(function (c) { if (c) c.addEventListener('change', function () { showErr('errAgree', ''); syncAll(); }); });
+    syncAll();
+
+    var pv = $('apPrivacyToggle');
+    if (pv) pv.addEventListener('click', function () { var b = $('apPrivacyBody'); if (b) b.hidden = !b.hidden; });
+
+    var formEl = $('apFormEl');
+    if (formEl) formEl.addEventListener('submit', submit);
+
+    ['onvi-auth', 'storage', 'pageshow'].forEach(function (ev) { window.addEventListener(ev, readAuth); });
+
+    function onScroll() {
+      var y = window.scrollY || 0;
+      if (y > st.lastY + 4) st.dir = 'down';
+      else if (y < st.lastY - 4) st.dir = 'up';
+      st.lastY = y;
+      syncBar();
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    syncBar();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
 
 <script data-x="pricing-apply-script">
 (function(){

@@ -36,6 +36,14 @@
 
     // 로그인 직후에만 실행 (pendingLogin 플래그로 일반 로드와 구분)
     function routeAfterLogin() {
+      // 로그인 전에 하던 일(예: 상담 신청)이 있으면 그 화면으로 돌려보낸다.
+      // 열린 리다이렉트가 되지 않도록 같은 출처의 경로만 받는다.
+      var back = '';
+      try { back = sessionStorage.getItem('onvi.after_login') || ''; } catch (e) { /* 무시 */ }
+      if (back) {
+        try { sessionStorage.removeItem('onvi.after_login'); } catch (e) { /* 무시 */ }
+        if (/^\/(?!\/)/.test(back)) { location.replace(back); return; }
+      }
       if (!ONBOARDING_READY) { if (location.pathname !== '/') location.replace('/'); return; }
       client.from('family_members').select('id').limit(1).then(function (r) {
         var has = r && r.data && r.data.length > 0;

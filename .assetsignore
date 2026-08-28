@@ -49,6 +49,9 @@ shared/tokens.css
 # iCloud 동기화 충돌 사본
 assets 2/
 
+# DB 스키마 (서버에서만 실행 — 웹에 노출할 이유가 없다)
+supabase/
+
 # 문서/설정/메타 (서빙 안 함)
 *.docx
 CLAUDE.md
