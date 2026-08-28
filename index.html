@@ -109,6 +109,18 @@
     .gen{ grid-template-columns:1fr; }
     .gen figure{ margin:0 !important; }
     [style*="aspect-ratio:21/9"]{ aspect-ratio:4/3 !important; }
+    /* 티저 편지는 맛보기까지만 — 전문은 아래 CTA로 */
+    .ov-lcard-img{ aspect-ratio:2/1 !important; }
+    .ov-lcard-body{ padding-top:16px !important; }
+    .ov-lcard-body > p{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; margin-top:12px !important; font-size:15px !important; line-height:1.7 !important; }
+    .ov-lcard-body > blockquote{ font-size:16px !important; line-height:1.55 !important; }
+    .ov-lcard-body > h3{ font-size:19px !important; line-height:1.42 !important; margin-bottom:12px !important; }
+    .ov-lcard-body > span:first-child{ margin-bottom:10px !important; }
+    /* 섹션 머리글은 아이브로우와 제목까지 */
+    .ov-teaser-head{ margin-bottom:18px !important; }
+    .ov-teaser-head hr{ margin-top:14px !important; }
+    .ov-teaser-head h2{ font-size:25px !important; margin:14px 0 0 !important; }
+    .ov-teaser-head > p{ display:none !important; }
   }
 </style>
 </head>
@@ -158,7 +170,7 @@
 
 <section style="background:color-mix(in srgb, var(--hanji,#F5F1E6) 72%, #FFFFFF);">
   <div style="max-width:900px; margin:0 auto;">
-    <div style="text-align:center; margin-bottom:34px;">
+    <div class="ov-teaser-head" style="text-align:center; margin-bottom:34px;">
       <div class="eyebrow">금요편지</div>
       <hr class="rule" style="margin:20px auto 0;">
       <h2>편지 속에서 <br data-m>부모님을 만나요.</h2>
@@ -174,7 +186,7 @@
         </span>
       </span>
       <span class="ov-lcard-body" style="display:flex; flex-direction:column; align-items:flex-start; padding:clamp(22px,3.5vw,32px) clamp(24px,4vw,36px) 0;">
-        <span style="display:inline-flex; align-items:center; gap:8px; background:var(--hanji,#F5F1E6); border-radius:999px; padding:7px 15px; font-size:12.5px; font-weight:600; color:var(--simhae,#2C4A6B); line-height:1.5; margin-bottom:14px;"><span aria-hidden="true" style="color:#2A7360;">⌒</span>지난주 따님의 답장에서 이어진 이야기예요.</span>
+        <span style="display:inline-flex; align-items:center; gap:9px; padding:0 0 0 12px; border-left:2px solid var(--cheongja,#4FB89E); font-size:12px; font-weight:700; letter-spacing:0.02em; color:#2A7360; line-height:1.5; margin-bottom:16px;">지난주 따님의 답장에서 이어진 이야기</span>
         <h3 style="font-family:var(--font-letter),'Gowun Batang',serif; font-size:clamp(20px,2.4vw,24px); line-height:1.5; font-weight:700; letter-spacing:-0.01em; color:var(--simya,#1F2A3A); margin:0 0 14px; text-wrap:balance;">아버지가 처음으로 <br data-keep>약도를 그려두고 기다리셨어요</h3>
         <blockquote style="margin:0; padding:4px 0 4px 16px; border-left:3px solid var(--noeul,#D9B88C); font-family:var(--font-letter),'Gowun Batang',serif; font-size:clamp(16px,1.8vw,19px); line-height:1.65; font-weight:700; color:var(--simya,#1F2A3A);">"기억이란 게, 물어봐 주는 사람이 <br data-keep>있어야 나오는 거더라."</blockquote>
         <p style="font-family:var(--font-letter),'Gowun Batang',serif; font-size:clamp(15.5px,1.6vw,17px); line-height:1.85; color:#2A3646; margin:18px 0 0;">지난주 편지에 따님이 댓글을 남기셨어요. "아빠가 일하던 그 운동화 골목, 어디예요? 나도 가보고 싶은데." 화요일 통화에서 그 질문을 그대로 전해드렸더니, 아버지는 이면지에 약도를 그려 전화기 옆에 두고 계셨습니다.</p>
@@ -192,8 +204,8 @@
     <div style="text-align:center; max-width:640px; margin:0 auto 56px;">
       <div class="eyebrow">온비가 함께하는 방법</div>
       <hr class="rule" style="margin:20px auto 0;">
-      <h2>부모님은 통화만. <br>나머지는 온비가.</h2>
-      <p class="lede" style="margin:0;">글을 쓸 필요도, 앱을 배울 필요도 없습니다. <br data-m>매주 한 번의 통화면 충분합니다.</p>
+      <h2>부모님은 전화만 <br>받으시면 됩니다.</h2>
+      <p class="lede" style="margin:0;">그 통화가 매주 편지로 도착합니다.</p>
     </div>
     <div id="how-cards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;">
       <div class="card">
@@ -231,16 +243,15 @@
     <div style="text-align:center; max-width:560px; margin:0 auto 52px;">
       <div class="eyebrow">온비와 함께하는 가족들</div>
       <hr class="rule" style="margin:20px auto 0;">
-      <h2 style="margin:22px 0 0;">먼저 시작한 가족들의 이야기</h2>
+      <h2 style="margin:22px 0 0;">온비가 그리는 가족의 이야기</h2>
     </div>
     <div id="review-cards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;">
       <div style="background:#FFF; border:1px solid #E6E0D1; border-radius:20px; padding:34px 30px; display:flex; flex-direction:column; gap:22px;">
         <blockquote class="quote" style="font-size:18px; line-height:1.7; letter-spacing:-0.015em; color:var(--simya,#1F2A3A); margin:0; flex:1; text-wrap:pretty;">"타지에 사는 딸이라 늘 죄송했는데, 이제는 매주 아버지의 한 주를 온 가족이 함께 살아요."</blockquote>
         <div style="display:flex; align-items:center; gap:12px; padding-top:20px; border-top:1px solid #F0EBDD;">
           <span style="width:42px; height:42px; border-radius:999px; overflow:hidden; flex-shrink:0;"><img src="assets/photos/quote-daughter.jpg" alt="" style="width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block;"></span>
-          <span style="display:flex; flex-direction:column; gap:2px;">
+          <span style="display:flex; flex-direction:column;">
             <span style="font-size:14px; font-weight:700; color:var(--simya,#1F2A3A);">서울 · 40대 딸</span>
-            <span style="font-size:12.5px; color:#6A7789;">이음으로 7개월째</span>
           </span>
         </div>
       </div>
@@ -248,9 +259,8 @@
         <blockquote class="quote" style="font-size:18px; line-height:1.7; letter-spacing:-0.015em; color:var(--simya,#1F2A3A); margin:0; flex:1; text-wrap:pretty;">"통화만 하면 늘 '괜찮다'로 끝났어요. 편지를 받고서야 어머니가 요즘 무엇을 좋아하시는지 알았습니다."</blockquote>
         <div style="display:flex; align-items:center; gap:12px; padding-top:20px; border-top:1px solid #F0EBDD;">
           <span style="width:42px; height:42px; border-radius:999px; overflow:hidden; flex-shrink:0;"><img src="assets/photos/quote-son-face.jpg" alt="" style="width:100%; height:100%; object-fit:cover; display:block;"></span>
-          <span style="display:flex; flex-direction:column; gap:2px;">
+          <span style="display:flex; flex-direction:column;">
             <span style="font-size:14px; font-weight:700; color:var(--simya,#1F2A3A);">부산 · 50대 아들</span>
-            <span style="font-size:12.5px; color:#6A7789;">이음으로 1년째</span>
           </span>
         </div>
       </div>
@@ -258,9 +268,8 @@
         <blockquote class="quote" style="font-size:18px; line-height:1.7; letter-spacing:-0.015em; color:var(--simya,#1F2A3A); margin:0; flex:1; text-wrap:pretty;">"손주가 남긴 음성을 아버지가 몇 번이나 다시 들으셨대요. 인생책 첫 권을 받고 온 가족이 울었습니다."</blockquote>
         <div style="display:flex; align-items:center; gap:12px; padding-top:20px; border-top:1px solid #F0EBDD;">
           <span style="width:42px; height:42px; border-radius:999px; overflow:hidden; flex-shrink:0;"><img src="assets/photos/quote-dil-bright.jpg" alt="" style="width:100%; height:100%; object-fit:cover; display:block;"></span>
-          <span style="display:flex; flex-direction:column; gap:2px;">
+          <span style="display:flex; flex-direction:column;">
             <span style="font-size:14px; font-weight:700; color:var(--simya,#1F2A3A);">대전 · 40대 며느리</span>
-            <span style="font-size:12.5px; color:#6A7789;">새김으로 1년 6개월째</span>
           </span>
         </div>
       </div>
@@ -273,7 +282,7 @@
     <h2>오늘, 우리 가족의 첫 이야기를 <br>시작하세요.</h2>
     <p class="lede" style="color:rgba(255,255,255,0.7); margin:20px auto 34px; max-width:520px;">부모님과 가족에게 맞는 방법을 온비가 함께 찾아드립니다. 부담 없이 상담부터 시작해보세요.</p>
     <div style="display:flex; justify-content:center;">
-      <a class="btn" href="service.html#join">월 9,900원부터 →</a>
+      <a class="btn" href="pricing.html">월 9,900원부터 →</a>
     </div>
   </div>
 </section>

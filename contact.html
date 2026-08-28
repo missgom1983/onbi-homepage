@@ -77,8 +77,13 @@
   @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
   @media (max-width: 760px){
     h1 br, h2 br, h3 br, blockquote br, p br{ display:none; }
-    section{ padding-top:72px !important; padding-bottom:72px !important; }
+    br[data-m], br[data-keep]{ display:inline !important; }
+    section{ padding-top:40px !important; padding-bottom:40px !important; }
     section:first-of-type{ padding-top:118px !important; }
+    /* 폼은 줄일 수 없으니 간격만 좁힌다 */
+    form{ gap:16px !important; }
+    form input, form textarea{ min-height:48px !important; padding:12px 14px !important; }
+    form label{ margin-bottom:6px !important; }
     .gen{ grid-template-columns:1fr; }
     .gen figure{ margin:0 !important; }
     [style*="aspect-ratio:21/9"]{ aspect-ratio:4/3 !important; }
