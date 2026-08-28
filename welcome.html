@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회원가입 완료 · On:Vi</title>
+
+<link rel="stylesheet" href="shared/ds/tokens/fonts.css">
+<link rel="stylesheet" href="shared/ds/tokens/colors.css">
+<link rel="stylesheet" href="shared/ds/tokens/colorways.css">
+<link rel="stylesheet" href="shared/ds/tokens/typography.css">
+<link rel="stylesheet" href="shared/ds/tokens/spacing.css">
+<link rel="stylesheet" href="shared/ds/styles.css">
+<link rel="stylesheet" href="shared/ds/tokens/fonts-letter.css">
+
+<style>
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--hanji,#F5F1E6); color:var(--simya,#1F2A3A); font-family:var(--font-ui),'Pretendard Variable',Pretendard,sans-serif; letter-spacing:-0.012em; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  a{ color:#2A7360; } a:hover{ color:#1F5D4D; }
+  .ov-rv{ opacity:0; transform:translateY(18px); transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
+  .ov-rv.ov-on{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .ov-rv{ opacity:1 !important; transform:none !important; transition:none !important; } }
+  .stack{ width:calc(100% - 40px); max-width:1880px; margin:20px auto 0; display:flex; flex-direction:column; gap:20px; padding-bottom:20px; }
+  .stack > section{ border-radius:28px; padding:clamp(40px,6vw,88px) clamp(24px,5vw,88px); }
+  .stack > section > .wrap{ width:100%; max-width:1160px; }
+  .wrap{ width:min(1160px,90%); margin:0 auto; }
+  .eyebrow{ font-size:12px; font-weight:700; letter-spacing:0.14em; color:#2A7360; }
+  .rule{ display:block; width:34px; height:2px; background:var(--cheongja,#4FB89E); border:none; margin:20px 0 0; }
+  h1{ font-size:clamp(34px,5.2vw,64px); line-height:1.14; letter-spacing:-0.035em; font-weight:700; margin:22px 0 24px; text-wrap:balance; }
+  h2{ font-size:clamp(26px,3.6vw,44px); line-height:1.18; letter-spacing:-0.035em; font-weight:700; margin:22px 0 20px; text-wrap:balance; }
+  h3{ font-size:21px; font-weight:700; letter-spacing:-0.025em; margin:0 0 10px; }
+  .lede{ font-size:clamp(15.5px,1.5vw,18px); line-height:1.7; color:#3F4D62; letter-spacing:-0.015em; text-wrap:pretty; }
+  .split{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(40px,6vw,80px); align-items:center; }
+  .photo{ border-radius:18px; overflow:hidden; box-shadow:0 30px 60px -34px rgba(31,42,58,0.34); }
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:15px 30px; border-radius:999px; background:var(--cheongja,#4FB89E); color:#FFF; font-size:15.5px; font-weight:700; text-decoration:none; transition:background .2s, box-shadow .2s, transform .2s; }
+  .btn:hover{ background:var(--action-primary-hover,#45A88F); color:#FFF; box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); transform:translateY(-1px); }
+  .btn-ghost{ display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:14px 28px; border-radius:999px; background:rgba(255,255,255,0.7); border:1px solid #E6E0D1; color:var(--simya,#1F2A3A); font-size:15px; font-weight:600; text-decoration:none; transition:border-color .2s, background .2s; }
+  .btn-ghost:hover{ border-color:var(--cheongja,#4FB89E); background:#FFF; color:var(--simya,#1F2A3A); }
+  .btn-ghost-dark{ background:transparent; border-color:rgba(255,255,255,0.28); color:#FFF; }
+  .btn-ghost-dark:hover{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.6); color:#FFF; }
+  .card{ background:#FFF; border:1px solid #E6E0D1; border-radius:20px; padding:16px 16px 30px; }
+  .card p{ margin:0; font-size:15px; color:#3F4D62; line-height:1.65; }
+  .num{ font-size:13px; font-weight:700; letter-spacing:0.14em; color:var(--cheongja,#4FB89E); margin-bottom:12px; }
+  .quote{ font-family:var(--font-letter),'Gowun Batang',serif; font-weight:700; text-wrap:balance; }
+  .gen{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  /* GNB */
+    .onvi-nav-root > .bar{ pointer-events:auto; width:min(1120px,94%); display:flex; align-items:center; justify-content:space-between; gap:16px; background:rgba(31,42,58,0.55); border:1px solid rgba(255,255,255,0.14); border-radius:999px; padding:9px 9px 9px 24px; box-shadow:0 18px 44px -20px rgba(31,42,58,0.45); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); }
+    .onvi-nav-root a{ text-decoration:none; }
+  .burger:focus-visible, .onvi-nav-root a:focus-visible{ outline:2px solid #FFF; outline-offset:2px; }
+  .nav-logo{ display:inline-flex; align-items:center; font-size:19px; font-weight:700; letter-spacing:-0.03em; color:color-mix(in srgb, var(--cheongja,#4FB89E) 55%, #FFFFFF); flex-shrink:0; }
+  .nav-logo:hover{ color:color-mix(in srgb, var(--cheongja,#4FB89E) 70%, #FFFFFF); }
+  .nav-links{ display:flex; align-items:center; gap:2px; flex-wrap:wrap; justify-content:center; }
+  .nav-links a{ font-size:14px; display:inline-flex; align-items:center; min-height:44px; padding:10px 16px; border-radius:999px; color:rgba(255,255,255,0.82); font-weight:600; transition:color .2s, background .2s; }
+  .nav-links a:hover{ color:#FFF; background:rgba(255,255,255,0.14); }
+  .nav-links a.active{ color:#FFF; font-weight:700; background:rgba(255,255,255,0.16); }
+  .nav-cta{ display:flex; align-items:center; gap:6px; flex-shrink:0; }
+  .nav-cta a.start{ display:inline-flex; align-items:center; background:var(--cheongja,#4FB89E); color:#FFF; font-size:14px; font-weight:700; padding:11px 22px; border-radius:999px; }
+  .nav-cta a.start:hover{ background:var(--action-primary-hover,#45A88F); color:#FFF; }
+  .burger{ display:none; align-items:center; justify-content:center; width:42px; height:42px; margin-left:2px; background:transparent; border:none; border-radius:999px; cursor:pointer; padding:0; }
+  .burger span{ display:block; width:22px; height:2px; border-radius:2px; background:#FFF; }
+  .burger > span{ display:flex; flex-direction:column; gap:5px; align-items:center; width:auto; height:auto; background:none; }
+  .panel{ pointer-events:auto; display:none; width:min(1120px,94%); flex-direction:column; gap:2px; padding:10px; background:rgba(31,42,58,0.86); border:1px solid rgba(255,255,255,0.14); border-radius:22px; box-shadow:0 22px 50px -22px rgba(31,42,58,0.5); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  .panel.open{ display:flex; }
+  .panel a{ min-height:44px; padding:14px 16px; border-radius:14px; font-size:15.5px; font-weight:600; color:rgba(255,255,255,0.9); }
+  .panel a:hover{ background:rgba(255,255,255,0.12); color:#FFF; }
+  footer.site{ background:#26282A; color:rgba(255,255,255,0.55); font-size:13px; padding:56px 0 34px; }
+  footer.site a{ text-decoration:none; }
+  footer.site .flinks a{ font-size:13.5px; color:rgba(255,255,255,0.7); }
+  footer.site .flinks a:hover{ color:var(--cheongja,#4FB89E); }
+  .dark-cta{ padding:112px 0; background:#22384F; color:#FFF; text-align:center; }
+  .dark-cta h2{ margin:0; }
+  @media (max-width: 900px){
+    .nav-links{ display:none !important; }
+    .burger{ display:inline-flex; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+  @media (max-width: 760px){
+    h1 br, h2 br, h3 br, blockquote br, p br{ display:none; }
+    br[data-m], br[data-keep]{ display:inline !important; }
+    section{ padding-top:72px !important; padding-bottom:72px !important; }
+    section:first-of-type{ padding-top:118px !important; }
+    [data-wc-hero]{ padding-top:108px !important; padding-bottom:40px !important; }
+    .gen{ grid-template-columns:1fr; }
+    .gen figure{ margin:0 !important; }
+    [style*="aspect-ratio:21/9"]{ aspect-ratio:4/3 !important; }
+  }
+  [hidden]{ display:none !important; }
+  body, footer, nav, [data-onvi-consult], [data-onvi-modal]{ word-break:keep-all; overflow-wrap:break-word; }
+  .onvi-nav-root{ position:fixed; top:16px; left:0; right:0; z-index:300; display:flex; flex-direction:column; align-items:center; gap:10px; pointer-events:none; transition:transform .38s cubic-bezier(.22,.61,.36,1); will-change:transform; }
+  .onvi-nav-root.onvi-nav-hidden{ transform:translateY(calc(-100% - 24px)); }
+  @media (prefers-reduced-motion: reduce){ .onvi-nav-root{ transition:none !important; } }
+  .nav-user{ display:inline-flex; align-items:center; gap:9px; padding:6px 16px 6px 6px; border-radius:999px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.14); transition:background .2s; }
+  .nav-user:hover{ background:rgba(255,255,255,0.18); }
+  .nav-user-badge{ width:32px; height:32px; border-radius:999px; overflow:hidden; flex-shrink:0; border:1.5px solid rgba(255,255,255,0.4); display:inline-block; }
+  .nav-user-badge img{ width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block; }
+  .nav-user-name{ font-size:14px; font-weight:700; color:#FFF; letter-spacing:-0.01em; white-space:nowrap; }
+  .panel-foot{ margin-top:6px; padding:10px 4px 2px; border-top:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .panel-foot a{ display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; font-size:13.5px; font-weight:600; color:rgba(255,255,255,0.72); min-height:44px; }
+  .panel-foot a:hover{ color:#FFF; background:none; }
+  .nav-user-wrap{ position:relative; flex-shrink:0; }
+  .nav-user{ cursor:pointer; font-family:inherit; padding:6px 14px 6px 6px; }
+  .nav-caret{ width:6px; height:6px; border-right:1.5px solid rgba(255,255,255,0.6); border-bottom:1.5px solid rgba(255,255,255,0.6); flex-shrink:0; margin-left:1px; transition:transform .22s; transform:rotate(45deg) translateY(-1px); }
+  .nav-user[aria-expanded="true"] .nav-caret{ transform:rotate(-135deg) translateY(1px); }
+  .nav-menu{ position:absolute; right:0; top:calc(100% + 10px); width:264px; display:flex; flex-direction:column; gap:2px; padding:8px; background:rgba(31,42,58,0.96); border:1px solid rgba(255,255,255,0.14); border-radius:20px; box-shadow:0 24px 54px -22px rgba(31,42,58,0.6); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+  .nav-menu-main{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-radius:14px; background:rgba(79,184,158,0.16); min-height:44px; }
+  .nav-menu-main:hover{ background:rgba(79,184,158,0.28); }
+  .nav-menu-main > span:first-child{ display:flex; flex-direction:column; gap:2px; }
+  .nav-menu-main .t{ font-size:14.5px; font-weight:700; color:#FFFFFF; letter-spacing:-0.015em; }
+  .nav-menu-main .d{ font-size:12px; color:rgba(255,255,255,0.55); }
+  .nav-menu-main .arr{ font-size:13px; color:var(--cheongja,#4FB89E); flex-shrink:0; }
+  .nav-menu-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; border-radius:14px; font-size:14px; font-weight:600; color:rgba(255,255,255,0.9); min-height:44px; }
+  .nav-menu-row:hover{ background:rgba(255,255,255,0.12); }
+  .nav-menu-row .chev{ font-size:13px; color:rgba(255,255,255,0.4); flex-shrink:0; }
+  .nav-menu-out{ display:flex; width:100%; align-items:center; padding:13px 16px; border-radius:14px; background:none; border:none; font-family:inherit; font-size:14px; font-weight:600; color:rgba(255,255,255,0.55); cursor:pointer; text-align:left; min-height:44px; transition:color .2s; }
+  .nav-menu-out:hover{ color:#FFFFFF; background:rgba(255,255,255,0.12); }
+  .panel-user{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .panel-space{ background:rgba(79,184,158,0.2); font-weight:700 !important; color:#FFFFFF !important; padding:11px 16px !important; }
+  .panel-space:hover{ background:rgba(79,184,158,0.32) !important; }
+  .panel-my{ padding:11px 12px !important; }
+  footer br[data-m]{ display:none; }
+  @media (max-width: 760px){
+    footer br[data-m]{ display:inline !important; }
+    [data-ft-tag]{ display:none; }
+    [data-ft-row]{ flex-direction:column; gap:22px !important; }
+    [data-ft-people]{ flex-wrap:wrap; align-items:baseline !important; gap:7px 9px !important; }
+    [data-ft-people] > span{ white-space:nowrap; font-size:12.5px !important; }
+    [data-ft-people] > span[data-ft-label]{ width:100%; font-size:10.5px !important; }
+  }
+  /* 페이지 고유 */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { word-break: keep-all; overflow-wrap: break-word; margin: 0; background: #F5F1E6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    a { color: #2A7360; } a:hover { color: #1F5D4D; }
+    .ov-rv { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
+    .ov-rv.ov-on { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .ov-rv { opacity: 1 !important; transform: none !important; transition: none !important; } }
+    input::placeholder { color: #6A7789; }
+    input:focus { outline: none; background: #FFFFFF; border-color: #4FB89E !important; box-shadow: 0 0 0 4px #EAF4EF; }
+    @media (max-width: 760px) {
+      [data-cta] { flex-wrap: nowrap !important; gap: 10px !important; }
+      [data-cta] > a, [data-cta] > button { flex: 1 1 0; justify-content: center !important; padding: 13px 10px !important; font-size: 13.5px !important; white-space: nowrap; }
+      h1 br, h2 br, h3 br, blockquote br, p br { display:none; }
+      section:first-of-type { padding-top:118px !important; }
+    }
+  
+  /* 디자인 툴 hover */
+  .hv1:hover{ filter:brightness(0.94); }
+  .hv2:hover{ filter:brightness(0.95); }
+  .hv3:hover{ filter:brightness(0.96); }
+  .hv4:hover{ background:var(--action-primary-hover); box-shadow:0 12px 28px -12px rgba(79,184,158,0.7); }
+  /* 가입 완료 화면 */
+    @keyframes wcStamp { from { transform: scale(.82); } to { transform: none; } }
+    @keyframes wcRise { from { transform: translateY(14px); } to { transform: none; } }
+    @keyframes wcRing { from { opacity: .55; transform: scale(.9); } to { opacity: 0; transform: scale(1.5); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+
+<div style="font-family:var(--font-ui); background:var(--hanji); color:var(--simya); letter-spacing:-0.012em; min-height:100vh; display:flex; flex-direction:column;">
+
+  <div class="onvi-nav-root" id="navRoot">
+  <div class="bar">
+    <a class="nav-logo" href="index.html"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center;"></span></a>
+    <div class="nav-links">
+      <a href="service.html">서비스</a>
+      <a href="pricing.html">요금제</a>
+      <a href="brand.html">브랜드</a>
+      <a href="support.html">고객지원</a>
+    </div>
+    <div class="nav-cta">
+      <div class="nav-user-wrap" id="navUser" hidden>
+        <button type="button" class="nav-user" id="navUserBtn" aria-haspopup="menu" aria-expanded="false"><span class="nav-user-badge"><span data-avatar-initial="" style="width:100%; height:100%; display:grid; place-items:center; background:rgba(79,184,158,0.42); color:#FFFFFF; font-size:14px; font-weight:700; letter-spacing:0;"></span></span><span class="nav-user-name" id="navUserName"></span><span class="nav-caret" aria-hidden="true"></span></button>
+        <div class="nav-menu" id="navMenu" role="menu" hidden>
+          <div role="menuitem" aria-disabled="true" class="nav-menu-main" style="background:rgba(255,255,255,0.05) !important; border:1px dashed rgba(255,255,255,0.16); cursor:default;"><span><span class="t" style="color:rgba(255,255,255,0.5);">가족 공간</span><span class="d">편지 / 답장 / 이야기 기록</span></span><span style="flex-shrink:0; font-size:10.5px; font-weight:700; letter-spacing:0.08em; padding:4px 9px; border-radius:999px; background:rgba(217,184,140,0.2); color:#E4C49C;">준비 중</span></div>
+          <a href="mypage.html" role="menuitem" class="nav-menu-row"><span>마이페이지</span><span aria-hidden="true" class="chev">›</span></a>
+          <button type="button" role="menuitem" class="nav-menu-out" id="navLogout">로그아웃</button>
+        </div>
+      </div>
+      <a class="start" id="navLogin" href="login.html">로그인</a>
+      <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" id="navBurger"><span><span></span><span></span><span></span></span></button>
+    </div>
+  </div>
+  <div class="panel" id="navPanel">
+    <a href="service.html">서비스</a>
+    <a href="pricing.html">요금제</a>
+    <a href="brand.html">브랜드</a>
+    <a href="support.html">고객지원</a>
+    <div class="panel-foot">
+      <div class="panel-user" id="panelUser" hidden>
+        <span aria-disabled="true" class="panel-space" style="background:rgba(255,255,255,0.05); border:1px dashed rgba(255,255,255,0.16); color:rgba(255,255,255,0.5); cursor:default;">가족 공간 <span style="font-size:10.5px; font-weight:700; letter-spacing:0.08em; padding:3px 8px; border-radius:999px; background:rgba(217,184,140,0.2); color:#E4C49C;">준비 중</span></span>
+        <button type="button" id="panelLogout" class="panel-my" style="background:none; border:none; font-family:inherit; text-align:left; cursor:pointer; color:rgba(255,255,255,0.7);">로그아웃</button>
+        <a href="mypage.html" class="panel-my">마이페이지 ›</a>
+      </div>
+      <a href="login.html" id="panelLogin">로그인 ›</a>
+    </div>
+  </div>
+</div>
+<div class="stack" style="flex:1 1 auto; display:flex; flex-direction:column; max-width:none; width:100%; margin:0; padding:0;">
+  <section data-wc-hero="" style="position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: clamp(120px, 17vh, 168px) 20px clamp(56px, 8vh, 80px);">
+    <span aria-hidden="true" style="position: absolute; top: -8%; left: 50%; width: min(720px, 120%); height: min(720px, 120%); transform: translateX(-50%); background: radial-gradient(circle at 50% 42%, rgba(79, 184, 158, 0.16) 0%, rgba(79, 184, 158, 0.05) 38%, rgba(245, 241, 230, 0) 66%); pointer-events: none;"></span>
+
+    <div style="position: relative; width: min(520px, 100%);">
+      <div aria-hidden="true" style="position: relative; width: 82px; height: 82px; margin: 0px auto 26px; display: grid; place-items: center; animation: 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0s 1 normal both running wcStamp;">
+        <span style="position: absolute; inset: -14px; border-radius: 999px; border: 1.5px solid var(--cheongja); animation: 1.5s ease-out 0.45s 1 normal both running wcRing;"></span>
+        <span style="position: absolute; inset: 0px; border-radius: 999px; border: 1.5px solid var(--cheongja); background: rgb(255, 255, 255);"></span>
+        <span style="position: relative; font-size: 30px; font-weight: 700; color: rgb(42, 115, 96); letter-spacing: 0px;" id="wcStamp">온</span>
+      </div>
+
+      <h1 style="font-size: clamp(30px, 5.4vw, 46px); line-height: 1.2; letter-spacing: -0.04em; font-weight: 700; margin: 0px; text-wrap: balance; animation: 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s 1 normal both running wcRise;">이제 온비 가족이에요</h1>
+      <p style="margin: 16px 0px 0px; font-size: 16px; line-height: 1.7; color: rgb(90, 102, 120); animation: 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s 1 normal both running wcRise;"><span id="wcNo">17</span>번째로 이름을 걸었어요. <br><span id="wcFamily">우리 가족</span>의 첫 장이 열렸습니다.</p>
+
+      <div style="margin-top: 26px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; animation: 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.28s 1 normal both running wcRise;">
+        
+          <span style="display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; border-radius: 999px; background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); font-size: 13.5px; font-weight: 600; color: rgb(63, 77, 98);">부모님의 이야기</span>
+        
+          <span style="display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; border-radius: 999px; background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); font-size: 13.5px; font-weight: 600; color: rgb(63, 77, 98);">금요일 오후</span>
+        
+      </div>
+
+      <div style="margin-top: 34px; animation: 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.36s 1 normal both running wcRise;">
+        <a href="pricing.html" class="scp0" style="display: inline-flex; align-items: center; justify-content: center; gap: 9px; width: 100%; max-width: 340px; padding: 16px 28px; border-radius: 999px; background: var(--cheongja); color: rgb(255, 255, 255); font-size: 16px; font-weight: 700; letter-spacing: -0.01em; min-height: 56px; text-decoration: none; box-shadow: rgba(79, 184, 158, 0.6) 0px 16px 34px -16px; transition: background 0.2s, transform 0.2s;">1기 신청하고 시작하기</a>
+        <p style="margin: 14px 0px 0px; font-size: 13.5px; line-height: 1.7; color: rgb(106, 119, 137);">세 달 0원, 넷째 달부터 한 달 9,900원. <br>신청하시면 이번 주 금요일 오후에 첫 통화를 드려요.</p>
+        <a href="mypage.html" style="display: inline-block; margin-top: 18px; font-size: 14px; font-weight: 600; color: rgb(138, 147, 160); text-decoration: underline; text-underline-offset: 4px;">나중에 할게요</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 0px 20px clamp(56px, 8vh, 88px); display: flex; justify-content: center;">
+    <div style="width: min(520px, 100%); padding: 24px 26px; border-radius: 22px; background: rgb(255, 255, 255); border: 1px solid rgb(230, 224, 209); box-shadow: rgba(31, 42, 58, 0.24) 0px 24px 54px -34px;">
+      <div style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; color: rgb(42, 115, 96);">시작하기 전에</div>
+      <h2 style="margin: 12px 0px 0px; font-size: 20px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.4; text-wrap: balance;">가족을 먼저 불러두세요</h2>
+      <p style="margin: 10px 0px 0px; font-size: 14px; line-height: 1.75; color: rgb(92, 102, 117); text-wrap: pretty;">아직 시작하지 않아도 초대는 지금 하실 수 있어요. 모여 있으면 시작하실 때 그대로 이어집니다.</p>
+
+      <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+        
+          <div style="display: flex; align-items: flex-start; gap: 11px; padding: 13px 15px; border-radius: 14px; background: rgb(251, 248, 239); border: 1px solid rgb(239, 233, 218);">
+            <span aria-hidden="true" style="flex-shrink: 0; margin-top: 7px; width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja);"></span>
+            <span style="font-size: 13.5px; line-height: 1.7; color: rgb(63, 77, 98);">편지가 오면 온 가족이 같이 읽고 답을 남길 수 있어요.</span>
+          </div>
+        
+          <div style="display: flex; align-items: flex-start; gap: 11px; padding: 13px 15px; border-radius: 14px; background: rgb(251, 248, 239); border: 1px solid rgb(239, 233, 218);">
+            <span aria-hidden="true" style="flex-shrink: 0; margin-top: 7px; width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja);"></span>
+            <span style="font-size: 13.5px; line-height: 1.7; color: rgb(63, 77, 98);">참여비는 한 사람이 내지 않고 나눠 낼 수 있어요.</span>
+          </div>
+        
+          <div style="display: flex; align-items: flex-start; gap: 11px; padding: 13px 15px; border-radius: 14px; background: rgb(251, 248, 239); border: 1px solid rgb(239, 233, 218);">
+            <span aria-hidden="true" style="flex-shrink: 0; margin-top: 7px; width: 5px; height: 5px; border-radius: 999px; background: var(--cheongja);"></span>
+            <span style="font-size: 13.5px; line-height: 1.7; color: rgb(63, 77, 98);">먼저 모여 있으면, 시작하실 때 따로 부르지 않아도 돼요.</span>
+          </div>
+        
+      </div>
+
+      
+
+      <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-size: 13px; font-weight: 700; color: var(--simya);">누구를 부르실까요</span>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          
+            <button type="button" aria-pressed="true" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(234, 244, 239); border: 1px solid var(--cheongja); color: rgb(42, 115, 96); font-weight: 700;">동생</button>
+          
+            <button type="button" aria-pressed="false" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(255, 255, 255); border: 1px solid rgb(224, 217, 198); color: rgb(63, 77, 98); font-weight: 600;">언니나 오빠</button>
+          
+            <button type="button" aria-pressed="false" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(255, 255, 255); border: 1px solid rgb(224, 217, 198); color: rgb(63, 77, 98); font-weight: 600;">누나나 형</button>
+          
+            <button type="button" aria-pressed="false" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(255, 255, 255); border: 1px solid rgb(224, 217, 198); color: rgb(63, 77, 98); font-weight: 600;">배우자</button>
+          
+            <button type="button" aria-pressed="false" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(255, 255, 255); border: 1px solid rgb(224, 217, 198); color: rgb(63, 77, 98); font-weight: 600;">자녀</button>
+          
+            <button type="button" aria-pressed="false" style="padding: 11px 18px; border-radius: 999px; font-family: inherit; font-size: 13.5px; cursor: pointer; min-height: 44px; transition: 0.16s; background: rgb(255, 255, 255); border: 1px solid rgb(224, 217, 198); color: rgb(63, 77, 98); font-weight: 600;">그 밖의 가족</button>
+          
+        </div>
+        <button type="button" class="scp1" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; border-radius: 999px; background: transparent; border: 1.5px solid var(--simhae); color: var(--simhae); font-family: inherit; font-size: 14.5px; font-weight: 700; letter-spacing: -0.01em; min-height: 48px; cursor: pointer; transition: background 0.2s, color 0.2s;">동생 초대 링크 만들기</button>
+        
+      </div>
+
+      <p style="margin: 18px 0px 0px; font-size: 12.5px; line-height: 1.75; color: rgb(138, 147, 160);">신청하지 않으셔도 계정은 그대로 있어요. 부모님께는 신청을 확정하신 뒤에만 전화를 드립니다.</p>
+    </div>
+  </section>
+</div>
+<footer class="site">
+  <div class="wrap" style="display:flex; flex-direction:column; gap:34px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:12px; max-width:360px;">
+        <a href="index.html" style="display:inline-flex; align-items:center; font-size:20px; font-weight:700; letter-spacing:-0.03em; color:#FFF;"><span style="display:inline-flex; align-items:baseline;"><span>On</span><span style="color:var(--cheongja,#4FB89E);">:</span><span>Vi</span></span><span aria-hidden="true" style="width:4.5px; height:4.5px; border-radius:999px; background:#FFFFFF; margin-left:7px; align-self:center; flex-shrink:0;"></span></a>
+        <p style="margin:0; color:rgba(255,255,255,0.62); line-height:1.6; font-size:13.5px;">온 가족이 함께 기억을 쌓는 공간.<span data-ft-tag=""> <br>매주의 안부가 세대를 잇는 이야기가 되는, 기억 회사.</span></p>
+      </div>
+    </div>
+    <div data-ft-row="" style="display:flex; flex-wrap:wrap; gap:14px 40px; align-items:baseline; padding-top:26px; border-top:1px solid rgba(255,255,255,0.09);">
+      <div data-ft-people="" style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
+        <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--cheongja,#4FB89E) 50%, #FFFFFF); white-space:nowrap;">만드는 사람들</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">김태희</b> 대표</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">이민섭</b> COO</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">김세연</b> CTO</span>
+      </div>
+      <div data-ft-people="" style="display:flex; align-items:baseline; gap:14px;">
+        <span data-ft-label="" style="font-size:10.5px; font-weight:700; letter-spacing:0.12em; color:color-mix(in srgb, var(--noeul,#D9B88C) 75%, #FFFFFF); white-space:nowrap;">도움을 주는 사람들</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">정준교</b> 고문</span>
+        <span data-dot="" style="color:rgba(255,255,255,0.22);">·</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82);"><b style="color:#FFFFFF; font-weight:600;">원민재</b> 자문</span>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
+      <p style="margin:0; font-size:11.5px; line-height:1.65; color:rgba(255,255,255,0.38); max-width:560px;">온비는 정보 제공 서비스이며, 의료 진단, 응급 대응 서비스가 아닙니다. <br data-m="">통화 내용은 부모님 본인의 동의 후에만 기록됩니다.</p>
+      <div style="display:flex; align-items:center; gap:14px; font-size:11.5px; color:rgba(255,255,255,0.4); white-space:nowrap;">
+        <span style="color:#7C9CB8;">onvi.kr</span><span style="color:rgba(255,255,255,0.2);">·</span><span>© 2026 On:Vi</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="shared/reveal.js"></script>
+<script>
+  (function () {
+    var root = document.getElementById('navRoot');
+    var panel = document.getElementById('navPanel');
+    var burger = document.getElementById('navBurger');
+    var open = false;
+
+    function setOpen(v) {
+      open = v;
+      panel.classList.toggle('open', v);
+      burger.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    if (panel && burger) {
+      burger.addEventListener('click', function () { setOpen(!open); setMenu(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) setOpen(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (!open) return;
+        if (!root.contains(e.target)) setOpen(false);
+      });
+      panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') setOpen(false); });
+    }
+
+    // 모바일: 아래로 스크롤하면 네비를 감추고, 위로 올리면 다시 보여준다
+    var lastY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      var d = y - lastY;
+      if (Math.abs(d) < 8) return;
+      lastY = y;
+      if (d > 0 && y > 140 && !open && !menuOpen) root.classList.add('onvi-nav-hidden');
+      else if (d < 0 || y <= 140) root.classList.remove('onvi-nav-hidden');
+    }, { passive: true });
+
+    // 프로필 드롭다운
+    var menuOpen = false;
+    var userBtn = document.getElementById('navUserBtn');
+    var menu = document.getElementById('navMenu');
+    function setMenu(v) {
+      menuOpen = v;
+      if (menu) menu.hidden = !v;
+      if (userBtn) userBtn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    if (userBtn && menu) {
+      userBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!menuOpen); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menuOpen) setMenu(false); });
+      document.addEventListener('pointerdown', function (e) {
+        if (menuOpen && !root.contains(e.target)) setMenu(false);
+      });
+    }
+    // 로그인 상태 판정·다시 읽기·로그아웃은 공용 모듈이 맡는다
+  })();
+</script>
+<script>
+  (function () {
+    function signIn(name) {
+      try {
+        localStorage.setItem('onvi.user.name', name);
+        window.dispatchEvent(new Event('onvi-auth'));
+      } catch (e) { /* 무시 */ }
+      window.location.href = 'mypage.html';
+    }
+    document.querySelectorAll('[data-social]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        try { localStorage.setItem('onvi.user.provider', b.getAttribute('data-social')); } catch (e) { /* 무시 */ }
+        signIn('박지현');
+      });
+    });
+    var form = document.getElementById('loginForm');
+    var err = document.getElementById('loginError');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = (form.name.value || '').trim();
+      var phone = (form.phone.value || '').trim();
+      function fail(m, f) { err.textContent = m; err.hidden = false; if (f) f.focus(); }
+      if (!name) { fail('성함을 다시 확인해 주세요.', form.name); return; }
+      if (!phone) { fail('연락처를 다시 확인해 주세요.', form.phone); return; }
+      err.hidden = true;
+      signIn(name);
+    });
+  })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // 가입 직후 화면 — 이름·가족 이름은 가입 때 남긴 값으로 채운다.
+  // 몇 번째인지는 아직 서버가 없어 예시 숫자를 그대로 둔다.
+  (function () {
+    function get(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+    var name = get('onvi.user.name');
+    var fam = get('onvi.family.name') || (name ? name + '님의 가족' : '');
+    if (fam) { var f = document.getElementById('wcFamily'); if (f) f.textContent = fam; }
+    if (name) { var st = document.getElementById('wcStamp'); if (st) st.textContent = name.trim().charAt(0); }
+
+    // 가족 초대 호칭 고르기 — 하나만 눌린 상태로 유지한다
+    var picks = document.querySelectorAll('button[aria-pressed]');
+    picks.forEach(function (b) {
+      b.addEventListener('click', function () {
+        picks.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      });
+    });
+  })();
+</script>
+<script defer src="shared/onvi-nav-auth.js"></script>
+<script defer src="shared/onvi-auth.js"></script>
+</body>
+</html>

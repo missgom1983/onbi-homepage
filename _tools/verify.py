@@ -11,7 +11,7 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 SHOTDIR = os.path.join(ROOT, "_tools", "shots")
 os.makedirs(SHOTDIR, exist_ok=True)
 
-PAGES = ["index", "brand", "service", "pricing", "support", "contact", "login", "signup", "mypage"]
+PAGES = ["index", "brand", "service", "pricing", "support", "contact", "login", "signup", "mypage", "welcome"]
 LIVE = "--live" in sys.argv
 
 # 페이지별 필수 조건: (검사이름, 정규식 or 함수, 기대)  — 각 페이지 렌더 DOM에 대해

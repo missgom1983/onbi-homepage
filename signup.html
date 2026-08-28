@@ -422,7 +422,14 @@
     paintDots(); errBox.hidden = true;
     window.scrollTo({top:0,behavior:'smooth'});
     if(name==='confirm'){ document.getElementById('cfHonor').textContent=st.honor; document.getElementById('cfPhone').textContent=st.pphone||'010-0000-0000'; }
-    if(name==='done'){ finish(); document.getElementById('dnName').textContent = st.family || st.name || '가족'; }
+    if(name==='done'){
+      finish();
+      var dn = document.getElementById('dnName');
+      if (dn) dn.textContent = st.family || st.name || '가족';
+      // 가입을 마치면 축하 화면으로 넘어간다 (v3.5.0에서 완료 화면이 별도 페이지가 됐다)
+      try { if (st.family) localStorage.setItem('onvi.family.name', st.family); } catch (e) { /* 무시 */ }
+      window.location.href = 'welcome.html';
+    }
   }
   function fail(msg){ errBox.textContent=msg; errBox.hidden=false; window.scrollTo({top:0,behavior:'smooth'}); }
   function val(id){ var e=document.getElementById(id); return e?(e.value||'').trim():''; }
